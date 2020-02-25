@@ -1,12 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
+import Header from "./components/Header";
+import Nav from "./components/Nav";
+import Routes from "./components/Routes";
 
-class App extends Component {
-  state = {
-    loggeingIn: ""
-  };
-  render() {
-    return <div></div>;
-  }
-}
+const App = () => {
+  return (
+    <>
+      <Header />
+      <Nav />
+      <Routes />
+    </>
+  );
+};
 
 export default App;
