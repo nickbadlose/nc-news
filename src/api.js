@@ -18,35 +18,33 @@ export const getArticleById = article_id => {
   });
 };
 
-export const getCommentsByArticleById = article_id => {
-  return axios.get(`${baseUrl}/articles/${article_id}/comments`).catch(err => {
-    console.dir(err);
+export const getCommentsByArticleId = (article_id, sort_by, order) => {
+  return axios.get(`${baseUrl}/articles/${article_id}/comments`, {
+    params: { sort_by, order }
   });
 };
 
 export const patchArticleById = (article_id, inc_votes) => {
   return axios
     .patch(`${baseUrl}/articles/${article_id}`, { inc_votes })
-    .then(res => res.data.article.votes)
-    .catch(err => {
-      console.dir(err);
-    });
+    .then(res => res.data.article.votes);
 };
 
-export const patchCommentByArticleId = (comment_id, inc_votes) => {
-  return axios
-    .patch(`${baseUrl}/comments/${comment_id}`, { inc_votes })
-    .then(res => res.data.comment.votes)
-    .catch(err => {
-      console.dir(err);
-    });
+export const patchCommentById = (comment_id, inc_votes) => {
+  return axios.patch(`${baseUrl}/comments/${comment_id}`, { inc_votes });
 };
 
 export const fetchUsers = () => {
   return axios
-    .patch(`${baseUrl}/comments/${comment_id}`, { inc_votes })
-    .then(res => res.data.comment.votes)
+    .get(`${baseUrl}/users`)
+    .then(({ data: { users } }) => {
+      return users;
+    })
     .catch(err => {
       console.dir(err);
     });
+};
+
+export const postCommentByArticleId = (article_id, comment) => {
+  return axios.post(`${baseUrl}/articles/${article_id}/comments`, comment);
 };

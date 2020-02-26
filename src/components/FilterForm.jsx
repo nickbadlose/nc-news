@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 
-class ArticleFilterForm extends Component {
+class FilterForm extends Component {
   state = {
     sortBy: "created_at",
     orderBy: "desc"
   };
   render() {
     const { sortBy, orderBy } = this.state;
-    const { handleChange, handleSubmit } = this;
+    const { handleChange } = this;
+    const { article } = this.props;
     return (
-      <form onSubmit={handleSubmit}>
+      <form>
         <label>
           Sort by:
           <select
@@ -20,7 +21,7 @@ class ArticleFilterForm extends Component {
             name="sortBy"
           >
             <option value="created_at">created at</option>
-            <option value="comment_count">comment count</option>
+            {article && <option value="comment_count">comment count</option>}
             <option value="votes">votes</option>
           </select>
         </label>
@@ -43,9 +44,16 @@ class ArticleFilterForm extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { sortBy, orderBy } = this.state;
-    const { fetchArticles } = this.props;
-    if (prevState.sortBy !== sortBy || prevState.orderBy !== orderBy)
-      fetchArticles(sortBy, orderBy);
+    const { fetchArticles, fetchCommentsByArticleId, article_id } = this.props;
+    if (fetchArticles) {
+      if (prevState.sortBy !== sortBy || prevState.orderBy !== orderBy) {
+        fetchArticles(sortBy, orderBy);
+      }
+    } else if (fetchCommentsByArticleId) {
+      if (prevState.sortBy !== sortBy || prevState.orderBy !== orderBy) {
+        fetchCommentsByArticleId(article_id, sortBy, orderBy);
+      }
+    }
   }
 
   handleChange = target => {
@@ -53,10 +61,6 @@ class ArticleFilterForm extends Component {
       ? this.setState({ sortBy: target.value })
       : this.setState({ orderBy: target.value });
   };
-
-  handleSubmit = event => {
-    event.preventDefault();
-  };
 }
 
-export default ArticleFilterForm;
+export default FilterForm;

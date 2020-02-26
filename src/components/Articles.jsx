@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ArticleTile from "./ArticleTile";
 import * as api from "../api";
-import ArticleFilterForm from "./ArticleFilterForm";
+import FilterForm from "./FilterForm";
 
 class Articles extends Component {
   state = {
@@ -14,7 +14,7 @@ class Articles extends Component {
     return (
       <main>
         <h2>Articles</h2>
-        <ArticleFilterForm articles={articles} fetchArticles={fetchArticles} />
+        <FilterForm fetchArticles={fetchArticles} article={true} />
         {isLoading ? (
           <p>Loading...</p>
         ) : (

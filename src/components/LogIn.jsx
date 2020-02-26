@@ -1,8 +1,7 @@
 import React from "react";
 import LogInForm from "./LogInForm";
 
-const LogIn = props => {
-  const { logIn } = props;
+const LogIn = ({ logIn }) => {
   return (
     <main>
       <LogInForm logIn={logIn} />

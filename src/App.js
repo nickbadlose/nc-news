@@ -14,7 +14,7 @@ class App extends Component {
       <>
         <Header />
         <Nav username={username} />
-        <Routes logIn={logIn} />
+        <Routes logIn={logIn} username={username} />
       </>
     );
   }

@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
 
-const Nav = props => {
-  const { username } = props;
+const Nav = ({ username }) => {
   return (
     <nav>
       <Link to="/">Home</Link>
