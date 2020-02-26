@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as api from "../api";
 import ArticleComments from "./ArticleComments";
 import { formatDate } from "../utils/utils";
+import IncrementVotes from "./IncrementVotes";
 
 class SpecificArticle extends Component {
   state = {
@@ -21,7 +22,7 @@ class SpecificArticle extends Component {
       article_id
     } = this.state.article;
     const { isLoading, toggleComments } = this.state;
-    const { handleChange } = this;
+    const { handleCommentsChange, handleVotesChange } = this;
     const { date, time } = formatDate(created_at);
     return (
       <main>
@@ -36,8 +37,11 @@ class SpecificArticle extends Component {
             <article>
               <p>{body}</p>
             </article>
-            <p>Votes: {votes}</p>
-            <button value={toggleComments} onClick={handleChange}>
+            <p>
+              Votes: {votes}{" "}
+              <IncrementVotes handleVotesChange={handleVotesChange} />
+            </p>
+            <button value={toggleComments} onClick={handleCommentsChange}>
               <p>Comments: {comment_count}</p>
             </button>
             {toggleComments && (
@@ -60,9 +64,18 @@ class SpecificArticle extends Component {
     });
   };
 
-  handleChange = event => {
+  handleCommentsChange = event => {
     this.setState(currentState => {
       return { toggleComments: !currentState.toggleComments };
+    });
+  };
+
+  handleVotesChange = event => {
+    const { article_id } = this.state.article;
+    api.patchArticleById(article_id, event.target.value).then(votes => {
+      this.setState(currentState => {
+        return { article: { ...currentState.article, votes } };
+      });
     });
   };
 }

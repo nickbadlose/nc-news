@@ -23,3 +23,30 @@ export const getCommentsByArticleById = article_id => {
     console.dir(err);
   });
 };
+
+export const patchArticleById = (article_id, inc_votes) => {
+  return axios
+    .patch(`${baseUrl}/articles/${article_id}`, { inc_votes })
+    .then(res => res.data.article.votes)
+    .catch(err => {
+      console.dir(err);
+    });
+};
+
+export const patchCommentByArticleId = (comment_id, inc_votes) => {
+  return axios
+    .patch(`${baseUrl}/comments/${comment_id}`, { inc_votes })
+    .then(res => res.data.comment.votes)
+    .catch(err => {
+      console.dir(err);
+    });
+};
+
+export const fetchUsers = () => {
+  return axios
+    .patch(`${baseUrl}/comments/${comment_id}`, { inc_votes })
+    .then(res => res.data.comment.votes)
+    .catch(err => {
+      console.dir(err);
+    });
+};

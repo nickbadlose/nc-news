@@ -10,3 +10,7 @@ export const formatDate = date => {
   }
   return dateObj;
 };
+
+export const checkValidUser = (users, username) => {
+  return users.every(user => user.username !== username);
+};
