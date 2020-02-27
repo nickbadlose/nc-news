@@ -1,7 +1,13 @@
 import React from "react";
 import CommentTile from "./CommentTile";
 
-const ArticleComments = ({ comments, deleteCommentById }) => {
+const ArticleComments = ({
+  comments,
+  deleteCommentById,
+  username,
+  err,
+  errorHandler
+}) => {
   return (
     <div>
       <ul>
@@ -11,6 +17,8 @@ const ArticleComments = ({ comments, deleteCommentById }) => {
               {...comment}
               deleteCommentById={deleteCommentById}
               key={comment.comment_id}
+              username={username}
+              err={err}
             />
           );
         })}

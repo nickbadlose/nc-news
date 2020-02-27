@@ -48,3 +48,13 @@ export const fetchUsers = () => {
 export const postCommentByArticleId = (article_id, comment) => {
   return axios.post(`${baseUrl}/articles/${article_id}/comments`, comment);
 };
+
+export const removeCommentById = comment_id => {
+  return axios.delete(`${baseUrl}/comments/${comment_id}`);
+};
+
+export const getTopics = () => {
+  return axios.get(`${baseUrl}/topics`).catch(err => {
+    console.dir(err);
+  });
+};

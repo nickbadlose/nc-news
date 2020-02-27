@@ -42,7 +42,9 @@ class PostCommentForm extends Component {
         fetchCommentsByArticleId(article_id, undefined, undefined, true);
       })
       .catch(() => {
-        errorHandler({ status: 404, msg: "need to log in to post a comment" });
+        errorHandler({
+          msg: "need to log in to post a comment"
+        });
       });
   };
 }

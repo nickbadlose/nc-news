@@ -6,14 +6,16 @@ import IncrementVotes from "./IncrementVotes";
 import PostCommentForm from "./PostCommentForm";
 import FilterForm from "./FilterForm";
 import ErrorMessage from "./ErrorMessage";
+import ToggleButton from "./ToggleButton";
 
 class SpecificArticle extends Component {
   state = {
     comments: [],
     isLoading: true,
     toggleComments: false,
-    postedComment: null,
-    err: null
+    commentChange: null,
+    postErr: null,
+    deleteErr: null
   };
   render() {
     const {
@@ -24,17 +26,16 @@ class SpecificArticle extends Component {
       author,
       created_at,
       comment_count,
-      article_id
-    } = this.state;
-    const {
+      article_id,
       isLoading,
       toggleComments,
       comments,
-      postedComment,
-      err
+      commentChange,
+      postErr,
+      deleteErr
     } = this.state;
     const {
-      handleCommentsChange,
+      handleButtonChange,
       fetchCommentsByArticleId,
       errorHandler,
       deleteCommentById
@@ -63,13 +64,13 @@ class SpecificArticle extends Component {
               username={username}
               article_id={article_id}
               fetchCommentsByArticleId={fetchCommentsByArticleId}
-              postedComment={postedComment}
               errorHandler={errorHandler}
             />
-            {err && <ErrorMessage err={err} />}
-            <button value={toggleComments} onClick={handleCommentsChange}>
-              <p>Comments: {+comment_count + postedComment}</p>
-            </button>
+            {postErr && <ErrorMessage err={postErr} />}
+            <ToggleButton
+              handleButtonChange={handleButtonChange}
+              buttonText={`Comments: ${+comment_count + commentChange}`}
+            />
             {toggleComments && (
               <section>
                 <FilterForm
@@ -80,6 +81,8 @@ class SpecificArticle extends Component {
                 <ArticleComments
                   comments={comments}
                   deleteCommentById={deleteCommentById}
+                  username={username}
+                  err={deleteErr}
                 />
               </section>
             )}
@@ -114,24 +117,40 @@ class SpecificArticle extends Component {
           return {
             comments,
             isLoading: false,
-            postedComment: postedBoolean && ++currentState.postedComment
+            commentChange: postedBoolean && ++currentState.commentChange
           };
         });
       });
   };
 
-  handleCommentsChange = () => {
+  handleButtonChange = () => {
     this.setState(currentState => {
       return { toggleComments: !currentState.toggleComments };
     });
   };
 
-  deleteCommentById = () => {
-    console.log("hey");
+  deleteCommentById = comment_id => {
+    const { comments } = this.state;
+    const initialComments = comments;
+    const filteredComments = comments.filter(
+      comment => comment.comment_id !== comment_id
+    );
+    this.setState(currentState => ({
+      comments: filteredComments,
+      commentChange: --currentState.commentChange,
+      deleteErr: null
+    }));
+    api.removeCommentById(comment_id).catch(() => {
+      this.setState(currentState => ({
+        comments: initialComments,
+        deleteErr: { msg: "comment could not be removed" },
+        commentChange: ++currentState.commentChange
+      }));
+    });
   };
 
   errorHandler = err => {
-    this.setState({ err });
+    this.setState({ postErr: err });
   };
 }
 

@@ -11,6 +11,11 @@ class Articles extends Component {
   render() {
     const { articles, isLoading } = this.state;
     const { fetchArticles } = this;
+    const {
+      location: { search }
+    } = this.props;
+    const topic = search.slice(7);
+    console.log(topic);
     return (
       <main>
         <h2>Articles</h2>
@@ -19,11 +24,23 @@ class Articles extends Component {
           <p>Loading...</p>
         ) : (
           <article>
-            <ul>
-              {articles.map(article => {
-                return <ArticleTile {...article} key={article.article_id} />;
-              })}
-            </ul>
+            {topic ? (
+              <ul>
+                {articles.map(article => {
+                  if (article.topic === topic) {
+                    return (
+                      <ArticleTile {...article} key={article.article_id} />
+                    );
+                  }
+                })}
+              </ul>
+            ) : (
+              <ul>
+                {articles.map(article => {
+                  return <ArticleTile {...article} key={article.article_id} />;
+                })}
+              </ul>
+            )}
           </article>
         )}
       </main>

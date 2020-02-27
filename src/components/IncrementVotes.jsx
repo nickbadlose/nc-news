@@ -46,7 +46,7 @@ class IncrementVotes extends Component {
         this.setState(currentState => {
           return {
             voteDifference: currentState.voteDifference - voteChange,
-            err: { status: 500, msg: "unable to change vote" }
+            err: { msg: "unable to change vote" }
           };
         });
       });
@@ -62,7 +62,7 @@ class IncrementVotes extends Component {
         this.setState(currentState => {
           return {
             voteDifference: currentState.voteDifference - voteChange,
-            err: { status: 500, msg: "unable to change vote" }
+            err: { msg: "unable to change vote" }
           };
         });
       });
