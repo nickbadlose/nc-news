@@ -7,6 +7,7 @@ import PostCommentForm from "./PostCommentForm";
 import FilterForm from "./FilterForm";
 import ErrorMessage from "./ErrorMessage";
 import ToggleButton from "./ToggleButton";
+import ErrorPage from "./ErrorPage";
 
 class SpecificArticle extends Component {
   state = {
@@ -15,7 +16,8 @@ class SpecificArticle extends Component {
     toggleComments: false,
     commentChange: null,
     postErr: null,
-    deleteErr: null
+    deleteErr: null,
+    err: null
   };
   render() {
     const {
@@ -32,7 +34,8 @@ class SpecificArticle extends Component {
       comments,
       commentChange,
       postErr,
-      deleteErr
+      deleteErr,
+      err
     } = this.state;
     const {
       handleButtonChange,
@@ -44,48 +47,55 @@ class SpecificArticle extends Component {
     const { date, time } = formatDate(created_at);
     return (
       <main>
-        {isLoading ? (
-          <p>Loading...</p>
+        {err ? (
+          <ErrorPage err={err} />
         ) : (
           <>
-            <h3>{title}</h3>
-            <p>
-              Author: {author} / topic: {topic} / created: {`${date}: ${time}`}
-            </p>
-            <article>
-              <p>{body}</p>
-            </article>
-            <IncrementVotes
-              votes={votes}
-              article_id={article_id}
-              type="article"
-            />
-            <PostCommentForm
-              username={username}
-              article_id={article_id}
-              fetchCommentsByArticleId={fetchCommentsByArticleId}
-              errorHandler={errorHandler}
-            />
-            {postErr && <ErrorMessage err={postErr} />}
-            <ToggleButton
-              handleButtonChange={handleButtonChange}
-              buttonText={`Comments: ${+comment_count + commentChange}`}
-            />
-            {toggleComments && (
-              <section>
-                <FilterForm
-                  fetchCommentsByArticleId={fetchCommentsByArticleId}
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <h3>{title}</h3>
+                <p>
+                  Author: {author} / topic: {topic} / created:{" "}
+                  {`${date}: ${time}`}
+                </p>
+                <article>
+                  <p>{body}</p>
+                </article>
+                <IncrementVotes
+                  votes={votes}
                   article_id={article_id}
-                  article={false}
+                  type="article"
                 />
-                <ArticleComments
-                  comments={comments}
-                  deleteCommentById={deleteCommentById}
+                <PostCommentForm
                   username={username}
-                  err={deleteErr}
+                  article_id={article_id}
+                  fetchCommentsByArticleId={fetchCommentsByArticleId}
+                  errorHandler={errorHandler}
                 />
-              </section>
-            )}
+                {postErr && <ErrorMessage err={postErr} />}
+                <ToggleButton
+                  handleButtonChange={handleButtonChange}
+                  buttonText={`Comments: ${+comment_count + commentChange}`}
+                />
+                {toggleComments && (
+                  <section>
+                    <FilterForm
+                      fetchCommentsByArticleId={fetchCommentsByArticleId}
+                      article_id={article_id}
+                      article={false}
+                    />
+                    <ArticleComments
+                      comments={comments}
+                      deleteCommentById={deleteCommentById}
+                      username={username}
+                      err={deleteErr}
+                    />
+                  </section>
+                )}
+              </>
+            )}{" "}
           </>
         )}
       </main>
@@ -119,6 +129,12 @@ class SpecificArticle extends Component {
             isLoading: false,
             commentChange: postedBoolean && ++currentState.commentChange
           };
+        });
+      })
+      .catch(({ response }) => {
+        // console.log(response.status, response.data.msg);
+        this.setState({
+          err: { status: response.status, msg: response.data.msg }
         });
       });
   };

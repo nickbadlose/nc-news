@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as api from "../api";
 import { Link } from "@reach/router";
 
-class SideBar extends Component {
+class Topics extends Component {
   state = {
     topics: [],
     isLoading: true
@@ -11,7 +11,6 @@ class SideBar extends Component {
     const { topics, isLoading } = this.state;
     return (
       <>
-        <h2>Topics</h2>
         {isLoading ? (
           <p>Loading...</p>
         ) : (
@@ -21,7 +20,8 @@ class SideBar extends Component {
                 return (
                   <li key={topic.slug}>
                     <Link to={`/topics/articles?topic=${topic.slug}`}>
-                      {topic.slug}
+                      <h2>{topic.slug}</h2>
+                      <p>{topic.description}</p>
                     </Link>
                   </li>
                 );
@@ -44,4 +44,4 @@ class SideBar extends Component {
   };
 }
 
-export default SideBar;
+export default Topics;

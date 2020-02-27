@@ -2,20 +2,24 @@ import axios from "axios";
 
 const baseUrl = "https://not-quite-reddit.herokuapp.com/api";
 
-export const getArticles = (sort_by, order) => {
-  return axios
-    .get(`${baseUrl}/articles`, {
+export const getArticles = (sort_by, order, topic = null) => {
+  if (topic) {
+    return axios.get(`${baseUrl}/articles?topic=${topic}`, {
       params: { sort_by, order }
-    })
-    .catch(err => {
-      console.dir(err);
     });
+  } else {
+    return axios
+      .get(`${baseUrl}/articles`, {
+        params: { sort_by, order }
+      })
+      .catch(err => {
+        console.dir(err);
+      });
+  }
 };
 
 export const getArticleById = article_id => {
-  return axios.get(`${baseUrl}/articles/${article_id}`).catch(err => {
-    console.dir(err);
-  });
+  return axios.get(`${baseUrl}/articles/${article_id}`);
 };
 
 export const getCommentsByArticleId = (article_id, sort_by, order) => {
