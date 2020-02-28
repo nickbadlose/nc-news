@@ -1,33 +1,7 @@
-// import React from "react";
+import React, { Component } from "react";
 import { Link } from "@reach/router";
 import { formatDate } from "../utils/utils";
 import IncrementVotes from "./IncrementVotes";
-
-// const ArticleTile = ({
-//   author,
-//   title,
-//   votes,
-//   created_at,
-//   comment_count,
-//   article_id
-// }) => {
-//   const { date, time } = formatDate(created_at);
-//   return (
-//     <li>
-//       <Link to={`/articles/${article_id}`}>
-//         <h3>{title}</h3>
-//       </Link>
-//       <p>Author: {author}</p>
-//       <p>Comments: {comment_count}</p>
-//       <p>Created: {`${date}: ${time}`}</p>
-//       <IncrementVotes votes={votes} article_id={article_id} type="article" />
-//     </li>
-//   );
-// };
-
-// export default ArticleTile;
-
-import React, { Component } from "react";
 import ToggleButton from "./ToggleButton";
 
 class ArticleTile extends Component {

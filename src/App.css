@@ -1,3 +1,69 @@
 .App {
   text-align: center;
+  background-color: #d7c0bb;
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  grid-template-rows: minmax(50px, 80px) minmax(30px, 50px) auto;
+  grid-template-areas:
+    "header header-side"
+    "nav nav-side"
+    "main sidebar";
+}
+
+/* Global CSS */
+
+ul {
+  list-style: none;
+  padding: 0%;
+}
+
+.Link {
+  text-decoration: none;
+  color: black;
+  margin: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .SideBar {
+    display: none;
+  }
+}
+
+/* Header CSS */
+
+.Header {
+  grid-area: header;
+  background-color: #471105;
+  max-height: 80px;
+}
+
+.Header-side {
+  grid-area: header-side;
+  background-color: #471105;
+  max-height: 80px;
+}
+
+.Nav {
+  grid-area: nav;
+  max-height: 50px;
+  background-color: #6f1a07;
+}
+
+.Nav-side {
+  grid-area: nav-side;
+  max-height: 50px;
+  background-color: #6f1a07;
+}
+
+.main {
+  grid-area: main;
+}
+
+.SideBar {
+  grid-area: sidebar;
+  height: 100vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: rosybrown;
 }

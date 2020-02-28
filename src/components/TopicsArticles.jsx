@@ -45,27 +45,21 @@ class TopicsArticles extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {
-      location: { search }
-    } = this.props;
+    const { topic } = this.props;
 
-    if (prevProps.location.search !== search) {
+    if (prevProps.topic !== topic) {
       this.fetchArticles();
     }
   }
 
   fetchArticles = (sort_by, order) => {
-    const {
-      location: { search }
-    } = this.props;
-    const topic = search.slice(7);
+    const { topic } = this.props;
     api
       .getArticles(sort_by, order, topic)
       .then(({ data: { articles } }) => {
         this.setState({ articles, isLoading: false });
       })
       .catch(({ response }) => {
-        // console.log(response.status, response.data.msg);
         this.setState({
           err: { status: response.status, msg: response.data.msg }
         });

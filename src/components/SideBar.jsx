@@ -10,7 +10,7 @@ class SideBar extends Component {
   render() {
     const { topics, isLoading } = this.state;
     return (
-      <>
+      <div className="SideBar">
         <h2>Topics</h2>
         {isLoading ? (
           <p>Loading...</p>
@@ -20,7 +20,10 @@ class SideBar extends Component {
               {topics.map(topic => {
                 return (
                   <li key={topic.slug}>
-                    <Link to={`/topics/articles?topic=${topic.slug}`}>
+                    <Link
+                      to={`/topics/articles/${topic.slug}`}
+                      className="Link"
+                    >
                       {topic.slug}
                     </Link>
                   </li>
@@ -29,7 +32,7 @@ class SideBar extends Component {
             </ul>
           </nav>
         )}
-      </>
+      </div>
     );
   }
 

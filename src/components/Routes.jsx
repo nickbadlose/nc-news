@@ -11,11 +11,11 @@ import ErrorPage from "./ErrorPage";
 const Routes = ({ logIn, username }) => {
   return (
     <>
-      <Router>
+      <Router className="main">
         <HomePage path="/" />
         <Articles path="/articles" />
         <SpecificArticle path="/articles/:article_id/" username={username} />
-        <TopicsArticles path="/topics/articles" />
+        <TopicsArticles path="/topics/articles/:topic" />
         <Topics path="/topics" />
         <LogIn path="/login" logIn={logIn} />
         <ErrorPage default />
