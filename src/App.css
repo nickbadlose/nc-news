@@ -274,20 +274,15 @@ ul {
 }
 
 .specificArticleInfo {
-  background-color: red;
+  background-color: white;
   grid-area: infoVotes;
   display: flex;
-  /* vertical-align: middle; */
   flex-direction: row;
   justify-content: space-around;
 }
 
 .specificArticleInformation {
   padding-top: 4vh;
-}
-
-.IncrementVotesComments {
-  /* grid-area: commentVotes; */
 }
 
 .specificArticleBody {
@@ -300,32 +295,97 @@ ul {
   grid-area: comments;
   display: grid;
   grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 100%;
   grid-template-areas:
-    "postComment commentToggle"
-    "commentSection commentSection";
+    "postCommentToggle"
+    "commentSection";
+}
+
+.postCommentAndToggle {
+  grid-area: postCommentToggle;
+  display: flex;
+  justify-content: space-around;
 }
 
 .PostCommentForm {
-  grid-area: postComment;
+  padding: 1vh;
 }
 
 .commentsToggle {
-  grid-area: commentToggle;
+  padding: 1vh;
+}
+
+.postCommentErrorMsg {
+  padding: 1vh;
 }
 
 .commentsSection {
-  grid-area: commentSection !important;
+  grid-area: commentSection;
   justify-self: stretch;
 }
 
-.ArticleComments {
-  grid-area: commentsComments !important;
-  background-color: royalblue;
-  border: royalblue;
+/* Specififc article comments styling */
+
+.articleCommentTile {
+  text-align: left;
+  margin: 2vh;
+  padding: 2vh 2vh;
+  border-radius: 25px;
+  background-color: rosybrown;
+  color: black;
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "body commentVotes"
+    "commentInfo commentVotes";
 }
 
-/* Specififc article comments styling */
+/* @media only screen and (max-width: 768px) {
+  .articleCommentTile {
+    text-align: left;
+    background-color: rosybrown;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "commentInfo commentInfo"
+      "body body";
+  }
+} */
+
+.commentInfo {
+  /* padding-top: 1em; */
+  grid-area: commentInfo;
+  display: flex;
+  justify-content: space-between;
+}
+
+.commentBody {
+  /* padding-top: 1em; */
+  grid-area: body;
+}
+
+.incrementVotesComments {
+  grid-area: commentVotes;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.deleteCommentButtonSection {
+  grid-area: commentInfo;
+}
+
+.deleteCommentButton {
+  border: none;
+  color: blue;
+  background-color: inherit;
+  cursor: pointer;
+  margin: 1vh;
+  display: inline-block;
+  outline: none;
+}
 
 /* Topics page */
 
@@ -364,8 +424,13 @@ ul {
 /* Log in page */
 
 .logInPage {
-  padding: 2vh 0vw;
-  margin: 20vh 2vh;
+  display: flex;
+  justify-content: center;
+}
+
+.logInForm {
+  margin: 20vh 2vh 0vh 2vh;
+  padding: 2vh 2vw;
   border-radius: 25px;
   background-color: rosybrown;
 }

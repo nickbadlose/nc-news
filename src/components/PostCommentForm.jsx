@@ -3,21 +3,26 @@ import * as api from "../api";
 
 class PostCommentForm extends Component {
   state = {
-    body: "",
-    loggedOut: false
+    body: ""
   };
   render() {
-    const { body, loggedOut } = this.state;
+    const { body } = this.state;
     const { handleChange, handleSubmit } = this;
+    const { username } = this.props;
     return (
       <form onSubmit={handleSubmit} className="PostCommentForm">
         <label>
-          Add a comment:{" "}
           <input type="text" value={body} onChange={handleChange} required />
-          {loggedOut && <span>you need to log in to post a comment</span>}
           {}
+          <button>
+            {username
+              ? body
+                ? "Post comment"
+                : "Add a comment"
+              : "log in to post a comment"}
+          </button>
         </label>
-        <button>post</button>
+        {/* {username && <span> you need to log in to post a comment</span>} */}
       </form>
     );
   }
@@ -43,7 +48,7 @@ class PostCommentForm extends Component {
       })
       .catch(() => {
         errorHandler({
-          msg: "need to log in to post a comment"
+          msg: "log in to post a comment"
         });
       });
   };

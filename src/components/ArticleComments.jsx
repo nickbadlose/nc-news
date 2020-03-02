@@ -13,13 +13,15 @@ const ArticleComments = ({
       <ul>
         {comments.map(comment => {
           return (
-            <CommentTile
-              {...comment}
-              deleteCommentById={deleteCommentById}
-              key={comment.comment_id}
-              username={username}
-              err={err}
-            />
+            <div key={comment.comment_id}>
+              <CommentTile
+                {...comment}
+                deleteCommentById={deleteCommentById}
+                key={comment.comment_id}
+                username={username}
+                err={err}
+              />
+            </div>
           );
         })}
       </ul>

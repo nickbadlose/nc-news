@@ -14,19 +14,22 @@ const CommentTile = ({
 }) => {
   const { date, time } = formatDate(created_at);
   return (
-    <li>
-      <p>
-        Author: {author} / Created: {`${date}: ${time}`}
-      </p>
-      <p>{body}</p>
-      <IncrementVotes votes={votes} comment_id={comment_id} type="comment" />
-      <p>
+    <li className="articleCommentTile">
+      <p className="commentBody">{body}</p>
+      <div className="incrementVotesComments">
+        <IncrementVotes votes={votes} comment_id={comment_id} type="comment" />
+      </div>
+      <p className="commentInfo">
+        Posted by {author} on {date} at {time}
         {username === author && (
-          <span>
-            <button onClick={() => deleteCommentById(comment_id)}>
-              Delete
+          <span className="deleteCommentButtonSection">
+            <button
+              onClick={() => deleteCommentById(comment_id)}
+              className="deleteCommentButton"
+            >
+              Delete comment
             </button>
-            {err && <>cannot delete comment</>}
+            {err && <p>cannot delete comment</p>}
           </span>
         )}
       </p>

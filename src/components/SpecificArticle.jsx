@@ -61,7 +61,7 @@ class SpecificArticle extends Component {
                 <article className="specificArticleBody">
                   <p>{body}</p>
                 </article>
-                <p className="specificArticleInfo">
+                <div className="specificArticleInfo">
                   <div className="specificArticleInformation">
                     Created by {author} on {date} at {time}
                   </div>
@@ -69,22 +69,29 @@ class SpecificArticle extends Component {
                     votes={votes}
                     article_id={article_id}
                     type="article"
-                    className="IncrementVotesComments"
                   />
-                </p>
+                </div>
                 <div className="specificArticleComments">
-                  <PostCommentForm
-                    username={username}
-                    article_id={article_id}
-                    fetchCommentsByArticleId={fetchCommentsByArticleId}
-                    errorHandler={errorHandler}
-                  />
-                  {postErr && <ErrorMessage err={postErr} />}
-                  <ToggleButton
-                    handleButtonChange={handleButtonChange}
-                    buttonText={`Comments: ${+comment_count + commentChange}`}
-                    className="commentsToggle"
-                  />
+                  <div className="postCommentAndToggle">
+                    <PostCommentForm
+                      username={username}
+                      article_id={article_id}
+                      fetchCommentsByArticleId={fetchCommentsByArticleId}
+                      errorHandler={errorHandler}
+                    />
+                    {/* {postErr && (
+                      <div className="postCommentErrorMsg">
+                        <ErrorMessage err={postErr} />
+                      </div>
+                    )} */}
+                    <div className="commentsToggle">
+                      <ToggleButton
+                        handleButtonChange={handleButtonChange}
+                        buttonText={`Comments: ${+comment_count +
+                          commentChange}`}
+                      />
+                    </div>
+                  </div>
                   {toggleComments && (
                     <section className="commentsSection">
                       <div className="FilterFormComments">

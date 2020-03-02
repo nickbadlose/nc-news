@@ -13,7 +13,6 @@ class IncrementVotes extends Component {
     const { votes } = this.props;
     return (
       <div className="IncrementVotes">
-        {/* <span> */}
         <button
           onClick={() => handleVotesChange(1)}
           disabled={voteDifference === 1 && true}
@@ -29,7 +28,6 @@ class IncrementVotes extends Component {
         >
           ⬇
         </button>
-        {/* </span> */}
         {err && <ErrorMessage err={err} />}
       </div>
     );

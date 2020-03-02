@@ -2,10 +2,9 @@ import React from "react";
 
 const ErrorMessage = ({ err }) => {
   return (
-    <section>
-      <p>{err.status}</p>
-      <p>{err.msg}</p>
-    </section>
+    <span>
+      {err.status} {err.msg}
+    </span>
   );
 };
 
