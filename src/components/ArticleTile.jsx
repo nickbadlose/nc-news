@@ -23,20 +23,35 @@ class ArticleTile extends Component {
     const { handleButtonChange } = this;
     const { date, time } = formatDate(created_at);
     return (
-      <li>
-        <Link to={`/articles/${article_id}`}>
-          <h3>{title}</h3>
+      <li className="ArticleTile">
+        <Link to={`/articles/${article_id}`} className="articleTileHeader">
+          <h3>
+            {title} - {topic}
+          </h3>
         </Link>
-        <p>
-          Author: {author} / Topic: {topic}
+        <p className="articleTileInfo">
+          Created by {author} on {date} at {time}
         </p>
-        {toggleBody ? <p>{body}</p> : <p>{body.slice(0, 100)}...</p>}
-        <ToggleButton
-          handleButtonChange={handleButtonChange}
-          buttonText={toggleBody ? "show less" : "show more"}
-        />
-        <p>Comments: {comment_count}</p>
-        <p>Created: {`${date}: ${time}`}</p>
+        {toggleBody ? (
+          <>
+            <p className="articleTileBody">
+              {body}
+              <ToggleButton
+                handleButtonChange={handleButtonChange}
+                buttonText={toggleBody ? "show less" : "show more"}
+              />
+            </p>
+          </>
+        ) : (
+          <p className="articleTileBody">
+            {body.slice(0, 100)} ...
+            <ToggleButton
+              handleButtonChange={handleButtonChange}
+              buttonText={toggleBody ? "show less" : "show more"}
+            />
+          </p>
+        )}
+        <p className="articleTileComments">Comments: {comment_count} 💬</p>
         <IncrementVotes votes={votes} article_id={article_id} type="article" />
       </li>
     );

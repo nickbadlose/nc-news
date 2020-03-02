@@ -12,24 +12,26 @@ class IncrementVotes extends Component {
     const { voteDifference, err } = this.state;
     const { votes } = this.props;
     return (
-      <p>
+      <div className="IncrementVotes">
+        {/* <span> */}
+        <button
+          onClick={() => handleVotesChange(1)}
+          disabled={voteDifference === 1 && true}
+          className="incrementVotesButton"
+        >
+          ⬆
+        </button>
         Votes: {votes + voteDifference}
-        <span>
-          <button
-            onClick={() => handleVotesChange(1)}
-            disabled={voteDifference === 1 && true}
-          >
-            Upvote
-          </button>
-          <button
-            onClick={() => handleVotesChange(-1)}
-            disabled={voteDifference === -1 && true}
-          >
-            Downvote
-          </button>
-        </span>
+        <button
+          onClick={() => handleVotesChange(-1)}
+          disabled={voteDifference === -1 && true}
+          className="incrementVotesButton"
+        >
+          ⬇
+        </button>
+        {/* </span> */}
         {err && <ErrorMessage err={err} />}
-      </p>
+      </div>
     );
   }
 

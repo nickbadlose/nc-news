@@ -11,7 +11,7 @@ class App extends Component {
   };
   render() {
     const { username } = this.state;
-    const { logIn } = this;
+    const { logIn, logOut } = this;
     return (
       <div className="App">
         <Header />
@@ -19,13 +19,17 @@ class App extends Component {
         <div className="Header-side"></div>
         <div className="Nav-side"></div>
         <SideBar />
-        <Routes logIn={logIn} username={username} />
+        <Routes logIn={logIn} username={username} logOut={logOut} />
       </div>
     );
   }
 
   logIn = username => {
     this.setState({ username });
+  };
+
+  logOut = () => {
+    this.setState({ username: "" });
   };
 }
 

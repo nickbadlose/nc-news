@@ -10,7 +10,7 @@ class PostCommentForm extends Component {
     const { body, loggedOut } = this.state;
     const { handleChange, handleSubmit } = this;
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="PostCommentForm">
         <label>
           Add a comment:{" "}
           <input type="text" value={body} onChange={handleChange} required />

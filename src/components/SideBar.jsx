@@ -11,22 +11,21 @@ class SideBar extends Component {
     const { topics, isLoading } = this.state;
     return (
       <div className="SideBar">
-        <h2>Topics</h2>
+        <h2 className="sideBarHeader">Topics</h2>
         {isLoading ? (
           <p>Loading...</p>
         ) : (
           <nav>
-            <ul>
+            <ul className="sideBarNavList">
               {topics.map(topic => {
                 return (
-                  <li key={topic.slug}>
-                    <Link
-                      to={`/topics/articles/${topic.slug}`}
-                      className="Link"
-                    >
-                      {topic.slug}
-                    </Link>
-                  </li>
+                  <Link
+                    to={`/topics/articles/${topic.slug}`}
+                    className="sideBarLink"
+                    key={topic.slug}
+                  >
+                    <li className="sideBarLi">{topic.slug}</li>
+                  </Link>
                 );
               })}
             </ul>

@@ -1,9 +1,11 @@
 .App {
   text-align: center;
   background-color: #d7c0bb;
+  font-family: "Guardian Text Egyptian Web", Georgia, serif;
+  color: black;
   display: grid;
   grid-template-columns: 6fr 1fr;
-  grid-template-rows: minmax(50px, 80px) minmax(30px, 50px) auto;
+  grid-template-rows: minmax(8vh, 13vh) minmax(5vh, 8vh) auto;
   grid-template-areas:
     "header header-side"
     "nav nav-side"
@@ -17,53 +19,353 @@ ul {
   padding: 0%;
 }
 
-.Link {
+/* .Link {
   text-decoration: none;
   color: black;
   margin: 10px;
-}
-
-@media only screen and (max-width: 768px) {
-  .SideBar {
-    display: none;
-  }
-}
+  vertical-align: middle;
+  min-width: 44px;
+} */
 
 /* Header CSS */
 
 .Header {
   grid-area: header;
   background-color: #471105;
-  max-height: 80px;
+  max-height: 13vh;
+  color: white;
 }
 
 .Header-side {
   grid-area: header-side;
   background-color: #471105;
-  max-height: 80px;
+  max-height: 13vh;
 }
+
+/* Nav CSS */
 
 .Nav {
   grid-area: nav;
-  max-height: 50px;
+  display: flex;
+  justify-content: space-around;
+  max-height: 8vh;
   background-color: #6f1a07;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 .Nav-side {
   grid-area: nav-side;
-  max-height: 50px;
+  max-height: 8vh;
+  background-color: #6f1a07;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.navLink {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+  color: black;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  width: 100%;
+}
+
+.navLink:hover {
+  background-color: #471105;
+  color: white;
+}
+
+/* SideBar CSS */
+
+.SideBar {
+  grid-area: sidebar;
+  margin: 2vh;
+  height: 88vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 10vh;
+  border-radius: 25px;
   background-color: #6f1a07;
 }
+
+.sideBarHeader {
+  background-color: #471105;
+  color: white;
+  padding: 2vh 0vh;
+  border-radius: 25px;
+  margin: 0px;
+}
+
+.sideBarNavList {
+  margin: 0;
+}
+
+.sideBarLink {
+  text-decoration: none;
+  color: black;
+}
+
+.sideBarLi {
+  padding: 1vh 0vh;
+  border-radius: 25px;
+}
+
+.sideBarLink:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.sideBarLi:hover {
+  background-color: #471105;
+}
+
+@media only screen and (max-width: 768px) {
+  .App {
+    text-align: center;
+    background-color: #d7c0bb;
+    font-family: "Guardian Text Egyptian Web", Georgia, serif;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: minmax(8vh, 13vh) minmax(5vh 8vh) auto;
+    grid-template-areas:
+      "header"
+      "nav"
+      "main";
+  }
+
+  .SideBar {
+    display: none;
+  }
+}
+
+/* main content CSS */
 
 .main {
   grid-area: main;
 }
 
-.SideBar {
-  grid-area: sidebar;
-  height: 100vh;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+.articlesHeader {
+  margin: 2vh;
+  padding: 2vh 0vh;
+  border-radius: 25px;
+  background-color: #471105;
+  color: white;
+}
+
+/* Order forms CSS */
+
+.FilterForm {
+  color: white;
+  border-radius: 25px;
+  background-color: #6f1a07;
+  padding: 2vh 0vh;
+  margin: 2vh;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Article tile CSS */
+
+.ArticleTile {
+  text-align: left;
+  margin: 2vh;
+  padding: 2vh 0vh;
+  border-radius: 25px;
+  background-color: rosybrown;
+  color: black;
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header votes"
+    "articleInfo votes"
+    "body votes"
+    "comments votes";
+}
+
+@media only screen and (max-width: 768px) {
+  .ArticleTile {
+    text-align: left;
+    background-color: rosybrown;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "header header"
+      "articleInfo articleInfo"
+      "body body"
+      "comments votes";
+  }
+}
+
+.articleTileHeader {
+  padding-left: 1vw;
+  grid-area: header;
+  text-decoration: none;
+  color: blue;
+}
+
+.articleTileInfo {
+  padding-left: 1vw;
+  grid-area: articleInfo;
+}
+
+.articleTileBody {
+  padding-left: 1vw;
+  grid-area: body;
+}
+
+.articleTileComments {
+  padding-left: 1vw;
+  grid-area: comments;
+}
+
+.ToggleButton {
+  border: none;
+  color: blue;
+  background-color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+}
+
+.IncrementVotes {
+  text-align: center;
+  grid-area: votes;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.incrementVotesButton {
+  border: none;
+  color: blue;
+  background-color: inherit;
+  cursor: pointer;
+  margin: 1vh;
+  display: inline-block;
+  outline: none;
+}
+
+.incrementVotesButton:disabled {
+  color: #6f1a07;
+}
+
+/* Specific article CSS */
+
+.SpecificArticle {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header"
+    "body"
+    "infoVotes"
+    "comments";
+}
+
+.specificArticleHeader {
+  background-color: red;
+  grid-area: header;
+}
+
+.specificArticleInfo {
+  background-color: red;
+  grid-area: infoVotes;
+  display: flex;
+  /* vertical-align: middle; */
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.specificArticleInformation {
+  padding-top: 4vh;
+}
+
+.IncrementVotesComments {
+  /* grid-area: commentVotes; */
+}
+
+.specificArticleBody {
+  background-color: royalblue;
+  grid-area: body;
+}
+
+.specificArticleComments {
+  background-color: red;
+  grid-area: comments;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "postComment commentToggle"
+    "commentSection commentSection";
+}
+
+.PostCommentForm {
+  grid-area: postComment;
+}
+
+.commentsToggle {
+  grid-area: commentToggle;
+}
+
+.commentsSection {
+  grid-area: commentSection !important;
+  justify-self: stretch;
+}
+
+.ArticleComments {
+  grid-area: commentsComments !important;
+  background-color: royalblue;
+  border: royalblue;
+}
+
+/* Specififc article comments styling */
+
+/* Topics page */
+
+.topicsHeader {
+  margin: 2vh;
+  padding: 2vh 0vh;
+  border-radius: 25px;
+  background-color: #471105;
+  color: white;
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.topicTile {
+  margin: 2vh;
+  padding: 1vh 0px;
+  border-radius: 25px;
+  background-color: rosybrown;
+  color: black;
+  min-width: 250px;
+}
+
+.topicDescription {
+  padding: 0vh 2vh;
+}
+
+.topicLink {
+  text-decoration: none;
+}
+
+/* Log in page */
+
+.logInPage {
+  padding: 2vh 0vw;
+  margin: 20vh 2vh;
+  border-radius: 25px;
   background-color: rosybrown;
 }

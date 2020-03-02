@@ -10,7 +10,7 @@ class FilterForm extends Component {
     const { handleChange } = this;
     const { article } = this.props;
     return (
-      <form>
+      <form className="FilterForm">
         <label>
           Sort by:
           <select
@@ -19,10 +19,19 @@ class FilterForm extends Component {
               handleChange(event.target);
             }}
             name="sortBy"
+            className="filterFormSelect"
           >
-            <option value="created_at">created at</option>
-            {article && <option value="comment_count">comment count</option>}
-            <option value="votes">votes</option>
+            <option value="created_at" className="filterFormOption">
+              created at
+            </option>
+            {article && (
+              <option value="comment_count" className="filterFormOption">
+                comment count
+              </option>
+            )}
+            <option value="votes" className="filterFormOption">
+              votes
+            </option>
           </select>
         </label>
         <label>
@@ -33,9 +42,14 @@ class FilterForm extends Component {
               handleChange(event.target);
             }}
             name="orderBy"
+            className="filterFormSelect"
           >
-            <option value="desc">descending</option>
-            <option value="asc">ascending</option>
+            <option value="desc" className="filterFormOption">
+              descending
+            </option>
+            <option value="asc" className="filterFormOption">
+              ascending
+            </option>
           </select>
         </label>
       </form>

@@ -11,23 +11,28 @@ class Topics extends Component {
     const { topics, isLoading } = this.state;
     return (
       <>
+        <h2 className="topicsHeader">Topics</h2>
         {isLoading ? (
           <p>Loading...</p>
         ) : (
-          <nav>
-            <ul>
+          <div>
+            <ul className="topics">
               {topics.map(topic => {
                 return (
-                  <li key={topic.slug}>
-                    <Link to={`/topics/articles/${topic.slug}`}>
+                  <Link
+                    to={`/topics/articles/${topic.slug}`}
+                    key={topic.slug}
+                    className="topicLink"
+                  >
+                    <li className="topicTile">
                       <h2>{topic.slug}</h2>
-                      <p>{topic.description}</p>
-                    </Link>
-                  </li>
+                      <p className="topicDescription">{topic.description}</p>
+                    </li>
+                  </Link>
                 );
               })}
             </ul>
-          </nav>
+          </div>
         )}
       </>
     );

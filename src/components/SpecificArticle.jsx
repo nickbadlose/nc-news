@@ -46,7 +46,7 @@ class SpecificArticle extends Component {
     const { username } = this.props;
     const { date, time } = formatDate(created_at);
     return (
-      <main>
+      <main className="SpecificArticle">
         {err ? (
           <ErrorPage err={err} />
         ) : (
@@ -55,47 +55,58 @@ class SpecificArticle extends Component {
               <p>Loading...</p>
             ) : (
               <>
-                <h3>{title}</h3>
-                <p>
-                  Author: {author} / topic: {topic} / created:{" "}
-                  {`${date}: ${time}`}
-                </p>
-                <article>
+                <h3 className="specificArticleHeader">
+                  {title} - {topic}
+                </h3>
+                <article className="specificArticleBody">
                   <p>{body}</p>
                 </article>
-                <IncrementVotes
-                  votes={votes}
-                  article_id={article_id}
-                  type="article"
-                />
-                <PostCommentForm
-                  username={username}
-                  article_id={article_id}
-                  fetchCommentsByArticleId={fetchCommentsByArticleId}
-                  errorHandler={errorHandler}
-                />
-                {postErr && <ErrorMessage err={postErr} />}
-                <ToggleButton
-                  handleButtonChange={handleButtonChange}
-                  buttonText={`Comments: ${+comment_count + commentChange}`}
-                />
-                {toggleComments && (
-                  <section>
-                    <FilterForm
-                      fetchCommentsByArticleId={fetchCommentsByArticleId}
-                      article_id={article_id}
-                      article={false}
-                    />
-                    <ArticleComments
-                      comments={comments}
-                      deleteCommentById={deleteCommentById}
-                      username={username}
-                      err={deleteErr}
-                    />
-                  </section>
-                )}
+                <p className="specificArticleInfo">
+                  <div className="specificArticleInformation">
+                    Created by {author} on {date} at {time}
+                  </div>
+                  <IncrementVotes
+                    votes={votes}
+                    article_id={article_id}
+                    type="article"
+                    className="IncrementVotesComments"
+                  />
+                </p>
+                <div className="specificArticleComments">
+                  <PostCommentForm
+                    username={username}
+                    article_id={article_id}
+                    fetchCommentsByArticleId={fetchCommentsByArticleId}
+                    errorHandler={errorHandler}
+                  />
+                  {postErr && <ErrorMessage err={postErr} />}
+                  <ToggleButton
+                    handleButtonChange={handleButtonChange}
+                    buttonText={`Comments: ${+comment_count + commentChange}`}
+                    className="commentsToggle"
+                  />
+                  {toggleComments && (
+                    <section className="commentsSection">
+                      <div className="FilterFormComments">
+                        <FilterForm
+                          fetchCommentsByArticleId={fetchCommentsByArticleId}
+                          article_id={article_id}
+                          article={false}
+                        />
+                      </div>
+                      <div className="ArticleComments">
+                        <ArticleComments
+                          comments={comments}
+                          deleteCommentById={deleteCommentById}
+                          username={username}
+                          err={deleteErr}
+                        />
+                      </div>
+                    </section>
+                  )}
+                </div>
               </>
-            )}{" "}
+            )}
           </>
         )}
       </main>
@@ -132,7 +143,6 @@ class SpecificArticle extends Component {
         });
       })
       .catch(({ response }) => {
-        // console.log(response.status, response.data.msg);
         this.setState({
           err: { status: response.status, msg: response.data.msg }
         });

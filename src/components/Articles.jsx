@@ -13,7 +13,7 @@ class Articles extends Component {
     const { fetchArticles } = this;
     return (
       <main>
-        <h2>Articles</h2>
+        <h2 className="articlesHeader">Articles</h2>
         <FilterForm fetchArticles={fetchArticles} article={true} />
         {isLoading ? (
           <p>Loading...</p>

@@ -8,7 +8,7 @@ import TopicsArticles from "./TopicsArticles";
 import Topics from "./Topics";
 import ErrorPage from "./ErrorPage";
 
-const Routes = ({ logIn, username }) => {
+const Routes = ({ logIn, username, logOut, loggedIn }) => {
   return (
     <>
       <Router className="main">
@@ -17,7 +17,12 @@ const Routes = ({ logIn, username }) => {
         <SpecificArticle path="/articles/:article_id/" username={username} />
         <TopicsArticles path="/topics/articles/:topic" />
         <Topics path="/topics" />
-        <LogIn path="/login" logIn={logIn} />
+        <LogIn
+          path="/login"
+          logIn={logIn}
+          username={username}
+          logOut={logOut}
+        />
         <ErrorPage default />
       </Router>
     </>
