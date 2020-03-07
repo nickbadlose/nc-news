@@ -5,7 +5,7 @@ import { formatDate } from "../utils/utils";
 import IncrementVotes from "./IncrementVotes";
 import PostCommentForm from "./PostCommentForm";
 import FilterForm from "./FilterForm";
-import ErrorMessage from "./ErrorMessage";
+// import ErrorMessage from "./ErrorMessage";
 import ToggleButton from "./ToggleButton";
 import ErrorPage from "./ErrorPage";
 
@@ -15,8 +15,9 @@ class SpecificArticle extends Component {
     isLoading: true,
     toggleComments: false,
     commentChange: null,
-    postErr: null,
+    // postErr: null,
     deleteErr: null,
+    deleteComment_id: null,
     err: null
   };
   render() {
@@ -33,9 +34,10 @@ class SpecificArticle extends Component {
       toggleComments,
       comments,
       commentChange,
-      postErr,
+      // postErr,
       deleteErr,
-      err
+      err,
+      deleteComment_id
     } = this.state;
     const {
       handleButtonChange,
@@ -107,6 +109,7 @@ class SpecificArticle extends Component {
                           deleteCommentById={deleteCommentById}
                           username={username}
                           err={deleteErr}
+                          deleteComment_id={deleteComment_id}
                         />
                       </div>
                     </section>
@@ -176,14 +179,17 @@ class SpecificArticle extends Component {
     api.removeCommentById(comment_id).catch(() => {
       this.setState(currentState => ({
         comments: initialComments,
-        deleteErr: { msg: "comment could not be removed" },
-        commentChange: ++currentState.commentChange
+        deleteErr: true,
+        commentChange: ++currentState.commentChange,
+        deleteComment_id: comment_id
       }));
     });
   };
 
-  errorHandler = err => {
-    this.setState({ postErr: err });
+  errorHandler = ({ status, data: { msg } }) => {
+    this.setState({
+      err: { status: status, msg: msg }
+    });
   };
 }
 

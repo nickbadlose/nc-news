@@ -6,7 +6,7 @@ const ArticleComments = ({
   deleteCommentById,
   username,
   err,
-  errorHandler
+  deleteComment_id
 }) => {
   return (
     <div>
@@ -20,6 +20,7 @@ const ArticleComments = ({
                 key={comment.comment_id}
                 username={username}
                 err={err}
+                deleteComment_id={deleteComment_id}
               />
             </div>
           );

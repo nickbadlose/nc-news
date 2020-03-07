@@ -20,7 +20,7 @@ class IncrementVotes extends Component {
         >
           ⬆
         </button>
-        Votes: {votes + voteDifference}
+        {votes + voteDifference}
         <button
           onClick={() => handleVotesChange(-1)}
           disabled={voteDifference === -1 && true}

@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #d7c0bb;
+  /* background-color: #d7c0bb; */
   font-family: "Guardian Text Egyptian Web", Georgia, serif;
   color: black;
   display: grid;
@@ -31,14 +31,14 @@ ul {
 
 .Header {
   grid-area: header;
-  background-color: #471105;
+  background-color: #052962;
   max-height: 13vh;
   color: white;
 }
 
 .Header-side {
   grid-area: header-side;
-  background-color: #471105;
+  background-color: #052962;
   max-height: 13vh;
 }
 
@@ -49,7 +49,7 @@ ul {
   display: flex;
   justify-content: space-around;
   max-height: 8vh;
-  background-color: #6f1a07;
+  background-color: #1a53c8;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -58,7 +58,7 @@ ul {
 .Nav-side {
   grid-area: nav-side;
   max-height: 8vh;
-  background-color: #6f1a07;
+  background-color: #1a53c8;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -76,7 +76,7 @@ ul {
 }
 
 .navLink:hover {
-  background-color: #471105;
+  background-color: #052962;
   color: white;
 }
 
@@ -84,17 +84,17 @@ ul {
 
 .SideBar {
   grid-area: sidebar;
-  margin: 2vh;
+  margin: 2vh 2vh 2vh 0vh;
   height: 88vh;
   position: -webkit-sticky;
   position: sticky;
   top: 10vh;
   border-radius: 25px;
-  background-color: #6f1a07;
+  background-color: #1a53c8;
 }
 
 .sideBarHeader {
-  background-color: #471105;
+  background-color: #052962;
   color: white;
   padding: 2vh 0vh;
   border-radius: 25px;
@@ -121,13 +121,14 @@ ul {
 }
 
 .sideBarLi:hover {
-  background-color: #471105;
+  background-color: #052962;
 }
 
 @media only screen and (max-width: 768px) {
   .App {
+    font-size: 2.5vh;
     text-align: center;
-    background-color: #d7c0bb;
+    /* background-color: #d7c0bb; */
     font-family: "Guardian Text Egyptian Web", Georgia, serif;
     display: grid;
     grid-template-columns: 100%;
@@ -153,7 +154,7 @@ ul {
   margin: 2vh;
   padding: 2vh 0vh;
   border-radius: 25px;
-  background-color: #471105;
+  background-color: #052962;
   color: white;
 }
 
@@ -162,7 +163,7 @@ ul {
 .FilterForm {
   color: white;
   border-radius: 25px;
-  background-color: #6f1a07;
+  background-color: #1a53c8;
   padding: 2vh 0vh;
   margin: 2vh;
   display: flex;
@@ -176,7 +177,7 @@ ul {
   margin: 2vh;
   padding: 2vh 0vh;
   border-radius: 25px;
-  background-color: rosybrown;
+  background-color: #eaeaea;
   color: black;
   display: grid;
   grid-template-columns: 6fr 1fr;
@@ -191,7 +192,8 @@ ul {
 @media only screen and (max-width: 768px) {
   .ArticleTile {
     text-align: left;
-    background-color: rosybrown;
+    background-color: #eaeaea;
+    max-width: 93vw;
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: auto;
@@ -204,19 +206,19 @@ ul {
 }
 
 .articleTileHeader {
-  padding-left: 1vw;
+  padding: 0vh 1vw;
   grid-area: header;
   text-decoration: none;
   color: blue;
 }
 
 .articleTileInfo {
-  padding-left: 1vw;
+  padding: 0vh 1vw;
   grid-area: articleInfo;
 }
 
 .articleTileBody {
-  padding-left: 1vw;
+  padding: 0vh 1vw;
   grid-area: body;
 }
 
@@ -253,7 +255,7 @@ ul {
 }
 
 .incrementVotesButton:disabled {
-  color: #6f1a07;
+  color: #1a53c8;
 }
 
 /* Specific article CSS */
@@ -269,12 +271,24 @@ ul {
 }
 
 .specificArticleHeader {
-  background-color: red;
+  max-width: 93vw;
+
+  margin: 2vh;
+  padding: 2vh 0vh;
+  border-radius: 25px;
+  background-color: #052962;
+  color: white;
   grid-area: header;
 }
 
 .specificArticleInfo {
-  background-color: white;
+  max-width: 93vw;
+
+  margin: 2vh;
+  padding: 2vh 2vh;
+  border-radius: 25px;
+  background-color: #eaeaea;
+  color: black;
   grid-area: infoVotes;
   display: flex;
   flex-direction: row;
@@ -282,16 +296,25 @@ ul {
 }
 
 .specificArticleInformation {
+  max-width: 93vw;
+
   padding-top: 4vh;
 }
 
 .specificArticleBody {
-  background-color: royalblue;
+  max-width: 93vw;
+
+  margin: 2vh;
+  padding: 2vh 2vh;
+  border-radius: 25px;
+  background-color: #eaeaea;
+  color: black;
   grid-area: body;
 }
 
 .specificArticleComments {
-  background-color: red;
+  max-width: 100vw;
+
   grid-area: comments;
   display: grid;
   grid-template-rows: auto;
@@ -302,6 +325,11 @@ ul {
 }
 
 .postCommentAndToggle {
+  margin: 2vh;
+  padding: 2vh 2vh;
+  border-radius: 25px;
+  background-color: #eaeaea;
+  color: black;
   grid-area: postCommentToggle;
   display: flex;
   justify-content: space-around;
@@ -309,9 +337,38 @@ ul {
 
 .PostCommentForm {
   padding: 1vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "textBody"
+    "submit";
+}
+
+.postCommentBody {
+  width: 49.45vw;
+  grid-area: textBody;
+  /* margin: 0; */
+  margin-bottom: -1vh;
+  resize: none;
+}
+
+.postCommentButtonDiv {
+  margin: 0;
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .postCommentButtonDiv {
+  }
+}
+
+.postCommentButton {
+  grid-area: submit;
+  width: 100%;
 }
 
 .commentsToggle {
+  margin-top: 2.5vh;
   padding: 1vh;
 }
 
@@ -321,7 +378,6 @@ ul {
 
 .commentsSection {
   grid-area: commentSection;
-  justify-self: stretch;
 }
 
 /* Specififc article comments styling */
@@ -331,7 +387,7 @@ ul {
   margin: 2vh;
   padding: 2vh 2vh;
   border-radius: 25px;
-  background-color: rosybrown;
+  background-color: #eaeaea;
   color: black;
   display: grid;
   grid-template-columns: 6fr 1fr;
@@ -344,7 +400,7 @@ ul {
 /* @media only screen and (max-width: 768px) {
   .articleCommentTile {
     text-align: left;
-    background-color: rosybrown;
+    background-color: #EAEAEA;
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 1fr 1fr;
@@ -393,7 +449,7 @@ ul {
   margin: 2vh;
   padding: 2vh 0vh;
   border-radius: 25px;
-  background-color: #471105;
+  background-color: #052962;
   color: white;
 }
 
@@ -408,7 +464,7 @@ ul {
   margin: 2vh;
   padding: 1vh 0px;
   border-radius: 25px;
-  background-color: rosybrown;
+  background-color: #eaeaea;
   color: black;
   min-width: 250px;
 }
@@ -432,5 +488,5 @@ ul {
   margin: 20vh 2vh 0vh 2vh;
   padding: 2vh 2vw;
   border-radius: 25px;
-  background-color: rosybrown;
+  background-color: #eaeaea;
 }

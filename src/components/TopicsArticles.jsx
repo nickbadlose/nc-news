@@ -13,9 +13,10 @@ class TopicsArticles extends Component {
   render() {
     const { articles, isLoading, err } = this.state;
     const { fetchArticles } = this;
+    const { topic } = this.props;
     return (
       <main>
-        <h2>Articles</h2>
+        <h2>Articles - {topic}</h2>
         {err ? (
           <ErrorPage err={err} />
         ) : (

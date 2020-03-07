@@ -12,7 +12,7 @@ class FilterForm extends Component {
     return (
       <form className="FilterForm">
         <label>
-          Sort by:
+          Sort:
           <select
             value={sortBy}
             onChange={event => {
@@ -35,7 +35,7 @@ class FilterForm extends Component {
           </select>
         </label>
         <label>
-          Order by:
+          Order:
           <select
             value={orderBy}
             onChange={event => {

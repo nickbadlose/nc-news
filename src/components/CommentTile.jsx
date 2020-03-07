@@ -10,7 +10,8 @@ const CommentTile = ({
   votes,
   username,
   deleteCommentById,
-  err
+  err,
+  deleteComment_id
 }) => {
   const { date, time } = formatDate(created_at);
   return (
@@ -29,7 +30,9 @@ const CommentTile = ({
             >
               Delete comment
             </button>
-            {err && <p>cannot delete comment</p>}
+            {err && comment_id === deleteComment_id && (
+              <span>Oops! Couln't delete comment</span>
+            )}
           </span>
         )}
       </p>
