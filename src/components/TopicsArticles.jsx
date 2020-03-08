@@ -16,7 +16,7 @@ class TopicsArticles extends Component {
     const { topic } = this.props;
     return (
       <main>
-        <h2>Articles - {topic}</h2>
+        <h2 className="topicsArticleHeader">Articles - {topic}</h2>
         {err ? (
           <ErrorPage err={err} />
         ) : (

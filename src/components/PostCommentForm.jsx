@@ -14,8 +14,6 @@ class PostCommentForm extends Component {
       <form onSubmit={handleSubmit} className="PostCommentForm">
         <label>
           <textarea
-            contentEditable
-            wrap="hard"
             placeholder={
               username ? "What are your thoughts?" : "Log in to post a comment"
             }
