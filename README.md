@@ -4,7 +4,7 @@ The Northcoders News APP. A news website that provides articles on topics such a
 
 ## Getting Started
 
-**Fork this repository and then clone it**
+**Clone this repository**
 
 In your terminal type the following commands:
 
@@ -29,7 +29,7 @@ If you don't have npm see this link on how to install it: https://www.npmjs.com/
 if not cd into it:
 
 ```bash
-cd be-nc-news
+cd nc-news
 ```
 
 Run the following command:
@@ -48,15 +48,13 @@ npm start
 
 This will open the APP in your browser so you can have a play around with it.
 
-**Here is a link to my hosted version: https://not-quite-reddit.herokuapp.com/api**
-
 ## Links to APP/API
 
-**Backend API github repo: https://github.com/nickbadlose/be-nc-news**
+**Backend API github repo: https://github.com/nickbadlose/be-nc-news .**
 
-**Hosted backend API: https://not-quite-reddit.herokuapp.com/api**
+**Hosted backend API: https://not-quite-reddit.herokuapp.com/api .**
 
-**Deployed APP: https://pensive-swirles-ce412d.netlify.com/**
+**Deployed APP: https://pensive-swirles-ce412d.netlify.com/ .**
 
 ## Acknowledgments
 
