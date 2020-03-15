@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseUrl = "https://not-quite-reddit.herokuapp.com/api";
 
-export const getArticles = (sort_by, order, topic = null) => {
+export const getArticles = (sort_by, order, topic = null, limit = null) => {
   if (topic) {
     return axios.get(`${baseUrl}/articles?topic=${topic}`, {
       params: { sort_by, order }
@@ -10,7 +10,7 @@ export const getArticles = (sort_by, order, topic = null) => {
   } else {
     return axios
       .get(`${baseUrl}/articles`, {
-        params: { sort_by, order }
+        params: { sort_by, order, limit }
       })
       .catch(err => {
         console.dir(err);
