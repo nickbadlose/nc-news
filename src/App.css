@@ -520,3 +520,70 @@ select:hover {
   border-radius: 25px;
   background-color: #eaeaea;
 }
+
+/* Homepage styling */
+
+.homepageArticleTile {
+  text-align: center;
+  margin: 2vh;
+  padding: 2vh 0vh;
+  border-radius: 25px;
+  max-width: 25vw;
+  min-width: 250px;
+  background-color: #eaeaea;
+  color: black;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header"
+    "body"
+    "articleInfo";
+}
+
+/* @media only screen and (max-width: 768px) {
+  .homepageArticleTile {
+    text-align: left;
+    background-color: #eaeaea;
+    max-width: 30vw;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "header header"
+      "body body"
+      "comments votes";
+  }
+} */
+
+.homepageArticleTileHeader {
+  padding: 0vh 1vw;
+  grid-area: header;
+  text-decoration: none;
+  color: blue;
+}
+
+.homepageArticleTileVotes {
+  font-size: 0.8em;
+  padding: 0vh 1vw;
+}
+
+.homepageArticleTileBody {
+  padding: 0vh 1vw;
+  grid-area: body;
+}
+
+.homepageArticleTileComments {
+  padding-left: 1vw;
+}
+
+.homepageArticleTileInfo {
+  grid-area: articleInfo;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.homepageList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

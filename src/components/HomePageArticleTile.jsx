@@ -6,20 +6,24 @@ const HomePageArticleTile = ({
   votes,
   comment_count,
   body,
-  topic,
   article_id
 }) => {
   return (
-    <Link to={`/articles/${article_id}`} className="articleTileHeader">
-      <li className="ArticleTile">
-        <h3>
-          {title} - {topic}
-        </h3>
-        <p className="articleTileBody">{body.slice(0, 100)} ...</p>
-        <p className="articleTileComments">Comments: {comment_count} 💬</p>
-        <p>votes: {votes}</p>
-      </li>
-    </Link>
+    <li className="homepageArticleTile">
+      <Link
+        to={`/articles/${article_id}`}
+        className="homepageArticleTileHeader"
+      >
+        <h3>{title}</h3>
+      </Link>
+      <p className="homepageArticleTileBody">{body.slice(0, 100)} ...</p>
+      <div className="homepageArticleTileInfo">
+        <p className="homepageArticleTileComments">
+          Comments: {comment_count} 💬
+        </p>
+        <p className="homepageArticleTileVotes">votes: {votes}</p>
+      </div>
+    </li>
   );
 };
 
