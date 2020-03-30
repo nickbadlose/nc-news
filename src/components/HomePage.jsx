@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../api";
 import HomePageArticleTile from "./HomePageArticleTile";
+import ErrorPage from "./ErrorPage";
 
 class HomePage extends Component {
   state = {
@@ -8,7 +9,8 @@ class HomePage extends Component {
     highestRatedArticles: [],
     codingArticles: [],
     footballArticles: [],
-    cookingArticles: []
+    cookingArticles: [],
+    err: false
   };
 
   render() {
@@ -17,57 +19,76 @@ class HomePage extends Component {
       highestRatedArticles,
       codingArticles,
       footballArticles,
-      cookingArticles
+      cookingArticles,
+      err
     } = this.state;
     return (
       <main>
-        <h2 className="articlesHeader">Popular Articles</h2>
-        {isLoading ? (
-          <p>Loading...</p>
+        {err ? (
+          <ErrorPage />
         ) : (
-          <ul className="homepageList">
-            {highestRatedArticles.map(article => {
-              return (
-                <HomePageArticleTile {...article} key={article.article_id} />
-              );
-            })}
-          </ul>
-        )}
-        <h2 className="articlesHeader">Coding Articles</h2>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <ul className="homepageList">
-            {codingArticles.map(article => {
-              return (
-                <HomePageArticleTile {...article} key={article.article_id} />
-              );
-            })}
-          </ul>
-        )}
-        <h2 className="articlesHeader">Football Articles</h2>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <ul className="homepageList">
-            {footballArticles.map(article => {
-              return (
-                <HomePageArticleTile {...article} key={article.article_id} />
-              );
-            })}
-          </ul>
-        )}
-        <h2 className="articlesHeader">Cooking Articles</h2>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <ul className="homepageList">
-            {cookingArticles.map(article => {
-              return (
-                <HomePageArticleTile {...article} key={article.article_id} />
-              );
-            })}
-          </ul>
+          <>
+            <h2 className="articlesHeader">Popular Articles</h2>
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <ul className="homepageList">
+                {highestRatedArticles.map(article => {
+                  return (
+                    <HomePageArticleTile
+                      {...article}
+                      key={article.article_id}
+                    />
+                  );
+                })}
+              </ul>
+            )}
+            <h2 className="articlesHeader">Coding Articles</h2>
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <ul className="homepageList">
+                {codingArticles.map(article => {
+                  return (
+                    <HomePageArticleTile
+                      {...article}
+                      key={article.article_id}
+                    />
+                  );
+                })}
+              </ul>
+            )}
+            <h2 className="articlesHeader">Football Articles</h2>
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <ul className="homepageList">
+                {footballArticles.map(article => {
+                  return (
+                    <HomePageArticleTile
+                      {...article}
+                      key={article.article_id}
+                    />
+                  );
+                })}
+              </ul>
+            )}
+            <h2 className="articlesHeader">Cooking Articles</h2>
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <ul className="homepageList">
+                {cookingArticles.map(article => {
+                  return (
+                    <HomePageArticleTile
+                      {...article}
+                      key={article.article_id}
+                    />
+                  );
+                })}
+              </ul>
+            )}
+          </>
         )}
       </main>
     );
@@ -97,6 +118,9 @@ class HomePage extends Component {
         if (topic === "cooking") {
           this.setState({ isLoading: false, cookingArticles: articles });
         }
+      })
+      .catch(err => {
+        this.setState({ err: true });
       });
   };
 }

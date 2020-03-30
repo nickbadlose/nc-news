@@ -1,6 +1,8 @@
 import React from "react";
 
-const ErrorPage = ({ err = { status: 400, msg: "oops" } }) => {
+const ErrorPage = ({
+  err = { status: 500, msg: "Oops, can't connect to the server!" }
+}) => {
   return (
     <main>
       <h2>Error: {err.status}</h2>

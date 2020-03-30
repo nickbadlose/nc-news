@@ -3,6 +3,7 @@ import ArticleTile from "./ArticleTile";
 import * as api from "../api";
 import FilterForm from "./FilterForm";
 import throttle from "lodash.throttle";
+import ErrorPage from "./ErrorPage";
 
 class Articles extends Component {
   state = {
@@ -11,26 +12,35 @@ class Articles extends Component {
     page: 1,
     sort_by: null,
     order: null,
-    maxPage: null
+    maxPage: null,
+    err: false
   };
   render() {
-    const { articles, isLoading, page, maxPage } = this.state;
+    const { articles, isLoading, page, maxPage, err } = this.state;
     const { fetchArticles } = this;
     return (
       <main>
-        <h2 className="articlesHeader">Articles</h2>
-        <FilterForm fetchArticles={fetchArticles} article={true} />
-        {isLoading ? (
-          <p>Loading...</p>
+        {err ? (
+          <ErrorPage />
         ) : (
-          <article>
-            <ul>
-              {articles.map(article => {
-                return <ArticleTile {...article} key={article.article_id} />;
-              })}
-            </ul>
-            {page < maxPage && <p>Loading more articles...</p>}
-          </article>
+          <>
+            <h2 className="articlesHeader">Articles</h2>
+            <FilterForm fetchArticles={fetchArticles} article={true} />
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <article>
+                <ul>
+                  {articles.map(article => {
+                    return (
+                      <ArticleTile {...article} key={article.article_id} />
+                    );
+                  })}
+                </ul>
+                {page < maxPage && <p>Loading more articles...</p>}
+              </article>
+            )}
+          </>
         )}
       </main>
     );
@@ -68,18 +78,23 @@ class Articles extends Component {
   }, 2000);
 
   fetchArticles = (sort_by, order, topic, limit) => {
-    api.getArticles(sort_by, order, topic, limit, 1).then(({ data }) => {
-      const maxPage = Math.ceil(data.total_count / 10);
+    api
+      .getArticles(sort_by, order, topic, limit, 1)
+      .then(({ data }) => {
+        const maxPage = Math.ceil(data.total_count / 10);
 
-      this.setState({
-        articles: data.articles,
-        isLoading: false,
-        sort_by,
-        order,
-        page: 1,
-        maxPage
+        this.setState({
+          articles: data.articles,
+          isLoading: false,
+          sort_by,
+          order,
+          page: 1,
+          maxPage
+        });
+      })
+      .catch(err => {
+        this.setState({ err: true });
       });
-    });
   };
 
   updateArticles = (sort_by, order, topic, limit, p) => {

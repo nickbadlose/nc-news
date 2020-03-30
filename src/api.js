@@ -3,13 +3,9 @@ import axios from "axios";
 const baseUrl = "https://not-quite-reddit.herokuapp.com/api";
 
 export const getArticles = (sort_by, order, topic, limit, p) => {
-  return axios
-    .get(`${baseUrl}/articles`, {
-      params: { sort_by, order, topic, limit, p }
-    })
-    .catch(err => {
-      console.dir(err);
-    });
+  return axios.get(`${baseUrl}/articles`, {
+    params: { sort_by, order, topic, limit, p }
+  });
 };
 
 export const getArticleById = article_id => {
@@ -33,14 +29,9 @@ export const patchCommentById = (comment_id, inc_votes) => {
 };
 
 export const fetchUsers = () => {
-  return axios
-    .get(`${baseUrl}/users`)
-    .then(({ data: { users } }) => {
-      return users;
-    })
-    .catch(err => {
-      console.dir(err);
-    });
+  return axios.get(`${baseUrl}/users`).then(({ data: { users } }) => {
+    return users;
+  });
 };
 
 export const postCommentByArticleId = (article_id, comment) => {
@@ -52,7 +43,5 @@ export const removeCommentById = comment_id => {
 };
 
 export const getTopics = () => {
-  return axios.get(`${baseUrl}/topics`).catch(err => {
-    console.dir(err);
-  });
+  return axios.get(`${baseUrl}/topics`);
 };

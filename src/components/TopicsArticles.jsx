@@ -62,7 +62,9 @@ class TopicsArticles extends Component {
       })
       .catch(({ response }) => {
         this.setState({
-          err: { status: response.status, msg: response.data.msg }
+          err: response
+            ? { status: response.status, msg: response.data.msg }
+            : { status: 500, msg: "Oops, can't connect to the server!" }
         });
       });
   };
