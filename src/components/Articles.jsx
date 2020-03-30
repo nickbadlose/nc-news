@@ -11,11 +11,10 @@ class Articles extends Component {
     page: 1,
     sort_by: null,
     order: null,
-    loadingMoreArticles: false,
     maxPage: null
   };
   render() {
-    const { articles, isLoading, loadingMoreArticles } = this.state;
+    const { articles, isLoading, page, maxPage } = this.state;
     const { fetchArticles } = this;
     return (
       <main>
@@ -30,7 +29,7 @@ class Articles extends Component {
                 return <ArticleTile {...article} key={article.article_id} />;
               })}
             </ul>
-            {loadingMoreArticles && <p>Loading more articles...</p>}
+            {page < maxPage && <p>Loading more articles...</p>}
           </article>
         )}
       </main>
@@ -38,16 +37,13 @@ class Articles extends Component {
   }
 
   componentDidMount() {
-    const { page } = this.state;
-
-    this.fetchArticles(undefined, undefined, undefined, undefined, page);
-
+    this.fetchArticles();
     window.addEventListener("scroll", this.handleScroll);
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { page, sort_by, order } = this.state;
-    if (prevState.page !== page) {
+    if (prevState.page !== page && page !== 1) {
       this.updateArticles(sort_by, order, undefined, undefined, page);
     }
   }
@@ -57,28 +53,30 @@ class Articles extends Component {
   }
 
   handleScroll = throttle(e => {
-    const { page, maxPage } = this.state;
-    if (maxPage !== page) {
+    const { page, maxPage, isLoading } = this.state;
+    if (maxPage !== page && !isLoading) {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 50
       ) {
         this.setState(currentState => {
           const newPage = currentState.page + 1;
-          return { page: newPage, loadingMoreArticles: true };
+          return { page: newPage };
         });
       }
     }
   }, 2000);
 
-  fetchArticles = (sort_by, order, topic, limit, p) => {
-    api.getArticles(sort_by, order, topic, limit, p).then(({ data }) => {
-      const maxPage = Math.round(data.total_count / 10);
+  fetchArticles = (sort_by, order, topic, limit) => {
+    api.getArticles(sort_by, order, topic, limit, 1).then(({ data }) => {
+      const maxPage = Math.ceil(data.total_count / 10);
+
       this.setState({
         articles: data.articles,
         isLoading: false,
         sort_by,
         order,
+        page: 1,
         maxPage
       });
     });
@@ -90,8 +88,7 @@ class Articles extends Component {
       .then(({ data: { articles } }) => {
         this.setState(currentState => {
           return {
-            articles: [...currentState.articles, ...articles],
-            loadingMoreArticles: false
+            articles: [...currentState.articles, ...articles]
           };
         });
       });

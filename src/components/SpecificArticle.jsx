@@ -5,9 +5,9 @@ import { formatDate } from "../utils/utils";
 import IncrementVotes from "./IncrementVotes";
 import PostCommentForm from "./PostCommentForm";
 import FilterForm from "./FilterForm";
-// import ErrorMessage from "./ErrorMessage";
 import ToggleButton from "./ToggleButton";
 import ErrorPage from "./ErrorPage";
+import throttle from "lodash.throttle";
 
 class SpecificArticle extends Component {
   state = {
@@ -15,10 +15,13 @@ class SpecificArticle extends Component {
     isLoading: true,
     toggleComments: false,
     commentChange: null,
-    // postErr: null,
     deleteErr: null,
     deleteComment_id: null,
-    err: null
+    err: null,
+    page: 1,
+    sort_by: null,
+    order: null,
+    maxPage: null
   };
   render() {
     const {
@@ -34,10 +37,11 @@ class SpecificArticle extends Component {
       toggleComments,
       comments,
       commentChange,
-      // postErr,
       deleteErr,
       err,
-      deleteComment_id
+      deleteComment_id,
+      page,
+      maxPage
     } = this.state;
     const {
       handleButtonChange,
@@ -81,16 +85,14 @@ class SpecificArticle extends Component {
                       fetchCommentsByArticleId={fetchCommentsByArticleId}
                       errorHandler={errorHandler}
                     />
-                    {/* {postErr && (
-                      <div className="postCommentErrorMsg">
-                        <ErrorMessage err={postErr} />
-                      </div>
-                    )} */}
                     <div className="commentsToggle">
                       <ToggleButton
                         handleButtonChange={handleButtonChange}
-                        buttonText={`Comments: ${+comment_count +
-                          commentChange}`}
+                        buttonText={
+                          toggleComments
+                            ? `Hide comments: ${+comment_count + commentChange}`
+                            : `Show comments: ${+comment_count + commentChange}`
+                        }
                       />
                     </div>
                   </div>
@@ -111,6 +113,7 @@ class SpecificArticle extends Component {
                           err={deleteErr}
                           deleteComment_id={deleteComment_id}
                         />
+                        {page < maxPage && <p>Loading more comments...</p>}
                       </div>
                     </section>
                   )}
@@ -127,11 +130,41 @@ class SpecificArticle extends Component {
     const { article_id } = this.props;
     this.fetchArticleById(article_id);
     this.fetchCommentsByArticleId(article_id);
+
+    window.addEventListener("scroll", this.handleScroll);
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { page, sort_by, order } = this.state;
+    const { article_id } = this.props;
+    if (prevState.page !== page && page !== 1) {
+      this.updateCommentsByArticleId(article_id, sort_by, order, page);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll = throttle(e => {
+    const { page, maxPage, toggleComments, isLoading } = this.state;
+    if (maxPage !== page && toggleComments && !isLoading) {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 50
+      ) {
+        this.setState(currentState => {
+          const newPage = currentState.page + 1;
+          return { page: newPage };
+        });
+      }
+    }
+  }, 2000);
 
   fetchArticleById = article_id => {
     api.getArticleById(article_id).then(({ data: { article } }) => {
-      this.setState({ ...article, isLoading: false });
+      const maxPage = Math.ceil(article.comment_count / 10);
+      this.setState({ ...article, isLoading: false, maxPage });
     });
   };
 
@@ -142,11 +175,14 @@ class SpecificArticle extends Component {
     postedBoolean = false
   ) => {
     api
-      .getCommentsByArticleId(article_id, sort_by, order)
+      .getCommentsByArticleId(article_id, sort_by, order, 1)
       .then(({ data: { comments } }) => {
         this.setState(currentState => {
           return {
             comments,
+            sort_by,
+            order,
+            page: 1,
             isLoading: false,
             commentChange: postedBoolean && ++currentState.commentChange
           };
@@ -155,6 +191,18 @@ class SpecificArticle extends Component {
       .catch(({ response }) => {
         this.setState({
           err: { status: response.status, msg: response.data.msg }
+        });
+      });
+  };
+
+  updateCommentsByArticleId = (article_id, sort_by, order, p) => {
+    api
+      .getCommentsByArticleId(article_id, sort_by, order, p)
+      .then(({ data: { comments } }) => {
+        this.setState(currentState => {
+          return {
+            comments: [...currentState.comments, ...comments]
+          };
         });
       });
   };

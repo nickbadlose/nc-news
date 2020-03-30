@@ -16,9 +16,9 @@ export const getArticleById = article_id => {
   return axios.get(`${baseUrl}/articles/${article_id}`);
 };
 
-export const getCommentsByArticleId = (article_id, sort_by, order) => {
+export const getCommentsByArticleId = (article_id, sort_by, order, p) => {
   return axios.get(`${baseUrl}/articles/${article_id}/comments`, {
-    params: { sort_by, order }
+    params: { sort_by, order, p }
   });
 };
 
