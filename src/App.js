@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Routes from "./components/Routes";
 import SideBar from "./components/SideBar";
-import "./App.css";
+// import "./App.css";
 
 class App extends Component {
   state = {
