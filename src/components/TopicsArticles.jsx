@@ -26,7 +26,11 @@ class TopicsArticles extends Component {
           <ErrorPage err={err} />
         ) : (
           <>
-            <FilterForm fetchArticles={fetchArticles} article={true} />
+            <FilterForm
+              fetchArticles={fetchArticles}
+              article={true}
+              topic={topic}
+            />
             {isLoading ? (
               <p>Loading...</p>
             ) : (

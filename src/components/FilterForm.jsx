@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class FilterForm extends Component {
   state = {
     sortBy: "created_at",
-    orderBy: "desc"
+    orderBy: "desc",
   };
   render() {
     const { sortBy, orderBy } = this.state;
@@ -15,7 +15,7 @@ class FilterForm extends Component {
           Sort:
           <select
             value={sortBy}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event.target);
             }}
             name="sortBy"
@@ -38,7 +38,7 @@ class FilterForm extends Component {
           Order:
           <select
             value={orderBy}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event.target);
             }}
             name="orderBy"
@@ -58,7 +58,18 @@ class FilterForm extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { sortBy, orderBy } = this.state;
-    const { fetchArticles, fetchCommentsByArticleId, article_id } = this.props;
+    const {
+      fetchArticles,
+      fetchCommentsByArticleId,
+      article_id,
+      topic,
+    } = this.props;
+    if (prevProps.topic !== topic) {
+      this.setState({
+        sortBy: "created_at",
+        orderBy: "desc",
+      });
+    }
     if (fetchArticles) {
       if (prevState.sortBy !== sortBy || prevState.orderBy !== orderBy) {
         fetchArticles(sortBy, orderBy);
@@ -70,7 +81,7 @@ class FilterForm extends Component {
     }
   }
 
-  handleChange = target => {
+  handleChange = (target) => {
     target.name === "sortBy"
       ? this.setState({ sortBy: target.value })
       : this.setState({ orderBy: target.value });
