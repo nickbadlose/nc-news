@@ -1,7 +1,7 @@
 import React from "react";
 
 const ErrorPage = ({
-  err = { status: 500, msg: "Oops, can't connect to the server!" }
+  err = { status: 500, msg: "Oops, can't connect to the server!" },
 }) => {
   return (
     <main>
