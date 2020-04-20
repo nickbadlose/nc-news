@@ -21,7 +21,7 @@ class SpecificArticle extends Component {
     page: 1,
     sort_by: null,
     order: null,
-    maxPage: null
+    maxPage: null,
   };
   render() {
     const {
@@ -41,13 +41,13 @@ class SpecificArticle extends Component {
       err,
       deleteComment_id,
       page,
-      maxPage
+      maxPage,
     } = this.state;
     const {
       handleButtonChange,
       fetchCommentsByArticleId,
       errorHandler,
-      deleteCommentById
+      deleteCommentById,
     } = this;
     const { username } = this.props;
     const { date, time } = formatDate(created_at);
@@ -146,14 +146,14 @@ class SpecificArticle extends Component {
     window.removeEventListener("scroll", this.handleScroll);
   }
 
-  handleScroll = throttle(e => {
+  handleScroll = throttle((e) => {
     const { page, maxPage, toggleComments, isLoading } = this.state;
     if (maxPage !== page && toggleComments && !isLoading) {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 50
       ) {
-        this.setState(currentState => {
+        this.setState((currentState) => {
           const newPage = currentState.page + 1;
           return { page: newPage };
         });
@@ -161,7 +161,7 @@ class SpecificArticle extends Component {
     }
   }, 2000);
 
-  fetchArticleById = article_id => {
+  fetchArticleById = (article_id) => {
     api.getArticleById(article_id).then(({ data: { article } }) => {
       const maxPage = Math.ceil(article.comment_count / 10);
       this.setState({ ...article, isLoading: false, maxPage });
@@ -177,20 +177,20 @@ class SpecificArticle extends Component {
     api
       .getCommentsByArticleId(article_id, sort_by, order, 1)
       .then(({ data: { comments } }) => {
-        this.setState(currentState => {
+        this.setState((currentState) => {
           return {
             comments,
             sort_by,
             order,
             page: 1,
             isLoading: false,
-            commentChange: postedBoolean && ++currentState.commentChange
+            commentChange: postedBoolean && ++currentState.commentChange,
           };
         });
       })
       .catch(({ response }) => {
         this.setState({
-          err: { status: response.status, msg: response.data.msg }
+          err: { status: response.status, msg: response.data.msg },
         });
       });
   };
@@ -199,44 +199,44 @@ class SpecificArticle extends Component {
     api
       .getCommentsByArticleId(article_id, sort_by, order, p)
       .then(({ data: { comments } }) => {
-        this.setState(currentState => {
+        this.setState((currentState) => {
           return {
-            comments: [...currentState.comments, ...comments]
+            comments: [...currentState.comments, ...comments],
           };
         });
       });
   };
 
   handleButtonChange = () => {
-    this.setState(currentState => {
+    this.setState((currentState) => {
       return { toggleComments: !currentState.toggleComments };
     });
   };
 
-  deleteCommentById = comment_id => {
+  deleteCommentById = (comment_id) => {
     const { comments } = this.state;
     const initialComments = comments;
     const filteredComments = comments.filter(
-      comment => comment.comment_id !== comment_id
+      (comment) => comment.comment_id !== comment_id
     );
-    this.setState(currentState => ({
+    this.setState((currentState) => ({
       comments: filteredComments,
       commentChange: --currentState.commentChange,
-      deleteErr: null
+      deleteErr: null,
     }));
     api.removeCommentById(comment_id).catch(() => {
-      this.setState(currentState => ({
+      this.setState((currentState) => ({
         comments: initialComments,
         deleteErr: true,
         commentChange: ++currentState.commentChange,
-        deleteComment_id: comment_id
+        deleteComment_id: comment_id,
       }));
     });
   };
 
-  errorHandler = ({ status, data: { msg } }) => {
+  errorHandler = ({ status, statusText }) => {
     this.setState({
-      err: { status: status, msg: msg }
+      err: { status: status, msg: statusText },
     });
   };
 }

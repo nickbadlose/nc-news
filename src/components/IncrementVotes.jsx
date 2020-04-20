@@ -5,7 +5,7 @@ import ErrorMessage from "./ErrorMessage";
 class IncrementVotes extends Component {
   state = {
     voteDifference: 0,
-    err: null
+    err: null,
   };
   render() {
     const { handleVotesChange } = this;
@@ -33,36 +33,36 @@ class IncrementVotes extends Component {
     );
   }
 
-  handleVotesChange = voteChange => {
+  handleVotesChange = (voteChange) => {
     const { comment_id, article_id, type } = this.props;
     if (type === "comment") {
-      this.setState(currentState => {
+      this.setState((currentState) => {
         return {
           voteDifference: currentState.voteDifference + voteChange,
-          err: null
+          err: null,
         };
       });
       api.patchCommentById(comment_id, voteChange).catch(() => {
-        this.setState(currentState => {
+        this.setState((currentState) => {
           return {
             voteDifference: currentState.voteDifference - voteChange,
-            err: { msg: "unable to change vote" }
+            err: { msg: "unable to change vote" },
           };
         });
       });
     }
     if (type === "article") {
-      this.setState(currentState => {
+      this.setState((currentState) => {
         return {
           voteDifference: currentState.voteDifference + voteChange,
-          err: null
+          err: null,
         };
       });
       api.patchArticleById(article_id, voteChange).catch(() => {
-        this.setState(currentState => {
+        this.setState((currentState) => {
           return {
             voteDifference: currentState.voteDifference - voteChange,
-            err: { msg: "unable to change vote" }
+            err: { msg: "unable to change vote" },
           };
         });
       });

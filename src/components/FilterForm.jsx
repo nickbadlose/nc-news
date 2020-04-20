@@ -2,56 +2,35 @@ import React, { Component } from "react";
 
 class FilterForm extends Component {
   state = {
-    sortBy: "created_at",
-    orderBy: "desc",
+    sortBy: "",
+    orderBy: "",
   };
   render() {
-    const { sortBy, orderBy } = this.state;
     const { handleChange } = this;
+    const { sortBy, orderBy } = this.state;
     const { article } = this.props;
     return (
       <form className="FilterForm">
-        <label>
-          Sort:
-          <select
-            value={sortBy}
-            onChange={(event) => {
-              handleChange(event.target);
-            }}
-            name="sortBy"
-            className="filterFormSelect"
-          >
-            <option value="created_at" className="filterFormOption">
-              created at
+        <select
+          onChange={handleChange}
+          className="filterFormSelect"
+          value={orderBy ? `${sortBy}/${orderBy}` : sortBy}
+        >
+          <option value="created_at" className="filterFormOption">
+            Newest
+          </option>
+          <option value="created_at/asc" className="filterFormOption">
+            Oldest
+          </option>
+          <option value="votes" className="filterFormOption">
+            Popular
+          </option>
+          {article && (
+            <option value="comment_count" className="filterFormOption">
+              Conversational
             </option>
-            {article && (
-              <option value="comment_count" className="filterFormOption">
-                comment count
-              </option>
-            )}
-            <option value="votes" className="filterFormOption">
-              votes
-            </option>
-          </select>
-        </label>
-        <label>
-          Order:
-          <select
-            value={orderBy}
-            onChange={(event) => {
-              handleChange(event.target);
-            }}
-            name="orderBy"
-            className="filterFormSelect"
-          >
-            <option value="desc" className="filterFormOption">
-              descending
-            </option>
-            <option value="asc" className="filterFormOption">
-              ascending
-            </option>
-          </select>
-        </label>
+          )}
+        </select>
       </form>
     );
   }
@@ -81,10 +60,9 @@ class FilterForm extends Component {
     }
   }
 
-  handleChange = (target) => {
-    target.name === "sortBy"
-      ? this.setState({ sortBy: target.value })
-      : this.setState({ orderBy: target.value });
+  handleChange = (event) => {
+    const separatedValue = event.target.value.split("/");
+    this.setState({ sortBy: separatedValue[0], orderBy: separatedValue[1] });
   };
 }
 

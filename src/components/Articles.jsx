@@ -4,6 +4,8 @@ import * as api from "../api";
 import FilterForm from "./FilterForm";
 import throttle from "lodash.throttle";
 import ErrorPage from "./ErrorPage";
+import SearchBox from "./SearchBox";
+import ErrorMessage from "./ErrorMessage";
 
 class Articles extends Component {
   state = {
@@ -13,25 +15,43 @@ class Articles extends Component {
     sort_by: null,
     order: null,
     maxPage: null,
-    err: false
+    err: false,
+    invalidUser: false,
+    author: false,
   };
   render() {
-    const { articles, isLoading, page, maxPage, err } = this.state;
-    const { fetchArticles } = this;
+    const {
+      articles,
+      isLoading,
+      page,
+      maxPage,
+      err,
+      invalidUser,
+      author,
+    } = this.state;
+    const { fetchArticles, errorHandler } = this;
     return (
       <main>
         {err ? (
           <ErrorPage />
         ) : (
           <>
-            <h2 className="articlesHeader">Articles</h2>
+            <h2 className="articlesHeader">
+              Articles{author && <> - {author}</>}
+            </h2>
+            <SearchBox
+              fetchArticles={fetchArticles}
+              errorHandler={errorHandler}
+            />
             <FilterForm fetchArticles={fetchArticles} article={true} />
             {isLoading ? (
               <p>Loading...</p>
+            ) : invalidUser ? (
+              <ErrorMessage err={invalidUser} />
             ) : (
               <article>
                 <ul>
-                  {articles.map(article => {
+                  {articles.map((article) => {
                     return (
                       <ArticleTile {...article} key={article.article_id} />
                     );
@@ -52,9 +72,9 @@ class Articles extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { page, sort_by, order } = this.state;
+    const { page, sort_by, order, author } = this.state;
     if (prevState.page !== page && page !== 1) {
-      this.updateArticles(sort_by, order, undefined, undefined, page);
+      this.updateArticles(sort_by, order, undefined, undefined, page, author);
     }
   }
 
@@ -62,14 +82,14 @@ class Articles extends Component {
     window.removeEventListener("scroll", this.handleScroll);
   }
 
-  handleScroll = throttle(e => {
+  handleScroll = throttle((e) => {
     const { page, maxPage, isLoading } = this.state;
     if (maxPage !== page && !isLoading) {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 50
       ) {
-        this.setState(currentState => {
+        this.setState((currentState) => {
           const newPage = currentState.page + 1;
           return { page: newPage };
         });
@@ -77,9 +97,9 @@ class Articles extends Component {
     }
   }, 2000);
 
-  fetchArticles = (sort_by, order, topic, limit) => {
+  fetchArticles = (sort_by, order, topic, limit, author) => {
     api
-      .getArticles(sort_by, order, topic, limit, 1)
+      .getArticles(sort_by, order, topic, limit, 1, author)
       .then(({ data }) => {
         const maxPage = Math.ceil(data.total_count / 10);
 
@@ -89,24 +109,31 @@ class Articles extends Component {
           sort_by,
           order,
           page: 1,
-          maxPage
+          maxPage,
+          author,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ err: true });
       });
   };
 
-  updateArticles = (sort_by, order, topic, limit, p) => {
+  updateArticles = (sort_by, order, topic, limit, p, author) => {
     api
-      .getArticles(sort_by, order, topic, limit, p)
+      .getArticles(sort_by, order, topic, limit, p, author)
       .then(({ data: { articles } }) => {
-        this.setState(currentState => {
+        this.setState((currentState) => {
           return {
-            articles: [...currentState.articles, ...articles]
+            articles: [...currentState.articles, ...articles],
           };
         });
       });
+  };
+
+  errorHandler = (invalidUser) => {
+    invalidUser
+      ? this.setState({ invalidUser: { msg: "User doesn't exist!" } })
+      : this.setState({ invalidUser: false });
   };
 }
 

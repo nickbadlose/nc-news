@@ -103,7 +103,6 @@ class TopicsArticles extends Component {
         });
       })
       .catch(({ response }) => {
-        console.dir(response);
         this.setState({
           err: response
             ? { status: response.status, msg: response.statusText }

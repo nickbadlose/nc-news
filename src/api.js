@@ -2,9 +2,9 @@ import axios from "axios";
 
 const baseUrl = "https://not-quite-reddit.herokuapp.com/api";
 
-export const getArticles = (sort_by, order, topic, limit, p) => {
+export const getArticles = (sort_by, order, topic, limit, p, author) => {
   return axios.get(`${baseUrl}/articles`, {
-    params: { sort_by, order, topic, limit, p },
+    params: { sort_by, order, topic, limit, p, author },
   });
 };
 
