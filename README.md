@@ -9,7 +9,7 @@ The Northcoders News APP. A news website that provides articles on topics such a
 In your terminal type the following commands:
 
 ```bash
-git clone YOUR-CLONED-REPO-URL
+git clone https://github.com/nickbadlose/nc-news.git
 
 cd nc-news
 ```

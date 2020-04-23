@@ -16,7 +16,7 @@ class Articles extends Component {
     order: null,
     maxPage: null,
     err: false,
-    invalidUser: false,
+    // invalidUser: false,
     author: false,
   };
   render() {
@@ -26,7 +26,7 @@ class Articles extends Component {
       page,
       maxPage,
       err,
-      invalidUser,
+      // invalidUser,
       author,
     } = this.state;
     const { fetchArticles, errorHandler } = this;
@@ -39,16 +39,17 @@ class Articles extends Component {
             <h2 className="articlesHeader">
               Articles{author && <> - {author}</>}
             </h2>
-            <SearchBox
+            {/* <SearchBox
               fetchArticles={fetchArticles}
               errorHandler={errorHandler}
-            />
+            /> */}
             <FilterForm fetchArticles={fetchArticles} article={true} />
             {isLoading ? (
               <p>Loading...</p>
-            ) : invalidUser ? (
-              <ErrorMessage err={invalidUser} />
             ) : (
+              // invalidUser ? (
+              //   <ErrorMessage err={invalidUser} />
+              // ) :
               <article>
                 <ul>
                   {articles.map((article) => {
