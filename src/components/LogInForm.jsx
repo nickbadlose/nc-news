@@ -6,13 +6,13 @@ class LogInForm extends Component {
   state = {
     users: [],
     usernameInput: "",
-    invalidUsername: false
+    invalidUsername: false,
   };
   render() {
     const { usernameInput, invalidUsername } = this.state;
     const { handleChange, handleSubmit } = this;
     return (
-      <form onSubmit={event => handleSubmit(event, usernameInput)}>
+      <form onSubmit={(event) => handleSubmit(event, usernameInput)}>
         <label>
           Username:{" "}
           <input
@@ -29,12 +29,12 @@ class LogInForm extends Component {
   }
 
   componentDidMount() {
-    api.fetchUsers().then(users => {
+    api.fetchUsers().then((users) => {
       this.setState({ users });
     });
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { users, invalidUsername } = this.state;
     if (!event.target.value) {
       this.setState({ invalidUsername: false });

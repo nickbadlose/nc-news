@@ -7,7 +7,7 @@ class LogIn extends Component {
   state = {
     users: [],
     isLoading: true,
-    err: false
+    err: false,
   };
   render() {
     const { logIn, username, logOut } = this.props;
@@ -32,7 +32,7 @@ class LogIn extends Component {
                 </div>
                 <p>Choose a user from this list of valid user accounts:</p>
                 <ul>
-                  {users.map(user => {
+                  {users.map((user) => {
                     return <li key={user.username}>{user.username}</li>;
                   })}
                 </ul>
@@ -46,10 +46,10 @@ class LogIn extends Component {
   componentDidMount() {
     api
       .fetchUsers()
-      .then(users => {
+      .then((users) => {
         this.setState({ users, isLoading: false });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ err: true });
       });
   }

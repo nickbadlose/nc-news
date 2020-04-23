@@ -7,7 +7,7 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    username: ""
+    username: "",
   };
   render() {
     const { username } = this.state;
@@ -24,7 +24,7 @@ class App extends Component {
     );
   }
 
-  logIn = username => {
+  logIn = (username) => {
     this.setState({ username });
   };
 
