@@ -4,6 +4,7 @@ import ArticleTile from "./ArticleTile";
 import * as api from "../api";
 import throttle from "lodash.throttle";
 import ErrorPage from "./ErrorPage";
+import PostArticleForm from "./PostArticleForm";
 
 class TopicsArticles extends Component {
   state = {
@@ -26,6 +27,7 @@ class TopicsArticles extends Component {
           <ErrorPage err={err} />
         ) : (
           <>
+            <PostArticleForm />
             <FilterForm
               fetchArticles={fetchArticles}
               article={true}

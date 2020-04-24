@@ -5,6 +5,7 @@ class FilterForm extends Component {
     sortBy: "",
     orderBy: "",
   };
+
   render() {
     const { handleChange } = this;
     const { sortBy, orderBy } = this.state;
@@ -61,8 +62,8 @@ class FilterForm extends Component {
   }
 
   handleChange = (event) => {
-    const separatedValue = event.target.value.split("/");
-    this.setState({ sortBy: separatedValue[0], orderBy: separatedValue[1] });
+    const sortByOrderBy = event.target.value.split("/");
+    this.setState({ sortBy: sortByOrderBy[0], orderBy: sortByOrderBy[1] });
   };
 }
 

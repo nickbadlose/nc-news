@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import * as api from "../api";
 import { userStore } from "../stores/userinfo";
-import { Link } from "@reach/router";
 
 class PostCommentForm extends Component {
   state = {
     body: "",
-    users: [],
   };
+
   render() {
     const { body } = this.state;
     const { handleChange, handleSubmit } = this;
@@ -39,12 +38,6 @@ class PostCommentForm extends Component {
         </label>
       </form>
     );
-  }
-
-  componentDidMount() {
-    api.fetchUsers().then((users) => {
-      this.setState({ users });
-    });
   }
 
   handleChange = (event) => {
