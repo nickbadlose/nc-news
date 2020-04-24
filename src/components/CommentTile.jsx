@@ -1,6 +1,7 @@
 import React from "react";
 import { formatDate } from "../utils/utils";
 import IncrementVotes from "./IncrementVotes";
+import { userStore } from "../stores/userinfo";
 
 const CommentTile = ({
   author,
@@ -8,10 +9,9 @@ const CommentTile = ({
   created_at,
   comment_id,
   votes,
-  username,
   deleteCommentById,
   err,
-  deleteComment_id
+  deleteComment_id,
 }) => {
   const { date, time } = formatDate(created_at);
   return (
@@ -22,7 +22,7 @@ const CommentTile = ({
       </div>
       <p className="commentInfo">
         Posted by {author} on {date} at {time}
-        {username === author && (
+        {userStore.username === author && (
           <span className="deleteCommentButtonSection">
             <button
               onClick={() => deleteCommentById(comment_id)}

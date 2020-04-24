@@ -49,7 +49,6 @@ class SpecificArticle extends Component {
       errorHandler,
       deleteCommentById,
     } = this;
-    const { username } = this.props;
     const { date, time } = formatDate(created_at);
     return (
       <main className="SpecificArticle">
@@ -80,7 +79,6 @@ class SpecificArticle extends Component {
                 <div className="specificArticleComments">
                   <div className="postCommentAndToggle">
                     <PostCommentForm
-                      username={username}
                       article_id={article_id}
                       fetchCommentsByArticleId={fetchCommentsByArticleId}
                       errorHandler={errorHandler}
@@ -109,7 +107,6 @@ class SpecificArticle extends Component {
                         <ArticleComments
                           comments={comments}
                           deleteCommentById={deleteCommentById}
-                          username={username}
                           err={deleteErr}
                           deleteComment_id={deleteComment_id}
                         />

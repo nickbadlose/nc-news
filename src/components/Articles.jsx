@@ -4,8 +4,8 @@ import * as api from "../api";
 import FilterForm from "./FilterForm";
 import throttle from "lodash.throttle";
 import ErrorPage from "./ErrorPage";
-import SearchBox from "./SearchBox";
-import ErrorMessage from "./ErrorMessage";
+// import SearchBox from "./SearchBox";
+// import ErrorMessage from "./ErrorMessage";
 
 class Articles extends Component {
   state = {
@@ -29,7 +29,10 @@ class Articles extends Component {
       // invalidUser,
       author,
     } = this.state;
-    const { fetchArticles, errorHandler } = this;
+    const {
+      fetchArticles,
+      // errorHandler
+    } = this;
     return (
       <main>
         {err ? (
@@ -131,11 +134,11 @@ class Articles extends Component {
       });
   };
 
-  errorHandler = (invalidUser) => {
-    invalidUser
-      ? this.setState({ invalidUser: { msg: "User doesn't exist!" } })
-      : this.setState({ invalidUser: false });
-  };
+  // errorHandler = (invalidUser) => {
+  //   invalidUser
+  //     ? this.setState({ invalidUser: { msg: "User doesn't exist!" } })
+  //     : this.setState({ invalidUser: false });
+  // };
 }
 
 export default Articles;

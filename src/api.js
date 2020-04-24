@@ -45,3 +45,10 @@ export const removeCommentById = (comment_id) => {
 export const getTopics = () => {
   return axios.get(`${baseUrl}/topics`);
 };
+
+export const postLogIn = (username, password) => {
+  console.log(username, password);
+  return axios
+    .post(`${baseUrl}/login`, { username, password })
+    .then((res) => res.data.token);
+};

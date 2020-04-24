@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import { userStore } from "../stores/userinfo";
 
 class PostCommentForm extends Component {
   state = {
     body: "",
-    users: []
+    users: [],
   };
   render() {
     const { body, users } = this.state;
     const { handleChange, handleSubmit } = this;
-    const { username } = this.props;
     return (
       <form onSubmit={handleSubmit} className="PostCommentForm">
         <label>
           <textarea
             placeholder={
-              username ? "What are your thoughts?" : "Log in to post a comment"
+              userStore.username
+                ? "What are your thoughts?"
+                : "Log in to post a comment"
             }
             className="postCommentBody"
             type="text"
@@ -29,8 +31,8 @@ class PostCommentForm extends Component {
               type="submit"
               className="postCommentButton"
               disabled={
-                users.every(user => {
-                  return user.username !== username;
+                users.every((user) => {
+                  return user.username !== userStore.username;
                 }) || !body
               }
             >
@@ -43,26 +45,24 @@ class PostCommentForm extends Component {
   }
 
   componentDidMount() {
-    api.fetchUsers().then(users => {
+    api.fetchUsers().then((users) => {
       this.setState({ users });
     });
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ body: event.target.value });
   };
 
-  handleSubmit = event => {
-    const {
-      username,
-      article_id,
-      fetchCommentsByArticleId,
-      errorHandler
-    } = this.props;
+  handleSubmit = (event) => {
+    const { article_id, fetchCommentsByArticleId, errorHandler } = this.props;
     const { body } = this.state;
     event.preventDefault();
     api
-      .postCommentByArticleId(article_id, { username, body })
+      .postCommentByArticleId(article_id, {
+        username: userStore.username,
+        body,
+      })
       .then(() => {
         this.setState({ body: "" });
         fetchCommentsByArticleId(article_id, undefined, undefined, true);

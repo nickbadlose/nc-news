@@ -1,61 +1,54 @@
 import React, { Component } from "react";
-import * as api from "../api";
-import { checkValidUser } from "../utils/utils";
+import { userStore } from "../stores/userinfo";
+import ErrorMessage from "./ErrorMessage";
 
 class LogInForm extends Component {
   state = {
-    users: [],
-    usernameInput: "",
-    invalidUsername: false,
+    username: "",
+    password: "",
+    invalidUser: null,
   };
   render() {
-    const { usernameInput, invalidUsername } = this.state;
+    const { username, password, invalidUser } = this.state;
     const { handleChange, handleSubmit } = this;
     return (
-      <form onSubmit={(event) => handleSubmit(event, usernameInput)}>
+      <form onSubmit={handleSubmit}>
         <label>
           Username:{" "}
           <input
             type="text"
-            value={usernameInput}
-            onChange={handleChange}
+            value={username}
+            onChange={(e) => handleChange(e, "username")}
+            required
+          />
+        </label>
+        <label>
+          Password:{" "}
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => handleChange(e, "password")}
             required
           />
         </label>
         <button>Log in</button>
-        {invalidUsername && <span>User doesn't exist</span>}
+        {invalidUser && <ErrorMessage err={invalidUser} />}
       </form>
     );
   }
 
-  componentDidMount() {
-    api.fetchUsers().then((users) => {
-      this.setState({ users });
-    });
-  }
-
-  handleChange = (event) => {
-    const { users, invalidUsername } = this.state;
-    if (!event.target.value) {
-      this.setState({ invalidUsername: false });
-    }
-    if (event.target.value && !invalidUsername) {
-      this.setState({ invalidUsername: true });
-    }
-    if (!checkValidUser(users, event.target.value)) {
-      this.setState({ invalidUsername: false });
-    }
-    this.setState({ usernameInput: event.target.value });
+  handleChange = (e, input) => {
+    this.setState({ [input]: e.target.value });
   };
 
-  handleSubmit = (event, username) => {
-    const { logIn } = this.props;
-    const { users, usernameInput } = this.state;
-    event.preventDefault();
-    if (!checkValidUser(users, username)) {
-      logIn(usernameInput);
-      this.setState({ usernameInput: "" });
-    }
+  handleSubmit = (e) => {
+    const { username, password } = this.state;
+    e.preventDefault();
+    this.setState({ invalidUser: null });
+    userStore.logIn(username, password).catch((err) => {
+      this.setState({ invalidUser: { msg: "Invalid username or password!" } });
+    });
+    this.setState({ username: "", password: "" });
   };
 }
 

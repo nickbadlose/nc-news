@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "@reach/router";
+import { userStore } from "../stores/userinfo";
+import { observer } from "mobx-react";
 
-const Nav = ({ username }) => {
+const Nav = observer(() => {
   return (
     <nav className="Nav">
       <Link to="/" className="navLink">
@@ -14,10 +16,10 @@ const Nav = ({ username }) => {
         Topics
       </Link>
       <Link to="/login" className="navLink">
-        {username ? <>{username}</> : <>Log in</>}
+        {userStore.username ? <>{userStore.username}</> : <>Log in</>}
       </Link>
     </nav>
   );
-};
+});
 
 export default Nav;

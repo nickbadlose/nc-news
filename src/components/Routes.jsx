@@ -8,21 +8,16 @@ import TopicsArticles from "./TopicsArticles";
 import Topics from "./Topics";
 import ErrorPage from "./ErrorPage";
 
-const Routes = ({ logIn, username, logOut, loggedIn }) => {
+const Routes = () => {
   return (
     <>
       <Router className="main">
         <HomePage path="/" />
         <Articles path="/articles" />
-        <SpecificArticle path="/articles/:article_id/" username={username} />
+        <SpecificArticle path="/articles/:article_id/" />
         <TopicsArticles path="/topics/articles/:topic" />
         <Topics path="/topics" />
-        <LogIn
-          path="/login"
-          logIn={logIn}
-          username={username}
-          logOut={logOut}
-        />
+        <LogIn path="/login" />
         <ErrorPage default />
       </Router>
     </>
