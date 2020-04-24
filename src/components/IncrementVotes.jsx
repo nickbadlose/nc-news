@@ -34,39 +34,27 @@ class IncrementVotes extends Component {
   }
 
   handleVotesChange = (voteChange) => {
-    const { comment_id, article_id, type } = this.props;
-    if (type === "comment") {
+    const { comment_id, article_id } = this.props;
+
+    this.setState((currentState) => {
+      return {
+        voteDifference: currentState.voteDifference + voteChange,
+        err: null,
+      };
+    });
+
+    const promise = comment_id
+      ? api.patchCommentById(comment_id, voteChange)
+      : api.patchArticleById(article_id, voteChange);
+
+    promise.catch(() => {
       this.setState((currentState) => {
         return {
-          voteDifference: currentState.voteDifference + voteChange,
-          err: null,
+          voteDifference: currentState.voteDifference - voteChange,
+          err: { msg: "unable to change vote" },
         };
       });
-      api.patchCommentById(comment_id, voteChange).catch(() => {
-        this.setState((currentState) => {
-          return {
-            voteDifference: currentState.voteDifference - voteChange,
-            err: { msg: "unable to change vote" },
-          };
-        });
-      });
-    }
-    if (type === "article") {
-      this.setState((currentState) => {
-        return {
-          voteDifference: currentState.voteDifference + voteChange,
-          err: null,
-        };
-      });
-      api.patchArticleById(article_id, voteChange).catch(() => {
-        this.setState((currentState) => {
-          return {
-            voteDifference: currentState.voteDifference - voteChange,
-            err: { msg: "unable to change vote" },
-          };
-        });
-      });
-    }
+    });
   };
 }
 

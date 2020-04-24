@@ -1,4 +1,5 @@
 import axios from "axios";
+import { userStore } from "./stores/userinfo";
 
 const baseUrl = "https://not-quite-reddit.herokuapp.com/api";
 
@@ -35,7 +36,9 @@ export const fetchUsers = () => {
 };
 
 export const postCommentByArticleId = (article_id, comment) => {
-  return axios.post(`${baseUrl}/articles/${article_id}/comments`, comment);
+  return axios.post(`${baseUrl}/articles/${article_id}/comments`, comment, {
+    headers: { Authorization: "BEARER " + userStore.token },
+  });
 };
 
 export const removeCommentById = (comment_id) => {
@@ -47,7 +50,6 @@ export const getTopics = () => {
 };
 
 export const postLogIn = (username, password) => {
-  console.log(username, password);
   return axios
     .post(`${baseUrl}/login`, { username, password })
     .then((res) => res.data.token);

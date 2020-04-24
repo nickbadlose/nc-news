@@ -18,7 +18,7 @@ const CommentTile = ({
     <li className="articleCommentTile">
       <p className="commentBody">{body}</p>
       <div className="incrementVotesComments">
-        <IncrementVotes votes={votes} comment_id={comment_id} type="comment" />
+        <IncrementVotes votes={votes} comment_id={comment_id} />
       </div>
       <p className="commentInfo">
         Posted by {author} on {date} at {time}

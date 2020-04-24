@@ -6,7 +6,7 @@ import ToggleButton from "./ToggleButton";
 
 class ArticleTile extends Component {
   state = {
-    toggleBody: false
+    toggleBody: false,
   };
   render() {
     const {
@@ -17,7 +17,7 @@ class ArticleTile extends Component {
       comment_count,
       body,
       topic,
-      article_id
+      article_id,
     } = this.props;
     const { toggleBody } = this.state;
     const { handleButtonChange } = this;
@@ -52,13 +52,13 @@ class ArticleTile extends Component {
           </p>
         )}
         <p className="articleTileComments">Comments: {comment_count} 💬</p>
-        <IncrementVotes votes={votes} article_id={article_id} type="article" />
+        <IncrementVotes votes={votes} article_id={article_id} />
       </li>
     );
   }
 
   handleButtonChange = () => {
-    this.setState(currentState => {
+    this.setState((currentState) => {
       return { toggleBody: !currentState.toggleBody };
     });
   };

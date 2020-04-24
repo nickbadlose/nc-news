@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../api";
 import { userStore } from "../stores/userinfo";
+import { Link } from "@reach/router";
 
 class PostCommentForm extends Component {
   state = {
@@ -8,7 +9,7 @@ class PostCommentForm extends Component {
     users: [],
   };
   render() {
-    const { body, users } = this.state;
+    const { body } = this.state;
     const { handleChange, handleSubmit } = this;
     return (
       <form onSubmit={handleSubmit} className="PostCommentForm">
@@ -30,13 +31,9 @@ class PostCommentForm extends Component {
             <button
               type="submit"
               className="postCommentButton"
-              disabled={
-                users.every((user) => {
-                  return user.username !== userStore.username;
-                }) || !body
-              }
+              disabled={!body || !userStore.username}
             >
-              Comment
+              {userStore.username ? "COMMENT" : "LOG IN TO COMMENT"}
             </button>
           </div>
         </label>
