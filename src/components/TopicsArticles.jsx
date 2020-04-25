@@ -4,7 +4,8 @@ import ArticleTile from "./ArticleTile";
 import * as api from "../api";
 import throttle from "lodash.throttle";
 import ErrorPage from "./ErrorPage";
-import PostArticleForm from "./PostArticleForm";
+// import PostArticleForm from "./PostArticleForm";
+import { Link } from "@reach/router";
 
 class TopicsArticles extends Component {
   state = {
@@ -27,7 +28,10 @@ class TopicsArticles extends Component {
           <ErrorPage err={err} />
         ) : (
           <>
-            <PostArticleForm />
+            <Link to={`/topics/articles/${topic}/post`}>
+              <button>Post an article about this topic?</button>
+            </Link>
+            {/* <PostArticleForm topic={topic} /> */}
             <FilterForm
               fetchArticles={fetchArticles}
               article={true}

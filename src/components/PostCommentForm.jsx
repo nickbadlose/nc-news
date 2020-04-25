@@ -32,7 +32,7 @@ class PostCommentForm extends Component {
               className="postCommentButton"
               disabled={!body || !userStore.username}
             >
-              {userStore.username ? "COMMENT" : "LOG IN TO COMMENT"}
+              {userStore.username ? "Comment" : "Log in to comment"}
             </button>
           </div>
         </label>

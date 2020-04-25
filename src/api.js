@@ -54,3 +54,13 @@ export const postLogIn = (username, password) => {
     .post(`${baseUrl}/login`, { username, password })
     .then((res) => res.data.token);
 };
+
+export const postArticleByTopic = (article) => {
+  return axios
+    .post(`${baseUrl}/articles`, article, {
+      headers: { Authorization: "BEARER " + userStore.token },
+    })
+    .then(({ data: { article } }) => {
+      return article;
+    });
+};
