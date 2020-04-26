@@ -64,3 +64,7 @@ export const postArticleByTopic = (article) => {
       return article;
     });
 };
+
+export const removeArticleById = (article_id) => {
+  return axios.delete(`${baseUrl}/articles/${article_id}`);
+};

@@ -8,6 +8,8 @@ import FilterForm from "./FilterForm";
 import ToggleButton from "./ToggleButton";
 import ErrorPage from "./ErrorPage";
 import throttle from "lodash.throttle";
+import { userStore } from "../stores/userinfo";
+import { navigate } from "@reach/router";
 
 class SpecificArticle extends Component {
   state = {
@@ -48,6 +50,7 @@ class SpecificArticle extends Component {
       fetchCommentsByArticleId,
       errorHandler,
       deleteCommentById,
+      deleteArticleById,
     } = this;
     const { date, time } = formatDate(created_at);
     return (
@@ -69,6 +72,11 @@ class SpecificArticle extends Component {
                 <div className="specificArticleInfo">
                   <div className="specificArticleInformation">
                     Created by {author} on {date} at {time}
+                    {userStore.username === author && (
+                      <button onClick={deleteArticleById}>
+                        Delete article
+                      </button>
+                    )}
                   </div>
                   <IncrementVotes
                     votes={votes}
@@ -229,6 +237,19 @@ class SpecificArticle extends Component {
         deleteComment_id: comment_id,
       }));
     });
+  };
+
+  deleteArticleById = () => {
+    api
+      .removeArticleById(this.props.article_id)
+      .then(() => {
+        navigate("/articles");
+      })
+      .catch(({ response: { status, statusText } }) => {
+        this.setState({
+          err: { status: status, msg: statusText },
+        });
+      });
   };
 
   errorHandler = ({ status, statusText }) => {

@@ -7,7 +7,7 @@ class Topics extends Component {
   state = {
     topics: [],
     isLoading: true,
-    err: false
+    err: false,
   };
   render() {
     const { topics, isLoading, err } = this.state;
@@ -23,7 +23,7 @@ class Topics extends Component {
             ) : (
               <div>
                 <ul className="topics">
-                  {topics.map(topic => {
+                  {topics.map((topic) => {
                     return (
                       <Link
                         to={`/topics/articles/${topic.slug}`}
@@ -35,6 +35,7 @@ class Topics extends Component {
                           <p className="topicDescription">
                             {topic.description}
                           </p>
+                          <p>{topic.article_count} articles!</p>
                         </li>
                       </Link>
                     );
@@ -58,7 +59,7 @@ class Topics extends Component {
       .then(({ data: { topics } }) => {
         this.setState({ topics, isLoading: false });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ err: true });
       });
   };
