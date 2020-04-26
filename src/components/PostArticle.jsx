@@ -11,8 +11,12 @@ class PostArticle extends Component {
     const { err } = this.state;
     return (
       <div>
-        {" "}
-        {err ? <ErrorPage err={err} /> : <PostArticleForm topic={topic} />}
+        <h2 className="topicsArticleHeader">What do you think about {topic}</h2>
+        {err ? (
+          <ErrorPage err={err} />
+        ) : (
+          <PostArticleForm errorHandler={this.errorHandler} topic={topic} />
+        )}
       </div>
     );
   }

@@ -71,7 +71,6 @@ class PostArticleForm extends Component {
       })
       .then(({ article_id }) => {
         this.setState({ body: "" });
-        // fetchCommentsByArticleId(article_id, undefined, undefined, true);
         navigate(`/articles/${article_id}`);
       })
       .catch(({ response }) => {
