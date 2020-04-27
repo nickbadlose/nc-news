@@ -8,6 +8,7 @@ import TopicsArticles from "./TopicsArticles";
 import Topics from "./Topics";
 import ErrorPage from "./ErrorPage";
 import PostArticle from "./PostArticle";
+import SignUp from "./SignUp";
 
 const Routes = () => {
   return (
@@ -19,6 +20,7 @@ const Routes = () => {
         <TopicsArticles path="/topics/articles/:topic" />
         <Topics path="/topics" />
         <LogIn path="/login" />
+        <SignUp path="/signup" />
         <ErrorPage default />
         <PostArticle path="/topics/articles/:topic/post" />
       </Router>

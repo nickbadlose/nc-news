@@ -2,6 +2,7 @@ import React from "react";
 import LogInForm from "./LogInForm";
 import { userStore } from "../stores/userinfo";
 import { observer } from "mobx-react";
+import { Link } from "@reach/router";
 
 const LogIn = observer(() => {
   return (
@@ -16,6 +17,7 @@ const LogIn = observer(() => {
           <div>
             <LogInForm />
           </div>
+          <Link to="/signup">Don't have an account? Sign up.</Link>
         </div>
       )}
     </main>

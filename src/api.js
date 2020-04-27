@@ -84,3 +84,9 @@ export const postTopic = (topic) => {
       }
     );
 };
+
+export const postUser = (newUser) => {
+  return axios.post(`${baseUrl}/users`, newUser).then(({ data: { user } }) => {
+    return user;
+  });
+};

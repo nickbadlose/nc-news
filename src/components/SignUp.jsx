@@ -1,22 +1,17 @@
 import React from "react";
-import { userStore } from "../stores/userinfo";
 import { observer } from "mobx-react";
+import SignUpForm from "./SignUpForm";
+import { Link } from "@reach/router";
 
 const SignUp = observer(() => {
   return (
     <main className="logInPage">
-      {userStore.username.length ? (
+      <div className="logInForm">
         <div>
-          <h2>You are logged in as {userStore.username}</h2>
-          <button onClick={userStore.logOut}>Log out</button>
+          <SignUpForm />
         </div>
-      ) : (
-        <div className="logInForm">
-          <div>
-            <LogInForm />
-          </div>
-        </div>
-      )}
+        <Link to="/login">Already have an account? Log in.</Link>
+      </div>
     </main>
   );
 });
