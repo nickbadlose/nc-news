@@ -9,6 +9,7 @@ import Topics from "./Topics";
 import ErrorPage from "./ErrorPage";
 import PostArticle from "./PostArticle";
 import SignUp from "./SignUp";
+import UserPage from "./UserPage";
 
 const Routes = () => {
   return (
@@ -23,6 +24,7 @@ const Routes = () => {
         <SignUp path="/signup" />
         <ErrorPage default />
         <PostArticle path="/topics/articles/:topic/post" />
+        <UserPage path="/:username" />
       </Router>
     </>
   );

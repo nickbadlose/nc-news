@@ -57,8 +57,8 @@ class PostCommentForm extends Component {
         this.setState({ body: "" });
         fetchCommentsByArticleId(article_id, undefined, undefined, true);
       })
-      .catch(({ response }) => {
-        errorHandler(response);
+      .catch((err) => {
+        errorHandler(err);
       });
   };
 }

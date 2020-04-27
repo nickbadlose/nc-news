@@ -28,7 +28,7 @@ class EditArticleForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.handleClick(this.state.body);
+    this.props.editArticle(this.state.body);
   };
 }
 

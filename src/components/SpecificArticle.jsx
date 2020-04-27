@@ -55,7 +55,7 @@ class SpecificArticle extends Component {
       errorHandler,
       deleteCommentById,
       deleteArticleById,
-      handleClick,
+      editArticle,
     } = this;
     const { date, time } = formatDate(created_at);
     return (
@@ -73,12 +73,12 @@ class SpecificArticle extends Component {
                 </h3>
                 <article className="specificArticleBody">
                   {editingArticle ? (
-                    <EditArticleForm handleClick={handleClick} body={body} />
+                    <EditArticleForm editArticle={editArticle} body={body} />
                   ) : (
                     <p>
                       {body}
                       {userStore.username === author && (
-                        <button onClick={handleClick}>
+                        <button onClick={editArticle}>
                           {/* {editingArticle ? "Update" : "Edit"} */}
                           Edit
                         </button>
@@ -134,6 +134,7 @@ class SpecificArticle extends Component {
                           deleteCommentById={deleteCommentById}
                           err={deleteErr}
                           deleteComment_id={deleteComment_id}
+                          errorHandler={errorHandler}
                         />
                         {page < maxPage && <p>Loading more comments...</p>}
                       </div>
@@ -269,7 +270,7 @@ class SpecificArticle extends Component {
       });
   };
 
-  handleClick = (newBody) => {
+  editArticle = (newBody) => {
     const { editingArticle } = this.state;
     if (!editingArticle) {
       this.setState({ editingArticle: !editingArticle });
@@ -287,9 +288,10 @@ class SpecificArticle extends Component {
     }
   };
 
-  errorHandler = ({ status, statusText }) => {
+  errorHandler = ({ response }) => {
+    console.log(response);
     this.setState({
-      err: { status: status, msg: statusText },
+      err: { status: response.status, msg: response.data.msg },
     });
   };
 }
