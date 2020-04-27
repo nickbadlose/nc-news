@@ -3,38 +3,37 @@ import { userStore } from "../stores/userinfo";
 import * as api from "../api";
 import { navigate } from "@reach/router";
 
-class PostArticleForm extends Component {
+class PostTopicForm extends Component {
   state = {
-    body: "",
-    title: "",
+    description: "",
+    slug: "",
   };
   render() {
     const { handleChange, handleSubmit } = this;
-    const { topic } = this.props;
-    const { body, title } = this.state;
+    const { description, slug } = this.state;
 
     return (
       <form onSubmit={handleSubmit} className="PostCommentForm">
         <label>
           <input
             type="text"
-            value={title}
-            onChange={(e) => handleChange(e, "title")}
+            value={slug}
+            onChange={(e) => handleChange(e, "slug")}
             required
-            placeholder="Article title?"
+            placeholder="What topic do you think we should be talking about?"
           />
         </label>
         <label>
           <textarea
             placeholder={
               userStore.username
-                ? `What are your thoughts on ${topic}?`
-                : "Log in to post an article"
+                ? `Describe your topic of conversation?`
+                : "Log in to post a topic"
             }
             className="postCommentBody"
             type="text"
-            value={body}
-            onChange={(e) => handleChange(e, "body")}
+            value={description}
+            onChange={(e) => handleChange(e, "description")}
             required
           />
           {}
@@ -42,11 +41,9 @@ class PostArticleForm extends Component {
             <button
               type="submit"
               className="postCommentButton"
-              disabled={!body || !userStore.username || !title}
+              disabled={!description || !userStore.username || !slug}
             >
-              {userStore.username
-                ? "Post Article"
-                : "Log in to post an article"}
+              {userStore.username ? "Post Topic" : "Log in to post a topic"}
             </button>
           </div>
         </label>
@@ -59,24 +56,22 @@ class PostArticleForm extends Component {
   };
 
   handleSubmit = (event) => {
-    const { errorHandler, topic } = this.props;
-    const { body, title } = this.state;
+    const { errorHandler } = this.props;
+    const { description, slug } = this.state;
     event.preventDefault();
     api
-      .postArticleByTopic({
-        title,
-        body,
-        topic,
-        author: userStore.username,
+      .postTopic({
+        slug,
+        description,
       })
-      .then(({ article_id }) => {
-        this.setState({ body: "", title: "" });
-        navigate(`/articles/${article_id}`);
+      .then((topic) => {
+        this.setState({ description: "", slug: "" });
+        navigate(`/topics/articles/${topic}`);
       })
       .catch(({ response }) => {
-        errorHandler(response);
+        errorHandler({ status: response.status, msg: response.data.msg });
       });
   };
 }
 
-export default PostArticleForm;
+export default PostTopicForm;

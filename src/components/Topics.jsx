@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as api from "../api";
 import { Link } from "@reach/router";
 import ErrorPage from "./ErrorPage";
+import PostTopicForm from "./PostTopicForm.jsx";
 
 class Topics extends Component {
   state = {
@@ -14,7 +15,7 @@ class Topics extends Component {
     return (
       <>
         {err ? (
-          <ErrorPage />
+          <ErrorPage err={err} />
         ) : (
           <>
             <h2 className="topicsHeader">Topics</h2>
@@ -22,6 +23,7 @@ class Topics extends Component {
               <p>Loading...</p>
             ) : (
               <div>
+                <PostTopicForm errorHandler={this.errorHandler} />
                 <ul className="topics">
                   {topics.map((topic) => {
                     return (
@@ -62,6 +64,12 @@ class Topics extends Component {
       .catch((err) => {
         this.setState({ err: true });
       });
+  };
+
+  errorHandler = ({ status, msg }) => {
+    this.setState({
+      err: { status, msg },
+    });
   };
 }
 

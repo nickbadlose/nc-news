@@ -68,3 +68,19 @@ export const postArticleByTopic = (article) => {
 export const removeArticleById = (article_id) => {
   return axios.delete(`${baseUrl}/articles/${article_id}`);
 };
+
+export const postTopic = (topic) => {
+  return axios
+    .post(`${baseUrl}/topics`, topic, {
+      headers: { Authorization: "BEARER " + userStore.token },
+    })
+    .then(
+      ({
+        data: {
+          topic: { slug },
+        },
+      }) => {
+        return slug;
+      }
+    );
+};
