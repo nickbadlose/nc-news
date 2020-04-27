@@ -19,10 +19,10 @@ export const getCommentsByArticleId = (article_id, sort_by, order, p) => {
   });
 };
 
-export const patchArticleById = (article_id, inc_votes) => {
+export const patchArticleById = (article_id, inc_votes, body) => {
   return axios
-    .patch(`${baseUrl}/articles/${article_id}`, { inc_votes })
-    .then((res) => res.data.article.votes);
+    .patch(`${baseUrl}/articles/${article_id}`, { inc_votes, body })
+    .then((res) => res.data.article);
 };
 
 export const patchCommentById = (comment_id, inc_votes) => {

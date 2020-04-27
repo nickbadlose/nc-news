@@ -10,6 +10,7 @@ import ErrorPage from "./ErrorPage";
 import throttle from "lodash.throttle";
 import { userStore } from "../stores/userinfo";
 import { navigate } from "@reach/router";
+import EditArticleForm from "./EditArticleForm";
 
 class SpecificArticle extends Component {
   state = {
@@ -24,6 +25,8 @@ class SpecificArticle extends Component {
     sort_by: null,
     order: null,
     maxPage: null,
+    editingArticle: false,
+    body: null,
   };
   render() {
     const {
@@ -44,6 +47,7 @@ class SpecificArticle extends Component {
       deleteComment_id,
       page,
       maxPage,
+      editingArticle,
     } = this.state;
     const {
       handleButtonChange,
@@ -51,6 +55,7 @@ class SpecificArticle extends Component {
       errorHandler,
       deleteCommentById,
       deleteArticleById,
+      handleClick,
     } = this;
     const { date, time } = formatDate(created_at);
     return (
@@ -67,7 +72,19 @@ class SpecificArticle extends Component {
                   {title} - {topic}
                 </h3>
                 <article className="specificArticleBody">
-                  <p>{body}</p>
+                  {editingArticle ? (
+                    <EditArticleForm handleClick={handleClick} body={body} />
+                  ) : (
+                    <p>
+                      {body}
+                      {userStore.username === author && (
+                        <button onClick={handleClick}>
+                          {/* {editingArticle ? "Update" : "Edit"} */}
+                          Edit
+                        </button>
+                      )}
+                    </p>
+                  )}
                 </article>
                 <div className="specificArticleInfo">
                   <div className="specificArticleInformation">
@@ -250,6 +267,24 @@ class SpecificArticle extends Component {
           err: { status: status, msg: statusText },
         });
       });
+  };
+
+  handleClick = (newBody) => {
+    const { editingArticle } = this.state;
+    if (!editingArticle) {
+      this.setState({ editingArticle: !editingArticle });
+    } else {
+      api
+        .patchArticleById(this.props.article_id, undefined, newBody)
+        .then(({ body }) => {
+          this.setState({ body, editingArticle: !editingArticle });
+        })
+        .catch(({ response }) => {
+          this.setState({
+            err: { status: response.status, msg: response.data.msg },
+          });
+        });
+    }
   };
 
   errorHandler = ({ status, statusText }) => {
