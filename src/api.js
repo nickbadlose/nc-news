@@ -100,3 +100,9 @@ export const getComments = (username) => {
       return comments;
     });
 };
+
+export const search = (search) => {
+  return axios.get(`${baseUrl}/search`, {
+    params: { search },
+  });
+};

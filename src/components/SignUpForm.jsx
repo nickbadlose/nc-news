@@ -72,8 +72,10 @@ class SignUpForm extends Component {
         userStore.logIn(username, password);
         navigate("/");
       })
-      .catch(() => {
-        this.setState({ userExists: { msg: "User already exists" } });
+      .catch((err) => {
+        this.setState({
+          userExists: { msg: "Username taken or invalid format (no spaces)!" },
+        });
       });
     this.setState({ username: "", name: "", password: "", avatar_url: "" });
   };

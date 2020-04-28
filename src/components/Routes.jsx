@@ -10,6 +10,7 @@ import ErrorPage from "./ErrorPage";
 import PostArticle from "./PostArticle";
 import SignUp from "./SignUp";
 import UserPage from "./UserPage";
+import SearchPage from "./SearchPage";
 
 const Routes = () => {
   return (
@@ -25,6 +26,7 @@ const Routes = () => {
         <ErrorPage default />
         <PostArticle path="/topics/articles/:topic/post" />
         <UserPage path="/:username" />
+        <SearchPage path="/search/:search" />
       </Router>
     </>
   );

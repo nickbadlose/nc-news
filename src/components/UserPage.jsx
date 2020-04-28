@@ -41,7 +41,7 @@ class UserPage extends Component {
               <>
                 <h3>
                   {" "}
-                  total contributions - {articles.length + comments.length}
+                  Total contributions - {articles.length + comments.length}
                 </h3>
                 <article>
                   {userStore.username === username ? (

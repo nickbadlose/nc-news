@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "@reach/router";
 import { userStore } from "../stores/userinfo";
 import { observer } from "mobx-react";
+import SearchBox from "./SearchBox";
 
 const Nav = observer(() => {
   return (
@@ -15,6 +16,7 @@ const Nav = observer(() => {
       <Link to="/topics" className="navLink">
         Topics
       </Link>
+      <SearchBox />
       <Link to="/login" className="navLink">
         {userStore.username ? <>{userStore.username}</> : <>Log in</>}
       </Link>

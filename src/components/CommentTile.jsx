@@ -88,14 +88,12 @@ class CommentTile extends Component {
   editComment = (e, newBody) => {
     e.preventDefault();
     const { editingComment } = this.state;
-    console.log(newBody, editingComment);
     if (!editingComment) {
       this.setState({ editingComment: !editingComment });
     } else {
       api
         .patchCommentById(this.props.comment_id, undefined, newBody)
         .then(({ body }) => {
-          console.log(body, "here");
           this.setState({ body, editingComment: !editingComment });
         })
         .catch((err) => {

@@ -289,7 +289,6 @@ class SpecificArticle extends Component {
   };
 
   errorHandler = ({ response }) => {
-    console.log(response);
     this.setState({
       err: { status: response.status, msg: response.data.msg },
     });
