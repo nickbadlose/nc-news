@@ -92,3 +92,11 @@ export const postUser = (newUser) => {
     return user;
   });
 };
+
+export const getComments = (username) => {
+  return axios
+    .get(`${baseUrl}/comments/users/${username}`)
+    .then(({ data: { comments } }) => {
+      return comments;
+    });
+};
