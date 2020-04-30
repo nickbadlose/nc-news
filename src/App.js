@@ -5,6 +5,7 @@ import Routes from "./components/Routes";
 import SideBar from "./components/SideBar";
 import "./App.css";
 import { observer } from "mobx-react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = observer(() => {
   return (
