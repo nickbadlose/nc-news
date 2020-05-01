@@ -6,7 +6,7 @@ class SideBar extends Component {
   state = {
     topics: [],
     isLoading: true,
-    err: false
+    err: false,
   };
   render() {
     const { topics, isLoading, err } = this.state;
@@ -22,7 +22,7 @@ class SideBar extends Component {
             ) : (
               <nav>
                 <ul className="sideBarNavList">
-                  {topics.map(topic => {
+                  {topics.map((topic) => {
                     return (
                       <Link
                         to={`/topics/articles/${topic.slug}`}
@@ -52,9 +52,9 @@ class SideBar extends Component {
       .then(({ data: { topics } }) => {
         this.setState({ topics, isLoading: false });
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({
-          err: "Oops, can't connect to the server!"
+          err: "Oops, can't connect to the server!",
         });
       });
   };

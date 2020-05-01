@@ -5,11 +5,4 @@
   font-size: 2.5vh;
   font-family: "Guardian Text Egyptian Web", Georgia, serif;
   color: black;
-  display: grid;
-  grid-template-columns: 6fr 1fr;
-  grid-template-rows: minmax(8vh, 13vh) minmax(5vh, 8vh) auto;
-  grid-template-areas:
-    "header header"
-    "nav nav"
-    "main sidebar";
 }
