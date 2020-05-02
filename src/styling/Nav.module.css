@@ -8,13 +8,15 @@
 }
 
 .link {
-  border-top: 0.5px solid rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
   margin-right: 2px;
+  transition: border-top 0.5s ease-in-out;
+  transform: border;
 }
 
 .link:hover {
   border-top: none;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
   transition: border-bottom 0.5s ease-in-out;
 }
 
@@ -26,11 +28,6 @@
 .searchBar {
   margin-right: 3px;
 }
-
-/* .divider > div {
-  height: 100px;
-  border: none !important;
-} */
 
 @media only screen and (max-width: 575px) {
   .navBar {
@@ -49,6 +46,10 @@
 
   .link {
     border-top: none;
+  }
+
+  .link:hover {
+    border: none;
   }
 
   .form {

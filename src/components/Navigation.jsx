@@ -52,23 +52,23 @@ const Navigation = observer(() => {
             size="sm"
             className={styles.searchBar}
           />
-          <Button variant="outline-info" size="sm">
+          {/* <Button variant="outline-info" size="sm">
             Search
-          </Button>
+          </Button> */}
         </Form>
         <Nav className={styles.profile}>
           {userStore.username ? (
             <NavDropdown
               title={userStore.username}
               id="collapsible-nav-dropdown"
-              alignRight
+              // alignRight
               className={styles.NavDropdown}
             >
               <NavDropdown.Item href={`/${userStore.username}`}>
                 Profile
               </NavDropdown.Item>
 
-              <NavDropdown.Divider className={styles.divider} />
+              {/* <NavDropdown.Divider className={styles.divider} /> */}
 
               <NavDropdown.Item onClick={userStore.logOut}>
                 Log out
@@ -78,10 +78,10 @@ const Navigation = observer(() => {
             <NavDropdown
               title="Log in"
               id="collapsible-nav-dropdown"
-              alignRight
+              // alignRight
             >
               <NavDropdown.Item href="/login">Log in</NavDropdown.Item>
-              <NavDropdown.Divider className={styles.divider} />
+              {/* <NavDropdown.Divider className={styles.divider} /> */}
               <NavDropdown.Item href="/signup">Sign up</NavDropdown.Item>
             </NavDropdown>
           )}

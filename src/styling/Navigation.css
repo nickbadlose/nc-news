@@ -1,6 +1,7 @@
 #responsive-navbar-nav > div.Nav_profile__297M-.navbar-nav > div > div {
-  color: white;
   background-color: #343434;
+  /* display: flex;
+  flex-direction: column; */
 }
 
 #responsive-navbar-nav > div.Nav_profile__297M-.navbar-nav > div > div a {
@@ -8,9 +9,36 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
+#responsive-navbar-nav
+  > div.Nav_profile__297M-.navbar-nav
+  > div
+  > div
+  a::after {
+  content: "";
+  background-color: rgba(255, 255, 255, 0.8);
+  display: block;
+  height: 1px;
+  width: 0px;
+}
+
 #responsive-navbar-nav > div.Nav_profile__297M-.navbar-nav > div > div a:hover {
   background-color: #343434;
   color: rgba(255, 255, 255, 0.8);
+  /* border-bottom: 0.5px solid rgba(255, 255, 255, 0.8);
+  transition: border-bottom 0.5s ease-in-out;
+  padding: none !important;
+  margin: none !important; */
+}
+
+#responsive-navbar-nav
+  > div.Nav_profile__297M-.navbar-nav
+  > div
+  > div
+  a:hover::after {
+  content: "";
+  height: 1px;
+  width: 60%;
+  transition: width 0.5s ease-in-out;
 }
 
 #responsive-navbar-nav > div.Nav_profile__297M-.navbar-nav > div > div > div {
@@ -22,5 +50,13 @@
   #responsive-navbar-nav > div.Nav_profile__297M-.navbar-nav > div > div {
     background-color: #343434;
     border: none;
+  }
+
+  #responsive-navbar-nav
+    > div.Nav_profile__297M-.navbar-nav
+    > div
+    > div
+    a::after {
+    display: none;
   }
 }
