@@ -6,3 +6,8 @@
   font-family: "Guardian Text Egyptian Web", Georgia, serif;
   color: black;
 }
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
