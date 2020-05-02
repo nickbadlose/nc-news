@@ -9,26 +9,14 @@ import Form from "react-bootstrap/Form";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import FormControl from "react-bootstrap/FormControl";
+import logo from "../logos/news.svg";
 
 const Navigation = observer(() => {
   return (
-    // <nav className="Nav">
-    //   <Link to="/" className="navLink">
-    //     Home
-    //   </Link>
-    //   <Link to="/articles" className="navLink">
-    //     Articles
-    //   </Link>
-    //   <Link to="/topics" className="navLink">
-    //     Topics
-    //   </Link>
-    //   <SearchBox />
-    //   <Link to="/login" className="navLink">
-    //     {userStore.username ? <>{userStore.username}</> : <>Log in</>}
-    //   </Link>
-    // </nav>
     <Navbar expand="sm" variant="dark" id="navbar" className={styles.navBar}>
-      <Navbar.Brand href="/">NC</Navbar.Brand>
+      <Navbar.Brand href="/">
+        NC <img src={logo} alt="logo" />
+      </Navbar.Brand>
       <Navbar.Toggle
         aria-controls="responsive-navbar-nav"
         className="ml-auto"
@@ -61,7 +49,7 @@ const Navigation = observer(() => {
             <NavDropdown
               title={userStore.username}
               id="collapsible-nav-dropdown"
-              // alignRight
+              alignRight
               className={styles.NavDropdown}
             >
               <NavDropdown.Item href={`/${userStore.username}`}>
@@ -78,7 +66,7 @@ const Navigation = observer(() => {
             <NavDropdown
               title="Log in"
               id="collapsible-nav-dropdown"
-              // alignRight
+              alignRight
             >
               <NavDropdown.Item href="/login">Log in</NavDropdown.Item>
               {/* <NavDropdown.Divider className={styles.divider} /> */}
