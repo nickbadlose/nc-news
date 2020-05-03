@@ -10,6 +10,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import FormControl from "react-bootstrap/FormControl";
 import logo from "../logos/news.svg";
+import search from "../logos/search.svg";
 
 const Navigation = observer(() => {
   return (
@@ -43,6 +44,9 @@ const Navigation = observer(() => {
           {/* <Button variant="outline-info" size="sm">
             Search
           </Button> */}
+          {/* <button> */}
+          {/* <img src={search} alt="search" /> */}
+          {/* </button> */}
         </Form>
         <Nav className={styles.profile}>
           {userStore.username ? (
