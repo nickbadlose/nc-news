@@ -14,28 +14,24 @@ import search from "../logos/search.svg";
 const Navigation = observer(() => {
   return (
     <Navbar expand="sm" variant="dark" id="navbar" className={styles.navBar}>
-      <Nav className={styles.navTop}>
-        <Navbar.Brand href="/">
-          NC <img src={logo} alt="News" />
-        </Navbar.Brand>
-        <Navbar.Brand>
-          <Form className={styles.form} id="search-bar">
-            <FormControl
-              type="text"
-              placeholder="Search"
-              size="sm"
-              className={styles.searchBar}
-            />
-            <button className={styles.searchButton}>
-              <img src={search} alt="search" className={styles.img} />
-            </button>
-          </Form>
-        </Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="responsive-navbar-nav"
-          className="ml-auto"
+      <Navbar.Brand href="/" className={styles.brand}>
+        NC <img src={logo} alt="News" />
+      </Navbar.Brand>
+      <Form className={styles.form} id="search-bar">
+        <FormControl
+          type="text"
+          placeholder="Search"
+          size="sm"
+          className={styles.searchBar}
         />
-      </Nav>
+        <button className={styles.searchButton}>
+          <img src={search} alt="search" className={styles.img} />
+        </button>
+      </Form>
+      <Navbar.Toggle
+        aria-controls="responsive-navbar-nav"
+        className={styles.toggle}
+      />
       <Navbar.Collapse id="responsive-navbar-nav" className={styles.collapse}>
         <Nav className={styles.links}>
           <Nav.Link href="/" className={styles.link}>
@@ -49,7 +45,7 @@ const Navigation = observer(() => {
           </Nav.Link>
         </Nav>
         <Nav className={styles.profile}>
-          {userStore.username ? (
+          {userStore.username ? ( // need to add a logged in logo maybe? or maybe it's better with username?
             <NavDropdown
               title={userStore.username}
               id="collapsible-nav-dropdown"
