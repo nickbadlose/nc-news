@@ -15,13 +15,31 @@ import search from "../logos/search.svg";
 const Navigation = observer(() => {
   return (
     <Navbar expand="sm" variant="dark" id="navbar" className={styles.navBar}>
-      <Navbar.Brand href="/">
-        NC <img src={logo} alt="News" />
-      </Navbar.Brand>
-      <Navbar.Toggle
-        aria-controls="responsive-navbar-nav"
-        className="ml-auto"
-      />
+      <Nav className={styles.navTop}>
+        <Navbar.Brand href="/">
+          NC <img src={logo} alt="News" />
+        </Navbar.Brand>
+        <Navbar.Brand>
+          <Form className={styles.form}>
+            <FormControl
+              type="text"
+              placeholder="Search"
+              size="sm"
+              className={styles.searchBar}
+            />
+            {/* <Button variant="outline-info" size="sm">
+            Search
+          </Button> */}
+            {/* <button> */}
+            <img src={search} alt="search" className={styles.img} />
+            {/* </button> */}
+          </Form>
+        </Navbar.Brand>
+        <Navbar.Toggle
+          aria-controls="responsive-navbar-nav"
+          className="ml-auto"
+        />
+      </Nav>
       <Navbar.Collapse id="responsive-navbar-nav" className={styles.collapse}>
         <Nav className={styles.links}>
           <Nav.Link href="/" className={styles.link}>
@@ -34,20 +52,6 @@ const Navigation = observer(() => {
             Topics
           </Nav.Link>
         </Nav>
-        <Form className={styles.form}>
-          <FormControl
-            type="text"
-            placeholder="Search"
-            size="sm"
-            className={styles.searchBar}
-          />
-          {/* <Button variant="outline-info" size="sm">
-            Search
-          </Button> */}
-          {/* <button> */}
-          <img src={search} alt="search" className={styles.img} />
-          {/* </button> */}
-        </Form>
         <Nav className={styles.profile}>
           {userStore.username ? (
             <NavDropdown
