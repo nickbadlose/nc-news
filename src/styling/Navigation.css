@@ -36,11 +36,6 @@
   width: 60%;
 }
 
-#responsive-navbar-nav > div.Nav_profile__297M-.navbar-nav > div > div > div {
-  border-color: rgba(255, 255, 255, 0.5);
-  width: 10%;
-}
-
 @media only screen and (max-width: 575px) {
   #responsive-navbar-nav > div.Nav_profile__297M-.navbar-nav > div > div {
     background-color: #343434;

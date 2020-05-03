@@ -1,13 +1,13 @@
 .navBar {
   background-color: #343434;
-  /* flex-wrap: nowrap !important; */
 }
 
 .navTop {
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
-  justify-content: space-evenly !important;
+  /* justify-content: flex-start !important; */
+  /* width: 100%; */
 }
 
 .collapse {
@@ -62,6 +62,22 @@
   min-width: 0px;
 }
 
+.searchButton {
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+}
+
+.searchButton:focus {
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+}
+
 @media only screen and (max-width: 575px) {
   .navBar {
     background-color: #343434;
@@ -107,9 +123,9 @@
     margin-top: 3px;
   }
 
-  .img {
+  /* .img {
     margin-top: 2px;
-  }
+  } */
 
   .profile {
     order: 3;

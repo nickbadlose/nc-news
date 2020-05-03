@@ -7,7 +7,6 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import Button from "react-bootstrap/Button";
 import FormControl from "react-bootstrap/FormControl";
 import logo from "../logos/news.svg";
 import search from "../logos/search.svg";
@@ -20,19 +19,16 @@ const Navigation = observer(() => {
           NC <img src={logo} alt="News" />
         </Navbar.Brand>
         <Navbar.Brand>
-          <Form className={styles.form}>
+          <Form className={styles.form} id="search-bar">
             <FormControl
               type="text"
               placeholder="Search"
               size="sm"
               className={styles.searchBar}
             />
-            {/* <Button variant="outline-info" size="sm">
-            Search
-          </Button> */}
-            {/* <button> */}
-            <img src={search} alt="search" className={styles.img} />
-            {/* </button> */}
+            <button className={styles.searchButton}>
+              <img src={search} alt="search" className={styles.img} />
+            </button>
           </Form>
         </Navbar.Brand>
         <Navbar.Toggle
@@ -58,14 +54,10 @@ const Navigation = observer(() => {
               title={userStore.username}
               id="collapsible-nav-dropdown"
               alignRight
-              className={styles.NavDropdown}
             >
               <NavDropdown.Item href={`/${userStore.username}`}>
                 Profile
               </NavDropdown.Item>
-
-              {/* <NavDropdown.Divider className={styles.divider} /> */}
-
               <NavDropdown.Item onClick={userStore.logOut}>
                 Log out
               </NavDropdown.Item>
@@ -77,7 +69,6 @@ const Navigation = observer(() => {
               alignRight
             >
               <NavDropdown.Item href="/login">Log in</NavDropdown.Item>
-              {/* <NavDropdown.Divider className={styles.divider} /> */}
               <NavDropdown.Item href="/signup">Sign up</NavDropdown.Item>
             </NavDropdown>
           )}
