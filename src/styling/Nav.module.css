@@ -13,7 +13,7 @@
   margin-right: 5px;
 }
 
-/* .link::before {
+.link::before {
   content: "";
   background-color: rgba(255, 255, 255, 0.5);
   display: block;
@@ -21,7 +21,7 @@
   height: 1px;
   width: 120%;
   transition: width 0.5s ease-in-out;
-} */
+}
 
 .link::after {
   content: "";
@@ -33,10 +33,10 @@
   transition: width 0.5s ease-in-out;
 }
 
-/* .link:hover::before {
+.link:hover::before {
   width: 0%;
   transform: width;
-} */
+}
 
 .link:hover::after {
   transform: width;
@@ -47,6 +47,11 @@
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
+}
+
+.searchBar {
+  margin-right: 5px;
+  min-width: 0px;
 }
 
 @media only screen and (max-width: 575px) {
@@ -89,6 +94,10 @@
 
   .searchBar {
     margin-top: 3px;
+  }
+
+  .img {
+    margin-top: 2px;
   }
 
   .profile {

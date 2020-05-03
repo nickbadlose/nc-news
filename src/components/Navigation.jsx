@@ -16,7 +16,7 @@ const Navigation = observer(() => {
   return (
     <Navbar expand="sm" variant="dark" id="navbar" className={styles.navBar}>
       <Navbar.Brand href="/">
-        NC <img src={logo} alt="logo" />
+        NC <img src={logo} alt="News" />
       </Navbar.Brand>
       <Navbar.Toggle
         aria-controls="responsive-navbar-nav"
@@ -45,7 +45,7 @@ const Navigation = observer(() => {
             Search
           </Button> */}
           {/* <button> */}
-          {/* <img src={search} alt="search" /> */}
+          <img src={search} alt="search" className={styles.img} />
           {/* </button> */}
         </Form>
         <Nav className={styles.profile}>
