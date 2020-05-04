@@ -2,7 +2,7 @@ import { decorate, observable } from "mobx";
 
 export class Error {
   constructor() {
-    this.err = { msg: "hey", status: 404 };
+    this.err = null;
   }
 }
 

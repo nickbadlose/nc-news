@@ -18,7 +18,7 @@ import { observer } from "mobx-react";
 const Routes = observer(() => {
   return (
     <StyledRouter>
-      {!errorStore.err ? (
+      {errorStore.err ? (
         <ErrorPage err={errorStore.err} />
       ) : (
         <Router className="main">
