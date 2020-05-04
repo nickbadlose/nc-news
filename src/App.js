@@ -6,16 +6,18 @@ import Routes from "./components/Routes";
 import "./App.css";
 import { observer } from "mobx-react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { errorStore } from "./stores/error";
+import ErrorPage from "./components/ErrorPage";
 
 const App = observer(() => {
   return (
     <div className="App">
       <Header />
       <Navigation />
-      <div className="Header-side"></div>
-      <div className="Nav-side"></div>
+      {/* <div className="Header-side"></div>
+      <div className="Nav-side"></div> */}
       {/* <SideBar /> */}
-      <Routes />
+      {errorStore.err ? <ErrorPage err={errorStore.err} /> : <Routes />}
     </div>
   );
 });

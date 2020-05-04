@@ -26,7 +26,6 @@ export class UserInfo {
 }
 
 decorate(UserInfo, {
-  userLoggedIn: observable,
   username: observable,
 });
 

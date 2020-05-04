@@ -1,5 +1,6 @@
 import React from "react";
 import { userStore } from "../stores/userinfo";
+import { searchStore } from "../stores/search";
 import { observer } from "mobx-react";
 import styles from "../styling/Nav.module.css";
 import "../styling/Navigation.css";
@@ -17,14 +18,19 @@ const Navigation = observer(() => {
       <Navbar.Brand href="/" className={styles.brand}>
         NC <img src={logo} alt="News" />
       </Navbar.Brand>
-      <Form className={styles.form} id="search-bar">
+      <Form className={styles.form}>
         <FormControl
+          aria-label="Search box"
           type="text"
           placeholder="Search"
           size="sm"
           className={styles.searchBar}
+          onChange={searchStore.handleChange}
         />
-        <button className={styles.searchButton}>
+        <button
+          className={styles.searchButton}
+          onClick={searchStore.handleSubmit}
+        >
           <img src={search} alt="search" className={styles.img} />
         </button>
       </Form>
