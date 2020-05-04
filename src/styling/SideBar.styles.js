@@ -1,16 +1,23 @@
 import styled from "styled-components";
 
 export const StyledSidebar = styled.div`
-  background: #eaeaea;
+  background: ${(props) => props.theme.bg};
   position: sticky !important;
   grid-area: sidebar;
   display: flex;
   flex-direction: column;
   height: 100vh;
   top: 0px;
+  box-shadow: inset 7px 0px 5px -7px ${(props) => props.theme.borderC};
+  // border-left: 1px solid ${(props) => props.theme.borderC};
   // height: calc(100vh - 8rem);
   // top: 8rem;
   // overflow: scroll;
+
+  .spinner {
+    margin-top: 5rem;
+    align-self: center;
+  }
 
   h2 {
     color: rgba(0, 0, 0, 0.8);
@@ -20,10 +27,10 @@ export const StyledSidebar = styled.div`
 
     &::after {
       content: "";
-      height: 0.1px;
+      height: 1px;
       width: 90%;
       display: block;
-      background-color: rgb(52, 52, 52, 0.4);
+      background-color: ${(props) => props.theme.borderC};
       margin: 20px 0px;
       align-self: center;
     }
@@ -35,11 +42,11 @@ export const StyledSidebar = styled.div`
   }
 
   a {
-    color: rgba(0, 0, 0, 0.6);
+    color: ${(props) => props.theme.textC};
     text-decoration: none;
 
     &:hover {
-      color: rgba(0, 0, 0, 0.8);
+      color: ${(props) => props.theme.headerC};
     }
   }
 

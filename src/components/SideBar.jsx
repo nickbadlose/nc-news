@@ -3,6 +3,7 @@ import * as api from "../api";
 import { Link } from "@reach/router";
 import { StyledSidebar } from "../styling/SideBar.styles";
 import Spinner from "react-bootstrap/Spinner";
+import { mainTheme } from "../styling/themes.styling";
 
 class SideBar extends Component {
   state = {
@@ -13,14 +14,14 @@ class SideBar extends Component {
   render() {
     const { topics, isLoading, err } = this.state;
     return (
-      <StyledSidebar>
+      <StyledSidebar theme={mainTheme}>
         <h2 className="sideBarHeader">Topics</h2>
         {err ? (
           <p>Something went wrong!</p>
         ) : (
           <>
             {isLoading ? (
-              <Spinner animation="border" />
+              <Spinner animation="border" className="spinner" />
             ) : (
               <nav>
                 <ul className="sideBarNavList">

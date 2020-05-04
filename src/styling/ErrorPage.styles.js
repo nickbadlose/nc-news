@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Main = styled.main`
-  background-color: #eaeaea;
+  background-color: ${(props) => props.theme.bg};
   display: flex;
   flex-direction: column;
   width: 50vw;
@@ -10,6 +10,7 @@ export const Main = styled.main`
   border-radius: 5px;
   margin: 15vh auto 0px auto;
   overflow: auto;
+  box-shadow: inset 0 0 5px ${(props) => props.theme.borderC};
 
   img {
     width: 96px;
