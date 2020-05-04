@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import * as api from "../api";
 import { Link } from "@reach/router";
+import { StyledSidebar } from "../styling/SideBar.styles";
+import Spinner from "react-bootstrap/Spinner";
 
 class SideBar extends Component {
   state = {
@@ -11,14 +13,14 @@ class SideBar extends Component {
   render() {
     const { topics, isLoading, err } = this.state;
     return (
-      <div className="SideBar">
+      <StyledSidebar>
         <h2 className="sideBarHeader">Topics</h2>
         {err ? (
           <p>Something went wrong!</p>
         ) : (
           <>
             {isLoading ? (
-              <p>Loading...</p>
+              <Spinner animation="border" />
             ) : (
               <nav>
                 <ul className="sideBarNavList">
@@ -38,7 +40,7 @@ class SideBar extends Component {
             )}
           </>
         )}
-      </div>
+      </StyledSidebar>
     );
   }
 

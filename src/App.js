@@ -2,22 +2,18 @@ import React from "react";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Routes from "./components/Routes";
-// import SideBar from "./components/SideBar";
+import SideBar from "./components/SideBar";
 import "./App.css";
 import { observer } from "mobx-react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { errorStore } from "./stores/error";
-import ErrorPage from "./components/ErrorPage";
 
 const App = observer(() => {
   return (
     <div className="App">
       <Header />
       <Navigation />
-      {/* <div className="Header-side"></div>
-      <div className="Nav-side"></div> */}
-      {/* <SideBar /> */}
-      {errorStore.err ? <ErrorPage err={errorStore.err} /> : <Routes />}
+      <SideBar />
+      <Routes />
     </div>
   );
 });
