@@ -3,6 +3,8 @@
 .navBar {
   background-color: #343434;
   /* display: flex; */
+  /* position: sticky !important;
+  top: 0px; */
 }
 
 .collapse {

@@ -16,7 +16,6 @@ export const useTopics = () => {
     api
       .getTopics()
       .then(({ data: { topics } }) => {
-        console.log("hey");
         setTopics(topics);
         setIsLoading(false);
       })

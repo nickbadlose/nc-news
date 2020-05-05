@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledSidebar = styled.div`
   background: ${(props) => props.theme.bg};
-  position: sticky !important;
+  position: sticky;
   grid-area: sidebar;
   display: flex;
   flex-direction: column;

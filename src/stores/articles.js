@@ -9,8 +9,9 @@ export class Articles {
     this.order = undefined;
     this.topic = undefined;
     this.limit = undefined;
-    this.page = 1;
+    // this.page = 1;
     this.maxPage = null;
+    this.isLoading = true;
   }
 
   initialiseState = () => {
@@ -19,33 +20,41 @@ export class Articles {
     this.order = undefined;
     this.topic = undefined;
     this.limit = undefined;
-    this.page = 1;
+    // this.page = 1;
     this.maxPage = null;
     this.isLoading = true;
   };
 
-  fetchArticles = (sort_by, order, topic, limit, author) => {
+  updateArticles = (p) => {
     api
-      .getArticles(sort_by, order, topic, limit, 1, author)
+      .getArticles(this.sort_by, this.order, this.topic, this.limit, p)
+      .then(({ data: { articles } }) => {
+        this.articles = [...this.articles, ...articles];
+      });
+  };
+
+  fetchArticles = () => {
+    api
+      .getArticles(this.sort_by, this.order, this.topic, this.limit, 1)
       .then(({ data: { articles, total_count } }) => {
         const maxPage = Math.ceil(total_count / 10);
         this.articles = articles;
-        this.sort_by = sort_by;
-        this.order = order;
-        this.topic = topic;
-        this.limit = limit;
         this.page = 1;
         this.maxPage = maxPage;
         this.isLoading = false;
       })
       .catch(({ response }) => {
-        errorStore.err = { status: response.status, msg: response.data.msg };
+        errorStore.err = {
+          status: response.status,
+          msg: response.data.msg,
+        };
       });
   };
 }
 
 decorate(Articles, {
   articles: observable,
+  isLoading: observable,
 });
 
 export const articlesStore = new Articles();

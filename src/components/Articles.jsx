@@ -19,8 +19,57 @@ import { errorStore } from "../stores/error";
 
 const useArticles = () => {
   // const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  // const [sort_by, setSort_by] = useState(undefined);
+  // const [order, setOrder] = useState(undefined);
+  // const [limit, setLimit] = useState(undefined);
+  // const [topic, setTopic] = useState(undefined);
+  // const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
+    console.log("fetching...");
     articlesStore.fetchArticles();
+
+    return () => {
+      console.log("initialising state");
+      articlesStore.initialiseState();
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   if (page !== 1) {
+  //     console.log("updating...");
+  //     articlesStore.updateArticles(articlesStore.page);
+  //   }
+  // }, [page]);
+
+  useEffect(() => {
+    console.log("not updating");
+    if (page !== 1) {
+      console.log("updating...");
+      articlesStore.updateArticles(page);
+    }
+  }, [page]);
+
+  const handleScroll = throttle((e) => {
+    // const { page, maxPage, isLoading } = this.state;
+    if (articlesStore.maxPage !== page && !articlesStore.isLoading) {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 50
+      ) {
+        setPage((page) => page + 1);
+      }
+    }
+  }, 2000);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    console.log("Created");
+    return () => {
+      console.log("Cleaned up");
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 };
 
