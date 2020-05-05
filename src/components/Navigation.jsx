@@ -16,7 +16,7 @@ const Navigation = observer(() => {
   return (
     <Navbar expand="sm" variant="dark" id="navbar" className={styles.navBar}>
       <Navbar.Brand href="/" className={styles.brand}>
-        NC <img src={logo} alt="News" />
+        NC <img src={logo} alt="news" />
       </Navbar.Brand>
       <Form className={styles.form}>
         <FormControl

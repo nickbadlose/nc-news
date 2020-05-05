@@ -1,4 +1,5 @@
 /* dropdown styling and Nav grid area */
+/*Use styled components next time*/
 
 #navbar {
   grid-area: nav;

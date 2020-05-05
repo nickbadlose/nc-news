@@ -9,6 +9,7 @@ export const StyledSidebar = styled.div`
   height: 100vh;
   top: 0px;
   box-shadow: inset 7px 0px 5px -7px ${(props) => props.theme.borderC};
+  // box-shadow: -2px 0px 2px ${(props) => props.theme.borderC};
   // border-left: 1px solid ${(props) => props.theme.borderC};
   // height: calc(100vh - 8rem);
   // top: 8rem;
@@ -20,7 +21,7 @@ export const StyledSidebar = styled.div`
   }
 
   h2 {
-    color: rgba(0, 0, 0, 0.8);
+    color: ${(props) => props.theme.headerC};
     margin: 10px 0px 0px 0px;
     display: flex;
     flex-direction: column;

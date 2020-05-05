@@ -1,66 +1,33 @@
-import React, { Component } from "react";
-import * as api from "../api";
+import React from "react";
 import { Link } from "@reach/router";
 import { StyledSidebar } from "../styling/SideBar.styles";
 import Spinner from "react-bootstrap/Spinner";
 import { mainTheme } from "../styling/themes.styling";
+import { useTopics } from "../hooks";
 
-class SideBar extends Component {
-  state = {
-    topics: [],
-    isLoading: true,
-    err: false,
-  };
-  render() {
-    const { topics, isLoading, err } = this.state;
-    return (
-      <StyledSidebar theme={mainTheme}>
-        <h2 className="sideBarHeader">Topics</h2>
-        {err ? (
-          <p>Something went wrong!</p>
-        ) : (
-          <>
-            {isLoading ? (
-              <Spinner animation="border" className="spinner" />
-            ) : (
-              <nav>
-                <ul className="sideBarNavList">
-                  {topics.map((topic) => {
-                    return (
-                      <Link
-                        to={`/topics/articles/${topic.slug}`}
-                        className="sideBarLink"
-                        key={topic.slug}
-                      >
-                        <li className="sideBarLi">{topic.slug}</li>
-                      </Link>
-                    );
-                  })}
-                </ul>
-              </nav>
-            )}
-          </>
-        )}
-      </StyledSidebar>
-    );
-  }
+const SideBar = () => {
+  const { topics, isLoading } = useTopics();
 
-  componentDidMount() {
-    this.fetchTopics();
-  }
-
-  fetchTopics = () => {
-    api
-      .getTopics()
-      .then(({ data: { topics } }) => {
-        this.setState({ topics, isLoading: false });
-      })
-      .catch((err) => {
-        this.setState({
-          err: "Oops, can't connect to the server!",
-        });
-      });
-  };
-}
+  return (
+    <StyledSidebar theme={mainTheme}>
+      <h2>Topics</h2>
+      {isLoading ? (
+        <Spinner animation="border" className="spinner" />
+      ) : (
+        <nav>
+          <ul>
+            {topics.map((topic) => {
+              return (
+                <Link to={`/topics/articles/${topic.slug}`} key={topic.slug}>
+                  <li>{topic.slug}</li>
+                </Link>
+              );
+            })}
+          </ul>
+        </nav>
+      )}
+    </StyledSidebar>
+  );
+};
 
 export default SideBar;

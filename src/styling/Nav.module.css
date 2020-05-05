@@ -1,5 +1,8 @@
+/*Use styled components next time*/
+
 .navBar {
   background-color: #343434;
+  /* display: flex; */
 }
 
 .collapse {
@@ -8,10 +11,14 @@
   flex-grow: 1;
 }
 
+.brand {
+  display: flex;
+}
+
 .link {
   display: flex !important;
   flex-direction: column;
-  margin-right: 5px;
+  margin-right: 0.25rem;
 }
 
 .link::before {
@@ -50,9 +57,10 @@
 }
 
 .searchBar {
-  margin-right: 5px;
+  margin-right: 0.25rem;
   min-width: 0px;
   max-width: 200px;
+  align-self: center;
 }
 
 .searchButton {
@@ -61,6 +69,7 @@
   cursor: pointer;
   display: inline-block;
   outline: none;
+  align-self: center;
 }
 
 .searchButton:focus {
@@ -69,6 +78,14 @@
   cursor: pointer;
   display: inline-block;
   outline: none;
+}
+
+.img {
+  align-self: center;
+}
+
+.profile {
+  align-self: center;
 }
 
 @media only screen and (max-width: 575px) {
@@ -106,12 +123,11 @@
   .form {
     flex-basis: 0%;
     flex-grow: 1;
-    margin-right: 5px;
+    margin-right: 0.25rem;
   }
 
   .profile {
     order: 3;
-    border-top: none;
     align-self: flex-start;
     text-align: left;
   }
