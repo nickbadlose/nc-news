@@ -16,6 +16,30 @@ export const useTopics = () => {
     api
       .getTopics()
       .then(({ data: { topics } }) => {
+        console.log("hey");
+        setTopics(topics);
+        setIsLoading(false);
+      })
+      .catch(({ response }) => {
+        errorStore.err = { status: response.status, msg: response.data.msg };
+      });
+  }, [isLoading, setIsLoading]);
+
+  return {
+    topics,
+    setTopics,
+    isLoading,
+  };
+};
+
+export const useArticles = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [topics, setTopics] = useState([]);
+
+  useEffect(() => {
+    api
+      .getTopics()
+      .then(({ data: { topics } }) => {
         setTopics(topics);
         setIsLoading(false);
       })

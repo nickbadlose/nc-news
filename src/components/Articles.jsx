@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import ArticleTile from "./ArticleTile";
 import * as api from "../api";
 import FilterForm from "./FilterForm";
@@ -6,8 +6,57 @@ import throttle from "lodash.throttle";
 import ErrorPage from "./ErrorPage";
 // import SearchBox from "./SearchBox";
 // import ErrorMessage from "./ErrorMessage";
+import { observer } from "mobx-react";
+import { articlesStore } from "../stores/articles";
+import { errorStore } from "../stores/error";
 
-class Articles extends Component {
+// const useWindowEvent = (event = "scroll", callback = handleScroll) => {
+//   useEffect(() => {
+//     window.addEventListener(event, callback);
+//     return () => window.removeEventListener(event, callback);
+//   }, [event, callback]);
+// };
+
+const useArticles = () => {
+  // const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    articlesStore.fetchArticles();
+  }, []);
+};
+
+const Articles = observer(() => {
+  useArticles();
+
+  return (
+    <main>
+      <h2>Articles</h2>
+      {/* <SearchBox
+              fetchArticles={fetchArticles}
+              errorHandler={errorHandler}
+            /> */}
+      <FilterForm fetchArticles={articlesStore.fetchArticles} article={true} />
+      {articlesStore.isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        // invalidUser ? (
+        //   <ErrorMessage err={invalidUser} />
+        // ) :
+        <article>
+          <ul>
+            {articlesStore.articles.map((article) => {
+              return <ArticleTile {...article} key={article.article_id} />;
+            })}
+          </ul>
+          {articlesStore.page < articlesStore.maxPage && (
+            <p>Loading more articles...</p>
+          )}
+        </article>
+      )}
+    </main>
+  );
+});
+
+class UpdatingArticles extends Component {
   state = {
     articles: [],
     isLoading: true,

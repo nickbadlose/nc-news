@@ -11,11 +11,12 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import FormControl from "react-bootstrap/FormControl";
 import logo from "../logos/news.svg";
 import search from "../logos/search.svg";
+import { Link } from "@reach/router";
 
 const Navigation = observer(() => {
   return (
     <Navbar expand="sm" variant="dark" id="navbar" className={styles.navBar}>
-      <Navbar.Brand href="/" className={styles.brand}>
+      <Navbar.Brand as={Link} to="/" className={styles.brand}>
         NC <img src={logo} alt="news" />
       </Navbar.Brand>
       <Form className={styles.form}>
@@ -40,13 +41,13 @@ const Navigation = observer(() => {
       />
       <Navbar.Collapse id="responsive-navbar-nav" className={styles.collapse}>
         <Nav className={styles.links}>
-          <Nav.Link href="/" className={styles.link}>
+          <Nav.Link as={Link} to="/" className={styles.link}>
             Home
           </Nav.Link>
-          <Nav.Link href="/articles" className={styles.link}>
+          <Nav.Link as={Link} to="/articles" className={styles.link}>
             Articles
           </Nav.Link>
-          <Nav.Link href="/topics" className={styles.link}>
+          <Nav.Link as={Link} to="/topics" className={styles.link}>
             Topics
           </Nav.Link>
         </Nav>
@@ -57,7 +58,7 @@ const Navigation = observer(() => {
               id="collapsible-nav-dropdown"
               alignRight
             >
-              <NavDropdown.Item href={`/${userStore.username}`}>
+              <NavDropdown.Item as={Link} to={`/${userStore.username}`}>
                 Profile
               </NavDropdown.Item>
               <NavDropdown.Item onClick={userStore.logOut}>
@@ -70,8 +71,12 @@ const Navigation = observer(() => {
               id="collapsible-nav-dropdown"
               alignRight
             >
-              <NavDropdown.Item href="/login">Log in</NavDropdown.Item>
-              <NavDropdown.Item href="/signup">Sign up</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/login">
+                Log in
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/signup">
+                Sign up
+              </NavDropdown.Item>
             </NavDropdown>
           )}
         </Nav>
