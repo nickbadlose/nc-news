@@ -1,61 +1,26 @@
-import React, { Component } from "react";
-import * as api from "../api";
-import ErrorMessage from "./ErrorMessage";
+import React from "react";
+import { useVotes } from "../hooks";
 
-class IncrementVotes extends Component {
-  state = {
-    voteDifference: 0,
-    err: null,
-  };
-  render() {
-    const { handleVotesChange } = this;
-    const { voteDifference, err } = this.state;
-    const { votes } = this.props;
-    return (
-      <div className="IncrementVotes">
-        <button
-          onClick={() => handleVotesChange(1)}
-          disabled={voteDifference === 1 && true}
-          className="incrementVotesButton"
-        >
-          ⬆
-        </button>
-        {votes + voteDifference}
-        <button
-          onClick={() => handleVotesChange(-1)}
-          disabled={voteDifference === -1 && true}
-          className="incrementVotesButton"
-        >
-          ⬇
-        </button>
-        {err && <ErrorMessage err={err} />}
-      </div>
-    );
-  }
+const IncrementVotes = ({ votes, article_id }) => {
+  const { voteDifference, handleVotes } = useVotes(article_id, true);
 
-  handleVotesChange = (voteChange) => {
-    const { comment_id, article_id } = this.props;
-
-    this.setState((currentState) => {
-      return {
-        voteDifference: currentState.voteDifference + voteChange,
-        err: null,
-      };
-    });
-
-    const promise = comment_id
-      ? api.patchCommentById(comment_id, voteChange)
-      : api.patchArticleById(article_id, voteChange);
-
-    promise.catch(() => {
-      this.setState((currentState) => {
-        return {
-          voteDifference: currentState.voteDifference - voteChange,
-          err: { msg: "unable to change vote" },
-        };
-      });
-    });
-  };
-}
+  return (
+    <div>
+      <button
+        onClick={() => handleVotes(1)}
+        disabled={voteDifference === 1 && true}
+      >
+        ⬆
+      </button>
+      {votes + voteDifference}
+      <button
+        onClick={() => handleVotes(-1)}
+        disabled={voteDifference === -1 && true}
+      >
+        ⬇
+      </button>
+    </div>
+  );
+};
 
 export default IncrementVotes;

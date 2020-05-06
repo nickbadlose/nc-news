@@ -1,11 +1,10 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component } from "react";
 import { articlesStore } from "../stores/articles";
 import { observer } from "mobx-react";
 
 const FilterForm = observer(({ article }) => {
-  // const { handleChange } = useFilter();
   return (
-    <form className="FilterForm">
+    <form>
       <select
         onChange={(e) => articlesStore.handleChange(e)}
         className="filterFormSelect"
@@ -15,20 +14,10 @@ const FilterForm = observer(({ article }) => {
             : articlesStore.sort_by
         }
       >
-        <option value="created_at" className="filterFormOption">
-          Newest
-        </option>
-        <option value="created_at/asc" className="filterFormOption">
-          Oldest
-        </option>
-        <option value="votes" className="filterFormOption">
-          Popular
-        </option>
-        {article && (
-          <option value="comment_count" className="filterFormOption">
-            Conversational
-          </option>
-        )}
+        <option value="created_at">Newest</option>
+        <option value="created_at/asc">Oldest</option>
+        <option value="votes">Popular</option>
+        {article && <option value="comment_count">Conversational</option>}
       </select>
     </form>
   );

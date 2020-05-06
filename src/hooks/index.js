@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { errorStore } from "../stores/error";
 import * as api from "../api";
 import { articlesStore } from "../stores/articles";
@@ -93,6 +93,34 @@ export const useArticlesAndScroll = (sort_by, order, topic, page) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
+};
+
+export const useToggle = () => {
+  const [toggle, setToggle] = useState(false);
+
+  const handleToggle = () => {
+    setToggle((toggle) => !toggle);
+  };
+
+  return { toggle, handleToggle };
+};
+
+export const useVotes = (id, article) => {
+  const [voteDifference, setVoteDifference] = useState(0);
+
+  const handleVotes = (voteChange) => {
+    setVoteDifference((voteDifference) => voteDifference + voteChange);
+
+    const promise = article
+      ? api.patchArticleById(id, voteChange)
+      : api.patchCommentById(id, voteChange);
+
+    promise.catch(() => {
+      setVoteDifference((voteDifference) => voteDifference - voteChange);
+    });
+  };
+
+  return { voteDifference, handleVotes };
 };
 
 // export const useformState = () => {}
