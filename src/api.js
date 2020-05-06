@@ -3,7 +3,7 @@ import { userStore } from "./stores/userinfo";
 
 const baseUrl = "https://not-quite-reddit.herokuapp.com/api";
 
-export const getArticles = (sort_by, order, topic, limit, p, author) => {
+export const getArticles = (sort_by, order, topic, p, limit, author) => {
   return axios.get(`${baseUrl}/articles`, {
     params: { sort_by, order, topic, limit, p, author },
   });

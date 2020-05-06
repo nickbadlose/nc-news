@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { errorStore } from "../stores/error";
 import * as api from "../api";
-
-// export const useLoading = () => {
-//   const [isLoading, setIsLoading] = useState(true);
-
-//   return { isLoading, setIsLoading };
-// };
+import { articlesStore } from "../stores/articles";
+import throttle from "lodash.throttle";
 
 export const useTopics = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,29 +27,75 @@ export const useTopics = () => {
   };
 };
 
-export const useArticles = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [topics, setTopics] = useState([]);
+export const useArticlesAndScroll = (sort_by, order, topic, page) => {
+  const isMounted = useRef(true);
 
   useEffect(() => {
+    return () => {
+      console.log("unmounting...");
+      isMounted.current = false;
+      articlesStore.initialiseState();
+    };
+  }, []);
+
+  useEffect(() => {
+    articlesStore.page = 1;
+
     api
-      .getTopics()
-      .then(({ data: { topics } }) => {
-        setTopics(topics);
-        setIsLoading(false);
+      .getArticles(sort_by, order, topic, 1)
+      .then(({ data: { articles, total_count } }) => {
+        const maxPage = Math.ceil(total_count / 10);
+        if (isMounted.current) {
+          articlesStore.articles = articles;
+          articlesStore.maxPage = maxPage;
+          articlesStore.isLoading = false;
+        }
       })
       .catch(({ response }) => {
-        errorStore.err = { status: response.status, msg: response.data.msg };
+        errorStore.err = {
+          status: response.status,
+          msg: response.data.msg,
+        };
       });
-  }, [isLoading, setIsLoading]);
+  }, [sort_by, order, topic]);
 
-  return {
-    topics,
-    setTopics,
-    isLoading,
-  };
+  useEffect(() => {
+    if (page !== 1) {
+      api
+        .getArticles(
+          articlesStore.sort_by,
+          articlesStore.order,
+          articlesStore.topic,
+          articlesStore.page
+        )
+        .then(({ data: { articles } }) => {
+          if (isMounted.current) {
+            articlesStore.articles = [...articlesStore.articles, ...articles];
+          }
+        });
+    }
+  }, [page]);
+
+  const handleScroll = throttle((e) => {
+    if (articlesStore.maxPage !== page && !articlesStore.isLoading) {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 50
+      ) {
+        articlesStore.page = page + 1;
+      }
+    }
+  }, 1000);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
 };
 
+// export const useformState = () => {}
 // export const useApi = () => {};
 // export const useLocalStorage = () => {};
 // export const useDarkMode = () => {};
