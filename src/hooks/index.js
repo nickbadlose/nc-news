@@ -3,6 +3,30 @@ import { errorStore } from "../stores/error";
 import * as api from "../api";
 import { articlesStore } from "../stores/articles";
 import throttle from "lodash.throttle";
+import { navigate } from "@reach/router";
+
+export const useForm = (initialForm) => {
+  const [form, setForm] = useState(initialForm);
+
+  const handleChange = (e, input) => {
+    setForm({ ...form, [input]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    api
+      .postTopic(form)
+      .then((topic) => {
+        setForm(initialForm);
+        navigate(`/topics/articles/${topic}`);
+      })
+      .catch(({ response }) => {
+        errorStore.err = { status: response.status, msg: response.data.msg };
+      });
+  };
+
+  return { form, handleChange, handleSubmit };
+};
 
 export const useTopics = () => {
   const isMounted = useRef(true);
