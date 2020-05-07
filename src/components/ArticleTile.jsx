@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 import { formatDate } from "../utils/utils";
 import IncrementVotes from "./IncrementVotes";
 import { useToggle } from "../hooks";
+import * as api from "../api";
 
 const ArticleTile = ({
   author,
@@ -35,7 +36,11 @@ const ArticleTile = ({
         )}
       </p>
       <p>Comments: {comment_count} 💬</p>
-      <IncrementVotes votes={votes} article_id={article_id} />
+      <IncrementVotes
+        votes={votes}
+        id={article_id}
+        api={api.patchArticleById}
+      />
     </li>
   );
 };

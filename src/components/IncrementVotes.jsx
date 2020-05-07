@@ -1,8 +1,8 @@
 import React from "react";
 import { useVotes } from "../hooks";
 
-const IncrementVotes = ({ votes, article_id }) => {
-  const { voteDifference, handleVotes } = useVotes(article_id, true);
+const IncrementVotes = ({ votes, id, api }) => {
+  const { voteDifference, handleVotes } = useVotes(id, api);
 
   return (
     <div>

@@ -5,15 +5,24 @@ import { articlesStore } from "../stores/articles";
 import throttle from "lodash.throttle";
 
 export const useTopics = () => {
+  const isMounted = useRef(true);
   const [isLoading, setIsLoading] = useState(true);
   const [topics, setTopics] = useState([]);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   useEffect(() => {
     api
       .getTopics()
       .then(({ data: { topics } }) => {
-        setTopics(topics);
-        setIsLoading(false);
+        if (isMounted.current) {
+          setTopics(topics);
+          setIsLoading(false);
+        }
       })
       .catch(({ response }) => {
         errorStore.err = { status: response.status, msg: response.data.msg };
@@ -32,7 +41,6 @@ export const useArticlesAndScroll = (sort_by, order, topic, page) => {
 
   useEffect(() => {
     return () => {
-      console.log("unmounting...");
       isMounted.current = false;
       articlesStore.initialiseState();
     };
@@ -105,17 +113,13 @@ export const useToggle = () => {
   return { toggle, handleToggle };
 };
 
-export const useVotes = (id, article) => {
+export const useVotes = (id, api) => {
   const [voteDifference, setVoteDifference] = useState(0);
 
   const handleVotes = (voteChange) => {
     setVoteDifference((voteDifference) => voteDifference + voteChange);
 
-    const promise = article
-      ? api.patchArticleById(id, voteChange)
-      : api.patchCommentById(id, voteChange);
-
-    promise.catch(() => {
+    api(id, voteChange).catch(() => {
       setVoteDifference((voteDifference) => voteDifference - voteChange);
     });
   };
