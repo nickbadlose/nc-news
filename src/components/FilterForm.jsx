@@ -1,17 +1,13 @@
 import React from "react";
-import { articlesStore } from "../stores/articles";
-import { observer } from "mobx-react";
+// import { articlesStore } from "../stores/articles";
+// import { observer } from "mobx-react";
 
-const FilterForm = observer(({ article }) => {
+const FilterForm = ({ article, handleChange, sort_by, order }) => {
   return (
     <form>
       <select
-        onChange={(e) => articlesStore.handleChange(e)}
-        value={
-          articlesStore.order
-            ? `${articlesStore.sort_by}/${articlesStore.order}`
-            : articlesStore.sort_by
-        }
+        onChange={(e) => handleChange(e)}
+        value={order ? `${sort_by}/${order}` : sort_by}
       >
         <option value="created_at">Newest</option>
         <option value="created_at/asc">Oldest</option>
@@ -20,6 +16,6 @@ const FilterForm = observer(({ article }) => {
       </select>
     </form>
   );
-});
+};
 
 export default FilterForm;

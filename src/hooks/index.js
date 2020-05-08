@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useReducer } from "react";
 import { errorStore } from "../stores/error";
 import * as api from "../api";
 import { articlesStore } from "../stores/articles";
 import throttle from "lodash.throttle";
 import { navigate } from "@reach/router";
+import { useImmerReducer } from "use-immer";
 
 export const useForm = (initialForm) => {
   const [form, setForm] = useState(initialForm);
@@ -60,61 +61,107 @@ export const useTopics = () => {
   };
 };
 
-export const useArticlesAndScroll = (sort_by, order, topic, page) => {
+const initialState = {
+  articles: [],
+  page: 1,
+  order: undefined,
+  sort_by: undefined,
+  maxPage: null,
+  isLoading: true,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "fetch":
+      state.maxPage = action.maxPage;
+      state.page = 1;
+      state.articles = action.articles;
+      state.isLoading = false;
+      return;
+    case "update":
+      state.articles = [...state.articles, ...action.articles];
+      return;
+    case "filter":
+      state.page = 1;
+      state.sort_by = action.sort_by;
+      state.order = action.order;
+      return;
+    case "next-page":
+      state.page++;
+      return;
+    case "err":
+      errorStore.err = action.err;
+      return;
+    default:
+      return state;
+  }
+};
+
+export const useArticlesAndScroll = (topic) => {
   const isMounted = useRef(true);
+  const [state, dispatch] = useImmerReducer(reducer, initialState);
+  // const [state, dispatch] = useReducer(reducer, initialState);
+
+  console.log(state);
+
+  const handleChange = (e) => {
+    const [sort_by, order] = e.target.value.split("/");
+    dispatch({
+      type: "filter",
+      sort_by,
+      order,
+    });
+  };
 
   useEffect(() => {
     return () => {
       isMounted.current = false;
-      articlesStore.initialiseState();
+      console.log("unmounting");
     };
   }, []);
 
   useEffect(() => {
-    articlesStore.page = 1;
-
+    console.log("fetching/updating ", state.sort_by, state.order, state.page);
     api
-      .getArticles(sort_by, order, topic, 1)
+      .getArticles(state.sort_by, state.order, topic, state.page)
       .then(({ data: { articles, total_count } }) => {
         const maxPage = Math.ceil(total_count / 10);
         if (isMounted.current) {
-          articlesStore.articles = articles;
-          articlesStore.maxPage = maxPage;
-          articlesStore.isLoading = false;
+          console.log("updating.....");
+          state.page === 1
+            ? dispatch({
+                type: "fetch",
+                maxPage,
+                articles,
+              })
+            : dispatch({
+                type: "update",
+                articles,
+              });
         }
       })
       .catch(({ response }) => {
-        errorStore.err = {
-          status: response.status,
-          msg: response.data.msg,
-        };
-      });
-  }, [sort_by, order, topic]);
-
-  useEffect(() => {
-    if (page !== 1) {
-      api
-        .getArticles(
-          articlesStore.sort_by,
-          articlesStore.order,
-          articlesStore.topic,
-          articlesStore.page
-        )
-        .then(({ data: { articles } }) => {
-          if (isMounted.current) {
-            articlesStore.articles = [...articlesStore.articles, ...articles];
-          }
+        dispatch({
+          type: "err",
+          err: {
+            status: response.status,
+            msg: response.data.msg,
+          },
         });
-    }
-  }, [page]);
+      });
+  }, [state.sort_by, state.order, topic, state.page, dispatch]);
 
   const handleScroll = throttle((e) => {
-    if (articlesStore.maxPage !== page && !articlesStore.isLoading) {
+    console.log("handling scroll");
+    if (state.maxPage !== state.page && !state.isLoading) {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 50
       ) {
-        articlesStore.page = page + 1;
+        console.log("calling dispatch next page");
+        dispatch({
+          type: "next-page",
+        });
       }
     }
   }, 1000);
@@ -125,7 +172,76 @@ export const useArticlesAndScroll = (sort_by, order, topic, page) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
+
+  return { state, handleChange };
 };
+
+// export const useArticlesAndScroll = (sort_by, order, topic, page) => {
+//   const isMounted = useRef(true);
+
+//   useEffect(() => {
+//     return () => {
+//       isMounted.current = false;
+//       articlesStore.initialiseState();
+//     };
+//   }, []);
+
+//   useEffect(() => {
+//     articlesStore.page = 1;
+
+//     api
+//       .getArticles(sort_by, order, topic, 1)
+//       .then(({ data: { articles, total_count } }) => {
+//         const maxPage = Math.ceil(total_count / 10);
+//         if (isMounted.current) {
+//           articlesStore.articles = articles;
+//           articlesStore.maxPage = maxPage;
+//           articlesStore.isLoading = false;
+//         }
+//       })
+//       .catch(({ response }) => {
+//         errorStore.err = {
+//           status: response.status,
+//           msg: response.data.msg,
+//         };
+//       });
+//   }, [sort_by, order, topic]);
+
+//   useEffect(() => {
+//     if (page !== 1) {
+//       api
+//         .getArticles(
+//           articlesStore.sort_by,
+//           articlesStore.order,
+//           articlesStore.topic,
+//           articlesStore.page
+//         )
+//         .then(({ data: { articles } }) => {
+//           if (isMounted.current) {
+//             articlesStore.articles = [...articlesStore.articles, ...articles];
+//           }
+//         });
+//     }
+//   }, [page]);
+
+//   const handleScroll = throttle((e) => {
+//     if (articlesStore.maxPage !== page && !articlesStore.isLoading) {
+//       if (
+//         window.innerHeight + window.scrollY >=
+//         document.body.offsetHeight - 50
+//       ) {
+//         articlesStore.page = page + 1;
+//       }
+//     }
+//   }, 1000);
+
+//   useEffect(() => {
+//     window.addEventListener("scroll", handleScroll);
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//     };
+//   }, [handleScroll]);
+// };
 
 export const useToggle = () => {
   const [toggle, setToggle] = useState(false);
