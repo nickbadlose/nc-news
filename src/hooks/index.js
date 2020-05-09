@@ -89,6 +89,11 @@ const reducer = (state, action) => {
     case "next-page":
       state.page++;
       return;
+    case "reset":
+      state.page = 1;
+      state.sort_by = "created_at";
+      state.order = undefined;
+      return;
     case "err":
       errorStore.err = action.err;
       return;
@@ -100,7 +105,6 @@ const reducer = (state, action) => {
 export const useArticlesAndScroll = (topic) => {
   const isMounted = useRef(true);
   const [state, dispatch] = useImmerReducer(reducer, initialState);
-  // const [state, dispatch] = useReducer(reducer, initialState);
 
   console.log(state);
 
@@ -119,6 +123,11 @@ export const useArticlesAndScroll = (topic) => {
       console.log("unmounting");
     };
   }, []);
+
+  useEffect(() => {
+    console.log("reset");
+    dispatch({ type: "reset" });
+  }, [topic]);
 
   useEffect(() => {
     console.log("fetching/updating ", state.sort_by, state.order, state.page);
@@ -141,6 +150,7 @@ export const useArticlesAndScroll = (topic) => {
         }
       })
       .catch(({ response }) => {
+        console.log(response);
         dispatch({
           type: "err",
           err: {
@@ -187,7 +197,7 @@ export const useArticlesAndScroll = (topic) => {
 //   }, []);
 
 //   useEffect(() => {
-//     articlesStore.page = 1;
+//     // articlesStore.page = 1;
 
 //     api
 //       .getArticles(sort_by, order, topic, 1)

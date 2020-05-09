@@ -6,8 +6,41 @@ import throttle from "lodash.throttle";
 import ErrorPage from "./ErrorPage";
 // import PostArticleForm from "./PostArticleForm";
 import { Link } from "@reach/router";
+import { observer } from "mobx-react";
+import { articlesStore } from "../stores/articles";
+import { useArticlesAndScroll } from "../hooks";
 
-class TopicsArticles extends Component {
+const TopicsArticles = observer(({ topic }) => {
+  const { state, handleChange } = useArticlesAndScroll(topic);
+  return (
+    <main>
+      <h2>Articles - {topic}</h2>
+      <Link to={`/topics/articles/${topic}/post`}>
+        <button>Post an article about this topic?</button>
+      </Link>
+      <FilterForm
+        handleChange={handleChange}
+        article={true}
+        sort_by={state.sort_by}
+        order={state.order}
+      />
+      {state.isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <article>
+          <ul>
+            {state.articles.map((article) => {
+              return <ArticleTile {...article} key={article.article_id} />;
+            })}
+          </ul>
+          {state.page < state.maxPage && <p>Loading more articles...</p>}
+        </article>
+      )}
+    </main>
+  );
+});
+
+class updatingTopicsArticles extends Component {
   state = {
     articles: [],
     isLoading: true,

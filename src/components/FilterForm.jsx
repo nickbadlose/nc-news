@@ -1,8 +1,8 @@
 import React from "react";
-// import { articlesStore } from "../stores/articles";
-// import { observer } from "mobx-react";
+import { articlesStore } from "../stores/articles";
+import { observer } from "mobx-react";
 
-const FilterForm = ({ article, handleChange, sort_by, order }) => {
+const FilterForm = observer(({ article, handleChange, sort_by, order }) => {
   return (
     <form>
       <select
@@ -16,6 +16,6 @@ const FilterForm = ({ article, handleChange, sort_by, order }) => {
       </select>
     </form>
   );
-};
+});
 
 export default FilterForm;

@@ -24,6 +24,7 @@ export class Articles {
   };
 
   handleChange = (e) => {
+    this.page = 1;
     const [sort_by, order] = e.target.value.split("/");
     this.sort_by = sort_by;
     this.order = order;
