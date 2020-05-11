@@ -48,7 +48,6 @@ export const useForm = (initialForm, submit) => {
             submit({ type: "fetch-comments", comments });
           })
           .catch(({ response }) => {
-            console.log(response);
             submit({
               type: "err",
               err: {
@@ -206,7 +205,7 @@ export const useArticlesAndScroll = (topic) => {
 
   const handleScroll = throttle((e) => {
     console.log("handling scroll");
-    if (state.maxPage !== state.page && !state.isLoading) {
+    if (state.maxPage > state.page && !state.isLoading) {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 50

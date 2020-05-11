@@ -1,128 +1,87 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as api from "../api";
-import HomePageArticleTile from "./HomePageArticleTile";
-import ErrorPage from "./ErrorPage";
+import { Link } from "@reach/router";
+import { errorStore } from "../stores/error";
 
-class HomePage extends Component {
-  state = {
+const HomePage = () => {
+  const [state, setState] = useState({
+    articles: [],
+    topics: [],
     isLoading: true,
-    highestRatedArticles: [],
-    codingArticles: [],
-    footballArticles: [],
-    cookingArticles: [],
-    err: false
-  };
+  });
+  const isMounted = useRef(true);
 
-  render() {
-    const {
-      isLoading,
-      highestRatedArticles,
-      codingArticles,
-      footballArticles,
-      cookingArticles,
-      err
-    } = this.state;
-    return (
-      <main>
-        {err ? (
-          <ErrorPage />
-        ) : (
-          <>
-            <h2 className="articlesHeader">Popular Articles</h2>
-            {isLoading ? (
-              <p>Loading...</p>
-            ) : (
-              <ul className="homepageList">
-                {highestRatedArticles.map(article => {
-                  return (
-                    <HomePageArticleTile
-                      {...article}
-                      key={article.article_id}
-                    />
-                  );
-                })}
-              </ul>
-            )}
-            <h2 className="articlesHeader">Coding Articles</h2>
-            {isLoading ? (
-              <p>Loading...</p>
-            ) : (
-              <ul className="homepageList">
-                {codingArticles.map(article => {
-                  return (
-                    <HomePageArticleTile
-                      {...article}
-                      key={article.article_id}
-                    />
-                  );
-                })}
-              </ul>
-            )}
-            <h2 className="articlesHeader">Football Articles</h2>
-            {isLoading ? (
-              <p>Loading...</p>
-            ) : (
-              <ul className="homepageList">
-                {footballArticles.map(article => {
-                  return (
-                    <HomePageArticleTile
-                      {...article}
-                      key={article.article_id}
-                    />
-                  );
-                })}
-              </ul>
-            )}
-            <h2 className="articlesHeader">Cooking Articles</h2>
-            {isLoading ? (
-              <p>Loading...</p>
-            ) : (
-              <ul className="homepageList">
-                {cookingArticles.map(article => {
-                  return (
-                    <HomePageArticleTile
-                      {...article}
-                      key={article.article_id}
-                    />
-                  );
-                })}
-              </ul>
-            )}
-          </>
-        )}
-      </main>
-    );
-  }
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
-  componentDidMount() {
-    const { fetchArticles } = this;
-    fetchArticles("votes", "desc", null, 3);
-    fetchArticles("votes", "desc", "coding", 3);
-    fetchArticles("votes", "desc", "football", 3);
-    fetchArticles("votes", "desc", "cooking", 3);
-  }
-
-  fetchArticles = (sort_by, order, topic, limit) => {
-    api
-      .getArticles(sort_by, order, topic, limit)
-      .then(({ data: { articles } }) => {
-        if (!topic) {
-          this.setState({ isLoading: false, highestRatedArticles: articles });
+  useEffect(() => {
+    Promise.all([
+      api.getArticles("votes", "desc", undefined, undefined, 3),
+      api.getTopics(),
+    ])
+      .then(
+        ([
+          {
+            data: { articles },
+          },
+          {
+            data: { topics },
+          },
+        ]) => {
+          setState({ articles, topics, isLoading: false });
         }
-        if (topic === "coding") {
-          this.setState({ isLoading: false, codingArticles: articles });
-        }
-        if (topic === "football") {
-          this.setState({ isLoading: false, footballArticles: articles });
-        }
-        if (topic === "cooking") {
-          this.setState({ isLoading: false, cookingArticles: articles });
-        }
-      })
-      .catch(err => {
-        this.setState({ err: true });
+      )
+      .catch(({ response }) => {
+        errorStore.err = { status: response.status, msg: response.data.msg };
       });
-  };
-}
+  }, [setState]);
+
+  return (
+    <main>
+      <h2>Popular Articles</h2>
+      {state.isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {state.articles.map((article) => {
+            return (
+              <li key={article.article_id}>
+                <Link to={`/articles/${article.article_id}`}>
+                  <h3>{article.title}</h3>
+                </Link>
+                <p>{article.body.slice(0, 100)} ...</p>
+                <div>
+                  <p>Comments: {article.comment_count} 💬</p>
+                  <p>votes: {article.votes}</p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      <h2>Hot Topics!</h2>
+      {state.isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {state.topics.slice(0, 3).map((topic) => {
+            return (
+              <Link to={`/topics/articles/${topic.slug}`} key={topic.slug}>
+                <li>
+                  <h2>{topic.slug}</h2>
+                  <p>{topic.description}</p>
+                  <p>{topic.article_count} articles!</p>
+                </li>
+              </Link>
+            );
+          })}
+        </ul>
+      )}
+    </main>
+  );
+};
 
 export default HomePage;

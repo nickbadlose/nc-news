@@ -19,7 +19,13 @@ const SideBar = () => {
             {topics.map((topic) => {
               return (
                 <Link to={`/topics/articles/${topic.slug}`} key={topic.slug}>
-                  <li>{topic.slug}</li>
+                  <li>
+                    {topic.slug.length > 20 ? (
+                      <p>{topic.slug.slice(0, 20)}...</p>
+                    ) : (
+                      topic.slug
+                    )}
+                  </li>
                 </Link>
               );
             })}
