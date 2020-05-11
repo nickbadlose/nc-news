@@ -1,149 +1,126 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef } from "react";
 import * as api from "../api";
 import { userStore } from "../stores/userinfo";
 import UserArticleTile from "./UserArticleTile";
 import UserCommentTile from "./UserCommentTile";
-import ErrorPage from "./ErrorPage";
+import { useImmer } from "use-immer";
+import { errorStore } from "../stores/error";
 
-class UserPage extends Component {
-  state = {
+const UserPage = ({ username }) => {
+  const isMounted = useRef(true);
+  const [state, setState] = useImmer({
     articles: [],
     comments: [],
     isLoading: true,
     err: null,
     toggleComments: false,
     toggleArticles: false,
-  };
-  render() {
-    const { username } = this.props;
-    const {
-      articles,
-      comments,
-      isLoading,
-      err,
-      toggleArticles,
-      toggleComments,
-    } = this.state;
-    return (
-      <main>
-        {err ? (
-          <ErrorPage />
-        ) : (
-          <>
-            <h2 className="articlesHeader">
-              {userStore.username === username
-                ? `Welcome ${username}`
-                : `Profile - ${username}`}
-            </h2>
-            {isLoading ? (
-              <p> Loading...</p>
-            ) : (
-              <>
-                <h3>
-                  {" "}
-                  Total contributions - {articles.length + comments.length}
-                </h3>
-                <article>
-                  {userStore.username === username ? (
-                    <h3>Your Articles</h3>
-                  ) : (
-                    <h3>{username}'s Articles</h3>
-                  )}
-                  <ul>
-                    {toggleArticles
-                      ? articles.map((article) => {
-                          return (
-                            <UserArticleTile
-                              {...article}
-                              key={article.article_id}
-                            />
-                          );
-                        })
-                      : articles.slice(0, 3).map((article) => {
-                          return (
-                            <UserArticleTile
-                              {...article}
-                              key={article.article_id}
-                            />
-                          );
-                        })}
-                  </ul>
-                  <button
-                    onClick={(e) => this.handleClick(e, "toggleArticles")}
-                  >
-                    {toggleArticles ? "Show less" : "Show all articles"}
-                  </button>
-                </article>
-                <article>
-                  {userStore.username === username ? (
-                    <h3>Your Comments</h3>
-                  ) : (
-                    <h3>{username}'s Comments</h3>
-                  )}
-                  <ul>
-                    {toggleComments
-                      ? comments.map((comment) => {
-                          return (
-                            <UserCommentTile
-                              {...comment}
-                              key={comment.comment_id}
-                            />
-                          );
-                        })
-                      : comments.slice(0, 3).map((comment) => {
-                          return (
-                            <UserCommentTile
-                              {...comment}
-                              key={comment.comment_id}
-                            />
-                          );
-                        })}
-                  </ul>
-                  <button
-                    onClick={(e) => this.handleClick(e, "toggleComments")}
-                  >
-                    {toggleComments ? "Show less" : "Show all comments"}
-                  </button>
-                </article>
-              </>
-            )}
-          </>
-        )}
-      </main>
-    );
-  }
+  });
 
-  componentDidMount() {
-    this.fetchArticles();
-    this.fetchComments();
-  }
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
-  fetchArticles = () => {
-    api
-      .getArticles(
+  useEffect(() => {
+    Promise.all([
+      api.getArticles(
         undefined,
         undefined,
         undefined,
         undefined,
-        undefined,
-        this.props.username
-      )
-      .then(({ data: { articles } }) => {
-        this.setState({ articles, isLoading: false });
+        100,
+        username
+      ),
+      api.getComments(username),
+    ])
+      .then(([{ data }, comments]) => {
+        if (isMounted.current) {
+          setState((current) => {
+            current.comments = comments;
+            current.articles = data.articles;
+            current.isLoading = false;
+          });
+        }
+      })
+      .catch(({ response }) => {
+        errorStore.err = { status: response.status, msg: response.data.msg };
       });
-  };
+  }, [username, setState]);
 
-  fetchComments = () => {
-    api.getComments(this.props.username).then((comments) => {
-      this.setState({ comments, isLoading: false });
+  const handleClick = (e, input) => {
+    setState((current) => {
+      current[input] = !current[input];
     });
   };
 
-  handleClick = (e, input) => {
-    this.setState((currentState) => {
-      return { [input]: !currentState[input] };
-    });
-  };
-}
+  return (
+    <main>
+      <h2>
+        {userStore.username === username
+          ? `Welcome ${username}`
+          : `Profile - ${username}`}
+      </h2>
+      {state.isLoading ? (
+        <p> Loading...</p>
+      ) : (
+        <>
+          <h3>
+            {" "}
+            Total contributions -{" "}
+            {state.articles.length + state.comments.length}
+          </h3>
+          <article>
+            {userStore.username === username ? (
+              <h3>Your Articles</h3>
+            ) : (
+              <h3>{username}'s Articles</h3>
+            )}
+            <ul>
+              {state.toggleArticles
+                ? state.articles.map((article) => {
+                    return (
+                      <UserArticleTile {...article} key={article.article_id} />
+                    );
+                  })
+                : state.articles.slice(0, 3).map((article) => {
+                    return (
+                      <UserArticleTile {...article} key={article.article_id} />
+                    );
+                  })}
+            </ul>
+            <button onClick={(e) => handleClick(e, "toggleArticles")}>
+              {state.toggleArticles ? "Show less" : "Show all articles"}
+            </button>
+          </article>
+          <article>
+            {userStore.username === username ? (
+              <h3>Your Comments</h3>
+            ) : (
+              <h3>{username}'s Comments</h3>
+            )}
+            <ul>
+              {state.toggleComments
+                ? state.comments.map((comment) => {
+                    return (
+                      <UserCommentTile {...comment} key={comment.comment_id} />
+                    );
+                  })
+                : state.comments.slice(0, 3).map((comment) => {
+                    return (
+                      <UserCommentTile {...comment} key={comment.comment_id} />
+                    );
+                  })}
+            </ul>
+            <button onClick={(e) => handleClick(e, "toggleComments")}>
+              {state.toggleComments ? "Show less" : "Show all comments"}
+            </button>
+          </article>
+        </>
+      )}
+    </main>
+  );
+};
 
 export default UserPage;

@@ -1,35 +1,24 @@
-import React, { Component } from "react";
-// import { userStore } from "../stores/userinfo";
+import React from "react";
+import { useForm } from "../hooks";
 
-class EditArticleForm extends Component {
-  state = {
-    body: this.props.body,
-  };
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          <textarea
-            className="postCommentBody"
-            type="text"
-            value={this.state.body}
-            onChange={(e) => this.handleChange(e, "body")}
-            required
-          />
-        </label>
-        <button>update</button>
-      </form>
-    );
-  }
-
-  handleChange = (e, input) => {
-    this.setState({ [input]: e.target.value });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.editArticle(this.state.body);
-  };
-}
+const EditArticleForm = ({ editArticle, body }) => {
+  const { form, handleEditArticle, handleChange } = useForm(
+    { body },
+    editArticle
+  );
+  return (
+    <form onSubmit={handleEditArticle}>
+      <label>
+        <textarea
+          type="text"
+          value={form.body}
+          onChange={(e) => handleChange(e, "body")}
+          required
+        />
+      </label>
+      <button>update</button>
+    </form>
+  );
+};
 
 export default EditArticleForm;

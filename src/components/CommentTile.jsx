@@ -1,10 +1,106 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect, useRef } from "react";
 import { formatDate } from "../utils/utils";
 import IncrementVotes from "./IncrementVotes";
 import { userStore } from "../stores/userinfo";
 import * as api from "../api";
+import { errorStore } from "../stores/error";
 
-class CommentTile extends Component {
+const useComments = (body) => {
+  const isMounted = useRef(true);
+  const [state, setState] = useState({ editingComment: false, body });
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  const handleChange = (e, input) => {
+    setState({ ...state, [input]: e.target.value });
+  };
+
+  const editComment = (e, newBody, comment_id) => {
+    e.preventDefault();
+    if (!state.editingComment) {
+      setState({ ...state, editingComment: !state.editingComment });
+    } else {
+      api
+        .patchCommentById(comment_id, undefined, newBody)
+        .then(({ body }) => {
+          if (isMounted.current) {
+            setState({ body, editingComment: !state.editingComment });
+          }
+        })
+        .catch(({ response }) => {
+          errorStore.err = {
+            status: response.status,
+            msg: response.data.msg,
+          };
+        });
+    }
+  };
+
+  return { state, handleChange, editComment };
+};
+
+// maybe useForm with handleEditComment and do this like so...
+
+const CommentTile = ({
+  body,
+  author,
+  created_at,
+  comment_id,
+  votes,
+  deleteCommentById,
+}) => {
+  const { state, handleChange, editComment } = useComments(body);
+  const { date, time } = formatDate(created_at);
+
+  return (
+    <li>
+      <form>
+        <article>
+          {state.editingComment ? (
+            <textarea
+              type="text"
+              value={state.body}
+              onChange={(e) => handleChange(e, "body")}
+              required
+            />
+          ) : (
+            <p>{state.body}</p>
+          )}
+        </article>
+
+        <IncrementVotes
+          votes={votes}
+          id={comment_id}
+          api={api.patchCommentById}
+        />
+        <p>
+          Posted by {author} on {date} at {time}
+        </p>
+        {userStore.username === author && (
+          <span>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                return deleteCommentById(comment_id);
+              }}
+            >
+              Delete comment
+            </button>
+            <button onClick={(e) => editComment(e, state.body, comment_id)}>
+              {state.editingComment ? "Update" : "Edit"}
+            </button>
+          </span>
+        )}
+      </form>
+    </li>
+  );
+};
+
+class updatingCommentTile extends Component {
   state = {
     editingComment: false,
     body: this.props.body,

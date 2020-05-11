@@ -5,8 +5,9 @@ import { articlesStore } from "../stores/articles";
 import throttle from "lodash.throttle";
 import { navigate } from "@reach/router";
 import { useImmerReducer } from "use-immer";
+import { userStore } from "../stores/userinfo";
 
-export const useForm = (initialForm) => {
+export const useForm = (initialForm, submit) => {
   const [form, setForm] = useState(initialForm);
 
   const handleChange = (e, input) => {
@@ -26,7 +27,49 @@ export const useForm = (initialForm) => {
       });
   };
 
-  return { form, handleChange, handleSubmit };
+  const handleEditArticle = (e) => {
+    e.preventDefault();
+    submit(form.body);
+  };
+
+  const handlePostComment = (e, article_id) => {
+    e.preventDefault();
+    api
+      .postCommentByArticleId(article_id, {
+        username: userStore.username,
+        body: form.body,
+      })
+      .then(() => {
+        setForm(initialForm);
+        api
+          .getCommentsByArticleId(article_id)
+          .then(({ data: { comments } }) => {
+            submit({ type: "post-comment" });
+            submit({ type: "fetch-comments", comments });
+          })
+          .catch(({ response }) => {
+            console.log(response);
+            submit({
+              type: "err",
+              err: {
+                status: response.status,
+                msg: response.data.msg,
+              },
+            });
+          });
+      })
+      .catch(({ response }) => {
+        errorStore.err = { status: response.status, msg: response.data.msg };
+      });
+  };
+
+  return {
+    form,
+    handleChange,
+    handleSubmit,
+    handleEditArticle,
+    handlePostComment,
+  };
 };
 
 export const useTopics = () => {
@@ -252,6 +295,84 @@ export const useArticlesAndScroll = (topic) => {
 //     };
 //   }, [handleScroll]);
 // };
+
+export const useArticleAndCommentsAndScroll = (
+  article_id,
+  toggle,
+  reducer,
+  initialState
+) => {
+  const isMounted = useRef(true);
+  const [state, dispatch] = useImmerReducer(reducer, initialState);
+
+  const handleScroll = throttle((e) => {
+    if (state.maxPage !== state.page && toggle && !state.isLoading) {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 50
+      ) {
+        dispatch({
+          type: "next-page",
+        });
+      }
+    }
+  }, 1000);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
+
+  useEffect(() => {
+    api.getArticleById(article_id).then(({ data: { article } }) => {
+      const maxPage = Math.ceil(article.comment_count / 10);
+      if (isMounted.current) {
+        dispatch({ type: "fetch-article", article, maxPage });
+      }
+    });
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, [article_id, dispatch]);
+
+  useEffect(() => {
+    api
+      .getCommentsByArticleId(
+        article_id,
+        state.sort_by,
+        state.order,
+        state.page
+      )
+      .then(({ data: { comments } }) => {
+        if (isMounted.current) {
+          state.page === 1
+            ? dispatch({ type: "fetch-comments", comments })
+            : dispatch({
+                type: "update-comments",
+                comments,
+              });
+        }
+      })
+      .catch(({ response }) => {
+        dispatch({
+          type: "err",
+          err: {
+            status: response.status,
+            msg: response.data.msg,
+          },
+        });
+      });
+  }, [article_id, state.sort_by, state.order, state.page, dispatch]);
+
+  return {
+    state,
+    isMounted,
+    dispatch,
+  };
+};
 
 export const useToggle = () => {
   const [toggle, setToggle] = useState(false);

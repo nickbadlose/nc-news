@@ -1,298 +1,235 @@
-import React, { Component } from "react";
+import React from "react";
 import * as api from "../api";
-import ArticleComments from "./ArticleComments";
+import CommentTile from "./CommentTile";
 import { formatDate } from "../utils/utils";
 import IncrementVotes from "./IncrementVotes";
 import PostCommentForm from "./PostCommentForm";
 import FilterForm from "./FilterForm";
-import ToggleButton from "./ToggleButton";
-import ErrorPage from "./ErrorPage";
-import throttle from "lodash.throttle";
 import { userStore } from "../stores/userinfo";
 import { navigate } from "@reach/router";
 import EditArticleForm from "./EditArticleForm";
+import { errorStore } from "../stores/error";
+import { useToggle, useArticleAndCommentsAndScroll } from "../hooks";
 
-class SpecificArticle extends Component {
-  state = {
-    comments: [],
-    isLoading: true,
-    toggleComments: false,
-    commentChange: null,
-    deleteErr: null,
-    deleteComment_id: null,
-    err: null,
-    page: 1,
-    sort_by: null,
-    order: null,
-    maxPage: null,
-    editingArticle: false,
-    body: null,
-  };
-  render() {
-    const {
-      title,
-      body,
-      votes,
-      topic,
-      author,
-      created_at,
-      comment_count,
-      article_id,
-      isLoading,
-      toggleComments,
-      comments,
-      commentChange,
-      deleteErr,
-      err,
-      deleteComment_id,
-      page,
-      maxPage,
-      editingArticle,
-    } = this.state;
-    const {
-      handleButtonChange,
-      fetchCommentsByArticleId,
-      errorHandler,
-      deleteCommentById,
-      deleteArticleById,
-      editArticle,
-    } = this;
-    const { date, time } = formatDate(created_at);
-    return (
-      <main className="SpecificArticle">
-        {err ? (
-          <ErrorPage err={err} />
-        ) : (
-          <>
-            {isLoading ? (
-              <p>Loading...</p>
-            ) : (
-              <>
-                <h3 className="specificArticleHeader">
-                  {title} - {topic}
-                </h3>
-                <article className="specificArticleBody">
-                  {editingArticle ? (
-                    <EditArticleForm editArticle={editArticle} body={body} />
-                  ) : (
-                    <p>
-                      {body}
-                      {userStore.username === author && (
-                        <button onClick={editArticle}>
-                          {/* {editingArticle ? "Update" : "Edit"} */}
-                          Edit
-                        </button>
-                      )}
-                    </p>
-                  )}
-                </article>
-                <div className="specificArticleInfo">
-                  <div className="specificArticleInformation">
-                    Created by {author} on {date} at {time}
-                    {userStore.username === author && (
-                      <button onClick={deleteArticleById}>
-                        Delete article
-                      </button>
-                    )}
-                  </div>
-                  <IncrementVotes
-                    votes={votes}
-                    article_id={article_id}
-                    type="article"
-                  />
-                </div>
-                <div className="specificArticleComments">
-                  <div className="postCommentAndToggle">
-                    <PostCommentForm
-                      article_id={article_id}
-                      fetchCommentsByArticleId={fetchCommentsByArticleId}
-                      errorHandler={errorHandler}
-                    />
-                    <div className="commentsToggle">
-                      <ToggleButton
-                        handleButtonChange={handleButtonChange}
-                        buttonText={
-                          toggleComments
-                            ? `Hide comments: ${+comment_count + commentChange}`
-                            : `Show comments: ${+comment_count + commentChange}`
-                        }
-                      />
-                    </div>
-                  </div>
-                  {toggleComments && (
-                    <section className="commentsSection">
-                      <div className="FilterFormComments">
-                        <FilterForm
-                          fetchCommentsByArticleId={fetchCommentsByArticleId}
-                          article_id={article_id}
-                          article={false}
-                        />
-                      </div>
-                      <div className="ArticleComments">
-                        <ArticleComments
-                          comments={comments}
-                          deleteCommentById={deleteCommentById}
-                          err={deleteErr}
-                          deleteComment_id={deleteComment_id}
-                          errorHandler={errorHandler}
-                        />
-                        {page < maxPage && <p>Loading more comments...</p>}
-                      </div>
-                    </section>
-                  )}
-                </div>
-              </>
-            )}
-          </>
-        )}
-      </main>
-    );
+// refactor with mobx and hooks using commented out articles hook as an example. will help for comments so we don't have to pass them down
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "fetch-article":
+      state.article = action.article;
+      state.isLoading = false;
+      state.maxPage = action.maxPage;
+      return;
+    case "fetch-comments":
+      state.comments = action.comments;
+      return;
+    case "update-comments":
+      state.comments = [...state.comments, ...action.comments];
+      return;
+    case "filter":
+      state.page = 1;
+      state.sort_by = action.sort_by;
+      state.order = action.order;
+      return;
+    case "next-page":
+      state.page++;
+      return;
+    case "reset":
+      state.page = 1;
+      state.sort_by = "created_at";
+      state.order = undefined;
+      return;
+    case "post-comment":
+      state.page = 1;
+      state.sort_by = "created_at";
+      state.order = undefined;
+      state.article.comment_count++;
+      return;
+    case "delete-comment":
+      state.page = 1;
+      state.sort_by = "created_at";
+      state.order = undefined;
+      state.article.comment_count--;
+      return;
+    case "editing-article":
+      state.editingArticle = !state.editingArticle;
+      return;
+    case "update-article":
+      state.article.body = action.body;
+      state.editingArticle = !state.editingArticle;
+      return;
+    case "err":
+      errorStore.err = action.err;
+      return;
+    default:
+      return state;
   }
+};
 
-  componentDidMount() {
-    const { article_id } = this.props;
-    this.fetchArticleById(article_id);
-    this.fetchCommentsByArticleId(article_id);
+const initialState = {
+  article: {},
+  comments: [],
+  page: 1,
+  sort_by: undefined,
+  order: undefined,
+  maxPage: null,
+  isLoading: true,
+  editingArticle: false,
+};
 
-    window.addEventListener("scroll", this.handleScroll);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { page, sort_by, order } = this.state;
-    const { article_id } = this.props;
-    if (prevState.page !== page && page !== 1) {
-      this.updateCommentsByArticleId(article_id, sort_by, order, page);
-    }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
-
-  handleScroll = throttle((e) => {
-    const { page, maxPage, toggleComments, isLoading } = this.state;
-    if (maxPage !== page && toggleComments && !isLoading) {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 50
-      ) {
-        this.setState((currentState) => {
-          const newPage = currentState.page + 1;
-          return { page: newPage };
-        });
-      }
-    }
-  }, 2000);
-
-  fetchArticleById = (article_id) => {
-    api.getArticleById(article_id).then(({ data: { article } }) => {
-      const maxPage = Math.ceil(article.comment_count / 10);
-      this.setState({ ...article, isLoading: false, maxPage });
-    });
-  };
-
-  fetchCommentsByArticleId = (
+const SpecificArticle = ({ article_id }) => {
+  const { toggle, handleToggle } = useToggle();
+  const { state, isMounted, dispatch } = useArticleAndCommentsAndScroll(
     article_id,
-    sort_by,
-    order,
-    postedBoolean = false
-  ) => {
-    api
-      .getCommentsByArticleId(article_id, sort_by, order, 1)
-      .then(({ data: { comments } }) => {
-        this.setState((currentState) => {
-          return {
-            comments,
-            sort_by,
-            order,
-            page: 1,
-            isLoading: false,
-            commentChange: postedBoolean && ++currentState.commentChange,
-          };
-        });
-      })
-      .catch(({ response }) => {
-        this.setState({
-          err: { status: response.status, msg: response.data.msg },
-        });
-      });
-  };
+    toggle,
+    reducer,
+    initialState
+  );
 
-  updateCommentsByArticleId = (article_id, sort_by, order, p) => {
-    api
-      .getCommentsByArticleId(article_id, sort_by, order, p)
-      .then(({ data: { comments } }) => {
-        this.setState((currentState) => {
-          return {
-            comments: [...currentState.comments, ...comments],
-          };
-        });
-      });
-  };
+  const { date, time } = formatDate(state.article.created_at);
 
-  handleButtonChange = () => {
-    this.setState((currentState) => {
-      return { toggleComments: !currentState.toggleComments };
-    });
-  };
-
-  deleteCommentById = (comment_id) => {
-    const { comments } = this.state;
-    const initialComments = comments;
-    const filteredComments = comments.filter(
+  const deleteCommentById = (comment_id) => {
+    const filteredComments = state.comments.filter(
       (comment) => comment.comment_id !== comment_id
     );
-    this.setState((currentState) => ({
-      comments: filteredComments,
-      commentChange: --currentState.commentChange,
-      deleteErr: null,
-    }));
-    api.removeCommentById(comment_id).catch(() => {
-      this.setState((currentState) => ({
-        comments: initialComments,
-        deleteErr: true,
-        commentChange: ++currentState.commentChange,
-        deleteComment_id: comment_id,
-      }));
-    });
-  };
-
-  deleteArticleById = () => {
     api
-      .removeArticleById(this.props.article_id)
+      .removeCommentById(comment_id)
       .then(() => {
-        navigate("/articles");
+        if (isMounted.current) {
+          dispatch({ type: "delete-comment" });
+          dispatch({ type: "fetch-comments", comments: filteredComments });
+        }
       })
-      .catch(({ response: { status, statusText } }) => {
-        this.setState({
-          err: { status: status, msg: statusText },
+      .catch(({ response }) => {
+        dispatch({
+          type: "err",
+          err: {
+            status: response.status,
+            msg: response.data.msg,
+          },
         });
       });
   };
 
-  editArticle = (newBody) => {
-    const { editingArticle } = this.state;
-    if (!editingArticle) {
-      this.setState({ editingArticle: !editingArticle });
+  const deleteArticleById = () => {
+    api
+      .removeArticleById(article_id)
+      .then(() => {
+        if (isMounted.current) {
+          navigate("/articles");
+        }
+      })
+      .catch(({ response }) => {
+        dispatch({
+          type: "err",
+          err: {
+            status: response.status,
+            msg: response.data.msg,
+          },
+        });
+      });
+  };
+
+  const editArticle = (newBody) => {
+    if (!state.editingArticle) {
+      dispatch({ type: "editing-article" });
     } else {
       api
-        .patchArticleById(this.props.article_id, undefined, newBody)
+        .patchArticleById(article_id, undefined, newBody)
         .then(({ body }) => {
-          this.setState({ body, editingArticle: !editingArticle });
+          if (isMounted.current) {
+            dispatch({ type: "update-article", body });
+          }
         })
         .catch(({ response }) => {
-          this.setState({
-            err: { status: response.status, msg: response.data.msg },
+          dispatch({
+            type: "err",
+            err: {
+              status: response.status,
+              msg: response.data.msg,
+            },
           });
         });
     }
   };
 
-  errorHandler = ({ response }) => {
-    this.setState({
-      err: { status: response.status, msg: response.data.msg },
+  const handleChange = (e) => {
+    const [sort_by, order] = e.target.value.split("/");
+    dispatch({
+      type: "filter",
+      sort_by,
+      order,
     });
   };
-}
+
+  return (
+    <main>
+      {state.isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+          <h3>
+            {state.article.title} - {state.article.topic}
+          </h3>
+          <article>
+            {state.editingArticle ? (
+              <EditArticleForm
+                editArticle={editArticle}
+                body={state.article.body}
+              />
+            ) : (
+              <p>
+                {state.article.body}
+                {userStore.username === state.article.author && (
+                  <button onClick={editArticle}>Edit</button>
+                )}
+              </p>
+            )}
+          </article>
+          Created by {state.article.author} on {date} at {time}
+          {userStore.username === state.article.author && (
+            <button onClick={deleteArticleById}>Delete article</button>
+          )}
+          <IncrementVotes
+            votes={state.article.votes}
+            id={state.article.article_id}
+            api={api.patchArticleById}
+          />
+          <PostCommentForm
+            article_id={state.article.article_id}
+            dispatch={dispatch}
+          />
+          <button onClick={handleToggle}>
+            {toggle
+              ? `Hide comments: ${+state.article.comment_count}`
+              : `Show comments: ${+state.article.comment_count}`}
+          </button>
+          {toggle && (
+            <section>
+              <FilterForm
+                handleChange={handleChange}
+                sort_by={state.sort_by}
+                order={state.order}
+                article={false}
+              />
+              <ul>
+                {state.comments.map((comment) => {
+                  return (
+                    <CommentTile
+                      {...comment}
+                      deleteCommentById={deleteCommentById}
+                      key={comment.comment_id}
+                    />
+                  );
+                })}
+              </ul>
+              {state.page < state.maxPage && <p>Loading more comments...</p>}
+            </section>
+          )}
+        </div>
+      )}
+    </main>
+  );
+};
 
 export default SpecificArticle;

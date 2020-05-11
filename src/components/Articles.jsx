@@ -1,18 +1,10 @@
 import React from "react";
 import ArticleTile from "./ArticleTile";
 import FilterForm from "./FilterForm";
-import { observer } from "mobx-react";
-import { articlesStore } from "../stores/articles";
 import { useArticlesAndScroll } from "../hooks";
 
-const Articles = observer(() => {
+const Articles = () => {
   const { state, handleChange } = useArticlesAndScroll();
-  // useArticlesAndScroll(
-  //   articlesStore.sort_by,
-  //   articlesStore.order,
-  //   articlesStore.topic,
-  //   articlesStore.page
-  // );
 
   return (
     <main>
@@ -37,6 +29,6 @@ const Articles = observer(() => {
       )}
     </main>
   );
-});
+};
 
 export default Articles;
