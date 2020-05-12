@@ -1,84 +1,78 @@
-import React, { Component } from "react";
-import ErrorMessage from "./ErrorMessage";
-import * as api from "../api";
-import { navigate } from "@reach/router";
+import React from "react";
 import { userStore } from "../stores/userinfo";
+import { useForm } from "../hooks";
+import { checkValidUser } from "../utils/utils";
+import { Link } from "@reach/router";
 
-class SignUpForm extends Component {
-  state = {
+const SignUpForm = () => {
+  const { form, setForm, handleSignUp } = useForm({
     username: "",
     name: "",
     password: "",
     avatar_url: "",
-    userExists: null,
-  };
-  render() {
-    const { username, name, password, avatar_url, userExists } = this.state;
-    const { handleChange, handleSubmit } = this;
-    return (
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:{" "}
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => handleChange(e, "username")}
-            required
-          />
-        </label>
-        <label>
-          name:{" "}
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => handleChange(e, "name")}
-            required
-          />
-        </label>
-        <label>
-          Password:{" "}
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => handleChange(e, "password")}
-            required
-          />
-        </label>
-        <label>
-          avatar url (optional):{" "}
-          <input
-            type="avatar_url"
-            value={avatar_url}
-            onChange={(e) => handleChange(e, "avatar_url")}
-          />
-        </label>
-        <button>Sign up!</button>
-        {userExists && <ErrorMessage err={userExists} />}
-      </form>
-    );
-  }
+    userExists: false,
+    userInvalid: false,
+  });
 
-  handleChange = (e, input) => {
-    this.setState({ [input]: e.target.value });
+  const handleChange = (e, input, checkUsername) => {
+    e.persist();
+    setForm((c) => {
+      c[input] = e.target.value;
+    });
+    if (checkUsername) {
+      checkValidUser(userStore.users, e.target.value)
+        ? setForm((c) => {
+            c.userExists = false;
+          })
+        : setForm((c) => {
+            c.userExists = true;
+          });
+    }
   };
 
-  handleSubmit = (e) => {
-    const { username, name, password, avatar_url } = this.state;
-    e.preventDefault();
-    this.setState({ userExists: null });
-    api
-      .postUser({ username, name, password, avatar_url })
-      .then(() => {
-        userStore.logIn(username, password);
-        navigate("/");
-      })
-      .catch((err) => {
-        this.setState({
-          userExists: { msg: "Username taken or invalid format (no spaces)!" },
-        });
-      });
-    this.setState({ username: "", name: "", password: "", avatar_url: "" });
-  };
-}
+  return (
+    <form onSubmit={handleSignUp}>
+      <label>
+        Username:{" "}
+        <input
+          type="text"
+          value={form.username}
+          onChange={(e) => handleChange(e, "username", true)}
+          required
+        />
+        {form.userExists && <p>Username taken!</p>}
+      </label>
+      <label>
+        name:{" "}
+        <input
+          type="text"
+          value={form.name}
+          onChange={(e) => handleChange(e, "name")}
+          required
+        />
+      </label>
+      <label>
+        Password:{" "}
+        <input
+          type="password"
+          value={form.password}
+          onChange={(e) => handleChange(e, "password")}
+          required
+        />
+      </label>
+      <label>
+        avatar url (optional):{" "}
+        <input
+          type="avatar_url"
+          value={form.avatar_url}
+          onChange={(e) => handleChange(e, "avatar_url")}
+        />
+      </label>
+      <button disabled={form.userExists}>Sign up!</button>
+      {form.userInvalid && <p>Username cannot contain spaces</p>}
+      <Link to="/login">Already have an account? Log in.</Link>
+    </form>
+  );
+};
 
 export default SignUpForm;

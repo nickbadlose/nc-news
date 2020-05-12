@@ -2,10 +2,10 @@ import React from "react";
 import FilterForm from "./FilterForm";
 import ArticleTile from "./ArticleTile";
 import { Link } from "@reach/router";
-import { useArticlesAndScroll } from "../hooks";
+import { useArticlesScroll } from "../hooks";
 
 const TopicsArticles = ({ topic }) => {
-  const { state, handleChange } = useArticlesAndScroll(topic);
+  const { state, handleChange } = useArticlesScroll(topic);
   return (
     <main>
       <h2>Articles - {topic}</h2>

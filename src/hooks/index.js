@@ -1,25 +1,30 @@
-import { useState, useEffect, useRef, useReducer } from "react";
+import { useState, useEffect, useRef } from "react";
 import { errorStore } from "../stores/error";
 import * as api from "../api";
 import { articlesStore } from "../stores/articles";
 import throttle from "lodash.throttle";
 import { navigate } from "@reach/router";
-import { useImmerReducer } from "use-immer";
+import { useImmerReducer, useImmer } from "use-immer";
 import { userStore } from "../stores/userinfo";
 
 export const useForm = (initialForm, submit) => {
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useImmer(initialForm);
 
-  const handleChange = (e, input) => {
-    setForm({ ...form, [input]: e.target.value });
+  const handleChange = (e, input, checkUsername) => {
+    e.persist();
+    setForm((c) => {
+      c[input] = e.target.value;
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handlePostTopic = (e) => {
     e.preventDefault();
     api
       .postTopic(form)
       .then((topic) => {
-        setForm(initialForm);
+        setForm((c) => {
+          c = initialForm;
+        });
         navigate(`/topics/articles/${topic}`);
       })
       .catch(({ response }) => {
@@ -32,6 +37,18 @@ export const useForm = (initialForm, submit) => {
     submit(form.body);
   };
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setForm((c) => {
+      c.invalidUser = false;
+    });
+    userStore.logIn(form.username, form.password).catch(() => {
+      setForm((c) => {
+        c = initialForm;
+      });
+    });
+  };
+
   const handlePostComment = (e, article_id) => {
     e.preventDefault();
     api
@@ -40,7 +57,9 @@ export const useForm = (initialForm, submit) => {
         body: form.body,
       })
       .then(() => {
-        setForm(initialForm);
+        setForm((c) => {
+          c = initialForm;
+        });
         api
           .getCommentsByArticleId(article_id)
           .then(({ data: { comments } }) => {
@@ -62,12 +81,34 @@ export const useForm = (initialForm, submit) => {
       });
   };
 
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const { username, password, avatar_url, name } = form;
+    setForm((c) => {
+      c.userInvalid = false;
+    });
+    api
+      .postUser({ username, name, password, avatar_url })
+      .then(() => {
+        userStore.logIn(username, password);
+        navigate("/");
+      })
+      .catch(() => {
+        setForm((c) => {
+          c.userInvalid = true;
+        });
+      });
+  };
+
   return {
     form,
+    setForm,
     handleChange,
-    handleSubmit,
+    handlePostTopic,
     handleEditArticle,
     handlePostComment,
+    handleLogin,
+    handleSignUp,
   };
 };
 
@@ -144,7 +185,7 @@ const reducer = (state, action) => {
   }
 };
 
-export const useArticlesAndScroll = (topic) => {
+export const useArticlesScroll = (topic) => {
   const isMounted = useRef(true);
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
@@ -295,7 +336,7 @@ export const useArticlesAndScroll = (topic) => {
 //   }, [handleScroll]);
 // };
 
-export const useArticleAndCommentsAndScroll = (
+export const useArticleCommentsScroll = (
   article_id,
   toggle,
   reducer,

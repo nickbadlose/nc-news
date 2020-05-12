@@ -1,10 +1,10 @@
 import React from "react";
 import ArticleTile from "./ArticleTile";
 import FilterForm from "./FilterForm";
-import { useArticlesAndScroll } from "../hooks";
+import { useArticlesScroll } from "../hooks";
 
 const Articles = () => {
-  const { state, handleChange } = useArticlesAndScroll();
+  const { state, handleChange } = useArticlesScroll();
 
   return (
     <main>

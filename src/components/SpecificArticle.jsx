@@ -9,7 +9,7 @@ import { userStore } from "../stores/userinfo";
 import { navigate } from "@reach/router";
 import EditArticleForm from "./EditArticleForm";
 import { errorStore } from "../stores/error";
-import { useToggle, useArticleAndCommentsAndScroll } from "../hooks";
+import { useToggle, useArticleCommentsScroll } from "../hooks";
 
 // refactor with mobx and hooks using commented out articles hook as an example. will help for comments so we don't have to pass them down
 
@@ -79,7 +79,7 @@ const initialState = {
 
 const SpecificArticle = ({ article_id }) => {
   const { toggle, handleToggle } = useToggle();
-  const { state, isMounted, dispatch } = useArticleAndCommentsAndScroll(
+  const { state, isMounted, dispatch } = useArticleCommentsScroll(
     article_id,
     toggle,
     reducer,

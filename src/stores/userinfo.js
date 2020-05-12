@@ -1,5 +1,6 @@
 import * as api from "../api";
 import { decorate, observable } from "mobx";
+import { navigate } from "@reach/router";
 
 export class UserInfo {
   constructor(
@@ -8,6 +9,7 @@ export class UserInfo {
   ) {
     this.username = initialUser;
     this.token = initialToken;
+    this.users = [];
   }
 
   logIn = (username, password) => {
@@ -16,6 +18,7 @@ export class UserInfo {
       this.token = token;
       localStorage.setItem("token", token);
       localStorage.setItem("username", username);
+      navigate("/");
     });
   };
 

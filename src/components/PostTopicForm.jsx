@@ -6,11 +6,11 @@ const PostTopicForm = () => {
   const {
     form: { slug, description },
     handleChange,
-    handleSubmit,
+    handlePostTopic,
   } = useForm({ slug: "", description: "" });
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handlePostTopic}>
       <label>
         <input
           type="text"
