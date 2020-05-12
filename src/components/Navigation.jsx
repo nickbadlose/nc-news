@@ -26,6 +26,7 @@ const Navigation = observer(() => {
           placeholder="Search"
           size="sm"
           className={styles.searchBar}
+          value={searchStore.search}
           onChange={searchStore.handleChange}
         />
         <button

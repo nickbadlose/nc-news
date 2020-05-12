@@ -4,7 +4,6 @@ import { navigate } from "@reach/router";
 export class Search {
   constructor() {
     this.search = "";
-    this.searchData = [];
   }
 
   handleChange = (e) => {

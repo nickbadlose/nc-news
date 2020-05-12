@@ -10,7 +10,7 @@ import { userStore } from "../stores/userinfo";
 export const useForm = (initialForm, submit) => {
   const [form, setForm] = useImmer(initialForm);
 
-  const handleChange = (e, input, checkUsername) => {
+  const handleChange = (e, input) => {
     e.persist();
     setForm((c) => {
       c[input] = e.target.value;
@@ -189,8 +189,6 @@ export const useArticlesScroll = (topic) => {
   const isMounted = useRef(true);
   const [state, dispatch] = useImmerReducer(reducer, initialState);
 
-  console.log(state);
-
   const handleChange = (e) => {
     const [sort_by, order] = e.target.value.split("/");
     dispatch({
@@ -203,23 +201,19 @@ export const useArticlesScroll = (topic) => {
   useEffect(() => {
     return () => {
       isMounted.current = false;
-      console.log("unmounting");
     };
   }, []);
 
   useEffect(() => {
-    console.log("reset");
     dispatch({ type: "reset" });
   }, [topic]);
 
   useEffect(() => {
-    console.log("fetching/updating ", state.sort_by, state.order, state.page);
     api
       .getArticles(state.sort_by, state.order, topic, state.page)
       .then(({ data: { articles, total_count } }) => {
         const maxPage = Math.ceil(total_count / 10);
         if (isMounted.current) {
-          console.log("updating.....");
           state.page === 1
             ? dispatch({
                 type: "fetch",
@@ -233,7 +227,6 @@ export const useArticlesScroll = (topic) => {
         }
       })
       .catch(({ response }) => {
-        console.log(response);
         dispatch({
           type: "err",
           err: {
@@ -245,13 +238,11 @@ export const useArticlesScroll = (topic) => {
   }, [state.sort_by, state.order, topic, state.page, dispatch]);
 
   const handleScroll = throttle((e) => {
-    console.log("handling scroll");
     if (state.maxPage > state.page && !state.isLoading) {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 50
       ) {
-        console.log("calling dispatch next page");
         dispatch({
           type: "next-page",
         });
