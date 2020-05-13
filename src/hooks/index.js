@@ -9,12 +9,44 @@ import { userStore } from "../stores/userinfo";
 
 export const useForm = (initialForm, submit) => {
   const [form, setForm] = useImmer(initialForm);
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   const handleChange = (e, input) => {
     e.persist();
     setForm((c) => {
       c[input] = e.target.value;
     });
+  };
+
+  const handleEditComment = (e, newBody, comment_id) => {
+    e.preventDefault();
+    if (!form.editingComment) {
+      setForm((c) => {
+        c.editingComment = true;
+      });
+    } else {
+      api
+        .patchCommentById(comment_id, undefined, newBody)
+        .then(({ body }) => {
+          if (isMounted.current) {
+            setForm((c) => {
+              return { body, editingComment: false };
+            });
+          }
+        })
+        .catch(({ response }) => {
+          errorStore.err = {
+            status: response.status,
+            msg: response.data.msg,
+          };
+        });
+    }
   };
 
   const handlePostTopic = (e) => {
@@ -25,15 +57,19 @@ export const useForm = (initialForm, submit) => {
     api
       .postTopic(form)
       .then((topic) => {
-        setForm((c) => {
-          c = initialForm;
-        });
-        navigate(`/topics/articles/${topic}`);
+        if (isMounted.current) {
+          setForm((c) => {
+            c = initialForm;
+          });
+          navigate(`/topics/articles/${topic}`);
+        }
       })
       .catch(() => {
-        setForm((c) => {
-          c.invalidTopic = true;
-        });
+        if (isMounted.current) {
+          setForm((c) => {
+            c.invalidTopic = true;
+          });
+        }
       });
   };
 
@@ -48,9 +84,11 @@ export const useForm = (initialForm, submit) => {
       c.invalidUser = false;
     });
     userStore.logIn(form.username, form.password).catch(() => {
-      setForm((c) => {
-        return { ...initialForm, invalidUser: true };
-      });
+      if (isMounted.current) {
+        setForm((c) => {
+          return { ...initialForm, invalidUser: true };
+        });
+      }
     });
   };
 
@@ -63,11 +101,13 @@ export const useForm = (initialForm, submit) => {
         author: userStore.username,
       })
       .then(({ article_id }) => {
-        setForm((c) => {
-          c.body = "";
-          c.title = "";
-        });
-        navigate(`/articles/${article_id}`);
+        if (isMounted.current) {
+          setForm((c) => {
+            c.body = "";
+            c.title = "";
+          });
+          navigate(`/articles/${article_id}`);
+        }
       })
       .catch(({ response }) => {
         errorStore.err = {
@@ -85,27 +125,26 @@ export const useForm = (initialForm, submit) => {
         body: form.body,
       })
       .then(() => {
-        setForm((c) => {
-          c = initialForm;
-        });
-        api
-          .getCommentsByArticleId(article_id)
-          .then(({ data: { comments } }) => {
-            submit({ type: "post-comment" });
-            submit({ type: "fetch-comments", comments });
-          })
-          .catch(({ response }) => {
-            submit({
-              type: "err",
-              err: {
-                status: response.status,
-                msg: response.data.msg,
-              },
-            });
-          });
+        if (isMounted.current) {
+          setForm((c) => initialForm);
+        }
+
+        return api.getCommentsByArticleId(article_id);
+      })
+      .then(({ data: { comments } }) => {
+        if (isMounted.current) {
+          submit({ type: "post-comment" });
+          submit({ type: "fetch-comments", comments });
+        }
       })
       .catch(({ response }) => {
-        errorStore.err = { status: response.status, msg: response.data.msg };
+        submit({
+          type: "err",
+          err: {
+            status: response.status,
+            msg: response.data.msg,
+          },
+        });
       });
   };
 
@@ -118,13 +157,17 @@ export const useForm = (initialForm, submit) => {
     api
       .postUser({ username, name, password, avatar_url })
       .then(() => {
-        userStore.logIn(username, password);
-        navigate("/");
+        if (isMounted.current) {
+          userStore.logIn(username, password);
+          navigate("/");
+        }
       })
       .catch(() => {
-        setForm((c) => {
-          c.userInvalid = true;
-        });
+        if (isMounted.current) {
+          setForm((c) => {
+            c.userInvalid = true;
+          });
+        }
       });
   };
 
@@ -138,6 +181,7 @@ export const useForm = (initialForm, submit) => {
     handleLogin,
     handleSignUp,
     handlePostArticle,
+    handleEditComment,
   };
 };
 
