@@ -15,7 +15,7 @@ const ArticleTile = ({
   topic,
   article_id,
 }) => {
-  const { toggle, handleToggle } = useToggle();
+  const [toggle, handleToggle] = useToggle();
   const { date, time } = formatDate(created_at);
   return (
     <li>

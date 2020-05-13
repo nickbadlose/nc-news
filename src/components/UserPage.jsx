@@ -5,6 +5,7 @@ import UserArticleTile from "./UserArticleTile";
 import UserCommentTile from "./UserCommentTile";
 import { useImmer } from "use-immer";
 import { errorStore } from "../stores/error";
+import { useToggle } from "../hooks";
 
 const UserPage = ({ username }) => {
   const isMounted = useRef(true);
@@ -12,10 +13,9 @@ const UserPage = ({ username }) => {
     articles: [],
     comments: [],
     isLoading: true,
-    err: null,
-    toggleComments: false,
-    toggleArticles: false,
   });
+  const [toggleComments, handleCommentsToggle] = useToggle();
+  const [toggleArticles, handleArticlesToggle] = useToggle();
 
   useEffect(() => {
     return () => {
@@ -49,12 +49,6 @@ const UserPage = ({ username }) => {
       });
   }, [username, setState]);
 
-  const handleClick = (e, input) => {
-    setState((current) => {
-      current[input] = !current[input];
-    });
-  };
-
   return (
     <main>
       <h2>
@@ -78,7 +72,7 @@ const UserPage = ({ username }) => {
               <h3>{username}'s Articles</h3>
             )}
             <ul>
-              {state.toggleArticles
+              {toggleArticles
                 ? state.articles.map((article) => {
                     return (
                       <UserArticleTile {...article} key={article.article_id} />
@@ -90,8 +84,8 @@ const UserPage = ({ username }) => {
                     );
                   })}
             </ul>
-            <button onClick={(e) => handleClick(e, "toggleArticles")}>
-              {state.toggleArticles ? "Show less" : "Show all articles"}
+            <button onClick={(e) => handleArticlesToggle(e, "toggleArticles")}>
+              {toggleArticles ? "Show less" : "Show all articles"}
             </button>
           </article>
           <article>
@@ -101,7 +95,7 @@ const UserPage = ({ username }) => {
               <h3>{username}'s Comments</h3>
             )}
             <ul>
-              {state.toggleComments
+              {toggleComments
                 ? state.comments.map((comment) => {
                     return (
                       <UserCommentTile {...comment} key={comment.comment_id} />
@@ -113,8 +107,8 @@ const UserPage = ({ username }) => {
                     );
                   })}
             </ul>
-            <button onClick={(e) => handleClick(e, "toggleComments")}>
-              {state.toggleComments ? "Show less" : "Show all comments"}
+            <button onClick={(e) => handleCommentsToggle(e, "toggleComments")}>
+              {toggleComments ? "Show less" : "Show all comments"}
             </button>
           </article>
         </>

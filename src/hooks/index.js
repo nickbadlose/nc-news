@@ -435,7 +435,7 @@ export const useToggle = () => {
     setToggle((toggle) => !toggle);
   };
 
-  return { toggle, handleToggle };
+  return [toggle, handleToggle];
 };
 
 export const useVotes = (id, api) => {

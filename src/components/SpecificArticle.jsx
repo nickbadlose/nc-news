@@ -81,7 +81,7 @@ const SpecificArticle = ({ article_id }) => {
     reducer,
     initialState
   );
-  const { toggle, handleToggle } = useToggle();
+  const [toggle, handleToggle] = useToggle();
   useScroll(dispatch, state.page, state.maxPage, state.isLoading, toggle);
 
   const { date, time } = formatDate(state.article.created_at);
