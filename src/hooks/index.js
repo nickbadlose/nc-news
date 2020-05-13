@@ -44,9 +44,32 @@ export const useForm = (initialForm, submit) => {
     });
     userStore.logIn(form.username, form.password).catch(() => {
       setForm((c) => {
-        c = initialForm;
+        return { ...initialForm, invalidUser: true };
       });
     });
+  };
+
+  const handlePostArticle = (e, topic) => {
+    e.preventDefault();
+    api
+      .postArticleByTopic({
+        ...form,
+        topic,
+        author: userStore.username,
+      })
+      .then(({ article_id }) => {
+        setForm((c) => {
+          c.body = "";
+          c.title = "";
+        });
+        navigate(`/articles/${article_id}`);
+      })
+      .catch(({ response }) => {
+        errorStore.err = {
+          status: response.status,
+          msg: response.data.msg,
+        };
+      });
   };
 
   const handlePostComment = (e, article_id) => {
@@ -109,6 +132,7 @@ export const useForm = (initialForm, submit) => {
     handlePostComment,
     handleLogin,
     handleSignUp,
+    handlePostArticle,
   };
 };
 

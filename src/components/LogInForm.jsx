@@ -30,7 +30,7 @@ const LogInForm = () => {
         />
       </label>
       <button>Log in</button>
-      {form.invalidUser && <p>Invalid username or password!</p>}
+      {form.invalidUser && <p>Wrong username or password!</p>}
       <Link to="/signup">Don't have an account? Sign up.</Link>
     </form>
   );

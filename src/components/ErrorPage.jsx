@@ -9,6 +9,10 @@ const ErrorPage = ({ err }) => {
       <img src={errorImg} alt="Error!" />
       <h2>{err.status}</h2>
       <h3>{err.msg ? err.msg : "Oops! Something went wrong!"}</h3>
+      <p>
+        Need to add a refresh page button saying go back or something to reset
+        error page
+      </p>
     </Main>
   );
 };

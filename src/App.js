@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Routes from "./components/Routes";
@@ -6,16 +6,23 @@ import SideBar from "./components/SideBar";
 import "./App.css";
 import { observer } from "mobx-react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect } from "react";
 import * as api from "./api";
 import { userStore } from "./stores/userinfo";
 
 const App = observer(() => {
+  const isMounted = useRef(true);
+
   useEffect(() => {
     api.fetchUsers().then((users) => {
-      userStore.users = users;
+      if (isMounted.current) {
+        userStore.users = users;
+      }
     });
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
+
   return (
     <div className="App">
       <Header />
