@@ -19,6 +19,9 @@ export const useForm = (initialForm, submit) => {
 
   const handlePostTopic = (e) => {
     e.preventDefault();
+    setForm((c) => {
+      c.invalidTopic = false;
+    });
     api
       .postTopic(form)
       .then((topic) => {
@@ -27,8 +30,10 @@ export const useForm = (initialForm, submit) => {
         });
         navigate(`/topics/articles/${topic}`);
       })
-      .catch(({ response }) => {
-        errorStore.err = { status: response.status, msg: response.data.msg };
+      .catch(() => {
+        setForm((c) => {
+          c.invalidTopic = true;
+        });
       });
   };
 
