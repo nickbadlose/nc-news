@@ -1,6 +1,8 @@
 import React from "react";
+import { useFilter } from "../hooks";
 
-const FilterForm = ({ article, handleChange, sort_by, order }) => {
+const FilterForm = ({ article, dispatch, sort_by, order }) => {
+  const { handleChange } = useFilter(dispatch);
   return (
     <form>
       <select

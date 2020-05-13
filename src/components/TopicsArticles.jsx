@@ -2,10 +2,12 @@ import React from "react";
 import FilterForm from "./FilterForm";
 import ArticleTile from "./ArticleTile";
 import { Link } from "@reach/router";
-import { useArticlesScroll } from "../hooks";
+import { useArticles, useScroll } from "../hooks";
 
 const TopicsArticles = ({ topic }) => {
-  const { state, handleChange } = useArticlesScroll(topic);
+  const { state, dispatch } = useArticles(topic);
+  useScroll(dispatch, state.page, state.maxPage, state.isLoading, true);
+
   return (
     <main>
       <h2>Articles - {topic}</h2>
@@ -13,7 +15,7 @@ const TopicsArticles = ({ topic }) => {
         <button>Post an article about this topic?</button>
       </Link>
       <FilterForm
-        handleChange={handleChange}
+        dispatch={dispatch}
         article={true}
         sort_by={state.sort_by}
         order={state.order}
@@ -27,6 +29,12 @@ const TopicsArticles = ({ topic }) => {
               return <ArticleTile {...article} key={article.article_id} />;
             })}
           </ul>
+          {!state.articles.length && (
+            <p>
+              There's currently no articles about {topic} be the first to post
+              one!
+            </p>
+          )}
           {state.page < state.maxPage && <p>Loading more articles...</p>}
         </article>
       )}

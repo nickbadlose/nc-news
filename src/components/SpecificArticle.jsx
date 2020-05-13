@@ -9,9 +9,7 @@ import { userStore } from "../stores/userinfo";
 import { navigate } from "@reach/router";
 import EditArticleForm from "./EditArticleForm";
 import { errorStore } from "../stores/error";
-import { useToggle, useArticleCommentsScroll } from "../hooks";
-
-// refactor with mobx and hooks using commented out articles hook as an example. will help for comments so we don't have to pass them down
+import { useToggle, useSpecificArticle, useScroll } from "../hooks";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -52,11 +50,11 @@ const reducer = (state, action) => {
       state.article.comment_count--;
       return;
     case "editing-article":
-      state.editingArticle = !state.editingArticle;
+      state.editingArticle = true;
       return;
     case "update-article":
       state.article.body = action.body;
-      state.editingArticle = !state.editingArticle;
+      state.editingArticle = false;
       return;
     case "err":
       errorStore.err = action.err;
@@ -78,13 +76,13 @@ const initialState = {
 };
 
 const SpecificArticle = ({ article_id }) => {
-  const { toggle, handleToggle } = useToggle();
-  const { state, isMounted, dispatch } = useArticleCommentsScroll(
+  const { state, isMounted, dispatch } = useSpecificArticle(
     article_id,
-    toggle,
     reducer,
     initialState
   );
+  const { toggle, handleToggle } = useToggle();
+  useScroll(dispatch, state.page, state.maxPage, state.isLoading, toggle);
 
   const { date, time } = formatDate(state.article.created_at);
 
@@ -130,38 +128,6 @@ const SpecificArticle = ({ article_id }) => {
       });
   };
 
-  const editArticle = (newBody) => {
-    if (!state.editingArticle) {
-      dispatch({ type: "editing-article" });
-    } else {
-      api
-        .patchArticleById(article_id, undefined, newBody)
-        .then(({ body }) => {
-          if (isMounted.current) {
-            dispatch({ type: "update-article", body });
-          }
-        })
-        .catch(({ response }) => {
-          dispatch({
-            type: "err",
-            err: {
-              status: response.status,
-              msg: response.data.msg,
-            },
-          });
-        });
-    }
-  };
-
-  const handleChange = (e) => {
-    const [sort_by, order] = e.target.value.split("/");
-    dispatch({
-      type: "filter",
-      sort_by,
-      order,
-    });
-  };
-
   return (
     <main>
       {state.isLoading ? (
@@ -174,14 +140,17 @@ const SpecificArticle = ({ article_id }) => {
           <article>
             {state.editingArticle ? (
               <EditArticleForm
-                editArticle={editArticle}
+                dispatch={dispatch}
                 body={state.article.body}
+                article_id={article_id}
               />
             ) : (
               <p>
                 {state.article.body}
                 {userStore.username === state.article.author && (
-                  <button onClick={editArticle}>Edit</button>
+                  <button onClick={() => dispatch({ type: "editing-article" })}>
+                    Edit
+                  </button>
                 )}
               </p>
             )}
@@ -207,7 +176,7 @@ const SpecificArticle = ({ article_id }) => {
           {toggle && (
             <section>
               <FilterForm
-                handleChange={handleChange}
+                dispatch={dispatch}
                 sort_by={state.sort_by}
                 order={state.order}
                 article={false}

@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { errorStore } from "../stores/error";
 import * as api from "../api";
-import { articlesStore } from "../stores/articles";
 import throttle from "lodash.throttle";
 import { navigate } from "@reach/router";
 import { useImmerReducer, useImmer } from "use-immer";
 import { userStore } from "../stores/userinfo";
 
-export const useForm = (initialForm, submit) => {
+export const useForm = (initialForm, dispatch) => {
   const [form, setForm] = useImmer(initialForm);
   const isMounted = useRef(true);
 
@@ -73,9 +72,24 @@ export const useForm = (initialForm, submit) => {
       });
   };
 
-  const handleEditArticle = (e) => {
+  const handleEditArticle = (e, article_id) => {
     e.preventDefault();
-    submit(form.body);
+    api
+      .patchArticleById(article_id, undefined, form.body)
+      .then(({ body }) => {
+        if (isMounted.current) {
+          dispatch({ type: "update-article", body });
+        }
+      })
+      .catch(({ response }) => {
+        dispatch({
+          type: "err",
+          err: {
+            status: response.status,
+            msg: response.data.msg,
+          },
+        });
+      });
   };
 
   const handleLogin = (e) => {
@@ -94,6 +108,10 @@ export const useForm = (initialForm, submit) => {
 
   const handlePostArticle = (e, topic) => {
     e.preventDefault();
+    setForm((c) => {
+      c.body = "";
+      c.title = "";
+    });
     api
       .postArticleByTopic({
         ...form,
@@ -101,13 +119,7 @@ export const useForm = (initialForm, submit) => {
         author: userStore.username,
       })
       .then(({ article_id }) => {
-        if (isMounted.current) {
-          setForm((c) => {
-            c.body = "";
-            c.title = "";
-          });
-          navigate(`/articles/${article_id}`);
-        }
+        navigate(`/articles/${article_id}`);
       })
       .catch(({ response }) => {
         errorStore.err = {
@@ -119,26 +131,23 @@ export const useForm = (initialForm, submit) => {
 
   const handlePostComment = (e, article_id) => {
     e.preventDefault();
+    setForm((c) => initialForm);
     api
       .postCommentByArticleId(article_id, {
         username: userStore.username,
         body: form.body,
       })
       .then(() => {
-        if (isMounted.current) {
-          setForm((c) => initialForm);
-        }
-
         return api.getCommentsByArticleId(article_id);
       })
       .then(({ data: { comments } }) => {
         if (isMounted.current) {
-          submit({ type: "post-comment" });
-          submit({ type: "fetch-comments", comments });
+          dispatch({ type: "post-comment" });
+          dispatch({ type: "fetch-comments", comments });
         }
       })
       .catch(({ response }) => {
-        submit({
+        dispatch({
           type: "err",
           err: {
             status: response.status,
@@ -217,7 +226,7 @@ export const useTopics = () => {
   };
 };
 
-const initialState = {
+const articlesInitialState = {
   articles: [],
   page: 1,
   order: undefined,
@@ -226,7 +235,7 @@ const initialState = {
   isLoading: true,
 };
 
-const reducer = (state, action) => {
+const articlesReducer = (state, action) => {
   switch (action.type) {
     case "fetch":
       state.maxPage = action.maxPage;
@@ -258,18 +267,12 @@ const reducer = (state, action) => {
   }
 };
 
-export const useArticlesScroll = (topic) => {
+export const useArticles = (topic) => {
   const isMounted = useRef(true);
-  const [state, dispatch] = useImmerReducer(reducer, initialState);
-
-  const handleChange = (e) => {
-    const [sort_by, order] = e.target.value.split("/");
-    dispatch({
-      type: "filter",
-      sort_by,
-      order,
-    });
-  };
+  const [state, dispatch] = useImmerReducer(
+    articlesReducer,
+    articlesInitialState
+  );
 
   useEffect(() => {
     return () => {
@@ -279,7 +282,7 @@ export const useArticlesScroll = (topic) => {
 
   useEffect(() => {
     dispatch({ type: "reset" });
-  }, [topic]);
+  }, [topic, dispatch]);
 
   useEffect(() => {
     api
@@ -310,114 +313,41 @@ export const useArticlesScroll = (topic) => {
       });
   }, [state.sort_by, state.order, topic, state.page, dispatch]);
 
-  const handleScroll = throttle((e) => {
-    if (state.maxPage > state.page && !state.isLoading) {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 50
-      ) {
-        dispatch({
-          type: "next-page",
-        });
-      }
-    }
-  }, 1000);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [handleScroll]);
-
-  return { state, handleChange };
+  return { state, dispatch };
 };
 
-// export const useArticlesAndScroll = (sort_by, order, topic, page) => {
-//   const isMounted = useRef(true);
+export const useFilter = (dispatch) => {
+  const handleChange = (e) => {
+    const [sort_by, order] = e.target.value.split("/");
+    dispatch({
+      type: "filter",
+      sort_by,
+      order,
+    });
+  };
 
-//   useEffect(() => {
-//     return () => {
-//       isMounted.current = false;
-//       articlesStore.initialiseState();
-//     };
-//   }, []);
+  return { handleChange };
+};
 
-//   useEffect(() => {
-//     // articlesStore.page = 1;
-
-//     api
-//       .getArticles(sort_by, order, topic, 1)
-//       .then(({ data: { articles, total_count } }) => {
-//         const maxPage = Math.ceil(total_count / 10);
-//         if (isMounted.current) {
-//           articlesStore.articles = articles;
-//           articlesStore.maxPage = maxPage;
-//           articlesStore.isLoading = false;
-//         }
-//       })
-//       .catch(({ response }) => {
-//         errorStore.err = {
-//           status: response.status,
-//           msg: response.data.msg,
-//         };
-//       });
-//   }, [sort_by, order, topic]);
-
-//   useEffect(() => {
-//     if (page !== 1) {
-//       api
-//         .getArticles(
-//           articlesStore.sort_by,
-//           articlesStore.order,
-//           articlesStore.topic,
-//           articlesStore.page
-//         )
-//         .then(({ data: { articles } }) => {
-//           if (isMounted.current) {
-//             articlesStore.articles = [...articlesStore.articles, ...articles];
-//           }
-//         });
-//     }
-//   }, [page]);
-
-//   const handleScroll = throttle((e) => {
-//     if (articlesStore.maxPage !== page && !articlesStore.isLoading) {
-//       if (
-//         window.innerHeight + window.scrollY >=
-//         document.body.offsetHeight - 50
-//       ) {
-//         articlesStore.page = page + 1;
-//       }
-//     }
-//   }, 1000);
-
-//   useEffect(() => {
-//     window.addEventListener("scroll", handleScroll);
-//     return () => {
-//       window.removeEventListener("scroll", handleScroll);
-//     };
-//   }, [handleScroll]);
-// };
-
-export const useArticleCommentsScroll = (
-  article_id,
-  toggle,
-  reducer,
-  initialState
-) => {
+export const useScroll = (dispatch, page, maxPage, isLoading, toggle) => {
   const isMounted = useRef(true);
-  const [state, dispatch] = useImmerReducer(reducer, initialState);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   const handleScroll = throttle((e) => {
-    if (state.maxPage !== state.page && toggle && !state.isLoading) {
+    if (maxPage > page && toggle && !isLoading) {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 50
       ) {
-        dispatch({
-          type: "next-page",
-        });
+        isMounted.current &&
+          dispatch({
+            type: "next-page",
+          });
       }
     }
   }, 1000);
@@ -428,6 +358,25 @@ export const useArticleCommentsScroll = (
       window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
+
+  // const handleScroll = throttle((e) => {
+  //   if (maxPage > page && !isLoading) {
+  //     if (
+  //       window.innerHeight + window.scrollY >=
+  //       document.body.offsetHeight - 50
+  //     ) {
+  //       isMounted.current &&
+  //         dispatch({
+  //           type: "next-page",
+  //         });
+  //     }
+  //   }
+  // }, 1000);
+};
+
+export const useSpecificArticle = (article_id, reducer, initialState) => {
+  const isMounted = useRef(true);
+  const [state, dispatch] = useImmerReducer(reducer, initialState);
 
   useEffect(() => {
     api.getArticleById(article_id).then(({ data: { article } }) => {
@@ -438,6 +387,7 @@ export const useArticleCommentsScroll = (
     });
 
     return () => {
+      console.log("unmounting");
       isMounted.current = false;
     };
   }, [article_id, dispatch]);

@@ -1,17 +1,18 @@
 import React from "react";
 import ArticleTile from "./ArticleTile";
 import FilterForm from "./FilterForm";
-import { useArticlesScroll } from "../hooks";
+import { useArticles, useScroll } from "../hooks";
 
 const Articles = () => {
-  const { state, handleChange } = useArticlesScroll();
+  const { state, dispatch } = useArticles();
+  useScroll(dispatch, state.page, state.maxPage, state.isLoading, true);
 
   return (
     <main>
       <h2>Articles</h2>
       <FilterForm
         article={true}
-        handleChange={handleChange}
+        dispatch={dispatch}
         sort_by={state.sort_by}
         order={state.order}
       />

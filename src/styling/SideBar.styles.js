@@ -13,7 +13,7 @@ export const StyledSidebar = styled.div`
   // border-left: 1px solid ${(props) => props.theme.borderC};
   // height: calc(100vh - 8rem);
   // top: 8rem;
-  // overflow: scroll;
+  overflow: hidden;
 
   .spinner {
     margin-top: 5rem;

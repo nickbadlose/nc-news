@@ -1,13 +1,10 @@
 import React from "react";
 import { useForm } from "../hooks";
 
-const EditArticleForm = ({ editArticle, body }) => {
-  const { form, handleEditArticle, handleChange } = useForm(
-    { body },
-    editArticle
-  );
+const EditArticleForm = ({ dispatch, body, article_id }) => {
+  const { form, handleEditArticle, handleChange } = useForm({ body }, dispatch);
   return (
-    <form onSubmit={handleEditArticle}>
+    <form onSubmit={(e) => handleEditArticle(e, article_id)}>
       <label>
         <textarea
           type="text"
