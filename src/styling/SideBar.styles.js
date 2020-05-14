@@ -22,7 +22,7 @@ export const StyledSidebar = styled.div`
 
   h2 {
     color: ${(props) => props.theme.headerC};
-    margin: 10px 0px 0px 0px;
+    margin: 1rem 0px 0px 0px;
     display: flex;
     flex-direction: column;
 
@@ -32,7 +32,7 @@ export const StyledSidebar = styled.div`
       width: 90%;
       display: block;
       background-color: ${(props) => props.theme.borderC};
-      margin: 20px 0px;
+      margin: 1rem 0px;
       align-self: center;
     }
   }

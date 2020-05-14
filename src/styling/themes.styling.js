@@ -4,3 +4,5 @@ export const mainTheme = {
   headerC: "rgba(0, 0, 0, 0.8)",
   borderC: "rgba(52, 52, 52, 0.4)",
 };
+
+export const loggedIn = {};
