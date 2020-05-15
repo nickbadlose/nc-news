@@ -5,14 +5,18 @@ export const StyledMain = styled.main`
   flex-direction: column;
 
   h2 {
+    // background: ${(props) => props.theme.bg};
     color: ${(props) => props.theme.headerC};
     align-self: flex-start;
-    margin: 1rem;
+    margin: 1rem 1rem 0rem 0rem;
+    // width: 100%;
+    // text-align: left;
   }
 
   hr {
     // align-self: center;
-    width: 80%;
-    margin-left: 1rem;
+    background: ${(props) => props.theme.borderC};
+    // width: 80%;
+    // margin-left: 1rem;
   }
 `;

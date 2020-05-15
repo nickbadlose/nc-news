@@ -5,7 +5,8 @@ export const StyledHeader = styled.header`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #1f1f1f;
+  background-color: #0069d9;
+  // background: #dae0e6;
 
   h1 {
     color: #ffffff;

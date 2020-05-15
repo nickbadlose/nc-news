@@ -6,14 +6,37 @@ export const StyledSidebar = styled.div`
   grid-area: sidebar;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  top: 0px;
-  box-shadow: inset 7px 0px 5px -7px ${(props) => props.theme.borderC};
+  height: calc(100vh - 3.5rem - 5vw);
+  top: calc(2.5vw + 3.5rem);
+  border: 1px solid ${(props) => props.theme.borderC};
+  // box-shadow: inset 7px 0px 5px -7px ${(props) => props.theme.borderC};
+  border-radius: ${(props) => props.theme.borderR};
   // box-shadow: -2px 0px 2px ${(props) => props.theme.borderC};
   // border-left: 1px solid ${(props) => props.theme.borderC};
-  // height: calc(100vh - 8rem);
-  // top: 8rem;
   overflow: hidden;
+  scrollbar-width: none;
+  // scrollbar-color: ${(props) => props.theme.borderC} ${(props) =>
+  props.theme.bg};
+
+  ::-webkit-scrollbar {
+  width: 1px;
+  }
+ 
+  ::-webkit-scrollbar-track {
+    width: 1px;
+    // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+ 
+  ::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme.borderC};
+    outline: 1px solid ${(props) => props.theme.borderC};
+  }
+
+  :hover {
+    overflow-y: scroll;
+  }
+
+
 
   .spinner {
     margin-top: 5rem;
@@ -22,9 +45,14 @@ export const StyledSidebar = styled.div`
 
   h2 {
     color: ${(props) => props.theme.headerC};
-    margin: 1rem 0px 0px 0px;
+    background: ${(props) => props.theme.bg}; 
+    // box-shadow: inset 7px 0px 5px -7px ${(props) => props.theme.borderC};
+    // margin: 1rem 0px 0px 0px;
+    padding-top: 1rem;
     display: flex;
     flex-direction: column;
+    position: sticky;
+    top: 0px;
 
     &::after {
       content: "";
@@ -32,7 +60,8 @@ export const StyledSidebar = styled.div`
       width: 90%;
       display: block;
       background-color: ${(props) => props.theme.borderC};
-      margin: 1rem 0px;
+      // margin: 1rem 0px;
+      margin-top: 1rem ;
       align-self: center;
     }
   }
@@ -52,7 +81,7 @@ export const StyledSidebar = styled.div`
   }
 
   li {
-    padding: 0.25rem 0rem 0.5rem 1rem;
+    padding: 0.4rem 0rem 0.5rem 1rem;
     text-align: left;
   }
 

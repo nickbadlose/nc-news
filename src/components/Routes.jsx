@@ -14,10 +14,11 @@ import { observer } from "mobx-react";
 import LogInForm from "./LogInForm";
 import SignUpForm from "./SignUpForm";
 import PostArticleForm from "./PostArticleForm";
+import { mainTheme } from "../styling/themes.styling";
 
 const Routes = observer(() => {
   return (
-    <StyledRouter>
+    <StyledRouter theme={mainTheme}>
       {errorStore.err ? (
         <ErrorPage err={errorStore.err} />
       ) : (
