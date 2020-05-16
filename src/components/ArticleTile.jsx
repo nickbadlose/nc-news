@@ -29,26 +29,25 @@ const ArticleTile = ({
       <div className="main">
         <div className="articleInfo">
           {/* <div className="topicUser"> */}
-          <p>
+          <p className="topic">
             <Link to={`/topics/articles/${topic}`}>{topic}</Link>
           </p>
-          <p className="author">
-            Created by <Link to={`/${author}`}>{author}</Link> on {date} at{" "}
-            {time}
-          </p>
           {/* </div> */}
-          <p>Comments: {comment_count} 💬</p>
+          <p className="comments">Comments: {comment_count} 💬</p>
         </div>
         <Link to={`/articles/${article_id}`}>
-          <h3>{title}</h3>
+          <h3 className="title">{title}</h3>
         </Link>
-        <p>
+        <p className="body">
           {toggle || body.length < 101 ? body : body.slice(0, 100) + "..."}
           {body.length > 100 && (
             <button onClick={handleToggle}>
               {toggle ? "show less" : "show more"}
             </button>
           )}
+        </p>
+        <p className="author">
+          Created by <Link to={`/${author}`}>{author}</Link> on {date} at {time}
         </p>
       </div>
     </StyledLi>

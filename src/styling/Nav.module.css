@@ -1,7 +1,7 @@
 /*Use styled components next time*/
 
 .navBar {
-  background-color: #343434;
+  background-color: #007bff;
   /* display: flex; */
   position: sticky !important;
   top: 0px;
@@ -68,6 +68,8 @@
 
 .searchButton {
   border: none;
+  /* border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 2px; */
   background-color: inherit;
   cursor: pointer;
   display: inline-block;

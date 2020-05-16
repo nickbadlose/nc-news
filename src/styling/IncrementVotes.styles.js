@@ -5,6 +5,8 @@ export const StyledDiv = styled.div`
   padding-top: 0.25rem;
   display: flex;
   flex-direction: column;
+  background: ${(props) => props.theme.linkC};
+  color: ${(props) => props.theme.headerC};
 
   p {
     margin: 0;
@@ -12,7 +14,7 @@ export const StyledDiv = styled.div`
 
   button {
     border: none;
-    color: ${(props) => props.theme.linkC};
+    color: ${(props) => props.theme.headerC};
     background-color: inherit;
     cursor: pointer;
     outline: none;

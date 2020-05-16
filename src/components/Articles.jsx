@@ -12,14 +12,16 @@ const Articles = () => {
 
   return (
     <StyledMain theme={mainTheme}>
-      <h2>Articles</h2>
+      <div className="headerFilter">
+        <h2>Articles</h2>
+        <FilterForm
+          article={true}
+          dispatch={dispatch}
+          sort_by={state.sort_by}
+          order={state.order}
+        />
+      </div>
       <hr />
-      <FilterForm
-        article={true}
-        dispatch={dispatch}
-        sort_by={state.sort_by}
-        order={state.order}
-      />
       {state.isLoading ? (
         <Spinner animation="border" className="spinner" />
       ) : (
@@ -29,7 +31,9 @@ const Articles = () => {
               return <ArticleTile {...article} key={article.article_id} />;
             })}
           </ul>
-          {state.page < state.maxPage && <p>Loading more articles...</p>}
+          {state.page < state.maxPage && (
+            <Spinner animation="border" className="smallMarginSpinner" />
+          )}
         </article>
       )}
     </StyledMain>

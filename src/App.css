@@ -1,13 +1,15 @@
 /* @import-normalize; */
 
 .App {
-  background-color: #dae0e6;
+  /* background-color: #dae0e6; */
+  background-color: #eaeaea;
+
   text-align: center;
   font-size: 2.5vh;
   font-family: "Guardian Text Egyptian Web", Georgia, serif;
   color: rgba(0, 0, 0, 0.6);
   display: grid;
-  grid-template-columns: 8vw auto 20vw 8vw;
+  grid-template-columns: 8vw auto 160px 8vw;
   grid-template-rows: 4rem 3.5rem 2.5vw auto 2.5vw;
   grid-template-areas:
     "header header header header"

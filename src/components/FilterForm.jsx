@@ -14,6 +14,7 @@ const FilterForm = ({ article, dispatch, sort_by, order }) => {
         title="Sort by"
         // title={order ? `${sort_by}/${order}` : sort_by}
         size="sm"
+        alignRight={true}
       >
         <Dropdown.Item eventKey="created_at">Newest</Dropdown.Item>
         <Dropdown.Item eventKey="created_at/asc">Oldest</Dropdown.Item>
