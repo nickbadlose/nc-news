@@ -4,6 +4,8 @@ import { formatDate } from "../utils/utils";
 import IncrementVotes from "./IncrementVotes";
 import { useToggle } from "../hooks";
 import * as api from "../api";
+import { StyledLi } from "../styling/ArticleTile.styles";
+import { mainTheme } from "../styling/themes.styling";
 
 const ArticleTile = ({
   author,
@@ -18,30 +20,38 @@ const ArticleTile = ({
   const [toggle, handleToggle] = useToggle();
   const { date, time } = formatDate(created_at);
   return (
-    <li>
-      <Link to={`/articles/${article_id}`}>
-        <h3>
-          {title} - {topic}
-        </h3>
-      </Link>
-      <p>
-        Created by {author} on {date} at {time}
-      </p>
-      <p>
-        {toggle || body.length < 101 ? body : body.slice(0, 100) + "..."}
-        {body.length > 100 && (
-          <button onClick={handleToggle}>
-            {toggle ? "show less" : "show more"}
-          </button>
-        )}
-      </p>
-      <p>Comments: {comment_count} 💬</p>
+    <StyledLi theme={mainTheme}>
       <IncrementVotes
         votes={votes}
         id={article_id}
         api={api.patchArticleById}
       />
-    </li>
+      <div className="main">
+        <div className="articleInfo">
+          {/* <div className="topicUser"> */}
+          <p>
+            <Link to={`/topics/articles/${topic}`}>{topic}</Link>
+          </p>
+          <p className="author">
+            Created by <Link to={`/${author}`}>{author}</Link> on {date} at{" "}
+            {time}
+          </p>
+          {/* </div> */}
+          <p>Comments: {comment_count} 💬</p>
+        </div>
+        <Link to={`/articles/${article_id}`}>
+          <h3>{title}</h3>
+        </Link>
+        <p>
+          {toggle || body.length < 101 ? body : body.slice(0, 100) + "..."}
+          {body.length > 100 && (
+            <button onClick={handleToggle}>
+              {toggle ? "show less" : "show more"}
+            </button>
+          )}
+        </p>
+      </div>
+    </StyledLi>
   );
 };
 

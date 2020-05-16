@@ -1,25 +1,27 @@
 import React from "react";
 import { useVotes } from "../hooks";
+import { StyledDiv } from "../styling/IncrementVotes.styles";
+import { mainTheme } from "../styling/themes.styling";
 
 const IncrementVotes = ({ votes, id, api }) => {
   const { voteDifference, handleVotes } = useVotes(id, api);
 
   return (
-    <div>
+    <StyledDiv theme={mainTheme}>
       <button
         onClick={() => handleVotes(1)}
         disabled={voteDifference === 1 && true}
       >
         ⬆
       </button>
-      {votes + voteDifference}
+      <p>{votes + voteDifference}</p>
       <button
         onClick={() => handleVotes(-1)}
         disabled={voteDifference === -1 && true}
       >
         ⬇
       </button>
-    </div>
+    </StyledDiv>
   );
 };
 

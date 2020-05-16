@@ -19,4 +19,13 @@ export const StyledMain = styled.main`
     // width: 80%;
     // margin-left: 1rem;
   }
+
+  .spinner {
+    margin-top: ${(props) => props.theme.marginL};
+    align-self: center;
+  }
+
+  ul {
+    margin: 0px;
+  }
 `;

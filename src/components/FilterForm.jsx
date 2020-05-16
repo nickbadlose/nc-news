@@ -1,20 +1,28 @@
 import React from "react";
 import { useFilter } from "../hooks";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
+import { StyledForm } from "../styling/FilterForm.styles";
 
 const FilterForm = ({ article, dispatch, sort_by, order }) => {
-  const { handleChange } = useFilter(dispatch);
+  const { handleSelect } = useFilter(dispatch);
   return (
-    <form>
-      <select
-        onChange={(e) => handleChange(e)}
-        value={order ? `${sort_by}/${order}` : sort_by}
+    <StyledForm>
+      <DropdownButton
+        id="dropdown-basic-button"
+        onSelect={handleSelect}
+        title="Sort by"
+        // title={order ? `${sort_by}/${order}` : sort_by}
+        size="sm"
       >
-        <option value="created_at">Newest</option>
-        <option value="created_at/asc">Oldest</option>
-        <option value="votes">Popular</option>
-        {article && <option value="comment_count">Conversational</option>}
-      </select>
-    </form>
+        <Dropdown.Item eventKey="created_at">Newest</Dropdown.Item>
+        <Dropdown.Item eventKey="created_at/asc">Oldest</Dropdown.Item>
+        <Dropdown.Item eventKey="votes">Popular</Dropdown.Item>
+        {article && (
+          <Dropdown.Item eventKey="comment_count">Conversational</Dropdown.Item>
+        )}
+      </DropdownButton>
+    </StyledForm>
   );
 };
 

@@ -317,8 +317,8 @@ export const useArticles = (topic) => {
 };
 
 export const useFilter = (dispatch) => {
-  const handleChange = (e) => {
-    const [sort_by, order] = e.target.value.split("/");
+  const handleSelect = (eKey) => {
+    const [sort_by, order] = eKey.split("/");
     dispatch({
       type: "filter",
       sort_by,
@@ -326,7 +326,7 @@ export const useFilter = (dispatch) => {
     });
   };
 
-  return { handleChange };
+  return { handleSelect };
 };
 
 export const useScroll = (dispatch, page, maxPage, isLoading, toggle) => {

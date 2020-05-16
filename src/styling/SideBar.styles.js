@@ -36,10 +36,13 @@ export const StyledSidebar = styled.div`
     overflow-y: scroll;
   }
 
+  :focus {
+    overflow-y: scroll;
+  }
 
 
   .spinner {
-    margin-top: 5rem;
+    margin-top: ${(props) => props.theme.marginL};
     align-self: center;
   }
 

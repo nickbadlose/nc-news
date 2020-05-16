@@ -4,6 +4,7 @@ import FilterForm from "./FilterForm";
 import { useArticles, useScroll } from "../hooks";
 import { StyledMain } from "../styling/Articles.styles";
 import { mainTheme } from "../styling/themes.styling";
+import Spinner from "react-bootstrap/Spinner";
 
 const Articles = () => {
   const { state, dispatch } = useArticles();
@@ -20,7 +21,7 @@ const Articles = () => {
         order={state.order}
       />
       {state.isLoading ? (
-        <p>Loading...</p>
+        <Spinner animation="border" className="spinner" />
       ) : (
         <article>
           <ul>
