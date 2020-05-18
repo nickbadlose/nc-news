@@ -4,7 +4,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import { StyledForm } from "../styling/FilterForm.styles";
 
-const FilterForm = ({ article, dispatch, sort_by, order }) => {
+const FilterForm = ({ article, dispatch }) => {
   const { handleSelect } = useFilter(dispatch);
   return (
     <StyledForm>
@@ -12,7 +12,6 @@ const FilterForm = ({ article, dispatch, sort_by, order }) => {
         id="dropdown-basic-button"
         onSelect={handleSelect}
         title="Sort by"
-        // title={order ? `${sort_by}/${order}` : sort_by}
         size="sm"
         alignRight={true}
       >

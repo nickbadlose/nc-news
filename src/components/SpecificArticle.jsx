@@ -175,12 +175,7 @@ const SpecificArticle = ({ article_id }) => {
           </button>
           {toggle && (
             <section>
-              <FilterForm
-                dispatch={dispatch}
-                sort_by={state.sort_by}
-                order={state.order}
-                article={false}
-              />
+              <FilterForm dispatch={dispatch} article={false} />
               <ul>
                 {state.comments.map((comment) => {
                   return (

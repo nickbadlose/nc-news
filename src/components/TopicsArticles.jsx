@@ -14,12 +14,7 @@ const TopicsArticles = ({ topic }) => {
       <Link to={`/topics/articles/${topic}/post`}>
         <button>Post an article about this topic?</button>
       </Link>
-      <FilterForm
-        dispatch={dispatch}
-        article={true}
-        sort_by={state.sort_by}
-        order={state.order}
-      />
+      <FilterForm dispatch={dispatch} article={true} />
       {state.isLoading ? (
         <p>Loading...</p>
       ) : (

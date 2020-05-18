@@ -5,7 +5,6 @@ import { useTopics } from "../hooks";
 
 const Topics = () => {
   const { topics, isLoading } = useTopics();
-  console.log(topics);
 
   return (
     <main>

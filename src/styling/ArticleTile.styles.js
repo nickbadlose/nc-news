@@ -63,8 +63,9 @@ export const StyledLi = styled.li`
   }
 
   .author {
-    display: flex;
-    justify-content: flex-end;
+    // display: flex;
+    // justify-content: flex-end;
+    text-align: right;
     overflow: hidden;
     font-size: 0.8rem;
     border-top: ${(props) => props.theme.border};
