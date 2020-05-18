@@ -1,4 +1,4 @@
-export const formatDate = date => {
+export const formatDate = (date) => {
   const dateObj = {};
   if (date === undefined) {
     dateObj.date = undefined;
@@ -12,5 +12,9 @@ export const formatDate = date => {
 };
 
 export const checkValidUser = (users, username) => {
-  return users.every(user => user.username !== username);
+  return users.every((user) => user.username !== username);
+};
+
+export const formatTopic = (topic) => {
+  return topic.slice(0, 1).toUpperCase() + topic.slice(1);
 };

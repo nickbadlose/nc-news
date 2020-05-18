@@ -20,11 +20,9 @@ const SideBar = () => {
               return (
                 <Link to={`/topics/articles/${topic.slug}`} key={topic.slug}>
                   <li>
-                    {topic.slug.length > 10 ? (
-                      <p>{topic.slug.slice(0, 10)}...</p>
-                    ) : (
-                      topic.slug
-                    )}
+                    {topic.slug.length > 10
+                      ? topic.slug.slice(0, 10) + "..."
+                      : topic.slug}
                   </li>
                 </Link>
               );

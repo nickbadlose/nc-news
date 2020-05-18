@@ -54,7 +54,10 @@ export const useForm = (initialForm, dispatch) => {
       c.invalidTopic = false;
     });
     api
-      .postTopic(form)
+      .postTopic({
+        slug: form.slug.toLowerCase(),
+        description: form.description,
+      })
       .then((topic) => {
         if (isMounted.current) {
           setForm((c) => {

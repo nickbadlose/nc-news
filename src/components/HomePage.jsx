@@ -31,7 +31,7 @@ const HomePage = () => {
             data: { topics },
           },
         ]) => {
-          setState({ articles, topics, isLoading: false });
+          isMounted.current && setState({ articles, topics, isLoading: false });
         }
       )
       .catch(({ response }) => {

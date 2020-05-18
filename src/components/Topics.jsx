@@ -5,6 +5,7 @@ import { useTopics } from "../hooks";
 
 const Topics = () => {
   const { topics, isLoading } = useTopics();
+  console.log(topics);
 
   return (
     <main>
@@ -21,7 +22,11 @@ const Topics = () => {
                   <li>
                     <h2>{topic.slug}</h2>
                     <p>{topic.description}</p>
-                    <p>{topic.article_count} articles!</p>
+                    {+topic.article_count === 1 ? (
+                      <p>{topic.article_count} article!</p>
+                    ) : (
+                      <p>{topic.article_count} articles!</p>
+                    )}
                   </li>
                 </Link>
               );

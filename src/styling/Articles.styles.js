@@ -11,6 +11,13 @@ export const StyledMain = styled.main`
     margin-top: 1rem;
   }
 
+  img {
+    border-radius: 3px;
+    // height: 300px;
+    // width: 400px;
+    filter: brightness(50%);
+  }
+
   h2 {
     // background: ${(props) => props.theme.bg};
     color: ${(props) => props.theme.headerC};
