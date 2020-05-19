@@ -4,29 +4,48 @@ export const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
 
-  .headerFilter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center !important;
-    margin-top: 1rem;
+  .createLine {
+
+          &::after {
+        content: "";
+        height: 1px;
+        // width: 90%;
+        display: block;
+        background-color: ${(props) => props.theme.borderC};
+        // margin: 1rem 0px;
+        margin-top: 0.5rem ;
+        align-self: center;
+      }
+
+    .headerFilter {
+      display: flex;
+      // flex-direction: column;
+      justify-content: space-between;
+      align-items: center !important;
+      padding-top: 1rem;
+  
+      h2 {
+        // order: 1;
+        // align-self: flex-start;
+        // background: ${(props) => props.theme.bg};
+        color: ${(props) => props.theme.headerC};
+        // align-self: flex-start;
+        // margin: 1rem 1rem 0rem 0rem;
+        // width: 100%;
+        // text-align: left;
+        // margin: 0px;
+      }
+    }
   }
 
-  img {
-    border-radius: 3px;
-    // height: 300px;
-    // width: 400px;
-    filter: brightness(50%);
-  }
 
-  h2 {
-    // background: ${(props) => props.theme.bg};
-    color: ${(props) => props.theme.headerC};
-    // align-self: flex-start;
-    // margin: 1rem 1rem 0rem 0rem;
-    // width: 100%;
-    // text-align: left;
-    // margin: 0px;
-  }
+  // img {
+  //   border-radius: 3px;
+  //   // height: 300px;
+  //   // width: 400px;
+  //   filter: brightness(50%);
+  // }
+
 
   hr {
     // align-self: center;

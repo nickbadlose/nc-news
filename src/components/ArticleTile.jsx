@@ -16,6 +16,7 @@ const ArticleTile = ({
   body,
   topic,
   article_id,
+  image,
 }) => {
   const [toggle, handleToggle] = useToggle();
   const { date, time } = formatDate(created_at);
@@ -46,6 +47,7 @@ const ArticleTile = ({
             </button>
           )}
         </p>
+        <img src={image} alt={topic} height="200px" width="200px" />
         <p className="author">
           Created by <Link to={`/${author}`}>{author}</Link> on {date} at {time}
         </p>

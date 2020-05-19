@@ -4,7 +4,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import { StyledForm } from "../styling/FilterForm.styles";
 
-const FilterForm = ({ article, dispatch }) => {
+const FilterForm = ({ article, dispatch, className }) => {
   const { handleSelect } = useFilter(dispatch);
   return (
     <StyledForm>

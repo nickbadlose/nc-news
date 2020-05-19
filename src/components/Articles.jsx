@@ -9,21 +9,28 @@ import Spinner from "react-bootstrap/Spinner";
 const Articles = () => {
   const { state, dispatch } = useArticles();
   useScroll(dispatch, state.page, state.maxPage, state.isLoading, true);
-
+  console.log("render");
   return (
     <StyledMain theme={mainTheme}>
-      <div className="headerFilter">
-        <h2>Articles</h2>
-        <FilterForm article={true} dispatch={dispatch} />
+      <div className="createLine">
+        <div className="headerFilter">
+          <h2>Articles</h2>
+          <FilterForm article={true} dispatch={dispatch} className="articles" />
+        </div>
       </div>
-      <hr />
-      {state.isLoading ? (
+      {state.isLoading || state.isLoadingImages ? (
         <Spinner animation="border" className="spinner" />
       ) : (
         <article>
           <ul>
             {state.articles.map((article) => {
-              return <ArticleTile {...article} key={article.article_id} />;
+              return (
+                <ArticleTile
+                  {...article}
+                  key={article.article_id}
+                  image={state.images[article.topic]}
+                />
+              );
             })}
           </ul>
           {state.page < state.maxPage && (

@@ -21,7 +21,13 @@ const TopicsArticles = ({ topic }) => {
         <article>
           <ul>
             {state.articles.map((article) => {
-              return <ArticleTile {...article} key={article.article_id} />;
+              return (
+                <ArticleTile
+                  {...article}
+                  key={article.article_id}
+                  image={state.images[article.topic]}
+                />
+              );
             })}
           </ul>
           {!state.articles.length && (
