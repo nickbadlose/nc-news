@@ -19,7 +19,7 @@ export const StyledSidebar = styled.div`
   props.theme.bg};
 
   ::-webkit-scrollbar {
-  width: 1px;
+   width: 1px;
   }
  
   ::-webkit-scrollbar-track {

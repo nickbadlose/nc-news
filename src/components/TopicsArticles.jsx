@@ -15,19 +15,19 @@ const TopicsArticles = ({ topic }) => {
         <button>Post an article about this topic?</button>
       </Link>
       <FilterForm dispatch={dispatch} article={true} />
-      {state.isLoading ? (
+      {state.isLoading || state.isLoadingImages ? (
         <p>Loading...</p>
       ) : (
         <article>
+          <img
+            src={state.images[topic]}
+            alt={topic}
+            width="100%"
+            height="10%"
+          />
           <ul>
             {state.articles.map((article) => {
-              return (
-                <ArticleTile
-                  {...article}
-                  key={article.article_id}
-                  image={state.images[article.topic]}
-                />
-              );
+              return <ArticleTile {...article} key={article.article_id} />;
             })}
           </ul>
           {!state.articles.length && (

@@ -9,7 +9,7 @@ import Spinner from "react-bootstrap/Spinner";
 const Articles = () => {
   const { state, dispatch } = useArticles();
   useScroll(dispatch, state.page, state.maxPage, state.isLoading, true);
-  console.log("render");
+
   return (
     <StyledMain theme={mainTheme}>
       <div className="createLine">

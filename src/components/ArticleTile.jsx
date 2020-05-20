@@ -19,7 +19,7 @@ const ArticleTile = ({
   image,
 }) => {
   const [toggle, handleToggle] = useToggle();
-  const { date, time } = formatDate(created_at);
+  const { date } = formatDate(created_at);
   return (
     <StyledLi theme={mainTheme}>
       <IncrementVotes
@@ -27,30 +27,38 @@ const ArticleTile = ({
         id={article_id}
         api={api.patchArticleById}
       />
-      <div className="main">
-        <div className="articleInfo">
-          {/* <div className="topicUser"> */}
-          <p className="topic">
-            <Link to={`/topics/articles/${topic}`}>{topic}</Link>
-          </p>
-          {/* </div> */}
-          <p className="comments">Comments: {comment_count} 💬</p>
+      {image && (
+        <div className="topicImage">
+          <img src={image} alt={topic} />
         </div>
-        <Link to={`/articles/${article_id}`}>
-          <h3 className="title">{title}</h3>
-        </Link>
-        <p className="body">
-          {toggle || body.length < 101 ? body : body.slice(0, 100) + "..."}
-          {body.length > 100 && (
+      )}
+      <div className="main">
+        <div className="titleBody">
+          <Link to={`/articles/${article_id}`}>
+            <h3 className="title">{title}</h3>
+          </Link>
+          <p className="body">
+            {body}
+            {/* {toggle || body.length < 101 ? body : body.slice(0, 100) + "..."} */}
+            {/* {body.length > 100 && (
             <button onClick={handleToggle}>
               {toggle ? "show less" : "show more"}
             </button>
-          )}
-        </p>
-        <img src={image} alt={topic} height="200px" width="200px" />
-        <p className="author">
-          Created by <Link to={`/${author}`}>{author}</Link> on {date} at {time}
-        </p>
+          )} */}
+          </p>
+          <div className="fade"></div>
+        </div>
+        <div className="articleInfo">
+          <p className="author">
+            By <Link to={`/${author}`}>{author}</Link> on {date}
+          </p>
+          <div className="topicComments">
+            <p className="topic">
+              <Link to={`/topics/articles/${topic}`}>{topic}</Link>
+            </p>
+            <p className="comments">Comments: {comment_count} 💬</p>
+          </div>
+        </div>
       </div>
     </StyledLi>
   );
