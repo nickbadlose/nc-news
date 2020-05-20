@@ -8,6 +8,7 @@ export const StyledLi = styled.li`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  max-height: 130px;
 
 
   :hover {
@@ -16,18 +17,18 @@ export const StyledLi = styled.li`
 
   .topicImage {
     align-self: center;
-    min-width: 10vw;
-    min-height: 10vw;
-    max-width: 10vw;
-    max-height: 10vw;
-    width: 10vw;
-    height: 10vw;
+    min-width: 130px;
+    min-height: 130px;
+    max-width: 130px;
+    max-height: 130px;
+    width: 130px;
+    height: 130px;
 
     img {
-      min-width: 10vw;
-      min-height: 10vw;
-      max-width: 10vw;
-      max-height: 10vw;
+      min-width: 130px;
+      min-height: 130px;
+      max-width: 130px;
+      max-height: 130px;
       width: 100%;
       height: 100%;
     }
@@ -37,6 +38,7 @@ export const StyledLi = styled.li`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
 
     a {
       text-decoration: none;
@@ -46,21 +48,7 @@ export const StyledLi = styled.li`
 
     .titleBody {
       position: relative;
-
-      // background-image: linear-gradient(to bottom, transparent, white);
-      // :after {
-        // content: "";
-        // display: block;
-        // position: absolute;
-        // bottom: 0;
-        // height: 20px;
-        // height:200px;
-        // width:100%;
-        // position:fixed;
-        // bottom:0;
-        // background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(95%,rgba(0,0,0,1)));
-        // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
-      // }
+      overflow: hidden;
 
       .title {
         margin: 0rem 0.5rem;
@@ -72,16 +60,14 @@ export const StyledLi = styled.li`
         text-align: left;
       }
 
-      .fade {
-        background: black;
-        height:200px;
-        width:200px;
-        position:fixed;
-        bottom:0;
-        // z-index: 10;
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(95%,rgba(0,0,0,1)));
+      .textFader {
+        background: white;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(95%,rgba(255,255,255,1)));
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
-        // background: -webkit-linear-gradient(top, rgb(246,246,246) 17%,rgb(246,246,246) 17%,rgb(237,237,237) 33%,rgb(237,237,237) 33%,rgb(237,237,237) 47%,rgb(237,237,237) 62%,rgb(237,237,237) 62%);
       }
     }
 
@@ -94,6 +80,7 @@ export const StyledLi = styled.li`
       overflow: hidden;
       font-size: 0.8rem;
       border-top: ${(props) => props.theme.border};
+      padding: 0.2rem 0rem;
       margin: 0rem 0.5rem;
     
       .topicComments {

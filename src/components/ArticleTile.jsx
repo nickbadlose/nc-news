@@ -35,7 +35,7 @@ const ArticleTile = ({
       <div className="main">
         <div className="titleBody">
           <Link to={`/articles/${article_id}`}>
-            <h3 className="title">{title}</h3>
+            <h4 className="title">{title}</h4>
           </Link>
           <p className="body">
             {body}
@@ -46,7 +46,7 @@ const ArticleTile = ({
             </button>
           )} */}
           </p>
-          <div className="fade"></div>
+          <div className="textFader"></div>
         </div>
         <div className="articleInfo">
           <p className="author">
