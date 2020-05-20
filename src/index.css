@@ -7,6 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@-moz-document url-prefix() {
+  html {
+    font-size: 14px;
+  }
+}
+
 html {
   background-color: #eaeaea;
 }

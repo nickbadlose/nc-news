@@ -80,17 +80,19 @@ export const StyledLi = styled.li`
     .articleInfo {
       display: flex;
       justify-content: space-between;
-      // -ms-flex-align: center;
+      -ms-flex-align: center;
+      flex-wrap: no-wrap;
       align-items: center;
       overflow: hidden;
       font-size: 0.8rem;
       border-top: ${(props) => props.theme.border};
-      min-height: 20px;
+      min-height: 1.25rem;
       margin: 0rem 0.5rem;
     
       .topicComments {
         display: flex;
         flex-direction: row;
+        flex-wrap: no-wrap;
         justify-content: flex-end;
       }
     
@@ -112,6 +114,14 @@ export const StyledLi = styled.li`
     
       p {
         margin: 0rem;
+        display: flex;
+        flex-wrap: no-wrap !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .topic {
+        display: none !important;
       }
     }
   }

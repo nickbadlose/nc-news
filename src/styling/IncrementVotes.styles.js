@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const StyledDiv = styled.div`
-  // grid-area: votes;
   padding-top: 0.25rem;
   min-width: 1.5rem;
   display: flex;
