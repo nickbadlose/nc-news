@@ -66,7 +66,12 @@ export const StyledLi = styled.li`
         height: 100%;
         position: absolute;
         top: 0px;
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(95%,rgba(255,255,255,1)));
+        background: -moz-linear-gradient(top,  rgba(255,255,255,0) 60%, rgba(255,255,255,1) 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1)));
+        background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(255,255,255,1) 100%);
+        background: -o-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(255,255,255,1) 100%);
+        background: -ms-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(255,255,255,1) 100%);
+        background: linear-gradient(to bottom,  rgba(255,255,255,0) 60%,rgba(255,255,255,1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
       }
     }
@@ -75,12 +80,12 @@ export const StyledLi = styled.li`
     .articleInfo {
       display: flex;
       justify-content: space-between;
-      -ms-flex-align: center;
+      // -ms-flex-align: center;
       align-items: center;
       overflow: hidden;
       font-size: 0.8rem;
       border-top: ${(props) => props.theme.border};
-      padding: 0.2rem 0rem;
+      min-height: 20px;
       margin: 0rem 0.5rem;
     
       .topicComments {

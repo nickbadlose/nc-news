@@ -17,6 +17,7 @@ const PostTopicForm = () => {
           value={form.slug}
           onChange={(e) => handleChange(e, "slug")}
           required
+          maxLength="16"
           placeholder="What should we discuss?"
         />
       </label>

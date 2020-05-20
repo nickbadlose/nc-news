@@ -38,6 +38,7 @@ const SignUpForm = () => {
           type="text"
           value={form.username}
           onChange={(e) => handleChange(e, "username", true)}
+          maxLength="13"
           required
         />
         {form.userExists && <p>Username taken!</p>}
