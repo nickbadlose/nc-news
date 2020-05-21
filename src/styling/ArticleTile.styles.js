@@ -50,6 +50,12 @@ export const StyledLi = styled.li`
       position: relative;
       overflow: hidden;
 
+      .titleMobile {
+        display: none;
+        margin: 0rem 0.5rem;
+        text-align: left;
+      }
+
       .title {
         margin: 0rem 0.5rem;
         text-align: left;
@@ -81,7 +87,7 @@ export const StyledLi = styled.li`
       display: flex;
       justify-content: space-between;
       -ms-flex-align: center;
-      flex-wrap: no-wrap;
+      flex-wrap: nowrap;
       align-items: center;
       overflow: hidden;
       font-size: 0.8rem;
@@ -92,36 +98,73 @@ export const StyledLi = styled.li`
       .topicComments {
         display: flex;
         flex-direction: row;
-        flex-wrap: no-wrap;
+        flex-wrap: nowrap;
         justify-content: flex-end;
-      }
-    
-      .topic {
-        display: flex;
 
-        &::after {
-          content: "";
-          background-color: ${(props) => props.theme.linkC};
-          border: 1px solid ${(props) => props.theme.linkC};
-          border-radius: 50%
-          display: block;
-          align-self: center;
-          height: 1px;
-          width: 1px;
-          margin: 0px 3px;
+        .author {
+          display: flex !important;
+          flex-wrap: nowrap !important;
+        }
+
+        .comments {
+          display: flex !important;
+          flex-wrap: nowrap !important;
+        }
+        
+        .topic {
+          display: flex;
+  
+          &::after {
+            content: "";
+            background-color: ${(props) => props.theme.linkC};
+            border: 1px solid ${(props) => props.theme.linkC};
+            border-radius: 50%
+            display: block;
+            align-self: center;
+            height: 1px;
+            width: 1px;
+            margin: 0px 3px;
+          }
         }
       }
     
       p {
         margin: 0rem;
-        display: flex;
-        flex-wrap: no-wrap !important;
       }
     }
 
-    @media (max-width: 600px) {
-      .topic {
-        display: none !important;
+  }
+  @media (max-width: 600px) {
+    .topic {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 500px) {
+    max-height: unset;
+
+    .main {
+      justify-content: center;
+      
+      .articleInfo {
+        display: none;
+      }
+
+      .titleMobile {
+        font-size: ${(props) => props.fontSize};
+        display: block !important;
+      }
+
+      .title {
+        display: none;
+      }
+
+      .body {
+        display: none;
+      }
+
+      .textFader {
+        display: none;
       }
     }
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
-import { formatDate } from "../utils/utils";
+import { formatDate, formatFontSize } from "../utils/utils";
 import IncrementVotes from "./IncrementVotes";
 import { useToggle } from "../hooks";
 import * as api from "../api";
@@ -20,8 +20,9 @@ const ArticleTile = ({
 }) => {
   const [toggle, handleToggle] = useToggle();
   const { date } = formatDate(created_at);
+  const fontSize = formatFontSize(title);
   return (
-    <StyledLi theme={mainTheme}>
+    <StyledLi theme={mainTheme} fontSize={fontSize}>
       <IncrementVotes
         votes={votes}
         id={article_id}
@@ -36,6 +37,11 @@ const ArticleTile = ({
         <div className="titleBody">
           <Link to={`/articles/${article_id}`}>
             <h4 className="title">{title}</h4>
+          </Link>
+          <Link to={`/articles/${article_id}`}>
+            <h4 className="titleMobile">
+              {title.length < 90 ? title : title.slice(0, 90) + "..."}
+            </h4>
           </Link>
           <p className="body">
             {body}
