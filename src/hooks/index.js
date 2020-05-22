@@ -297,7 +297,12 @@ export const useArticles = (topic) => {
     api.getTopics().then(({ data: { topics } }) => {
       if (isMounted.current) {
         const images = topics.reduce((obj, topic) => {
-          obj[topic.slug] = topic.image_url;
+          obj[topic.slug] = {
+            image_url: topic.image_url,
+            image_thumb: topic.image_thumb,
+            image_banner: topic.image_banner,
+            mobile_banner: topic.mobile_banner,
+          };
           return obj;
         }, {});
         dispatch({ type: "fetch-images", images });

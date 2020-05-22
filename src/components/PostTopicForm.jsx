@@ -31,6 +31,7 @@ const PostTopicForm = () => {
           type="text"
           value={form.description}
           onChange={(e) => handleChange(e, "description")}
+          maxLength="55"
           required
         />
         {}

@@ -21,9 +21,7 @@ export const formatTopic = (topic) => {
 
 export const formatFontSize = (paragraph) => {
   let fontSize = 1.5;
-  if (paragraph.length < 15) fontSize = 1.7;
-  else if (paragraph.length < 20) fontSize = 1.6;
-  else if (paragraph.length < 25) fontSize = 1.5;
+  if (paragraph.length < 25) fontSize = 1.5;
   else if (paragraph.length < 30) fontSize = 1.4;
   else if (paragraph.length < 35) fontSize = 1.35;
   else if (paragraph.length < 45) fontSize = 1.3;

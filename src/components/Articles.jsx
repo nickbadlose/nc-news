@@ -21,14 +21,28 @@ const Articles = () => {
       {state.isLoading || state.isLoadingImages ? (
         <Spinner animation="border" className="spinner" />
       ) : (
-        <article>
-          <ul>
+        <article
+          style={{
+            display: "flex", // remove this for none card stylying
+            flexDirection: "column",
+          }}
+        >
+          <ul
+            style={{
+              display: "flex",
+              flexWrap: "wrap", // remove this for non card styling
+              justifyContent: "flex-start",
+              // alignItems: "center",
+              width: "calc(100% + 1rem)",
+              alignSelf: "center",
+            }}
+          >
             {state.articles.map((article) => {
               return (
                 <ArticleTile
                   {...article}
                   key={article.article_id}
-                  image={state.images[article.topic]}
+                  images={state.images[article.topic]}
                 />
               );
             })}

@@ -9,10 +9,10 @@ export const StyledLi = styled.li`
   flex-direction: row;
   flex-wrap: nowrap;
   max-height: 130px;
-
+  width: 100%;
 
   :hover {
-  border: 1px solid #ffffff;
+    border: 1px solid #ffffff;
   }
 
   .topicImage {
@@ -39,6 +39,7 @@ export const StyledLi = styled.li`
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    width: 100%;
 
     a {
       text-decoration: none;
@@ -54,13 +55,15 @@ export const StyledLi = styled.li`
         display: none;
         margin: 0rem 0.5rem;
         text-align: left;
+        text-transform: capitalize;
       }
 
       .title {
         margin: 0rem 0.5rem;
         text-align: left;
+        text-transform: capitalize;
       }
-  
+
       .body {
         margin: 0rem 0.5rem;
         text-align: left;
@@ -72,17 +75,42 @@ export const StyledLi = styled.li`
         height: 100%;
         position: absolute;
         top: 0px;
-        background: -moz-linear-gradient(top,  rgba(255,255,255,0) 60%, rgba(255,255,255,1) 100%);
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1)));
-        background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(255,255,255,1) 100%);
-        background: -o-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(255,255,255,1) 100%);
-        background: -ms-linear-gradient(top,  rgba(255,255,255,0) 60%,rgba(255,255,255,1) 100%);
-        background: linear-gradient(to bottom,  rgba(255,255,255,0) 60%,rgba(255,255,255,1) 100%);
+        background: -moz-linear-gradient(
+          top,
+          rgba(255, 255, 255, 0) 60%,
+          rgba(255, 255, 255, 1) 100%
+        );
+        background: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          color-stop(60%, rgba(255, 255, 255, 0)),
+          color-stop(100%, rgba(255, 255, 255, 1))
+        );
+        background: -webkit-linear-gradient(
+          top,
+          rgba(255, 255, 255, 0) 60%,
+          rgba(255, 255, 255, 1) 100%
+        );
+        background: -o-linear-gradient(
+          top,
+          rgba(255, 255, 255, 0) 60%,
+          rgba(255, 255, 255, 1) 100%
+        );
+        background: -ms-linear-gradient(
+          top,
+          rgba(255, 255, 255, 0) 60%,
+          rgba(255, 255, 255, 1) 100%
+        );
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0) 60%,
+          rgba(255, 255, 255, 1) 100%
+        );
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
       }
     }
 
-    
     .articleInfo {
       display: flex;
       justify-content: space-between;
@@ -94,7 +122,11 @@ export const StyledLi = styled.li`
       border-top: ${(props) => props.theme.border};
       min-height: 1.25rem;
       margin: 0rem 0.5rem;
-    
+
+      p {
+        margin: 0rem;
+      }
+
       .topicComments {
         display: flex;
         flex-direction: row;
@@ -110,15 +142,15 @@ export const StyledLi = styled.li`
           display: flex !important;
           flex-wrap: nowrap !important;
         }
-        
+
         .topic {
           display: flex;
-  
+
           &::after {
             content: "";
             background-color: ${(props) => props.theme.linkC};
             border: 1px solid ${(props) => props.theme.linkC};
-            border-radius: 50%
+            border-radius: 50%;
             display: block;
             align-self: center;
             height: 1px;
@@ -127,13 +159,9 @@ export const StyledLi = styled.li`
           }
         }
       }
-    
-      p {
-        margin: 0rem;
-      }
     }
-
   }
+
   @media (max-width: 600px) {
     .topic {
       display: none !important;
@@ -144,8 +172,9 @@ export const StyledLi = styled.li`
     max-height: unset;
 
     .main {
+      flex-grow: 1;
       justify-content: center;
-      
+
       .articleInfo {
         display: none;
       }
@@ -167,5 +196,70 @@ export const StyledLi = styled.li`
         display: none;
       }
     }
+  }
+`;
+
+export const StyledLiCard = styled.li`
+  // flex: 1 1 250px;
+  flex-grow: 1;
+  max-width: calc((100% - 3rem) / 3);
+  margin: 1rem 0.5rem 0rem 0.5rem;
+
+  .card {
+  }
+
+  .titleBody {
+    padding: 0.5rem;
+
+    .title {
+      // text-align: left;
+      height: 146px;
+      overflow: hidden;
+      text-transform: capitalize;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  // .comments {
+  //   padding: 0.1rem 0.5rem;
+  // }
+
+  .topicAuthor {
+    padding: 0.1rem 0.5rem;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    a {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+
+      &::after {
+        content: "";
+        background-color: ${(props) => props.theme.linkC};
+        border: 1px solid ${(props) => props.theme.linkC};
+        border-radius: 50%;
+        display: block;
+        align-self: center;
+        height: 1px;
+        width: 1px;
+        margin: 0px 3px;
+      }
+    }
+  }
+
+  // do box border shadow instead of hover stuff me thinks
+
+  // &:hover {
+  // }
+
+  .image {
+    border: ${(props) => props.theme.border};
+    // width: 100%;
+    // height: 100%;
   }
 `;
