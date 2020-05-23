@@ -197,20 +197,23 @@ export const StyledLiCard = styled.li`
     padding: 0.5rem;
     position: relative;
     overflow: hidden;
-    height: ${(props) => (props.toggle ? "100%" : "160px")};
+    /* height: 1% !important; */
+    /* min-height: 160px; */
 
-    transition: height 1s ease-in-out;
+    /* max-height: ${(props) => (props.toggle ? "300px" : "160px")};
+    transition: max-height 0.3s ease; */
+    /* transform: rotate(${(props) => (props.toggle ? "180deg" : "0deg")}); */
 
     .title {
-      /* min-height: 146px; */
-      /* overflow: hidden; */
+      min-height: 146px;
+      overflow: hidden;
       text-transform: capitalize;
-      /* display: flex;
+      display: flex;
                flex-direction: column;
-               justify-content: center; */
+               justify-content: center;
     }
 
-    .textFader {
+    /* .textFader {
       background: white;
       width: 100%;
       height: 100%;
@@ -220,17 +223,13 @@ export const StyledLiCard = styled.li`
         to bottom,
         rgba(255, 255, 255, 0) 60%,
         rgba(255, 255, 255, 1) 100%
-      );
-      display: ${(props) => (props.toggle ? "none" : "block")};
+      ); */
+      /* display: ${(props) => (props.toggle ? "none" : "block")};
 
-      transition: display 2s ease-in-out;
+      transition: display 2s ease-in-out; */
     }
   }
   /* } */
-
-  /* .comments {
-     padding: 0.1rem 0.5rem;
-   } */
 
   .topicAuthor {
     padding: 0.1rem 0.5rem;

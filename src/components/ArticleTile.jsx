@@ -152,18 +152,27 @@ const ArticleTile = ({
           <Card.Title className="title">
             <Link to={`/articles/${article_id}`}>{title.toLowerCase()}</Link>
           </Card.Title>
-          <Card.Text>
-            {/* {toggle || body.length < 101 ? body : body.slice(0, 100) + "..."} */}
-            {body}
-          </Card.Text>
+          <Accordion>
+            {/* <Card> */}
+            <Accordion.Toggle as={Card.Header} eventKey="0">
+              Click me!
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="0">
+              <Card.Text>
+                {body}
+                {/* {toggle || body.length < 101
+                  ? body
+                  : body.slice(0, 100) + "..."} */}
+              </Card.Text>
+              {/* <Card.Body>Hello! I'm the body</Card.Body> */}
+            </Accordion.Collapse>
+            {/* </Card> */}
+          </Accordion>
           <Link to={`/articles/${article_id}`}>
             <div className="textFader"></div>
           </Link>
         </Card.Body>
         {/* </div> */}
-        <button onClick={handleToggle}>
-          {toggle ? "show less" : "show more"}
-        </button>
         <Card.Footer className="text-muted topicAuthor">
           <Link to={`/${author}`} className="author">
             {author}
