@@ -9,7 +9,7 @@ export const StyledLi = styled.li`
   flex-direction: row;
   flex-wrap: nowrap;
   max-height: 130px;
-  width: 100%;
+  /* width: 100%; */
 
   :hover {
     border: 1px solid #ffffff;
@@ -176,24 +176,59 @@ export const StyledLiCard = styled.li`
   margin: 1rem 0.5rem 0rem 0.5rem;
 
   .card {
-    /* border: ${(props) => props.theme.border}; */
-    border: 2px solid black ;
-  }
-
-  .titleBody {
-    padding: 0.5rem;
-
-    .title {
-      min-height: 146px;
-      overflow: hidden;
-      text-transform: capitalize;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    border: ${(props) => props.theme.border};
+    /* border: 2px solid black; */
+    :hover {
+      border: 1px solid #ffffff;
     }
   }
 
-   /* .comments {
+  a {
+    text-decoration: none;
+    color: ${(props) => props.theme.linkC};
+  }
+
+  /* .heightSetter {
+    position: relative;
+    height: 160px;
+    overflow: hidden; */
+
+  .titleBody {
+    padding: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    height: ${(props) => (props.toggle ? "100%" : "160px")};
+
+    transition: height 1s ease-in-out;
+
+    .title {
+      /* min-height: 146px; */
+      /* overflow: hidden; */
+      text-transform: capitalize;
+      /* display: flex;
+               flex-direction: column;
+               justify-content: center; */
+    }
+
+    .textFader {
+      background: white;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0px;
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 60%,
+        rgba(255, 255, 255, 1) 100%
+      );
+      display: ${(props) => (props.toggle ? "none" : "block")};
+
+      transition: display 2s ease-in-out;
+    }
+  }
+  /* } */
+
+  /* .comments {
      padding: 0.1rem 0.5rem;
    } */
 
@@ -230,7 +265,19 @@ export const StyledLiCard = styled.li`
     height: 100%;
   }
 
-  @media(max-width: 600px) {
-    
+  @media (max-width: 950px) {
+    max-width: calc((100% - 2rem) / 2);
+  }
+
+  @media (max-width: 768px) {
+    max-width: calc((100% - 3rem) / 3);
+  }
+
+  @media (max-width: 730px) {
+    max-width: calc((100% - 2rem) / 2);
+  }
+
+  @media (max-width: 500px) {
+    max-width: calc(100% - 1rem);
   }
 `;

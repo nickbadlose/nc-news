@@ -38,7 +38,7 @@ import Accordion from "react-bootstrap/Accordion";
 //       />
 //       {images && (
 //         <div className="topicImage">
-//           <img src={images.image_url} alt={topic} />
+//           <img src={images.image_thumb} alt={topic} />
 //         </div>
 //       )}
 //       <div className="main">
@@ -95,9 +95,9 @@ const ArticleTile = ({
   const [toggle, handleToggle] = useToggle();
   const { date } = formatDate(created_at);
   const fontSize = formatFontSize(title);
-  // console.log(images.image_url + "&ar=1:1&fit=crop");
+  console.log(toggle);
   return (
-    <StyledLiCard theme={mainTheme} fontSize={fontSize}>
+    <StyledLiCard theme={mainTheme} fontSize={fontSize} toggle={toggle}>
       {/* <IncrementVotes
         votes={votes}
         id={article_id}
@@ -143,31 +143,27 @@ const ArticleTile = ({
           <Card.Img
             className="image"
             variant="top"
-            src={images.image_url}
+            src={images.image_card}
             alt={topic}
           />
         )}
+        {/* <div className="heightSetter"> */}
         <Card.Body className="titleBody">
           <Card.Title className="title">
             <Link to={`/articles/${article_id}`}>{title.toLowerCase()}</Link>
           </Card.Title>
-          <Accordion>
-            {/* <Card> */}
-            <Accordion.Toggle as={Card.Header} eventKey="0">
-              Click me!
-            </Accordion.Toggle>
-            <Accordion.Collapse eventKey="0">
-              <Card.Text>
-                {toggle || body.length < 101
-                  ? body
-                  : body.slice(0, 100) + "..."}
-              </Card.Text>
-              {/* <Card.Body>Hello! I'm the body</Card.Body> */}
-            </Accordion.Collapse>
-            {/* </Card> */}
-          </Accordion>
+          <Card.Text>
+            {/* {toggle || body.length < 101 ? body : body.slice(0, 100) + "..."} */}
+            {body}
+          </Card.Text>
+          <Link to={`/articles/${article_id}`}>
+            <div className="textFader"></div>
+          </Link>
         </Card.Body>
-        {/* <Card.Body className="comments">Comments: {comment_count} 💬</Card.Body> */}
+        {/* </div> */}
+        <button onClick={handleToggle}>
+          {toggle ? "show less" : "show more"}
+        </button>
         <Card.Footer className="text-muted topicAuthor">
           <Link to={`/${author}`} className="author">
             {author}

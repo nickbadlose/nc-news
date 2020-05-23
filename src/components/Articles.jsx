@@ -10,7 +10,7 @@ const Articles = () => {
   useScroll(dispatch, state.page, state.maxPage, state.isLoading, true);
 
   return (
-    <StyledMain>
+    <StyledMain card={true}>
       <div className="createLine">
         <div className="headerFilter">
           <h2>Articles</h2>
@@ -21,20 +21,21 @@ const Articles = () => {
         <Spinner animation="border" className="spinner" />
       ) : (
         <article
-          style={{
-            display: "flex", // remove this for none card stylying
-            flexDirection: "column",
-          }}
+          className="centerTile"
+          // style={{
+          //   display: "flex", // remove this for none card stylying
+          //   flexDirection: "column",
+          // }}
         >
           <ul
-            style={{
-              display: "flex",
-              flexWrap: "wrap", // remove this for non card styling
-              justifyContent: "flex-start",
-              // alignItems: "center",
-              width: "calc(100% + 1rem)",
-              alignSelf: "center",
-            }}
+          // style={{
+          //   display: "flex",
+          //   flexWrap: "wrap", // remove this for non card styling
+          //   justifyContent: "flex-start",
+          //   // alignItems: "center",
+          //   width: "calc(100% + 1rem)",
+          //   alignSelf: "center",
+          // }}
           >
             {state.articles.map((article) => {
               return (

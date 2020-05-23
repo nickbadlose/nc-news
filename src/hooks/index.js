@@ -302,6 +302,7 @@ export const useArticles = (topic) => {
             image_thumb: topic.image_thumb,
             image_banner: topic.image_banner,
             mobile_banner: topic.mobile_banner,
+            image_card: topic.image_card,
           };
           return obj;
         }, {});

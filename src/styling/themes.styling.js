@@ -12,3 +12,5 @@ export const mainTheme = {
 };
 
 export const loggedIn = {};
+
+export const darkMode = {};
