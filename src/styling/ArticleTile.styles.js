@@ -17,18 +17,18 @@ export const StyledLi = styled.li`
 
   .topicImage {
     align-self: center;
-    min-width: 130px;
-    min-height: 130px;
-    max-width: 130px;
-    max-height: 130px;
-    width: 130px;
-    height: 130px;
+    min-width: 128px;
+    min-height: 128px;
+    max-width: 128px;
+    max-height: 128px;
+    width: 128px;
+    height: 128px;
 
     img {
-      min-width: 130px;
-      min-height: 130px;
-      max-width: 130px;
-      max-height: 130px;
+      min-width: 128px;
+      min-height: 128px;
+      max-width: 128px;
+      max-height: 128px;
       width: 100%;
       height: 100%;
     }
@@ -74,39 +74,11 @@ export const StyledLi = styled.li`
         height: 100%;
         position: absolute;
         top: 0px;
-        background: -moz-linear-gradient(
-          top,
-          rgba(255, 255, 255, 0) 60%,
-          rgba(255, 255, 255, 1) 100%
-        );
-        background: -webkit-gradient(
-          linear,
-          left top,
-          left bottom,
-          color-stop(60%, rgba(255, 255, 255, 0)),
-          color-stop(100%, rgba(255, 255, 255, 1))
-        );
-        background: -webkit-linear-gradient(
-          top,
-          rgba(255, 255, 255, 0) 60%,
-          rgba(255, 255, 255, 1) 100%
-        );
-        background: -o-linear-gradient(
-          top,
-          rgba(255, 255, 255, 0) 60%,
-          rgba(255, 255, 255, 1) 100%
-        );
-        background: -ms-linear-gradient(
-          top,
-          rgba(255, 255, 255, 0) 60%,
-          rgba(255, 255, 255, 1) 100%
-        );
         background: linear-gradient(
           to bottom,
           rgba(255, 255, 255, 0) 60%,
           rgba(255, 255, 255, 1) 100%
         );
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
       }
     }
 
@@ -205,6 +177,9 @@ export const StyledLiCard = styled.li`
   margin: 1rem 0.5rem 0rem 0.5rem;
 
   .card {
+    /* border: ${(props) => props.theme.border}; */
+    border: 2px solid black;
+
   }
 
   .titleBody {
@@ -257,7 +232,7 @@ export const StyledLiCard = styled.li`
   // }
 
   .image {
-    border: ${(props) => props.theme.border};
+    /* border: ${(props) => props.theme.border}; */
     // width: 100%;
     // height: 100%;
   }

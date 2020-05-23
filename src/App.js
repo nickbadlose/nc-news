@@ -3,13 +3,14 @@ import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Routes from "./components/Routes";
 import SideBar from "./components/SideBar";
-import "./App.css";
+// import "./App.css";
 import { observer } from "mobx-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as api from "./api";
 import { userStore } from "./stores/userinfo";
 import { ThemeProvider } from "styled-components";
 import { mainTheme } from "./styling/themes.styling";
+import GlobalStyles from "./styling/global.styles";
 
 const App = observer(() => {
   const isMounted = useRef(true);
@@ -27,6 +28,7 @@ const App = observer(() => {
 
   return (
     <ThemeProvider theme={mainTheme}>
+      <GlobalStyles />
       <div className="App">
         <Header />
         <Navigation />

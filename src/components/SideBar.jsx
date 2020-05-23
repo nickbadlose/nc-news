@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "@reach/router";
 import { StyledSidebar } from "../styling/SideBar.styles";
 import Spinner from "react-bootstrap/Spinner";
-import { mainTheme } from "../styling/themes.styling";
 import { useTopics } from "../hooks";
 
 const SideBar = () => {
