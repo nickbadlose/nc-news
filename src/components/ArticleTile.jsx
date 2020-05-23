@@ -173,7 +173,7 @@ const ArticleTile = ({
             {author}
           </Link>
           <Link to={`/topics/articles/${topic}`}>{topic}</Link>
-          Comments: {comment_count} 💬
+          {comment_count} 💬
         </Card.Footer>
       </Card>
     </StyledLiCard>

@@ -171,22 +171,19 @@ export const StyledLi = styled.li`
 `;
 
 export const StyledLiCard = styled.li`
-  // flex: 1 1 250px;
   flex-grow: 1;
   max-width: calc((100% - 3rem) / 3);
   margin: 1rem 0.5rem 0rem 0.5rem;
 
   .card {
     /* border: ${(props) => props.theme.border}; */
-    border: 2px solid black;
-
+    border: 2px solid black ;
   }
 
   .titleBody {
     padding: 0.5rem;
 
     .title {
-      // text-align: left;
       min-height: 146px;
       overflow: hidden;
       text-transform: capitalize;
@@ -196,9 +193,9 @@ export const StyledLiCard = styled.li`
     }
   }
 
-  // .comments {
-  //   padding: 0.1rem 0.5rem;
-  // }
+   /* .comments {
+     padding: 0.1rem 0.5rem;
+   } */
 
   .topicAuthor {
     padding: 0.1rem 0.5rem;
@@ -226,14 +223,14 @@ export const StyledLiCard = styled.li`
     }
   }
 
-  // do box border shadow instead of hover stuff me thinks
-
-  // &:hover {
-  // }
+  /* do box border shadow instead of hover stuff me thinks */
 
   .image {
-    /* border: ${(props) => props.theme.border}; */
-    // width: 100%;
-    // height: 100%;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media(max-width: 600px) {
+    
   }
 `;

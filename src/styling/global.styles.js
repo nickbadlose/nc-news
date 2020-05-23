@@ -12,11 +12,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@-moz-document url-prefix() {
+/* @-moz-document url-prefix() {
   html {
     font-size: 14px;
   }
-}
+} */
 
 html {
   background-color: #eaeaea;
@@ -49,7 +49,7 @@ ul {
   padding: 0%;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1050px) {
   .App {
     display: grid;
     grid-template-columns: 2vw auto 160px 2vw;
