@@ -54,7 +54,6 @@ export const StyledLi = styled.li`
       .titleMobile {
         display: none;
         margin: 0rem 0.5rem;
-        text-align: left;
         text-transform: capitalize;
       }
 
@@ -213,7 +212,7 @@ export const StyledLiCard = styled.li`
 
     .title {
       // text-align: left;
-      height: 146px;
+      min-height: 146px;
       overflow: hidden;
       text-transform: capitalize;
       display: flex;

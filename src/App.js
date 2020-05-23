@@ -8,6 +8,8 @@ import { observer } from "mobx-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as api from "./api";
 import { userStore } from "./stores/userinfo";
+import { ThemeProvider } from "styled-components";
+import { mainTheme } from "./styling/themes.styling";
 
 const App = observer(() => {
   const isMounted = useRef(true);
@@ -24,12 +26,14 @@ const App = observer(() => {
   }, []);
 
   return (
-    <div className="App">
-      <Header />
-      <Navigation />
-      <SideBar />
-      <Routes />
-    </div>
+    <ThemeProvider theme={mainTheme}>
+      <div className="App">
+        <Header />
+        <Navigation />
+        <SideBar />
+        <Routes />
+      </div>
+    </ThemeProvider>
   );
 });
 

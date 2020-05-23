@@ -9,7 +9,7 @@ const SideBar = () => {
   const { topics, isLoading } = useTopics();
 
   return (
-    <StyledSidebar theme={mainTheme}>
+    <StyledSidebar>
       <h2>Topics</h2>
       {isLoading ? (
         <Spinner animation="border" className="spinner" />
