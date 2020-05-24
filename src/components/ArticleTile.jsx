@@ -38,7 +38,11 @@ import Accordion from "react-bootstrap/Accordion";
 //       />
 //       {images && (
 //         <div className="topicImage">
-//           <img src={images.image_thumb} alt={topic} />
+{
+  /* <Link to={`/articles/${article_id}`}>
+  <img src={images.image_thumb} alt={topic} />
+</Link>; */
+}
 //         </div>
 //       )}
 //       <div className="main">
@@ -84,7 +88,7 @@ import Accordion from "react-bootstrap/Accordion";
 const ArticleTile = ({
   author,
   title,
-  votes,
+  votes, // maybe add votes with a heart
   created_at,
   comment_count,
   body,
@@ -93,86 +97,41 @@ const ArticleTile = ({
   images,
 }) => {
   const [toggle, handleToggle] = useToggle();
-  const { date } = formatDate(created_at);
-  const fontSize = formatFontSize(title);
   console.log(toggle);
   return (
-    <StyledLiCard theme={mainTheme} fontSize={fontSize} toggle={toggle}>
-      {/* <IncrementVotes
-        votes={votes}
-        id={article_id}
-        api={api.patchArticleById}
-      />
-      {images && (
-        <div className="topicImage">
-          <img src={images} alt={topic} />
-        </div>
-      )}
-      <div className="main">
-        <div className="titleBody">
-          <Link to={`/articles/${article_id}`}>
-            <h4 className="title">{title}</h4>
-          </Link>
-          <Link to={`/articles/${article_id}`}>
-            <h4 className="titleMobile">
-              {title}
-            </h4>
-          </Link>
-          <p className="body">
-            {body}
-          </p>
-          <Link to={`/articles/${article_id}`}>
-            <div className="textFader"></div>
-          </Link>
-        </div>
-        <div className="articleInfo">
-          <p className="author">
-            By <Link to={`/${author}`}>{author}</Link> on {date}
-          </p>
-          <div className="topicComments">
-            <p className="topic">
-              <Link to={`/topics/articles/${topic}`}>{topic}</Link>
-            </p>
-            <p className="comments">Comments: {comment_count} 💬</p>
-          </div>
-        </div>
-      </div> */}
-
+    <StyledLiCard theme={mainTheme} toggle={toggle}>
       <Card className="card">
         {images && (
-          <Card.Img
-            className="image"
-            variant="top"
-            src={images.image_card}
-            alt={topic}
-          />
+          <Link to={`/articles/${article_id}`}>
+            <Card.Img
+              className="image"
+              variant="top"
+              src={images.image_card}
+              alt={topic}
+            />
+          </Link>
         )}
-        {/* <div className="heightSetter"> */}
         <Card.Body className="titleBody">
           <Card.Title className="title">
             <Link to={`/articles/${article_id}`}>{title.toLowerCase()}</Link>
           </Card.Title>
+          <span style={{ fontSize: "3em", color: "Tomato" }}>
+            <i class="fas fa-camera"></i>
+          </span>
           <Accordion>
-            {/* <Card> */}
-            <Accordion.Toggle as={Card.Header} eventKey="0">
-              Click me!
-            </Accordion.Toggle>
+            <Accordion.Toggle
+              eventKey="0"
+              className="toggle"
+              onClick={handleToggle}
+            ></Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
-              <Card.Text>
-                {body}
-                {/* {toggle || body.length < 101
-                  ? body
-                  : body.slice(0, 100) + "..."} */}
-              </Card.Text>
-              {/* <Card.Body>Hello! I'm the body</Card.Body> */}
+              <Card.Text>{body}</Card.Text>
             </Accordion.Collapse>
-            {/* </Card> */}
           </Accordion>
           <Link to={`/articles/${article_id}`}>
             <div className="textFader"></div>
           </Link>
         </Card.Body>
-        {/* </div> */}
         <Card.Footer className="text-muted topicAuthor">
           <Link to={`/${author}`} className="author">
             {author}

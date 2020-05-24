@@ -177,7 +177,6 @@ export const StyledLiCard = styled.li`
 
   .card {
     border: ${(props) => props.theme.border};
-    /* border: 2px solid black; */
     :hover {
       border: 1px solid #ffffff;
     }
@@ -188,48 +187,43 @@ export const StyledLiCard = styled.li`
     color: ${(props) => props.theme.linkC};
   }
 
-  /* .heightSetter {
-    position: relative;
-    height: 160px;
-    overflow: hidden; */
-
   .titleBody {
     padding: 0.5rem;
     position: relative;
     overflow: hidden;
-    /* height: 1% !important; */
-    /* min-height: 160px; */
-
-    /* max-height: ${(props) => (props.toggle ? "300px" : "160px")};
-    transition: max-height 0.3s ease; */
-    /* transform: rotate(${(props) => (props.toggle ? "180deg" : "0deg")}); */
 
     .title {
       min-height: 146px;
       overflow: hidden;
       text-transform: capitalize;
       display: flex;
-               flex-direction: column;
-               justify-content: center;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    /* .textFader {
-      background: white;
+    .toggle {
+      all: unset;
+      transition: transform 0.5s ease;
+      transform: rotate(${(props) => (props.toggle ? "180deg" : "0deg")});
       width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0px;
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0) 60%,
-        rgba(255, 255, 255, 1) 100%
-      ); */
-      /* display: ${(props) => (props.toggle ? "none" : "block")};
 
-      transition: display 2s ease-in-out; */
+      :hover {
+        cursor: pointer;
+      }
+
+      &::before {
+        content: "\f107";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: inherit;
+        /*--adjust as necessary--*/
+        color: #000;
+        font-size: 1.2rem;
+        width: 100%;
+      }
     }
   }
-  /* } */
 
   .topicAuthor {
     padding: 0.1rem 0.5rem;

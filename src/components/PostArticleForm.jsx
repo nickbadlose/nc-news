@@ -16,7 +16,7 @@ const PostArticleForm = ({ topic }) => {
           value={form.title}
           onChange={(e) => handleChange(e, "title")}
           required
-          maxLength="60"
+          maxLength="80"
           placeholder="Article title?"
         />
       </label>
