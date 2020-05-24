@@ -9,6 +9,7 @@ export const mainTheme = {
   linkC: "#007bff",
   marginL: "5rem",
   smallMarginL: "1rem",
+  linkHover: "rgb(240, 45, 58, 1)",
 };
 
 export const loggedIn = {};

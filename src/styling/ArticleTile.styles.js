@@ -9,7 +9,6 @@ export const StyledLi = styled.li`
   flex-direction: row;
   flex-wrap: nowrap;
   max-height: 130px;
-  /* width: 100%; */
 
   :hover {
     border: 1px solid #ffffff;
@@ -177,6 +176,8 @@ export const StyledLiCard = styled.li`
 
   .card {
     border: ${(props) => props.theme.border};
+    transition: border 0.5s ease-in-out;
+
     :hover {
       border: 1px solid #ffffff;
     }
@@ -185,6 +186,11 @@ export const StyledLiCard = styled.li`
   a {
     text-decoration: none;
     color: ${(props) => props.theme.linkC};
+    transition: color 0.2s ease-in-out;
+
+    :hover {
+      color: ${(props) => props.theme.linkHover};
+    }
   }
 
   .titleBody {
@@ -209,6 +215,10 @@ export const StyledLiCard = styled.li`
 
       :hover {
         cursor: pointer;
+        color: rgb(240, 45, 58, 1);
+        &::before {
+          color: ${(props) => props.theme.linkHover};
+        }
       }
 
       &::before {
@@ -217,8 +227,7 @@ export const StyledLiCard = styled.li`
         font-style: normal;
         font-weight: normal;
         text-decoration: inherit;
-        /*--adjust as necessary--*/
-        color: #000;
+        color: ${(props) => props.theme.headerC};
         font-size: 1.2rem;
         width: 100%;
       }
@@ -231,6 +240,11 @@ export const StyledLiCard = styled.li`
     display: flex;
     flex-direction: row;
     justify-content: center;
+
+    p {
+      margin: 0px;
+      padding: 0px;
+    }
 
     a {
       display: flex;
@@ -249,17 +263,57 @@ export const StyledLiCard = styled.li`
         margin: 0px 3px;
       }
     }
-  }
 
-  /* do box border shadow instead of hover stuff me thinks */
+    .heart:nth-child(1) {
+      padding-left: 0.15rem;
+      color: ${(props) => props.theme.linkC};
+    }
+
+    .comments {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+
+      &::after {
+        content: "";
+        background-color: ${(props) => props.theme.linkC};
+        border: 1px solid ${(props) => props.theme.linkC};
+        border-radius: 50%;
+        display: block;
+        align-self: center;
+        height: 1px;
+        width: 1px;
+        margin: 0px 3px;
+      }
+
+      span {
+        padding-left: 0.15rem;
+      }
+    }
+  }
 
   .image {
     width: 100%;
     height: 100%;
   }
 
+  @media (max-width: 1250px) {
+    a:nth-child(2) {
+      display: none;
+    }
+  }
+
   @media (max-width: 950px) {
     max-width: calc((100% - 2rem) / 2);
+    a:nth-child(2) {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 800px) {
+    a:nth-child(2) {
+      display: none;
+    }
   }
 
   @media (max-width: 768px) {
@@ -272,5 +326,8 @@ export const StyledLiCard = styled.li`
 
   @media (max-width: 500px) {
     max-width: calc(100% - 1rem);
+    a:nth-child(2) {
+      display: flex;
+    }
   }
 `;

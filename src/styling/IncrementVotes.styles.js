@@ -20,7 +20,7 @@ export const StyledDiv = styled.div`
     outline: none;
 
     :disabled {
-      color: #aa2d0a;
+      color: ${(props) => props.theme.linkHover};
     }
   }
 `;

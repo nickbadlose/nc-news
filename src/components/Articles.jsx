@@ -4,39 +4,28 @@ import FilterForm from "./FilterForm";
 import { useArticles, useScroll } from "../hooks";
 import { StyledMain } from "../styling/Articles.styles";
 import Spinner from "react-bootstrap/Spinner";
+import Layout from "./Layout";
+import { observer } from "mobx-react";
+import { layoutStore } from "../stores/layout";
 
-const Articles = () => {
+const Articles = observer(() => {
   const { state, dispatch } = useArticles();
   useScroll(dispatch, state.page, state.maxPage, state.isLoading, true);
 
   return (
-    <StyledMain card={true}>
+    <StyledMain layout={layoutStore.layout}>
       <div className="createLine">
         <div className="headerFilter">
           <h2>Articles</h2>
+          <Layout />
           <FilterForm article={true} dispatch={dispatch} className="articles" />
         </div>
       </div>
       {state.isLoading || state.isLoadingImages ? (
         <Spinner animation="border" className="spinner" />
       ) : (
-        <article
-          className="centerTile"
-          // style={{
-          //   display: "flex", // remove this for none card stylying
-          //   flexDirection: "column",
-          // }}
-        >
-          <ul
-          // style={{
-          //   display: "flex",
-          //   flexWrap: "wrap", // remove this for non card styling
-          //   justifyContent: "flex-start",
-          //   // alignItems: "center",
-          //   width: "calc(100% + 1rem)",
-          //   alignSelf: "center",
-          // }}
-          >
+        <article className="centerTile">
+          <ul>
             {state.articles.map((article) => {
               return (
                 <ArticleTile
@@ -54,6 +43,6 @@ const Articles = () => {
       )}
     </StyledMain>
   );
-};
+});
 
 export default Articles;

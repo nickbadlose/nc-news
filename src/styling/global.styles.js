@@ -32,7 +32,7 @@ code {
   background-color: #eaeaea;
   text-align: center;
   font-family: "Guardian Text Egyptian Web", Georgia, serif;
-  color: rgba(0, 0, 0, 0.6);
+  color: ${(props) => props.theme.textC};
   display: grid;
   grid-template-columns: 8vw auto 160px 8vw;
   grid-template-rows: 4rem 3.5rem 2.5vw auto 2.5vw;
