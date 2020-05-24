@@ -1,12 +1,13 @@
 import { decorate, observable } from "mobx";
 
 export class layout {
-  constructor() {
-    this.layout = "list";
+  constructor(initialLayout = localStorage.layout || "list") {
+    this.layout = initialLayout;
   }
 
   handleLayout = (eKey) => {
     this.layout = eKey;
+    localStorage.setItem("layout", eKey);
   };
 }
 

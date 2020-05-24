@@ -129,7 +129,7 @@ export const StyledLi = styled.li`
             align-self: center;
             height: 1px;
             width: 1px;
-            margin: 0px 0.15rem;
+            margin: 0px 0.2rem;
           }
         }
       }
@@ -169,7 +169,7 @@ export const StyledLi = styled.li`
           align-self: center;
           height: 1px;
           width: 1px;
-          margin: 0px 0.15rem;
+          margin: 0px 0.2rem;
         }
       }
     }
@@ -178,7 +178,7 @@ export const StyledLi = styled.li`
       flex-wrap: nowrap !important;
 
       span {
-        padding-left: 0.15rem;
+        padding-left: 0.2rem;
       }
     }
   }
@@ -231,6 +231,11 @@ export const StyledLiCard = styled.li`
     :hover {
       border: 1px solid #ffffff;
     }
+  }
+
+  hr {
+    margin: 0rem 0rem 0.4rem 0rem;
+    background: rgba(52, 52, 52, 0.1);
   }
 
   a {
@@ -310,12 +315,12 @@ export const StyledLiCard = styled.li`
         align-self: center;
         height: 1px;
         width: 1px;
-        margin: 0px 0.15rem;
+        margin: 0px 0.2rem;
       }
     }
 
     .heart:nth-child(1) {
-      padding-left: 0.15rem;
+      padding-left: 0.2rem;
       color: ${(props) => props.theme.linkC};
     }
 
@@ -333,11 +338,11 @@ export const StyledLiCard = styled.li`
         align-self: center;
         height: 1px;
         width: 1px;
-        margin: 0px 0.15rem;
+        margin: 0px 0.2rem;
       }
 
       span {
-        padding-left: 0.15rem;
+        padding-left: 0.2rem;
       }
     }
   }

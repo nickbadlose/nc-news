@@ -96,6 +96,7 @@ const ArticleTile = ({
             <Card.Title className="title">
               <Link to={`/articles/${article_id}`}>{title.toLowerCase()}</Link>
             </Card.Title>
+            <hr></hr>
             <Accordion>
               <Accordion.Toggle
                 eventKey="0"
