@@ -17,11 +17,18 @@ export const StyledMain = styled.main`
     .headerFilter {
       display: flex;
       justify-content: space-between;
-      align-items: center !important;
+      align-items: center;
       padding-top: 1rem;
 
       h2 {
         color: ${(props) => props.theme.headerC};
+      }
+
+      .filters {
+        display: flex;
+        .sc-AxheI {
+          margin-right: 1rem;
+        }
       }
     }
   }

@@ -2,7 +2,7 @@ import React from "react";
 import { layoutStore } from "../stores/layout";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
-import { StyledForm } from "../styling/FilterForm.styles";
+import { StyledForm } from "../styling/Layout.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTh, faThList } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,7 +12,7 @@ const Layout = () => {
       <DropdownButton
         id="dropdown-basic-button"
         onSelect={layoutStore.handleLayout}
-        title="Layout"
+        title={<FontAwesomeIcon icon={faThList} />}
         size="sm"
         alignRight={true}
       >

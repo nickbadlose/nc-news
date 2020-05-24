@@ -9,6 +9,7 @@ export const StyledLi = styled.li`
   flex-direction: row;
   flex-wrap: nowrap;
   max-height: 130px;
+  transition: border 0.3s ease-in-out;
 
   :hover {
     border: 1px solid #ffffff;
@@ -42,8 +43,13 @@ export const StyledLi = styled.li`
 
     a {
       text-decoration: none;
-      align-self: flex-start;
       color: ${(props) => props.theme.linkC};
+      align-self: flex-start;
+      transition: color 0.2s ease-in-out;
+
+      :hover {
+        color: ${(props) => props.theme.linkHover};
+      }
     }
 
     .titleBody {
@@ -97,20 +103,18 @@ export const StyledLi = styled.li`
         margin: 0rem;
       }
 
+      .shortAuthor {
+        display: none;
+      }
+
       .topicComments {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: flex-end;
 
-        .author {
-          display: flex !important;
-          flex-wrap: nowrap !important;
-        }
-
-        .comments {
-          display: flex !important;
-          flex-wrap: nowrap !important;
+        .shortComments {
+          display: none;
         }
 
         .topic {
@@ -125,46 +129,92 @@ export const StyledLi = styled.li`
             align-self: center;
             height: 1px;
             width: 1px;
-            margin: 0px 3px;
+            margin: 0px 0.15rem;
           }
         }
       }
     }
   }
 
-  @media (max-width: 600px) {
-    .topic {
+  @media (max-width: 800px) {
+    .comments {
       display: none !important;
+    }
+
+    .shortComments {
+      display: flex !important;
+    }
+  }
+
+  @media (max-width: 530px) {
+    .shortAuthor {
+      display: flex !important;
+    }
+    .author {
+      display: none !important;
+    }
+
+    .articleInfo {
+      justify-content: center !important;
+
+      .shortAuthor {
+        align-items: center;
+
+        &::after {
+          content: "";
+          background-color: ${(props) => props.theme.linkC};
+          border: 1px solid ${(props) => props.theme.linkC};
+          border-radius: 50%;
+          display: block;
+          align-self: center;
+          height: 1px;
+          width: 1px;
+          margin: 0px 0.15rem;
+        }
+      }
+    }
+
+    .shortComments {
+      flex-wrap: nowrap !important;
+
+      span {
+        padding-left: 0.15rem;
+      }
     }
   }
 
   @media (max-width: 500px) {
     max-height: unset;
 
-    .main {
-      flex-grow: 1;
-      justify-content: center;
-
-      .articleInfo {
-        display: none;
-      }
+    .titleBody {
+      height: 100%;
 
       .titleMobile {
+        height: 100%;
         font-size: ${(props) => props.fontSize};
-        display: block !important;
+        display: flex !important;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: center;
       }
+    }
 
-      .title {
-        display: none;
-      }
+    .title {
+      display: none;
+    }
 
-      .body {
-        display: none;
-      }
+    .body {
+      display: none;
+    }
 
-      .textFader {
-        display: none;
-      }
+    .textFader {
+      display: none;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .topic {
+      display: none !important;
     }
   }
 `;
@@ -260,7 +310,7 @@ export const StyledLiCard = styled.li`
         align-self: center;
         height: 1px;
         width: 1px;
-        margin: 0px 3px;
+        margin: 0px 0.15rem;
       }
     }
 
@@ -283,7 +333,7 @@ export const StyledLiCard = styled.li`
         align-self: center;
         height: 1px;
         width: 1px;
-        margin: 0px 3px;
+        margin: 0px 0.15rem;
       }
 
       span {

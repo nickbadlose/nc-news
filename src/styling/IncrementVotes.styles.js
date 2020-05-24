@@ -18,6 +18,11 @@ export const StyledDiv = styled.div`
     background-color: inherit;
     cursor: pointer;
     outline: none;
+    transition: color 0.2s ease-in-out;
+
+    :hover {
+      color: ${(props) => props.theme.linkHover};
+    }
 
     :disabled {
       color: ${(props) => props.theme.linkHover};

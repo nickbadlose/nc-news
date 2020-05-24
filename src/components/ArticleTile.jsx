@@ -40,7 +40,6 @@ const ArticleTile = ({
             <Link to={`/articles/${article_id}`}>
               <img src={images.image_thumb} alt={topic} />
             </Link>
-            ;
           </div>
         )}
         <div className="main">
@@ -60,11 +59,20 @@ const ArticleTile = ({
             <p className="author">
               By <Link to={`/${author}`}>{author}</Link> on {date}
             </p>
+            <p className="shortAuthor">
+              <Link to={`/${author}`}>{author}</Link>
+            </p>
             <div className="topicComments">
               <p className="topic">
                 <Link to={`/topics/articles/${topic}`}>{topic}</Link>
               </p>
               <p className="comments">Comments: {comment_count} 💬</p>
+              <p className="shortComments">
+                {comment_count}{" "}
+                <span role="img" aria-labelledby="comments emoji">
+                  💬
+                </span>
+              </p>
             </div>
           </div>
         </div>

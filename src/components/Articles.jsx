@@ -17,8 +17,14 @@ const Articles = observer(() => {
       <div className="createLine">
         <div className="headerFilter">
           <h2>Articles</h2>
-          <Layout />
-          <FilterForm article={true} dispatch={dispatch} className="articles" />
+          <div className="filters">
+            <Layout />
+            <FilterForm
+              article={true}
+              dispatch={dispatch}
+              className="articles"
+            />
+          </div>
         </div>
       </div>
       {state.isLoading || state.isLoadingImages ? (
