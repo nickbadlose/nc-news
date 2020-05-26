@@ -10,6 +10,7 @@ export const mainTheme = {
   marginL: "5rem",
   smallMarginL: "1rem",
   linkHover: "rgb(240, 45, 58, 1)",
+  borderHover: "#ffffff",
 };
 
 export const loggedIn = {};

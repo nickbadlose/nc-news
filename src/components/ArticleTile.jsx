@@ -9,7 +9,7 @@ import { mainTheme } from "../styling/themes.styling";
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faCommentDots } from "@fortawesome/free-solid-svg-icons";
 import { layoutStore } from "../stores/layout";
 
 const ArticleTile = ({
@@ -34,6 +34,7 @@ const ArticleTile = ({
           votes={votes}
           id={article_id}
           api={api.patchArticleById}
+          className="articleTile"
         />
         {images && (
           <div className="topicImage">
@@ -120,9 +121,10 @@ const ArticleTile = ({
             </Link>
             <p className="comments">
               {comment_count}{" "}
-              <span role="img" aria-labelledby="comments emoji">
+              <FontAwesomeIcon icon={faCommentDots} className="commentIcon" />
+              {/* <span role="img" aria-labelledby="comments emoji">
                 💬
-              </span>
+              </span> */}
             </p>
             <p>
               {votes}
@@ -134,70 +136,5 @@ const ArticleTile = ({
     );
   }
 };
-
-// const ArticleTile = ({
-//   author,
-//   title,
-//   votes,
-//   comment_count,
-//   body,
-//   topic,
-//   article_id,
-//   images,
-// }) => {
-//   const [toggle, handleToggle] = useToggle();
-//   return (
-//     <StyledLiCard theme={mainTheme} toggle={toggle}>
-//       <Card className="card">
-//         {images && (
-//           <Link to={`/articles/${article_id}`}>
-//             <Card.Img
-//               className="image"
-//               variant="top"
-//               src={images.image_card}
-//               alt={topic}
-//             />
-//           </Link>
-//         )}
-//         <Card.Body className="titleBody">
-//           <Card.Title className="title">
-//             <Link to={`/articles/${article_id}`}>{title.toLowerCase()}</Link>
-//           </Card.Title>
-//           <Accordion>
-//             <Accordion.Toggle
-//               eventKey="0"
-//               className="toggle"
-//               onClick={handleToggle}
-//             ></Accordion.Toggle>
-//             <Accordion.Collapse eventKey="0">
-//               <Card.Text>{body}</Card.Text>
-//             </Accordion.Collapse>
-//           </Accordion>
-//           <Link to={`/articles/${article_id}`}>
-//             <div className="textFader"></div>
-//           </Link>
-//         </Card.Body>
-//         <Card.Footer className="text-muted topicAuthor">
-//           <Link to={`/${author}`} className="author">
-//             {author}
-//           </Link>
-//           <Link to={`/topics/articles/${topic}`} className="topic">
-//             {topic}
-//           </Link>
-//           <p className="comments">
-//             {comment_count}{" "}
-//             <span role="img" aria-labelledby="comments emoji">
-//               💬
-//             </span>
-//           </p>
-//           <p>
-//             {votes}
-//             <FontAwesomeIcon icon={faHeart} className="heart" />
-//           </p>
-//         </Card.Footer>
-//       </Card>
-//     </StyledLiCard>
-//   );
-// };
 
 export default ArticleTile;

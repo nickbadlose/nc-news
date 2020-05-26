@@ -341,8 +341,9 @@ export const StyledLiCard = styled.li`
         margin: 0px 0.2rem;
       }
 
-      span {
+      .commentIcon:nth-child(1) {
         padding-left: 0.2rem;
+        align-self: center;
       }
     }
   }

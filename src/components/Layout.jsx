@@ -12,7 +12,11 @@ const Layout = () => {
       <DropdownButton
         id="dropdown-basic-button"
         onSelect={layoutStore.handleLayout}
-        title={<FontAwesomeIcon icon={faThList} />}
+        title={
+          <FontAwesomeIcon
+            icon={layoutStore.layout === "list" ? faThList : faTh}
+          />
+        }
         size="sm"
         alignRight={true}
       >

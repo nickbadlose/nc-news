@@ -10,6 +10,8 @@ import { navigate } from "@reach/router";
 import EditArticleForm from "./EditArticleForm";
 import { errorStore } from "../stores/error";
 import { useToggle, useSpecificArticle, useScroll } from "../hooks";
+import { StyledMain } from "../styling/SpecificArticle.styles";
+import Spinner from "react-bootstrap/Spinner";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -129,14 +131,12 @@ const SpecificArticle = ({ article_id }) => {
   };
 
   return (
-    <main>
+    <StyledMain>
       {state.isLoading ? (
-        <p>Loading...</p>
+        <Spinner animation="border" className="spinner" />
       ) : (
-        <div>
-          <h3>
-            {state.article.title} - {state.article.topic}
-          </h3>
+        <div className="main">
+          <h2 className="title">{state.article.title}</h2>
           <article>
             {state.editingArticle ? (
               <EditArticleForm
@@ -145,17 +145,20 @@ const SpecificArticle = ({ article_id }) => {
                 article_id={article_id}
               />
             ) : (
-              <p>
-                {state.article.body}
+              <div>
+                <p className="body">{state.article.body}</p>
                 {userStore.username === state.article.author && (
                   <button onClick={() => dispatch({ type: "editing-article" })}>
                     Edit
                   </button>
                 )}
-              </p>
+              </div>
             )}
           </article>
-          Created by {state.article.author} on {date} at {time}
+          <p>{state.article.topic}</p>
+          <p>
+            Created by {state.article.author} on {date} at {time}
+          </p>
           {userStore.username === state.article.author && (
             <button onClick={deleteArticleById}>Delete article</button>
           )}
@@ -187,12 +190,14 @@ const SpecificArticle = ({ article_id }) => {
                   );
                 })}
               </ul>
-              {state.page < state.maxPage && <p>Loading more comments...</p>}
+              {state.page < state.maxPage && (
+                <Spinner animation="border" className="smallMarginSpinner" />
+              )}
             </section>
           )}
         </div>
       )}
-    </main>
+    </StyledMain>
   );
 };
 
