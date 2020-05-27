@@ -6,7 +6,7 @@ import IncrementVotes from "./IncrementVotes";
 import PostCommentForm from "./PostCommentForm";
 import FilterForm from "./FilterForm";
 import { userStore } from "../stores/userinfo";
-import { navigate } from "@reach/router";
+import { navigate, Link } from "@reach/router";
 import EditArticleForm from "./EditArticleForm";
 import { errorStore } from "../stores/error";
 import { useToggle, useSpecificArticle, useScroll } from "../hooks";
@@ -83,8 +83,7 @@ const SpecificArticle = ({ article_id }) => {
     reducer,
     initialState
   );
-  const [toggle, handleToggle] = useToggle();
-  useScroll(dispatch, state.page, state.maxPage, state.isLoading, toggle);
+  useScroll(dispatch, state.page, state.maxPage, state.isLoading);
 
   const { date, time } = formatDate(state.article.created_at);
 
@@ -147,21 +146,33 @@ const SpecificArticle = ({ article_id }) => {
             ) : (
               <div>
                 <p className="body">{state.article.body}</p>
-                {userStore.username === state.article.author && (
-                  <button onClick={() => dispatch({ type: "editing-article" })}>
-                    Edit
-                  </button>
-                )}
               </div>
             )}
           </article>
-          <p>{state.article.topic}</p>
-          <p>
-            Created by {state.article.author} on {date} at {time}
-          </p>
-          {userStore.username === state.article.author && (
-            <button onClick={deleteArticleById}>Delete article</button>
-          )}
+          <div className="articleInfo">
+            <p className="topic">
+              <Link to={`/topics/articles/${state.article.topic}`}>
+                {state.article.topic}
+              </Link>
+            </p>
+            <p className="author">
+              Posted by{" "}
+              <Link to={`/${state.article.author}`}>
+                {state.article.author}
+              </Link>{" "}
+              on {date} at {time}
+            </p>
+          </div>
+          <div classNAme="editDelete">
+            {userStore.username === state.article.author && (
+              <button onClick={() => dispatch({ type: "editing-article" })}>
+                Edit
+              </button>
+            )}
+            {userStore.username === state.article.author && (
+              <button onClick={deleteArticleById}>Delete article</button>
+            )}
+          </div>
           <IncrementVotes
             votes={state.article.votes}
             id={state.article.article_id}
@@ -171,30 +182,23 @@ const SpecificArticle = ({ article_id }) => {
             article_id={state.article.article_id}
             dispatch={dispatch}
           />
-          <button onClick={handleToggle}>
-            {toggle
-              ? `Hide comments: ${+state.article.comment_count}`
-              : `Show comments: ${+state.article.comment_count}`}
-          </button>
-          {toggle && (
-            <section>
-              <FilterForm dispatch={dispatch} article={false} />
-              <ul>
-                {state.comments.map((comment) => {
-                  return (
-                    <CommentTile
-                      {...comment}
-                      deleteCommentById={deleteCommentById}
-                      key={comment.comment_id}
-                    />
-                  );
-                })}
-              </ul>
-              {state.page < state.maxPage && (
-                <Spinner animation="border" className="smallMarginSpinner" />
-              )}
-            </section>
-          )}
+          <section>
+            <FilterForm dispatch={dispatch} article={false} />
+            <ul>
+              {state.comments.map((comment) => {
+                return (
+                  <CommentTile
+                    {...comment}
+                    deleteCommentById={deleteCommentById}
+                    key={comment.comment_id}
+                  />
+                );
+              })}
+            </ul>
+            {state.page < state.maxPage && (
+              <Spinner animation="border" className="smallMarginSpinner" />
+            )}
+          </section>
         </div>
       )}
     </StyledMain>

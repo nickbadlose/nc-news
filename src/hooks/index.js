@@ -356,7 +356,7 @@ export const useFilter = (dispatch) => {
   return { handleSelect };
 };
 
-export const useScroll = (dispatch, page, maxPage, isLoading, toggle) => {
+export const useScroll = (dispatch, page, maxPage, isLoading) => {
   const isMounted = useRef(true);
 
   useEffect(() => {
@@ -366,7 +366,7 @@ export const useScroll = (dispatch, page, maxPage, isLoading, toggle) => {
   }, []);
 
   const handleScroll = throttle((e) => {
-    if (maxPage > page && toggle && !isLoading) {
+    if (maxPage > page && !isLoading) {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 50
@@ -385,20 +385,6 @@ export const useScroll = (dispatch, page, maxPage, isLoading, toggle) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
-
-  // const handleScroll = throttle((e) => {
-  //   if (maxPage > page && !isLoading) {
-  //     if (
-  //       window.innerHeight + window.scrollY >=
-  //       document.body.offsetHeight - 50
-  //     ) {
-  //       isMounted.current &&
-  //         dispatch({
-  //           type: "next-page",
-  //         });
-  //     }
-  //   }
-  // }, 1000);
 };
 
 export const useSpecificArticle = (article_id, reducer, initialState) => {

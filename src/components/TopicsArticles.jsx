@@ -6,7 +6,7 @@ import { useArticles, useScroll } from "../hooks";
 
 const TopicsArticles = ({ topic }) => {
   const { state, dispatch } = useArticles(topic);
-  useScroll(dispatch, state.page, state.maxPage, state.isLoading, true);
+  useScroll(dispatch, state.page, state.maxPage, state.isLoading);
 
   return (
     <main>

@@ -143,6 +143,11 @@ export const StyledLi = styled.li`
 
     .shortComments {
       display: flex !important;
+      align-items: center;
+
+      .commentIcon {
+        padding-left: 0.2rem;
+      }
     }
   }
 

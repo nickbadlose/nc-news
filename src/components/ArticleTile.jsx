@@ -67,12 +67,16 @@ const ArticleTile = ({
               <p className="topic">
                 <Link to={`/topics/articles/${topic}`}>{topic}</Link>
               </p>
-              <p className="comments">Comments: {comment_count} 💬</p>
+              <p className="comments">
+                Comments: {comment_count}{" "}
+                <FontAwesomeIcon icon={faCommentDots} className="commentIcon" />
+              </p>
               <p className="shortComments">
                 {comment_count}{" "}
-                <span role="img" aria-labelledby="comments emoji">
+                <FontAwesomeIcon icon={faCommentDots} className="commentIcon" />
+                {/* <span role="img" aria-labelledby="comments emoji">
                   💬
-                </span>
+                </span> */}
               </p>
             </div>
           </div>

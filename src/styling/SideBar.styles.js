@@ -76,6 +76,7 @@ export const StyledSidebar = styled.div`
   li {
     padding: 0.4rem 0rem 0.5rem 1rem;
     text-align: left;
+    text-transform: capitalize;
   }
 
   @media (max-width: 768px) {
