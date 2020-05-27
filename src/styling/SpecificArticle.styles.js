@@ -17,6 +17,7 @@ export const StyledMain = styled.main`
   .main {
     background: ${(props) => props.theme.bg};
     border: ${(props) => props.theme.border};
+    border-radius: ${(props) => props.theme.borderR};
 
     .titleBody {
       min-height: 50vh;
@@ -62,11 +63,6 @@ export const StyledMain = styled.main`
       .editDelete {
         button {
           font-size: 0.8rem;
-        }
-
-        .modalLarge {
-          width: 1000px;
-          height: auto;
         }
       }
 

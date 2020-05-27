@@ -25,27 +25,21 @@ export const useForm = (initialForm, dispatch) => {
 
   const handleEditComment = (e, newBody, comment_id) => {
     e.preventDefault();
-    if (!form.editingComment) {
-      setForm((c) => {
-        c.editingComment = true;
+    api
+      .patchCommentById(comment_id, undefined, newBody)
+      .then(({ body }) => {
+        if (isMounted.current) {
+          setForm((c) => {
+            return { body };
+          });
+        }
+      })
+      .catch(({ response }) => {
+        errorStore.err = {
+          status: response.status,
+          msg: response.data.msg,
+        };
       });
-    } else {
-      api
-        .patchCommentById(comment_id, undefined, newBody)
-        .then(({ body }) => {
-          if (isMounted.current) {
-            setForm((c) => {
-              return { body, editingComment: false };
-            });
-          }
-        })
-        .catch(({ response }) => {
-          errorStore.err = {
-            status: response.status,
-            msg: response.data.msg,
-          };
-        });
-    }
   };
 
   const handlePostTopic = (e) => {

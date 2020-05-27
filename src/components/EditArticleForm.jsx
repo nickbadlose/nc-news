@@ -13,7 +13,7 @@ const EditArticleForm = ({ dispatch, body, article_id, title }) => {
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form.Group controlId="FormBodyInput">
+        <Form.Group controlId="editArticleFormBodyInput">
           <Form.Control
             as="textarea"
             value={form.body}

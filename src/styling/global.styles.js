@@ -16,6 +16,10 @@ body {
   max-width: 90%;
 }
 
+.editCommentInput {
+  min-height: 20vh;  /* Need to do modal styles globally, not sure why I didn't have to with editArticleForm styling for input but that seems to be an anomoly. I think the global styling is needed because when the modal is set to show it is a direct child of the body instead of the component it is in. This is just my thoughts, not certain */
+}
+
 /* @-moz-document url-prefix() {
   html {
     font-size: 14px;

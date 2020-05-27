@@ -2,6 +2,6 @@ import styled from "styled-components";
 
 export const StyledForm = styled.form`
   .articleInput {
-    min-height: 200px;
+    min-height: 30vh;
   }
 `;

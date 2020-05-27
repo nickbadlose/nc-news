@@ -74,9 +74,6 @@ const ArticleTile = ({
               <p className="shortComments">
                 {comment_count}{" "}
                 <FontAwesomeIcon icon={faCommentDots} className="commentIcon" />
-                {/* <span role="img" aria-labelledby="comments emoji">
-                  💬
-                </span> */}
               </p>
             </div>
           </div>
@@ -126,9 +123,6 @@ const ArticleTile = ({
             <p className="comments">
               {comment_count}{" "}
               <FontAwesomeIcon icon={faCommentDots} className="commentIcon" />
-              {/* <span role="img" aria-labelledby="comments emoji">
-                💬
-              </span> */}
             </p>
             <p>
               {votes}

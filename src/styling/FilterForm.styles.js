@@ -5,7 +5,6 @@ export const StyledForm = styled.form`
   // margin-top: 0.5rem;
 
   .comments {
-    margin-bottom: 1rem;
     display: flex;
     justify-content: flex-start;
   }

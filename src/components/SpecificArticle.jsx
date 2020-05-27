@@ -188,7 +188,7 @@ const SpecificArticle = ({ article_id }) => {
                 <Modal
                   show={state.editingArticle}
                   onHide={() => dispatch({ type: "editing-article" })}
-                  aria-labelledby="example-custom-modal-styling-title"
+                  aria-labelledby="modal-editing-article"
                   dialogClassName="modal-90w"
                 >
                   <EditArticleForm
