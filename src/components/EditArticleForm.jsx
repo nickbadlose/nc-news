@@ -2,8 +2,6 @@ import React from "react";
 import { useForm } from "../hooks";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 
 const EditArticleForm = ({ dispatch, body, article_id, title }) => {
   const { form, handleEditArticle, handleChange } = useForm({ body }, dispatch);
@@ -21,13 +19,9 @@ const EditArticleForm = ({ dispatch, body, article_id, title }) => {
         />
       </Modal.Body>
       <Modal.Footer>
-        <OverlayTrigger
-          overlay={<Tooltip id="tooltip">Delete Article!</Tooltip>}
-        >
-          <Button type="submit" variant="primary" size="sm">
-            Save Edits
-          </Button>
-        </OverlayTrigger>
+        <Button type="submit" variant="primary" size="sm">
+          Save Edits
+        </Button>
         <Button
           variant="secondary"
           onClick={() => dispatch({ type: "editing-article" })}

@@ -12,6 +12,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.modal-90w {
+  width: 90%;
+  max-width: none !important;
+}
+
 /* @-moz-document url-prefix() {
   html {
     font-size: 14px;

@@ -56,6 +56,16 @@ export const StyledMain = styled.main`
         button {
           font-size: 0.8rem;
         }
+
+        /* modal-90w {
+          width: 90%;
+          background: black !important;
+        } */
+
+        .modalLarge {
+          width: 1000px;
+          height: auto;
+        }
       }
 
       .info {
