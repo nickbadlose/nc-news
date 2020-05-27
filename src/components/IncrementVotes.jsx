@@ -24,7 +24,7 @@ const IncrementVotes = ({ votes, id, api, className }) => {
         >
           {/* <FontAwesomeIcon icon={faArrowAltCircleUp} /> */}
         </button>
-        <p>{votes + voteDifference}</p>
+        <p className="votes">{votes + voteDifference}</p>
         <button
           onClick={() => handleVotes(-1)}
           disabled={voteDifference === -1 && true}

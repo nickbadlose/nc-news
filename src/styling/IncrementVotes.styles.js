@@ -57,4 +57,13 @@ export const StyledDiv = styled.div`
       margin: 0;
     }
   }
+
+  .specificArticle {
+    display: flex;
+    padding: 0rem 0.5rem;
+
+    .votes {
+      padding: 0rem 0.2rem 0rem 0.1rem;
+    }
+  }
 `;

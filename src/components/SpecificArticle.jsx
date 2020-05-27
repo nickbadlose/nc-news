@@ -9,9 +9,19 @@ import { userStore } from "../stores/userinfo";
 import { navigate, Link } from "@reach/router";
 import EditArticleForm from "./EditArticleForm";
 import { errorStore } from "../stores/error";
-import { useToggle, useSpecificArticle, useScroll } from "../hooks";
+import { useSpecificArticle, useScroll, useToggle } from "../hooks";
 import { StyledMain } from "../styling/SpecificArticle.styles";
 import Spinner from "react-bootstrap/Spinner";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCommentAlt,
+  faPencilAlt,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import Modal from "react-bootstrap/Modal";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -52,7 +62,7 @@ const reducer = (state, action) => {
       state.article.comment_count--;
       return;
     case "editing-article":
-      state.editingArticle = true;
+      state.editingArticle = !state.editingArticle;
       return;
     case "update-article":
       state.article.body = action.body;
@@ -84,6 +94,7 @@ const SpecificArticle = ({ article_id }) => {
     initialState
   );
   useScroll(dispatch, state.page, state.maxPage, state.isLoading);
+  const [deleteArticle, handleDeleteArticle] = useToggle();
 
   const { date, time } = formatDate(state.article.created_at);
 
@@ -111,6 +122,7 @@ const SpecificArticle = ({ article_id }) => {
   };
 
   const deleteArticleById = () => {
+    handleDeleteArticle();
     api
       .removeArticleById(article_id)
       .then(() => {
@@ -137,47 +149,129 @@ const SpecificArticle = ({ article_id }) => {
         <div className="main">
           <h2 className="title">{state.article.title}</h2>
           <article>
-            {state.editingArticle ? (
-              <EditArticleForm
-                dispatch={dispatch}
-                body={state.article.body}
-                article_id={article_id}
-              />
-            ) : (
-              <div>
-                <p className="body">{state.article.body}</p>
-              </div>
-            )}
+            <div>
+              <p className="body">{state.article.body}</p>
+            </div>
           </article>
           <div className="articleInfo">
-            <p className="topic">
-              <Link to={`/topics/articles/${state.article.topic}`}>
-                {state.article.topic}
-              </Link>
-            </p>
-            <p className="author">
-              Posted by{" "}
-              <Link to={`/${state.article.author}`}>
-                {state.article.author}
-              </Link>{" "}
-              on {date} at {time}
-            </p>
-          </div>
-          <div classNAme="editDelete">
+            <div className="info">
+              <p className="topic">
+                <Link to={`/topics/articles/${state.article.topic}`}>
+                  {state.article.topic}
+                </Link>
+              </p>
+              <p className="author">
+                Posted by{" "}
+                <Link to={`/${state.article.author}`}>
+                  {state.article.author}
+                </Link>{" "}
+                on {date} at {time}
+              </p>
+              <p className="authorShort">
+                <Link to={`/${state.article.author}`}>
+                  {state.article.author}
+                </Link>
+              </p>
+              <p className="comments">
+                <FontAwesomeIcon icon={faCommentAlt} className="commentIcon" />
+                {+state.article.comment_count}
+              </p>
+            </div>
+            <IncrementVotes
+              votes={state.article.votes}
+              id={state.article.article_id}
+              api={api.patchArticleById}
+              className="specificArticle"
+            />
             {userStore.username === state.article.author && (
-              <button onClick={() => dispatch({ type: "editing-article" })}>
-                Edit
-              </button>
-            )}
-            {userStore.username === state.article.author && (
-              <button onClick={deleteArticleById}>Delete article</button>
+              <div className="editDelete">
+                <Modal
+                  show={state.editingArticle}
+                  onHide={() => dispatch({ type: "editing-article" })}
+                  centered
+                  aria-labelledby="contained-modal-title-vcenter"
+                >
+                  <EditArticleForm
+                    dispatch={dispatch}
+                    body={state.article.body}
+                    article_id={article_id}
+                    title={state.article.title}
+                  />
+                </Modal>
+                {!state.editingArticle && (
+                  <OverlayTrigger
+                    overlay={<Tooltip id="tooltip">Edit Article!</Tooltip>}
+                  >
+                    <Button
+                      type="submit"
+                      size="sm"
+                      onClick={() => dispatch({ type: "editing-article" })}
+                    >
+                      <FontAwesomeIcon
+                        icon={faPencilAlt}
+                        className="pencilIcon"
+                      />
+                    </Button>
+                  </OverlayTrigger>
+                )}
+                <Modal
+                  show={deleteArticle}
+                  onHide={handleDeleteArticle}
+                  centered
+                  aria-labelledby="contained-modal-title-vcenter"
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title>Delete Your Article?!</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    Are you sure you want to delete this article? This action
+                    cannot be undone!
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <OverlayTrigger
+                      overlay={<Tooltip id="tooltip">Delete Article!</Tooltip>}
+                    >
+                      <Button
+                        type="submit"
+                        variant="danger"
+                        size="sm"
+                        onClick={deleteArticleById}
+                      >
+                        <FontAwesomeIcon
+                          icon={faTrashAlt}
+                          className="pencilIcon"
+                        />
+                      </Button>
+                    </OverlayTrigger>
+                    <Button
+                      variant="secondary"
+                      onClick={handleDeleteArticle}
+                      size="sm"
+                    >
+                      Close
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+                {!deleteArticle && (
+                  <OverlayTrigger
+                    overlay={<Tooltip id="tooltip">Delete Article!</Tooltip>}
+                  >
+                    <Button
+                      type="submit"
+                      variant="danger"
+                      size="sm"
+                      onClick={handleDeleteArticle}
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrashAlt}
+                        className="pencilIcon"
+                      />
+                    </Button>
+                  </OverlayTrigger>
+                )}
+              </div>
             )}
           </div>
-          <IncrementVotes
-            votes={state.article.votes}
-            id={state.article.article_id}
-            api={api.patchArticleById}
-          />
           <PostCommentForm
             article_id={state.article.article_id}
             dispatch={dispatch}
