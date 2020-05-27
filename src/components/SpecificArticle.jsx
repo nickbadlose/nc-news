@@ -147,8 +147,8 @@ const SpecificArticle = ({ article_id }) => {
         <Spinner animation="border" className="spinner" />
       ) : (
         <div className="main">
-          <h2 className="title">{state.article.title}</h2>
-          <article>
+          <article className="titleBody">
+            <h2 className="title">{state.article.title}</h2>
             <div>
               <p className="body">{state.article.body}</p>
             </div>
@@ -276,7 +276,7 @@ const SpecificArticle = ({ article_id }) => {
             article_id={state.article.article_id}
             dispatch={dispatch}
           />
-          <section>
+          <section className="commentSection">
             <FilterForm dispatch={dispatch} article={false} />
             <ul>
               {state.comments.map((comment) => {

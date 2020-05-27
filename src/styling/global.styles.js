@@ -13,8 +13,7 @@ body {
 }
 
 .modal-90w {
-  width: 90%;
-  max-width: none !important;
+  max-width: 90%;
 }
 
 /* @-moz-document url-prefix() {
@@ -79,6 +78,12 @@ ul {
       ". . ."
       ". main ."
       ". . .";
+  }
+}
+
+@media (max-width: 575px) {
+  .modal-90w {
+    max-width: 100%;
   }
 }
 

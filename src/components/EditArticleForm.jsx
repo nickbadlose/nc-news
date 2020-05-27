@@ -2,21 +2,26 @@ import React from "react";
 import { useForm } from "../hooks";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import { StyledForm } from "../styling/EditArticleForm.styles";
+import Form from "react-bootstrap/Form";
 
 const EditArticleForm = ({ dispatch, body, article_id, title }) => {
   const { form, handleEditArticle, handleChange } = useForm({ body }, dispatch);
   return (
-    <form onSubmit={(e) => handleEditArticle(e, article_id)}>
+    <StyledForm onSubmit={(e) => handleEditArticle(e, article_id)}>
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <textarea
-          type="text"
-          value={form.body}
-          onChange={(e) => handleChange(e, "body")}
-          required
-        />
+        <Form.Group controlId="FormBodyInput">
+          <Form.Control
+            as="textarea"
+            value={form.body}
+            onChange={(e) => handleChange(e, "body")}
+            required
+            className="articleInput"
+          />
+        </Form.Group>
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" variant="primary" size="sm">
@@ -30,7 +35,7 @@ const EditArticleForm = ({ dispatch, body, article_id, title }) => {
           Close
         </Button>
       </Modal.Footer>
-    </form>
+    </StyledForm>
   );
 };
 

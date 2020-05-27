@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const StyledMain = styled.main`
+  display: flex;
+  flex-flow: column nowrap;
+
   .spinner {
     margin-top: ${(props) => props.theme.marginL};
     align-self: center;
@@ -15,28 +18,32 @@ export const StyledMain = styled.main`
     background: ${(props) => props.theme.bg};
     border: ${(props) => props.theme.border};
 
-    .title {
-      padding-top: 1rem;
-      color: ${(props) => props.theme.headerC};
-      margin-right: 0.5rem;
-      margin-left: 0.5rem;
-      text-align: left;
-      display: flex;
-      flex-flow: column nowrap;
+    .titleBody {
+      min-height: 50vh;
 
-      &::after {
-        content: "";
-        display: block;
-        width: 100%;
-        height: 1px;
-        background-color: ${(props) => props.theme.borderC};
-        margin-top: 1rem;
+      .title {
+        padding-top: 1rem;
+        color: ${(props) => props.theme.headerC};
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
+        text-align: left;
+        display: flex;
+        flex-flow: column nowrap;
+
+        &::after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 1px;
+          background-color: ${(props) => props.theme.borderC};
+          margin-top: 1rem;
+        }
       }
-    }
 
-    .body {
-      padding: 0.4rem 0.5rem 0.5rem 0.5rem;
-      text-align: left;
+      .body {
+        padding: 0.4rem 0.5rem 0.5rem 0.5rem;
+        text-align: left;
+      }
     }
 
     .articleInfo {
@@ -56,11 +63,6 @@ export const StyledMain = styled.main`
         button {
           font-size: 0.8rem;
         }
-
-        /* modal-90w {
-          width: 90%;
-          background: black !important;
-        } */
 
         .modalLarge {
           width: 1000px;
@@ -146,6 +148,19 @@ export const StyledMain = styled.main`
             padding-right: 0.2rem;
           }
         }
+      }
+    }
+
+    .commentSection {
+      display: flex;
+      flex-flow: column nowrap;
+      margin: 0rem 0.5rem;
+
+      ul {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        margin-bottom: 0.5rem;
       }
     }
   }

@@ -4,7 +4,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import { StyledForm } from "../styling/FilterForm.styles";
 
-const FilterForm = ({ article, dispatch, className }) => {
+const FilterForm = ({ article, dispatch }) => {
   const { handleSelect } = useFilter(dispatch);
   return (
     <StyledForm>
@@ -13,7 +13,8 @@ const FilterForm = ({ article, dispatch, className }) => {
         onSelect={handleSelect}
         title="Sort by"
         size="sm"
-        alignRight={true}
+        alignRight={article}
+        className={!article && "comments"}
       >
         <Dropdown.Item eventKey="created_at">Newest</Dropdown.Item>
         <Dropdown.Item eventKey="created_at/asc">Oldest</Dropdown.Item>
