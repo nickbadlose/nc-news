@@ -5,6 +5,7 @@ import throttle from "lodash.throttle";
 import { navigate } from "@reach/router";
 import { useImmerReducer, useImmer } from "use-immer";
 import { userStore } from "../stores/userinfo";
+import { checkValidTopic } from "../utils/utils";
 
 export const useForm = (initialForm, dispatch) => {
   const [form, setForm] = useImmer(initialForm);
@@ -46,27 +47,39 @@ export const useForm = (initialForm, dispatch) => {
     e.preventDefault();
     setForm((c) => {
       c.invalidTopic = false;
+      c.invalidFormat = false;
     });
-    api
-      .postTopic({
-        slug: form.slug.toLowerCase(),
-        description: form.description,
-      })
-      .then((topic) => {
-        if (isMounted.current) {
-          setForm((c) => {
-            c = initialForm;
-          });
-          navigate(`/topics/articles/${topic}`);
-        }
-      })
-      .catch(() => {
-        if (isMounted.current) {
-          setForm((c) => {
-            c.invalidTopic = true;
-          });
-        }
+
+    if (checkValidTopic(form.slug)) {
+      api
+        .postTopic({
+          slug: form.slug.toLowerCase(),
+          description: form.description,
+        })
+        .then((topic) => {
+          if (isMounted.current) {
+            setForm((c) => {
+              c.slug = "";
+              c.description = "";
+              c.validated = true;
+            });
+            dispatch();
+            navigate(`/topics/articles/${topic}`);
+          }
+        })
+        .catch(() => {
+          if (isMounted.current) {
+            setForm((c) => {
+              c.invalidTopic = true;
+            });
+          }
+        });
+    } else {
+      setForm((c) => {
+        c.invalidTopic = true;
+        c.invalidFormat = true;
       });
+    }
   };
 
   const handleEditArticle = (e, article_id) => {

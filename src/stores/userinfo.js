@@ -25,6 +25,7 @@ export class UserInfo {
   logOut = () => {
     this.username = "";
     localStorage.clear();
+    navigate("/");
   };
 }
 

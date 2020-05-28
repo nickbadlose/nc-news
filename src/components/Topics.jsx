@@ -1,25 +1,33 @@
 import React from "react";
 import { Link } from "@reach/router";
 import PostTopicForm from "./PostTopicForm.jsx";
-import { useTopics } from "../hooks";
+import { useTopics, useToggle } from "../hooks";
+import { StyledMain } from "../styling/Topics.styles";
+import Spinner from "react-bootstrap/Spinner";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 const Topics = () => {
   const { topics, isLoading } = useTopics();
 
   return (
-    <main>
-      <h2>Topics</h2>
+    <StyledMain>
+      <div className="createLine">
+        <div className="headerPostTopic">
+          <h2>Topics</h2>
+          <PostTopicForm />
+        </div>
+      </div>
       {isLoading ? (
-        <p>Loading...</p>
+        <Spinner animation="border" className="spinner" />
       ) : (
         <div>
-          <PostTopicForm />
           <ul>
             {topics.map((topic) => {
               return (
                 <Link to={`/topics/articles/${topic.slug}`} key={topic.slug}>
                   <li>
-                    <h2>{topic.slug}</h2>
+                    <h4>{topic.slug}</h4>
                     <p>{topic.description}</p>
                     {+topic.article_count === 1 ? (
                       <p>{topic.article_count} article!</p>
@@ -33,7 +41,7 @@ const Topics = () => {
           </ul>
         </div>
       )}
-    </main>
+    </StyledMain>
   );
 };
 

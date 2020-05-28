@@ -19,6 +19,11 @@ export const formatTopic = (topic) => {
   return topic.slice(0, 1).toUpperCase() + topic.slice(1);
 };
 
+export const checkValidTopic = (topic) => {
+  if (topic.match(/\s/g)) return false;
+  else return true;
+};
+
 export const formatFontSize = (paragraph) => {
   let fontSize = 1.5;
   if (paragraph.length < 25) fontSize = 1.5;

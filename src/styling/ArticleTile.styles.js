@@ -273,6 +273,12 @@ export const StyledLiCard = styled.li`
       transform: rotate(${(props) => (props.toggle ? "180deg" : "0deg")});
       width: 100%;
 
+      :focus {
+        &::before {
+          outline: 1px dotted;
+        }
+      }
+
       :hover {
         cursor: pointer;
         color: rgb(240, 45, 58, 1);
