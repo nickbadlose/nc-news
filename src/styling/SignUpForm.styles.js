@@ -11,10 +11,10 @@ export const StyledDiv = styled.div`
   }
 
   .signUpForm {
-    margin-top: 10vh;
+    margin-top: 2rem;
     margin-bottom: 2rem;
     background: ${(props) => props.theme.bg};
-    width: 50%;
+    width: 65%;
     padding: 1rem;
     border: 0.2rem solid #ececec;
     border-radius: ${(props) => props.theme.borderR};
@@ -32,24 +32,24 @@ export const StyledDiv = styled.div`
   }
 
   @media (max-width: 1000px) {
-    .logInForm {
-      width: 60%;
+    .signUpForm {
+      width: 75%;
     }
   }
 
   @media (max-width: 768px) {
-    max-height: calc(100vh - 3.5rem - 4vh);
+    min-height: calc(100vh - 3.5rem - 4vh);
   }
 
   @media (max-width: 600px) {
-    .logInForm {
-      width: 70%;
+    .signUpForm {
+      width: 85%;
     }
   }
 
   @media (max-width: 500px) {
-    .logInForm {
-      width: 90%;
+    .signUpForm {
+      width: 95%;
     }
   }
 `;

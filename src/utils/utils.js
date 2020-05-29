@@ -16,11 +16,14 @@ export const checkValidUser = (users, username) => {
 };
 
 export const checkUsernameFormat = (username) => {
-  // return users.every((user) => user.username !== username);
+  if (username.match(/[^a-zA-Z\d]/g)) return true;
+  else return false;
 };
 
 export const checkValidPassword = (password) => {
-  // return users.every((user) => user.username !== username);
+  if (password.match(/\s/g)) return true;
+  else if (password.match(/[a-zA-Z]/g) && password.match(/\d/g)) return false;
+  else return true;
 };
 
 export const formatTopic = (topic) => {
