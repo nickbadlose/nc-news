@@ -10,6 +10,7 @@ export const StyledLi = styled.li`
   flex-wrap: nowrap;
   max-height: 130px;
   transition: border 0.3s ease-in-out;
+  overflow: hidden;
 
   :hover {
     border: 1px solid #ffffff;
@@ -232,6 +233,7 @@ export const StyledLiCard = styled.li`
   .card {
     border: ${(props) => props.theme.border};
     transition: border 0.5s ease-in-out;
+    overflow: hidden;
 
     :hover {
       border: 1px solid #ffffff;

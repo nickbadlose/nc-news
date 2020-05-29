@@ -181,12 +181,11 @@ export const useForm = (initialForm, dispatch) => {
           navigate("/");
         }
       })
-      .catch(() => {
-        if (isMounted.current) {
-          setForm((c) => {
-            c.userInvalid = true;
-          });
-        }
+      .catch(({ response }) => {
+        errorStore.err = {
+          status: response.status,
+          msg: response.data.msg,
+        };
       });
   };
 

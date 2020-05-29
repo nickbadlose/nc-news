@@ -42,7 +42,7 @@ const PostTopicForm = () => {
                 placeholder="Title"
                 onChange={(e) => handleChange(e, "slug")}
                 value={form.slug}
-                maxLength="16"
+                maxLength="12"
                 isInvalid={form.invalidTopic}
               />
               {form.invalidFormat ? (

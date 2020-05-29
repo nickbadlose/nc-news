@@ -15,6 +15,14 @@ export const checkValidUser = (users, username) => {
   return users.every((user) => user.username !== username);
 };
 
+export const checkUsernameFormat = (username) => {
+  // return users.every((user) => user.username !== username);
+};
+
+export const checkValidPassword = (password) => {
+  // return users.every((user) => user.username !== username);
+};
+
 export const formatTopic = (topic) => {
   return topic.slice(0, 1).toUpperCase() + topic.slice(1);
 };

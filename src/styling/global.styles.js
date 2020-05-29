@@ -27,7 +27,7 @@ body {
 } */
 
 html {
-  background-color: #eaeaea;
+  background-color: ${(props) => props.theme.htmlBg};
 }
 
 code {
@@ -37,7 +37,7 @@ code {
 
 .App {
   /* background-color: #dae0e6; */
-  background-color: #eaeaea;
+  background-color: ${(props) => props.theme.htmlBg};
   text-align: center;
   font-family: "Guardian Text Egyptian Web", Georgia, serif;
   color: ${(props) => props.theme.textC};
