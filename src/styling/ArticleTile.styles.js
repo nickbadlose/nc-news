@@ -283,7 +283,6 @@ export const StyledLiCard = styled.li`
 
       :hover {
         cursor: pointer;
-        color: rgb(240, 45, 58, 1);
         &::before {
           color: ${(props) => props.theme.linkHover};
         }

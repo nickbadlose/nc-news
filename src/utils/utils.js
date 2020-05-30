@@ -1,3 +1,40 @@
+import moment from "moment";
+
+export const timeSince = (timestamp) => {
+  const currentTime = moment(Date.now());
+  const actionTime = moment(timestamp);
+  if (currentTime.diff(actionTime, "years") > 1) {
+    return `${currentTime.diff(actionTime, "years")} years ago`;
+  }
+  if (currentTime.diff(actionTime, "years") === 1) {
+    return "1 year ago";
+  }
+  if (currentTime.diff(actionTime, "months") > 1) {
+    return `${currentTime.diff(actionTime, "months")} months ago`;
+  }
+  if (currentTime.diff(actionTime, "months") === 1) {
+    return "1 month ago";
+  }
+  if (currentTime.diff(actionTime, "weeks") > 1) {
+    return `${currentTime.diff(actionTime, "weeks")} weeks ago`;
+  }
+  if (currentTime.diff(actionTime, "weeks") === 1) {
+    return "1 week ago";
+  }
+  if (currentTime.diff(actionTime, "days") > 1) {
+    return `${currentTime.diff(actionTime, "days")} days ago`;
+  }
+  if (currentTime.diff(actionTime, "days") === 1) {
+    return "1 day ago";
+  }
+  if (currentTime.diff(actionTime, "hours") > 1) {
+    return `${currentTime.diff(actionTime, "hours")} hours ago`;
+  }
+  if (currentTime.diff(actionTime, "hours") === 1) {
+    return "1 hour ago";
+  } else return "Less than an hour ago";
+};
+
 export const formatDate = (date) => {
   const dateObj = {};
   if (date === undefined) {

@@ -11,6 +11,7 @@ export const StyledMain = styled.main`
     display: flex;
     flex-flow: column nowrap;
     text-transform: capitalize;
+    margin-bottom: 0rem;
 
     &::after {
       content: "";
@@ -31,7 +32,6 @@ export const StyledMain = styled.main`
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    margin-top: 0.5rem;
     align-items: flex-start;
 
     .userInfo {
@@ -43,6 +43,7 @@ export const StyledMain = styled.main`
       top: calc(2.5vw + 3.5rem);
       text-align: left;
       overflow: hidden;
+      margin-top: 1rem;
 
       .titleText {
         padding: 0.5rem;
@@ -109,20 +110,15 @@ export const StyledMain = styled.main`
         align-items: stretch;
       }
     }
+  }
 
-    /* .articles {
-      flex: 1 1 calc((100% - 200px / 2));
-      background: ${(props) => props.theme.bg};
-      border: ${(props) => props.theme.border};
-      border-radius: ${(props) => props.theme.borderR};
-      margin: 0rem 1rem;
+  @media (max-width: 768px) {
+    .userInfo {
+      display: none;
     }
 
-    .comments {
-      flex: 1 1 calc((100% - 200px / 2));
-      background: ${(props) => props.theme.bg};
-      border: ${(props) => props.theme.border};
-      border-radius: ${(props) => props.theme.borderR};
-    } */
+    .articlesComments {
+      margin-left: 0rem !important;
+    }
   }
 `;

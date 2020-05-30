@@ -70,7 +70,7 @@ const UserPage = ({ username }) => {
       });
   }, [username, setState]);
 
-  const { date, time } = formatDate(state.user.joined);
+  const { date } = formatDate(state.user.joined);
 
   return (
     <StyledMain>
@@ -129,7 +129,6 @@ const UserPage = ({ username }) => {
               </ListGroupItem>
             </ListGroup>
           </Card>
-
           <article className="articlesComments">
             <ul>
               {state.articlesComments.map((articleComment) => {
@@ -147,45 +146,6 @@ const UserPage = ({ username }) => {
               })}
             </ul>
           </article>
-
-          {/* <article className="articles">
-            <h3>Articles</h3>
-            <ul>
-              {toggleArticles
-                ? state.articles.map((article) => {
-                    return (
-                      <UserArticleTile {...article} key={article.article_id} />
-                    );
-                  })
-                : state.articles.slice(0, 3).map((article) => {
-                    return (
-                      <UserArticleTile {...article} key={article.article_id} />
-                    );
-                  })}
-            </ul>
-            <button onClick={(e) => handleArticlesToggle(e, "toggleArticles")}>
-              {toggleArticles ? "Show less" : "Show all articles"}
-            </button>
-          </article>
-          <article className="comments">
-            <h3>Comments</h3>
-            <ul>
-              {toggleComments
-                ? state.comments.map((comment) => {
-                    return (
-                      <UserCommentTile {...comment} key={comment.comment_id} />
-                    );
-                  })
-                : state.comments.slice(0, 3).map((comment) => {
-                    return (
-                      <UserCommentTile {...comment} key={comment.comment_id} />
-                    );
-                  })}
-            </ul>
-            <button onClick={(e) => handleCommentsToggle(e, "toggleComments")}>
-              {toggleComments ? "Show less" : "Show all comments"}
-            </button>
-          </article> */}
         </div>
       )}
     </StyledMain>

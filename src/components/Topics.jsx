@@ -27,11 +27,7 @@ const Topics = () => {
           <ul>
             {topics.map((topic) => {
               return (
-                <StyledLi
-                  // img={topic.image_thumb}
-                  // mobile_img={topic.image_thumb}
-                  key={topic.slug}
-                >
+                <StyledLi key={topic.slug}>
                   <Link to={`/topics/articles/${topic.slug}`}>
                     <img src={topic.image_thumb} alt={topic.slug + " image"} />
                     <div className="topicInfo">
