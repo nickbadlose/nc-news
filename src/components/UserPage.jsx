@@ -131,12 +131,12 @@ const UserPage = ({ username }) => {
           </Card>
 
           <article className="articlesComments">
-            <h3>Articles</h3>
             <ul>
               {state.articlesComments.map((articleComment) => {
                 return (
                   <UserTile
                     {...articleComment}
+                    username={username}
                     key={
                       articleComment.topic === undefined
                         ? `c${articleComment.comment_id}`

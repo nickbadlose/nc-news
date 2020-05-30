@@ -22,6 +22,11 @@ export const StyledMain = styled.main`
     }
   }
 
+  .spinner {
+    margin-top: ${(props) => props.theme.marginL};
+    align-self: center;
+  }
+
   .layout {
     display: flex;
     flex-flow: row nowrap;
@@ -95,7 +100,14 @@ export const StyledMain = styled.main`
     }
 
     .articlesComments {
-      flex: 1 1 50%
+      flex: 1 1 50%;
+      margin-left: 1rem;
+
+      ul {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+      }
     }
 
     /* .articles {
