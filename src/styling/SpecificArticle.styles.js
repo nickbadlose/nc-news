@@ -69,6 +69,7 @@ export const StyledMain = styled.main`
       .info {
         display: flex;
         flex-flow: row nowrap;
+        align-items: center;
 
         a {
           text-decoration: none;

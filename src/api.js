@@ -37,6 +37,14 @@ export const fetchUsers = () => {
   });
 };
 
+export const getUser = (username) => {
+  return axios
+    .get(`${baseUrl}/users/${username}`)
+    .then(({ data: { user } }) => {
+      return user;
+    });
+};
+
 export const postCommentByArticleId = (article_id, comment) => {
   return axios.post(`${baseUrl}/articles/${article_id}/comments`, comment, {
     headers: { Authorization: "BEARER " + userStore.token },

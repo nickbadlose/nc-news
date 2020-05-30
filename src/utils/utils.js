@@ -35,6 +35,18 @@ export const checkValidTopic = (topic) => {
   else return true;
 };
 
+export const formatUserContributions = (articles, comments) => {
+  const articlesComments = [...articles, ...comments];
+  const formattedArticlesComments = articlesComments.map((item) => {
+    item.created_at = new Date(item.created_at).getTime();
+    return item;
+  });
+
+  return formattedArticlesComments.sort((a, b) => {
+    return b.created_at - a.created_at;
+  });
+};
+
 export const formatFontSize = (paragraph) => {
   let fontSize = 1.5;
   if (paragraph.length < 25) fontSize = 1.5;

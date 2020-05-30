@@ -1,21 +1,36 @@
 import React, { useEffect, useRef } from "react";
 import * as api from "../api";
 import { userStore } from "../stores/userinfo";
-import UserArticleTile from "./UserArticleTile";
+import UserTile from "./UserTile";
 import UserCommentTile from "./UserCommentTile";
 import { useImmer } from "use-immer";
 import { errorStore } from "../stores/error";
 import { useToggle } from "../hooks";
+import Spinner from "react-bootstrap/Spinner";
+import { StyledMain } from "../styling/UserPage.styles";
+import { formatDate, formatUserContributions } from "../utils/utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faClock,
+  faQuestionCircle,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import ListGroupItem from "react-bootstrap/ListGroupItem";
 
 const UserPage = ({ username }) => {
   const isMounted = useRef(true);
   const [state, setState] = useImmer({
-    articles: [],
-    comments: [],
+    articlesComments: [],
+    stars: 0,
+    user: {},
     isLoading: true,
   });
-  const [toggleComments, handleCommentsToggle] = useToggle();
-  const [toggleArticles, handleArticlesToggle] = useToggle();
+  // const [toggleComments, handleCommentsToggle] = useToggle();
+  // const [toggleArticles, handleArticlesToggle] = useToggle();
 
   useEffect(() => {
     return () => {
@@ -34,12 +49,18 @@ const UserPage = ({ username }) => {
         username
       ),
       api.getComments(username),
+      api.getUser(username),
     ])
-      .then(([{ data }, comments]) => {
+      .then(([{ data }, comments, user]) => {
+        const articlesComments = formatUserContributions(
+          data.articles,
+          comments
+        );
         if (isMounted.current) {
           setState((current) => {
-            current.comments = comments;
-            current.articles = data.articles;
+            current.articlesComments = articlesComments;
+            current.stars = data.articles.length * 5 + comments.length;
+            current.user = user;
             current.isLoading = false;
           });
         }
@@ -49,28 +70,86 @@ const UserPage = ({ username }) => {
       });
   }, [username, setState]);
 
+  const { date, time } = formatDate(state.user.joined);
+
   return (
-    <main>
-      <h2>
-        {userStore.username === username
-          ? `Welcome ${username}`
-          : `Profile - ${username}`}
-      </h2>
+    <StyledMain>
+      <h2 className="username">{username.toLowerCase()}</h2>
       {state.isLoading ? (
-        <p> Loading...</p>
+        <Spinner animation="border" className="spinner" />
       ) : (
-        <>
-          <h3>
-            {" "}
-            Total contributions -{" "}
-            {state.articles.length + state.comments.length}
-          </h3>
-          <article>
-            {userStore.username === username ? (
-              <h3>Your Articles</h3>
-            ) : (
-              <h3>{username}'s Articles</h3>
-            )}
+        <div className="layout">
+          <Card className="userInfo">
+            <Card.Img variant="top" src={state.user.avatar_url} alt="Avatar" />
+            <Card.Body className="titleText">
+              <Card.Title className="userInfoTitle">{username}</Card.Title>
+              {userStore.username === username ? (
+                <Card.Text className="text">
+                  A collection of all your comments and articles throughout your
+                  time with us!
+                </Card.Text>
+              ) : (
+                <Card.Text className="text">
+                  A collection of all {username}'s comments and articles
+                  throughout their time with us!
+                </Card.Text>
+              )}
+            </Card.Body>
+            <ListGroup className="list-group-flush">
+              <ListGroupItem className="stars">
+                <span>
+                  {state.stars} Stars{" "}
+                  <FontAwesomeIcon icon={faStar} className="starIcon" />
+                </span>
+                <OverlayTrigger
+                  overlay={
+                    userStore.username === username ? (
+                      <Tooltip id="tooltip">
+                        Want to improve your stars? Earn 5 stars for every
+                        article you post and 1 star for each comment you post!
+                      </Tooltip>
+                    ) : (
+                      <Tooltip id="tooltip">
+                        5 stars per articles posted and 1 star per comment
+                        posted!
+                      </Tooltip>
+                    )
+                  }
+                >
+                  <FontAwesomeIcon
+                    icon={faQuestionCircle}
+                    className="helpIcon"
+                  />
+                </OverlayTrigger>
+              </ListGroupItem>
+              <ListGroupItem className="memberJoinDate">
+                {" "}
+                Member since {date}{" "}
+                <FontAwesomeIcon icon={faClock} className="clockIcon" />
+              </ListGroupItem>
+            </ListGroup>
+          </Card>
+
+          <article className="articlesComments">
+            <h3>Articles</h3>
+            <ul>
+              {state.articlesComments.map((articleComment) => {
+                return (
+                  <UserTile
+                    {...articleComment}
+                    key={
+                      articleComment.topic === undefined
+                        ? `c${articleComment.comment_id}`
+                        : articleComment.article_id
+                    }
+                  />
+                );
+              })}
+            </ul>
+          </article>
+
+          {/* <article className="articles">
+            <h3>Articles</h3>
             <ul>
               {toggleArticles
                 ? state.articles.map((article) => {
@@ -88,12 +167,8 @@ const UserPage = ({ username }) => {
               {toggleArticles ? "Show less" : "Show all articles"}
             </button>
           </article>
-          <article>
-            {userStore.username === username ? (
-              <h3>Your Comments</h3>
-            ) : (
-              <h3>{username}'s Comments</h3>
-            )}
+          <article className="comments">
+            <h3>Comments</h3>
             <ul>
               {toggleComments
                 ? state.comments.map((comment) => {
@@ -110,10 +185,10 @@ const UserPage = ({ username }) => {
             <button onClick={(e) => handleCommentsToggle(e, "toggleComments")}>
               {toggleComments ? "Show less" : "Show all comments"}
             </button>
-          </article>
-        </>
+          </article> */}
+        </div>
       )}
-    </main>
+    </StyledMain>
   );
 };
 

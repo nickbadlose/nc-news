@@ -4,5 +4,6 @@ export const StyledForm = styled.form`
   a.dropdown-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 `;

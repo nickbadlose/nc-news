@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
 
-const UserArticleTile = ({ article_id, title, body }) => {
+const UserTile = ({ article_id, title, body }) => {
   return (
     <div>
       <Link to={`/articles/${article_id}`} className="articleTileHeader">
@@ -20,4 +20,4 @@ const UserArticleTile = ({ article_id, title, body }) => {
   );
 };
 
-export default UserArticleTile;
+export default UserTile;

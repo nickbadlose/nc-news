@@ -5,28 +5,32 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { StyledForm } from "../styling/Layout.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTh, faThList } from "@fortawesome/free-solid-svg-icons";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const Layout = () => {
   return (
     <StyledForm>
-      <DropdownButton
-        id="dropdown-basic-button"
-        onSelect={layoutStore.handleLayout}
-        title={
-          <FontAwesomeIcon
-            icon={layoutStore.layout === "list" ? faThList : faTh}
-          />
-        }
-        size="sm"
-        alignRight={true}
-      >
-        <Dropdown.Item eventKey="list">
-          List <FontAwesomeIcon icon={faThList} />
-        </Dropdown.Item>
-        <Dropdown.Item eventKey="card">
-          Card <FontAwesomeIcon icon={faTh} />
-        </Dropdown.Item>
-      </DropdownButton>
+      <OverlayTrigger overlay={<Tooltip id="tooltip">Change layout!</Tooltip>}>
+        <DropdownButton
+          id="dropdown-basic-button"
+          onSelect={layoutStore.handleLayout}
+          title={
+            <FontAwesomeIcon
+              icon={layoutStore.layout === "list" ? faThList : faTh}
+            />
+          }
+          size="sm"
+          alignRight={true}
+        >
+          <Dropdown.Item eventKey="list">
+            List <FontAwesomeIcon icon={faThList} />
+          </Dropdown.Item>
+          <Dropdown.Item eventKey="card">
+            Card <FontAwesomeIcon icon={faTh} />
+          </Dropdown.Item>
+        </DropdownButton>
+      </OverlayTrigger>
     </StyledForm>
   );
 };
