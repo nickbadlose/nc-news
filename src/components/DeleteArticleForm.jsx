@@ -9,7 +9,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
 
-const DeleteArticleForm = ({ article_id, dispatch, isMounted }) => {
+const DeleteArticleForm = ({ article_id, dispatch, isMounted, userPage }) => {
   const [deleteArticle, handleDeleteArticle] = useToggle();
 
   const deleteArticleById = () => {
@@ -18,7 +18,9 @@ const DeleteArticleForm = ({ article_id, dispatch, isMounted }) => {
       .removeArticleById(article_id)
       .then(() => {
         if (isMounted.current) {
-          navigate("/articles");
+          userPage
+            ? dispatch({ type: "delete-article" })
+            : navigate("/articles");
         }
       })
       .catch(({ response }) => {

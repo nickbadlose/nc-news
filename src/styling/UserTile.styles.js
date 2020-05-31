@@ -69,6 +69,7 @@ export const StyledLi = styled.li`
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    justify-content: space-between;
     color: ${(props) => props.theme.linkC};
     font-size: 0.8rem;
     background: ${(props) =>
@@ -79,9 +80,16 @@ export const StyledLi = styled.li`
       color: ${(props) => props.theme.linkC};
     }
 
+    .articleCommentInfo {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+    }
+
     .comments {
       display: flex;
       align-items: center;
+      flex-flow: row nowrap;
 
       &::after {
         content: "";
@@ -96,8 +104,36 @@ export const StyledLi = styled.li`
       }
     }
 
+    .votes {
+      display: flex;
+      align-items: center;
+      flex-flow: row nowrap;
+    }
+
     p {
       margin: 0rem;
+    }
+
+    .editDelete {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      justify-content: center;
+
+      button {
+        font-size: 0.6rem;
+      }
+    }
+
+    .editDeleteComment {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      justify-content: center;
+
+      button {
+        font-size: 0.6rem;
+      }
     }
   }
 

@@ -148,6 +148,7 @@ const UserPage = ({ username }) => {
                   <UserTile
                     {...articleComment}
                     username={username}
+                    isMounted={isMounted}
                     key={
                       articleComment.topic === undefined
                         ? `c${articleComment.comment_id}`
