@@ -49,6 +49,11 @@ export const StyledLi = styled.li`
       }
 
       .editDeleteComment {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+
         button {
           font-size: 0.8rem;
         }

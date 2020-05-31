@@ -11,7 +11,7 @@ export const mainTheme = {
   smallMarginL: "1rem",
   linkHover: "rgb(240, 45, 58, 1)",
   borderHover: "#ffffff",
-  userArticleHeaderFooterC: "rgb(252, 217, 220, 1)",
+  userArticleHeaderFooterC: "rgb(253, 236, 238, 1)",
 };
 
 export const loggedIn = {};

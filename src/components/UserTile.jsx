@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "@reach/router";
 import { useToggle } from "../hooks";
 import { StyledLi } from "../styling/UserTile.styles";
-import { formatDate, formatUserContributions, timeSince } from "../utils/utils";
+import { timeSince } from "../utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBook,
@@ -13,8 +13,6 @@ import {
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
-import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Accordion from "react-bootstrap/Accordion";
 
 const UserTile = ({
@@ -48,10 +46,6 @@ const UserTile = ({
           <Link to={`/articles/${article_id}`} className="articleCommentTitle">
             <Card.Title>{title}</Card.Title>
           </Link>
-
-          {/* <Card.Text>
-              With supporting text below as a natural lead-in to additional content.
-    </Card.Text> */}
           <footer className="blockquote-footer">{timeSince(created_at)}</footer>
         </Card.Body>
         <Accordion>
@@ -63,7 +57,7 @@ const UserTile = ({
             <FontAwesomeIcon icon={faAngleDown} className="arrowIcon" />
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="0">
-            <Card.Text>{body}</Card.Text>
+            <Card.Text className="body">{body}</Card.Text>
           </Accordion.Collapse>
         </Accordion>
         <Card.Footer className="text-muted footer">

@@ -45,6 +45,10 @@ export const StyledLi = styled.li`
     }
   }
 
+  .body {
+    padding: 1.25rem;
+  }
+
   .header {
     padding: 0.25rem;
     display: flex;
@@ -99,5 +103,6 @@ export const StyledLi = styled.li`
 
   .capitalize {
     text-transform: capitalize;
+    margin-right: 0.2rem;
   }
 `;

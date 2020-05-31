@@ -80,9 +80,21 @@ const UserPage = ({ username }) => {
       ) : (
         <div className="layout">
           <Card className="userInfo">
-            <Card.Img variant="top" src={state.user.avatar_url} alt="Avatar" />
+            <Card.Img
+              variant="top"
+              src={state.user.avatar_url}
+              alt="Avatar"
+              className="cardImage"
+            />
             <Card.Body className="titleText">
-              <Card.Title className="userInfoTitle">{username}</Card.Title>
+              <Card.Title className="userInfoTitle">
+                <img
+                  src={state.user.avatar_url}
+                  alt="Avatar"
+                  className="mobileImage"
+                />
+                {username}
+              </Card.Title>
               {userStore.username === username ? (
                 <Card.Text className="text">
                   A collection of all your comments and articles throughout your

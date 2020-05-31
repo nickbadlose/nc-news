@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import Tooltip from "react-bootstrap/Tooltip";
 import { StyledForm } from "../styling/PostCommentForm.styles";
 
-const PostCommentForm = ({ article_id, dispatch }) => {
+const PostCommentForm = ({ article_id, dispatch, commentsNum }) => {
   const { form, handlePostComment, handleChange } = useForm(
     { body: "" },
     dispatch
@@ -16,9 +16,11 @@ const PostCommentForm = ({ article_id, dispatch }) => {
     <StyledForm onSubmit={(e) => handlePostComment(e, article_id)}>
       <Form.Control
         placeholder={
-          userStore.username
-            ? "What are your thoughts?"
-            : "Log in to post a comment"
+          !userStore.username
+            ? "Log in to post a comment."
+            : commentsNum === 0
+            ? "Be the first to comment about this article."
+            : "What are your thoughts?"
         }
         as="textarea"
         value={form.body}

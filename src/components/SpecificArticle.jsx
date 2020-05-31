@@ -3,25 +3,18 @@ import * as api from "../api";
 import CommentTile from "./CommentTile";
 import { formatDate } from "../utils/utils";
 import IncrementVotes from "./IncrementVotes";
+import DeleteArticleForm from "../components/DeleteArticleForm";
 import PostCommentForm from "./PostCommentForm";
 import FilterForm from "./FilterForm";
 import { userStore } from "../stores/userinfo";
-import { navigate, Link } from "@reach/router";
+import { Link } from "@reach/router";
 import EditArticleForm from "./EditArticleForm";
 import { errorStore } from "../stores/error";
-import { useSpecificArticle, useScroll, useToggle } from "../hooks";
+import { useSpecificArticle, useScroll } from "../hooks";
 import { StyledMain } from "../styling/SpecificArticle.styles";
 import Spinner from "react-bootstrap/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCommentAlt,
-  faPencilAlt,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import Button from "react-bootstrap/Button";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-import Modal from "react-bootstrap/Modal";
+import { faComment } from "@fortawesome/free-solid-svg-icons";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -93,8 +86,8 @@ const SpecificArticle = ({ article_id }) => {
     reducer,
     initialState
   );
+
   useScroll(dispatch, state.page, state.maxPage, state.isLoading);
-  const [deleteArticle, handleDeleteArticle] = useToggle();
 
   const { date, time } = formatDate(state.article.created_at);
 
@@ -108,26 +101,6 @@ const SpecificArticle = ({ article_id }) => {
         if (isMounted.current) {
           dispatch({ type: "delete-comment" });
           dispatch({ type: "fetch-comments", comments: filteredComments });
-        }
-      })
-      .catch(({ response }) => {
-        dispatch({
-          type: "err",
-          err: {
-            status: response.status,
-            msg: response.data.msg,
-          },
-        });
-      });
-  };
-
-  const deleteArticleById = () => {
-    handleDeleteArticle();
-    api
-      .removeArticleById(article_id)
-      .then(() => {
-        if (isMounted.current) {
-          navigate("/articles");
         }
       })
       .catch(({ response }) => {
@@ -173,7 +146,7 @@ const SpecificArticle = ({ article_id }) => {
                 </Link>
               </p>
               <p className="comments">
-                <FontAwesomeIcon icon={faCommentAlt} className="commentIcon" />
+                <FontAwesomeIcon icon={faComment} className="commentIcon" />
                 {+state.article.comment_count}
               </p>
             </div>
@@ -185,99 +158,30 @@ const SpecificArticle = ({ article_id }) => {
             />
             {userStore.username === state.article.author && (
               <div className="editDelete">
-                <Modal
-                  show={state.editingArticle}
-                  onHide={() => dispatch({ type: "editing-article" })}
-                  aria-labelledby="modal-editing-article"
-                  dialogClassName="modal-90w"
-                >
-                  <EditArticleForm
-                    dispatch={dispatch}
-                    body={state.article.body}
-                    article_id={article_id}
-                    title={state.article.title}
-                  />
-                </Modal>
-                {!state.editingArticle && (
-                  <OverlayTrigger
-                    overlay={<Tooltip id="tooltip">Edit Article!</Tooltip>}
-                  >
-                    <Button
-                      type="submit"
-                      size="sm"
-                      onClick={() => dispatch({ type: "editing-article" })}
-                    >
-                      <FontAwesomeIcon
-                        icon={faPencilAlt}
-                        className="pencilIcon"
-                      />
-                    </Button>
-                  </OverlayTrigger>
-                )}
-                <Modal
-                  show={deleteArticle}
-                  onHide={handleDeleteArticle}
-                  centered
-                  aria-labelledby="contained-modal-title-vcenter"
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title>Delete Your Article?!</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    Are you sure you want to delete this article? This action
-                    cannot be undone!
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <OverlayTrigger
-                      overlay={<Tooltip id="tooltip">Delete Article!</Tooltip>}
-                    >
-                      <Button
-                        type="submit"
-                        variant="danger"
-                        size="sm"
-                        onClick={deleteArticleById}
-                      >
-                        <FontAwesomeIcon
-                          icon={faTrashAlt}
-                          className="pencilIcon"
-                        />
-                      </Button>
-                    </OverlayTrigger>
-                    <Button
-                      variant="secondary"
-                      onClick={handleDeleteArticle}
-                      size="sm"
-                    >
-                      Close
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-                {!deleteArticle && (
-                  <OverlayTrigger
-                    overlay={<Tooltip id="tooltip">Delete Article!</Tooltip>}
-                  >
-                    <Button
-                      type="submit"
-                      variant="danger"
-                      size="sm"
-                      onClick={handleDeleteArticle}
-                    >
-                      <FontAwesomeIcon
-                        icon={faTrashAlt}
-                        className="pencilIcon"
-                      />
-                    </Button>
-                  </OverlayTrigger>
-                )}
+                <EditArticleForm
+                  dispatch={dispatch}
+                  body={state.article.body}
+                  article_id={article_id}
+                  title={state.article.title}
+                  editingArticle={state.editingArticle}
+                />
+                <DeleteArticleForm
+                  article_id={article_id}
+                  dispatch={dispatch}
+                  isMounted={isMounted}
+                />
               </div>
             )}
           </div>
           <PostCommentForm
             article_id={state.article.article_id}
             dispatch={dispatch}
+            commentsNum={state.comments.length}
           />
           <section className="commentSection">
-            <FilterForm dispatch={dispatch} article={false} />
+            {state.comments.length !== 0 && (
+              <FilterForm dispatch={dispatch} article={false} />
+            )}
             <ul>
               {state.comments.map((comment) => {
                 return (

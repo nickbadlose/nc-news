@@ -36,7 +36,6 @@ export const StyledMain = styled.main`
 
     .userInfo {
       flex: 0 0 198px;
-      background: ${(props) => props.theme.bg};
       border: ${(props) => props.theme.border};
       border-radius: ${(props) => props.theme.borderR};
       position: sticky;
@@ -44,6 +43,10 @@ export const StyledMain = styled.main`
       text-align: left;
       overflow: hidden;
       margin-top: 1rem;
+
+      .mobileImage {
+        display: none;
+      }
 
       .titleText {
         padding: 0.5rem;
@@ -68,7 +71,7 @@ export const StyledMain = styled.main`
         justify-content: space-between;
       }
 
-      img {
+      .cardImage {
         width: 198px;
         height: 198px;
         min-width: 198px;
@@ -113,12 +116,50 @@ export const StyledMain = styled.main`
   }
 
   @media (max-width: 768px) {
-    .userInfo {
-      display: none;
-    }
+    .layout {
+      flex-flow: column nowrap;
+      align-items: stretch;
 
-    .articlesComments {
-      margin-left: 0rem !important;
+      .userInfo {
+        flex: 1 1 auto;
+        background: ${(props) => props.theme.bg};
+        border: ${(props) => props.theme.border};
+        border-radius: ${(props) => props.theme.borderR};
+        position: unset;
+        top: unset;
+        text-align: left;
+        overflow: hidden;
+        margin-top: 1rem;
+
+        .userInfoTitle {
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+
+          .mobileImage {
+            display: unset;
+            width: 2rem;
+            height: 2rem;
+            min-width: 2rem;
+            min-height: 2rem;
+            max-width: 2rem;
+            max-height: 2rem;
+            background: ${(props) => props.theme.textC};
+            color: #ffffff;
+            text-align: center;
+            overflow: hidden;
+            margin-right: 0.2rem;
+          }
+        }
+      }
+
+      .cardImage {
+        display: none;
+      }
+
+      .articlesComments {
+        margin-left: 0rem !important;
+      }
     }
   }
 `;

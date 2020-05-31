@@ -61,6 +61,11 @@ export const StyledMain = styled.main`
       }
 
       .editDelete {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+
         button {
           font-size: 0.8rem;
         }
