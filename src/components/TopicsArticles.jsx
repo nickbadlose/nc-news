@@ -3,13 +3,14 @@ import FilterForm from "./FilterForm";
 import ArticleTile from "./ArticleTile";
 import { Link } from "@reach/router";
 import { useArticles, useScroll } from "../hooks";
+import { StyledMain } from "../styling/TopicsArticles.styles";
 
 const TopicsArticles = ({ topic }) => {
   const { state, dispatch } = useArticles(topic);
   useScroll(dispatch, state.page, state.maxPage, state.isLoading);
 
   return (
-    <main>
+    <StyledMain>
       <h2>Articles - {topic}</h2>
       <Link to={`/topics/articles/${topic}/post`}>
         <button>Post an article about this topic?</button>
@@ -39,7 +40,7 @@ const TopicsArticles = ({ topic }) => {
           {state.page < state.maxPage && <p>Loading more articles...</p>}
         </article>
       )}
-    </main>
+    </StyledMain>
   );
 };
 

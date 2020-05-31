@@ -1,7 +1,14 @@
 import React from "react";
+import DeleteArticleForm from "./DeleteArticleForm";
+import EditArticleForm from "./EditArticleForm";
+import EditCommentForm from "./EditCommentForm";
+import DeleteCommentForm from "./DeleteCommentForm";
+import * as api from "../api";
+import { userStore } from "../stores/userinfo";
+import { errorStore } from "../stores/error";
 import { Link } from "@reach/router";
-import { useToggle } from "../hooks";
-import { useImmerReducer, useImmer } from "use-immer";
+import { useToggle, useForm } from "../hooks";
+import { useImmerReducer } from "use-immer";
 import { StyledLi } from "../styling/UserTile.styles";
 import { timeSince } from "../utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,27 +18,13 @@ import {
   faHeart,
   faCommentDots,
 } from "@fortawesome/free-solid-svg-icons";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
-import DeleteArticleForm from "./DeleteArticleForm";
-import EditArticleForm from "./EditArticleForm";
-import { userStore } from "../stores/userinfo";
-import { errorStore } from "../stores/error";
-import EditCommentForm from "./EditCommentForm";
-import DeleteCommentForm from "./DeleteCommentForm";
 
 const reducer = (state, action) => {
   switch (action.type) {
-    // case "delete-comment":
-    //   state.page = 1;
-    //   state.sort_by = "created_at";
-    //   state.order = undefined;
-    //   state.article.comment_count--;
-    //   return;
-    case "delete-article":
-      state.deletedArticle = true;
+    case "delete":
+      state.deleted = true;
       return;
     case "editing-article":
       state.editingArticle = !state.editingArticle;
@@ -63,13 +56,36 @@ const UserTile = ({
   const initialState = {
     body,
     editingArticle: false,
-    deletedArticle: false,
+    deleted: false,
     err: false,
   };
   const [state, dispatch] = useImmerReducer(reducer, initialState);
   const [bodyToggle, handleBodyToggle] = useToggle();
+  const { form, handleChange, handleEditComment } = useForm({
+    body,
+  });
+
+  const deleteCommentById = (comment_id) => {
+    api
+      .removeCommentById(comment_id)
+      .then(() => {
+        if (isMounted.current) {
+          dispatch({ type: "delete" });
+        }
+      })
+      .catch(({ response }) => {
+        dispatch({
+          type: "err",
+          err: {
+            status: response.status,
+            msg: response.data.msg,
+          },
+        });
+      });
+  };
+
   return (
-    !state.deletedArticle && (
+    !state.deleted && (
       <StyledLi toggle={bodyToggle} article={topic ? true : false}>
         <Card>
           {topic ? (
@@ -104,7 +120,9 @@ const UserTile = ({
               <FontAwesomeIcon icon={faAngleDown} className="arrowIcon" />
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
-              <Card.Text className="body">{state.body}</Card.Text>
+              <Card.Text className="body">
+                {topic ? state.body : form.body}
+              </Card.Text>
             </Accordion.Collapse>
           </Accordion>
           <Card.Footer className="text-muted footer">
@@ -143,16 +161,16 @@ const UserTile = ({
                 </div>
               ) : (
                 <div className="editDeleteComment">
-                  {/* <EditCommentForm
-                  handleChange={handleChange}
-                  handleEditComment={handleEditComment}
-                  body={form.body}
-                  comment_id={comment_id}
-                />
-                <DeleteCommentForm
-                  deleteCommentById={deleteCommentById}
-                  comment_id={comment_id}
-                /> */}
+                  <EditCommentForm
+                    handleChange={handleChange}
+                    handleEditComment={handleEditComment}
+                    body={form.body}
+                    comment_id={comment_id}
+                  />
+                  <DeleteCommentForm
+                    deleteCommentById={deleteCommentById}
+                    comment_id={comment_id}
+                  />
                 </div>
               ))}
           </Card.Footer>

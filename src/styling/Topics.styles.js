@@ -74,7 +74,7 @@ export const StyledLi = styled.li`
   }
 
   p {
-    margin: 0.5rem;
+    margin: 0rem 0.5rem 0.5rem 0.5rem;
   }
 
   img {

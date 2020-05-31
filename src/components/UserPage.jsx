@@ -2,10 +2,8 @@ import React, { useEffect, useRef } from "react";
 import * as api from "../api";
 import { userStore } from "../stores/userinfo";
 import UserTile from "./UserTile";
-import UserCommentTile from "./UserCommentTile";
 import { useImmer } from "use-immer";
 import { errorStore } from "../stores/error";
-import { useToggle } from "../hooks";
 import Spinner from "react-bootstrap/Spinner";
 import { StyledMain } from "../styling/UserPage.styles";
 import { formatDate, formatUserContributions } from "../utils/utils";
@@ -29,8 +27,6 @@ const UserPage = ({ username }) => {
     user: {},
     isLoading: true,
   });
-  // const [toggleComments, handleCommentsToggle] = useToggle();
-  // const [toggleArticles, handleArticlesToggle] = useToggle();
 
   useEffect(() => {
     return () => {

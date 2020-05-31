@@ -52,7 +52,7 @@ const ArticleTile = ({
               <h4 className="titleMobile">{title.toLowerCase()}</h4>
             </Link>
             <p className="body">{body}</p>
-            <Link to={`/articles/${article_id}`}>
+            <Link to={`/articles/${article_id}`} tabIndex="-1">
               <div className="textFader"></div>
             </Link>
           </div>

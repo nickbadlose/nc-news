@@ -18,9 +18,7 @@ const DeleteArticleForm = ({ article_id, dispatch, isMounted, userPage }) => {
       .removeArticleById(article_id)
       .then(() => {
         if (isMounted.current) {
-          userPage
-            ? dispatch({ type: "delete-article" })
-            : navigate("/articles");
+          userPage ? dispatch({ type: "delete" }) : navigate("/articles");
         }
       })
       .catch(({ response }) => {

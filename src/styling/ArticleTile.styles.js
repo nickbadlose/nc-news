@@ -9,6 +9,7 @@ export const StyledLi = styled.li`
   flex-direction: row;
   flex-wrap: nowrap;
   max-height: 130px;
+  min-height: 130px;
   transition: border 0.3s ease-in-out;
   overflow: hidden;
 

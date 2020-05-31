@@ -110,7 +110,7 @@ export const useForm = (initialForm, dispatch) => {
     userStore.logIn(form.username, form.password).catch(() => {
       if (isMounted.current) {
         setForm((c) => {
-          return { ...initialForm, invalidUser: true };
+          return { username: "", password: "", invalidUser: true };
         });
       }
     });
