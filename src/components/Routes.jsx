@@ -13,7 +13,6 @@ import { StyledRouter } from "../styling/Routes.styles";
 import { observer } from "mobx-react";
 import LogInForm from "./LogInForm";
 import SignUpForm from "./SignUpForm";
-import PostArticleForm from "./PostArticleForm";
 
 const Routes = observer(() => {
   return (
@@ -30,7 +29,6 @@ const Routes = observer(() => {
           <LogInForm path="/login" />
           <SignUpForm path="/signup" />
           <ErrorPage default />
-          <PostArticleForm path="/topics/articles/:topic/post" />
           <UserPage path="/:username" />
           <SearchPage path="/search/:search" />
         </Router>
