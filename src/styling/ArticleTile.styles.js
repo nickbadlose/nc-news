@@ -229,6 +229,7 @@ export const StyledLi = styled.li`
 export const StyledLiCard = styled.li`
   flex-grow: 1;
   max-width: calc((100% - 3rem) / 3);
+  min-width: calc((100% - 3rem) / 3);
   margin: 1rem 0.5rem 0rem 0.5rem;
 
   .card {
@@ -387,14 +388,17 @@ export const StyledLiCard = styled.li`
 
   @media (max-width: 768px) {
     max-width: calc((100% - 3rem) / 3);
+    min-width: calc((100% - 3rem) / 3);
   }
 
   @media (max-width: 730px) {
     max-width: calc((100% - 2rem) / 2);
+    min-width: calc((100% - 2rem) / 2);
   }
 
   @media (max-width: 500px) {
     max-width: calc(100% - 1rem);
+    min-width: calc(100% - 1rem);
     a:nth-child(2) {
       display: flex;
     }

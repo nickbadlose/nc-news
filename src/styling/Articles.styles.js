@@ -26,9 +26,8 @@ export const StyledMain = styled.main`
 
       .filters {
         display: flex;
-        .sc-AxheI {
-          margin-right: 1rem;
-        }
+        flex-flow: row nowrap;
+        align-items: center;
       }
     }
   }
