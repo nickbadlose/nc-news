@@ -12,6 +12,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.capitalize {
+  text-transform: capitalize;  /* capitalize first letter of each word */
+}
+
 .modal-90w {
   max-width: 90%;
 }

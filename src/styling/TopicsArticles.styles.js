@@ -51,6 +51,14 @@ export const StyledMain = styled.main`
     align-self: center;
   }
 
+  .noArticles {
+    margin-top: 1rem;
+    background: ${(props) => props.theme.bg};
+    border-radius: ${(props) => props.theme.borderR};
+    border: ${(props) => props.theme.border};
+    padding: 1rem;
+  }
+
   .centerTile {
     display: ${(props) => props.layout === "card" && "flex"};
     flex-direction: ${(props) => props.layout === "card" && "column"};

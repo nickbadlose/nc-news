@@ -39,21 +39,25 @@ const TopicsArticles = observer(({ topic }) => {
               </div>
             </div>
           </div>
-          <div className="centerTile">
-            <ul>
-              {state.articles.map((article) => {
-                return <ArticleTile {...article} key={article.article_id} />;
-              })}
-            </ul>
-            {!state.articles.length && (
-              <p>
-                There's currently no articles about {topic} be the first to post
-                one!
-              </p>
-            )}
-            {state.page < state.maxPage && (
-              <Spinner animation="border" className="smallMarginSpinner" />
-            )}
+          <div className="main">
+            <div className="topicInfo"></div>
+            <div className="centerTile">
+              <ul>
+                {state.articles.map((article) => {
+                  return <ArticleTile {...article} key={article.article_id} />;
+                })}
+              </ul>
+              {!state.articles.length && (
+                <p className="noArticles">
+                  There are currently no articles about{" "}
+                  <span className="capitalize">{topic}</span>, be the first to
+                  post one!
+                </p>
+              )}
+              {state.page < state.maxPage && (
+                <Spinner animation="border" className="smallMarginSpinner" />
+              )}
+            </div>
           </div>
         </article>
       )}
