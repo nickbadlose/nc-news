@@ -1,4 +1,5 @@
 import moment from "moment";
+import { userStore } from "../stores/userinfo";
 
 export const timeSince = (timestamp) => {
   const currentTime = moment(Date.now());
@@ -33,6 +34,31 @@ export const timeSince = (timestamp) => {
   if (currentTime.diff(actionTime, "hours") === 1) {
     return "1 hour ago";
   } else return "Less than an hour ago";
+};
+
+export const getTopContributors = (articles) => {
+  if (userStore.users.length === 0 || articles.length === 0) return [];
+
+  const contributors = articles.reduce((obj, article) => {
+    if (obj[article.author] === undefined) {
+      obj[article.author] = 1;
+    } else {
+      obj[article.author]++;
+    }
+    return obj;
+  }, {});
+
+  const contributorsArr = Object.keys(contributors).map((author) => {
+    const avatar_url = userStore.users.find((user) => user.username === author)
+      .avatar_url;
+    return { author, articles: contributors[author], avatar_url };
+  });
+
+  return contributorsArr
+    .sort((a, b) => {
+      return b.articles - a.articles;
+    })
+    .slice(0, 3);
 };
 
 export const formatDate = (date) => {

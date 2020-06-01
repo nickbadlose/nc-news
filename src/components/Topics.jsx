@@ -11,7 +11,6 @@ import { faBook } from "@fortawesome/free-solid-svg-icons";
 
 const Topics = () => {
   const { topics, isLoading } = useTopics();
-  console.log(topics);
   return (
     <StyledMain>
       <div className="createLine">

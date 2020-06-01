@@ -221,7 +221,7 @@ export const StyledLi = styled.li`
 
   @media (max-width: 420px) {
     .topic {
-      display: none !important;
+      display: ${(props) => !props.listLayout && "none !important"};
     }
   }
 `;
@@ -371,6 +371,11 @@ export const StyledLiCard = styled.li`
     a:nth-child(2) {
       display: none;
     }
+  }
+
+  @media (max-width: 1150px) {
+    max-width: ${(props) => props.topicLayout && "calc((100% - 2rem) / 2)"};
+    min-width: ${(props) => props.topicLayout && "calc((100% - 2rem) / 2)"};
   }
 
   @media (max-width: 950px) {

@@ -22,14 +22,16 @@ const ArticleTile = ({
   topic,
   article_id,
   images,
+  topicLayout,
+  listLayout,
 }) => {
   const [toggle, handleToggle] = useToggle();
   const { date } = formatDate(created_at);
   const fontSize = formatFontSize(title);
 
-  if (layoutStore.layout === "list") {
+  if (layoutStore.layout === "list" || listLayout) {
     return (
-      <StyledLi theme={mainTheme} fontSize={fontSize}>
+      <StyledLi theme={mainTheme} fontSize={fontSize} listLayout={listLayout}>
         <IncrementVotes
           votes={votes}
           id={article_id}
@@ -82,7 +84,7 @@ const ArticleTile = ({
     );
   } else {
     return (
-      <StyledLiCard theme={mainTheme} toggle={toggle}>
+      <StyledLiCard theme={mainTheme} toggle={toggle} topicLayout={topicLayout}>
         <Card className="card">
           {images && (
             <Link to={`/articles/${article_id}`}>
@@ -117,9 +119,11 @@ const ArticleTile = ({
             <Link to={`/${author}`} className="author">
               {author}
             </Link>
-            <Link to={`/topics/articles/${topic}`} className="topic">
-              {topic}
-            </Link>
+            {!topicLayout && (
+              <Link to={`/topics/articles/${topic}`} className="topic">
+                {topic}
+              </Link>
+            )}
             <p className="comments">
               {comment_count}{" "}
               <FontAwesomeIcon icon={faCommentDots} className="commentIcon" />

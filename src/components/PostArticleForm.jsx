@@ -10,7 +10,7 @@ import { StyledDiv } from "../styling/PostArticleForm.styles";
 
 const PostArticleForm = ({ topic }) => {
   const [postingArticle, handlePostingArticle] = useToggle();
-  const { form, handleChange, handlePostArticle } = useForm({
+  const { form, handleChange, handlePostArticle, setForm } = useForm({
     body: "",
     title: "",
   });
@@ -19,7 +19,13 @@ const PostArticleForm = ({ topic }) => {
     <StyledDiv>
       <Modal
         show={postingArticle}
-        onHide={handlePostingArticle}
+        onHide={() => {
+          setForm((c) => {
+            c.body = "";
+            c.title = "";
+          });
+          handlePostingArticle();
+        }}
         aria-labelledby="modal-posting-topic"
         dialogClassName="modal-90w"
       >
@@ -68,7 +74,13 @@ const PostArticleForm = ({ topic }) => {
             </Button>
             <Button
               variant="secondary"
-              onClick={handlePostingArticle}
+              onClick={() => {
+                setForm((c) => {
+                  c.body = "";
+                  c.title = "";
+                });
+                handlePostingArticle();
+              }}
               size="sm"
             >
               Close
@@ -116,37 +128,6 @@ const PostArticleForm = ({ topic }) => {
           </OverlayTrigger>
         ))}
     </StyledDiv>
-    // <form onSubmit={(e) => handlePostArticle(e, topic)}>
-    //   <label>
-    //     <input
-    //       type="text"
-    //       value={form.title}
-    //       onChange={(e) => handleChange(e, "title")}
-    //       required
-    //       maxLength="80"
-    //       placeholder="Article title?"
-    //     />
-    //   </label>
-    //   <label>
-    //     <textarea
-    //       placeholder={
-    //         userStore.username
-    //           ? `What are your thoughts on ${topic}?`
-    //           : "Log in to post an article"
-    //       }
-    //       type="text"
-    //       value={form.body}
-    //       onChange={(e) => handleChange(e, "body")}
-    //       required
-    //     />
-    //     {}
-    //     <div>
-    //       <button type="submit" disabled={!userStore.username}>
-    //         {userStore.username ? "Post Article" : "Log in to post an article"}
-    //       </button>
-    //     </div>
-    //   </label>
-    // </form>
   );
 };
 

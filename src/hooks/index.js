@@ -243,6 +243,7 @@ const articlesInitialState = {
   maxPage: null,
   isLoading: true,
   images: {},
+  descriptions: {},
   isLoadingImages: true,
 };
 
@@ -270,8 +271,9 @@ const articlesReducer = (state, action) => {
       state.sort_by = "created_at";
       state.order = undefined;
       return;
-    case "fetch-images":
+    case "fetch-images-descriptions":
       state.images = action.images;
+      state.descriptions = action.descriptions;
       state.isLoadingImages = false;
       return;
     case "err":
@@ -302,6 +304,10 @@ export const useArticles = (topic) => {
   useEffect(() => {
     api.getTopics().then(({ data: { topics } }) => {
       if (isMounted.current) {
+        const descriptions = topics.reduce((obj, topic) => {
+          obj[topic.slug] = topic.description;
+          return obj;
+        }, {});
         const images = topics.reduce((obj, topic) => {
           obj[topic.slug] = {
             image_url: topic.image_url,
@@ -312,7 +318,7 @@ export const useArticles = (topic) => {
           };
           return obj;
         }, {});
-        dispatch({ type: "fetch-images", images });
+        dispatch({ type: "fetch-images-descriptions", images, descriptions });
       }
     });
   }, [dispatch]);

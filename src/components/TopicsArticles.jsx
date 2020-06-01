@@ -1,18 +1,24 @@
 import React from "react";
 import FilterForm from "./FilterForm";
 import ArticleTile from "./ArticleTile";
-import { Link } from "@reach/router";
+import PostArticleForm from "./PostArticleForm";
 import { useArticles, useScroll } from "../hooks";
 import { StyledMain } from "../styling/TopicsArticles.styles";
 import Layout from "./Layout";
 import { observer } from "mobx-react";
 import { layoutStore } from "../stores/layout";
 import Spinner from "react-bootstrap/Spinner";
-import PostArticleForm from "./PostArticleForm";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import { getTopContributors } from "../utils/utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "@reach/router";
 
 const TopicsArticles = observer(({ topic }) => {
   const { state, dispatch } = useArticles(topic);
   useScroll(dispatch, state.page, state.maxPage, state.isLoading);
+  const topContributors = getTopContributors(state.articles);
 
   return (
     <StyledMain layout={layoutStore.layout}>
@@ -39,12 +45,57 @@ const TopicsArticles = observer(({ topic }) => {
               </div>
             </div>
           </div>
-          <div className="main">
-            <div className="topicInfo"></div>
+          <div className="mainTopic">
+            <div className="topicInfo">
+              <Card className="info">
+                <Card.Header>
+                  <Card.Title className="capitalize">{topic}</Card.Title>
+                </Card.Header>
+                <Card.Body>
+                  <Card.Text>{state.descriptions[topic]}</Card.Text>
+                </Card.Body>
+              </Card>
+              <Card className="topContributors">
+                <Card.Header>
+                  <Card.Title>Top Contributors</Card.Title>
+                </Card.Header>
+                <ListGroup variant="flush">
+                  {topContributors.map((contributor) => {
+                    return (
+                      <ListGroup.Item
+                        className="contributor"
+                        key={contributor.author}
+                      >
+                        {" "}
+                        <img src={contributor.avatar_url} alt="Avatar" />{" "}
+                        <Link to={`/${contributor.author}`}>
+                          {contributor.author}
+                        </Link>{" "}
+                        <footer className="blockquote-footer">
+                          <FontAwesomeIcon
+                            icon={faBook}
+                            className="articleIcon"
+                          />{" "}
+                          {contributor.articles === 1
+                            ? "1 article!"
+                            : `${contributor.articles} articles!`}
+                        </footer>{" "}
+                      </ListGroup.Item>
+                    );
+                  })}
+                </ListGroup>
+              </Card>
+            </div>
             <div className="centerTile">
               <ul>
                 {state.articles.map((article) => {
-                  return <ArticleTile {...article} key={article.article_id} />;
+                  return (
+                    <ArticleTile
+                      {...article}
+                      key={article.article_id}
+                      topicLayout={true}
+                    />
+                  );
                 })}
               </ul>
               {!state.articles.length && (
