@@ -8,6 +8,8 @@ import Spinner from "react-bootstrap/Spinner";
 import { formatDate } from "../utils/utils";
 import { Link } from "@reach/router";
 import { StyledDiv } from "../styling/SearchPage.styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook } from "@fortawesome/free-solid-svg-icons";
 
 const SearchPage = ({ search }) => {
   const isMounted = useRef(true);
@@ -33,48 +35,103 @@ const SearchPage = ({ search }) => {
 
   return (
     <StyledDiv>
+      <div className="createLine">
+        <h2>Search</h2>
+      </div>
       {state.isLoading ? (
         <Spinner animation="border" className="spinner" />
-      ) : state.searchData.length ? (
-        <ul>
-          {state.searchData.map((data) => {
-            if (data.slug) {
-              /* don't forget to style no results*/
-              return (
-                <li key={state.searchData.indexOf(data)}>
-                  <p>Topic - {data.slug}</p>
-                </li>
-              );
-            } else if (data.username) {
-              return (
-                <li key={state.searchData.indexOf(data)}>
-                  <Card className="user">
-                    <Card.Body>
-                      <Card.Title className="capitalize">
-                        <img src={data.avatar_url} alt="Avatar" />
-                        <Link to={`/${data.username}`}>
-                          {data.username}
-                        </Link>{" "}
-                      </Card.Title>
-                      <footer className="blockquote-footer">
-                        member since {formatDate(data.joined).date}
-                      </footer>
-                    </Card.Body>
-                  </Card>
-                </li>
-              );
-            } else
-              return (
-                <ArticleTile
-                  listLayout={true}
-                  key={state.searchData.indexOf(data)}
-                  {...data}
-                />
-              );
-          })}
-        </ul>
       ) : (
-        <p>Sorry your search didn't match any documents.</p>
+        <main>
+          <div className="numberOfMatches">
+            <h4>
+              {state.searchData.length} matches for{" "}
+              <span className="capitalize">"{search}"</span>
+            </h4>
+          </div>
+          {state.searchData.length ? (
+            <ul>
+              {state.searchData.map((data) => {
+                if (data.slug) {
+                  return (
+                    <li key={state.searchData.indexOf(data)}>
+                      <Card className="topic">
+                        <Link to={`/topics/articles/${data.slug}`}>
+                          <img
+                            src={data.image_thumb}
+                            alt={data.slug}
+                            className="topicImage"
+                          />
+                        </Link>
+                        <Card.Body className="topicBody">
+                          <Link to={`/topics/articles/${data.slug}`}>
+                            <Card.Title className="capitalize topicTitle">
+                              {data.slug}
+                            </Card.Title>
+                          </Link>
+                          <Card.Text classNAme="topicDescription">
+                            {data.description}
+                          </Card.Text>
+                          <Card.Text>
+                            {+data.article_count === 1 ? (
+                              <footer className="blockquote-footer">
+                                <FontAwesomeIcon
+                                  icon={faBook}
+                                  className="bookIcon"
+                                />{" "}
+                                {data.article_count} article!
+                              </footer>
+                            ) : (
+                              <footer className="blockquote-footer">
+                                <FontAwesomeIcon
+                                  icon={faBook}
+                                  className="bookIcon"
+                                />{" "}
+                                {data.article_count} articles!
+                              </footer>
+                            )}
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                    </li>
+                  );
+                } else if (data.username) {
+                  return (
+                    <li key={state.searchData.indexOf(data)}>
+                      <Card className="user">
+                        <Card.Body>
+                          <Card.Title className="capitalize">
+                            <img
+                              src={data.avatar_url}
+                              alt="Avatar"
+                              className="avatar"
+                            />
+                            <Link to={`/${data.username}`}>
+                              {data.username}
+                            </Link>{" "}
+                          </Card.Title>
+                          <footer className="blockquote-footer">
+                            member since {formatDate(data.joined).date}
+                          </footer>
+                        </Card.Body>
+                      </Card>
+                    </li>
+                  );
+                } else
+                  return (
+                    <ArticleTile
+                      searchLayout={true}
+                      key={state.searchData.indexOf(data)}
+                      {...data}
+                    />
+                  );
+              })}
+            </ul>
+          ) : (
+            <p className="noResults">
+              Sorry your search didn't match any documents.
+            </p>
+          )}
+        </main>
       )}
     </StyledDiv>
   );

@@ -119,10 +119,6 @@ export const StyledLi = styled.li`
           display: none;
         }
 
-        .comments {
-          display: ${(props) => props.listLayout && "none"};
-        }
-
         .topic {
           display: flex;
 
@@ -131,7 +127,7 @@ export const StyledLi = styled.li`
             background-color: ${(props) => props.theme.linkC};
             border: 1px solid ${(props) => props.theme.linkC};
             border-radius: 50%;
-            display: ${(props) => (props.listLayout ? "none" : "block")};
+            display: block;
             align-self: center;
             height: 1px;
             width: 1px;
@@ -148,7 +144,7 @@ export const StyledLi = styled.li`
     }
 
     .shortComments {
-      display: ${(props) => !props.listLayout && "flex !important"};
+      display: flex !important;
       align-items: center;
 
       .commentIcon {
@@ -225,7 +221,7 @@ export const StyledLi = styled.li`
 
   @media (max-width: 420px) {
     .topic {
-      display: ${(props) => !props.listLayout && "none !important"};
+      display: ${(props) => !props.searchLayout && "none !important"};
     }
   }
 `;

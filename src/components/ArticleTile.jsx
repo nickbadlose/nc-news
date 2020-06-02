@@ -23,15 +23,19 @@ const ArticleTile = ({
   article_id,
   images,
   topicLayout,
-  listLayout,
+  searchLayout,
 }) => {
   const [toggle, handleToggle] = useToggle();
   const { date } = formatDate(created_at);
   const fontSize = formatFontSize(title);
 
-  if (layoutStore.layout === "list" || listLayout) {
+  if (layoutStore.layout === "list" || searchLayout) {
     return (
-      <StyledLi theme={mainTheme} fontSize={fontSize} listLayout={listLayout}>
+      <StyledLi
+        theme={mainTheme}
+        fontSize={fontSize}
+        searchLayout={searchLayout}
+      >
         <IncrementVotes
           votes={votes}
           id={article_id}
@@ -70,7 +74,7 @@ const ArticleTile = ({
                 <Link to={`/topics/articles/${topic}`}>{topic}</Link>
               </p>
               <p className="comments">
-                Comments: {comment_count}{" "}
+                {comment_count} comments{" "}
                 <FontAwesomeIcon icon={faCommentDots} className="commentIcon" />
               </p>
               <p className="shortComments">

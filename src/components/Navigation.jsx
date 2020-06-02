@@ -53,7 +53,7 @@ const Navigation = observer(() => {
           </Nav.Link>
         </Nav>
         <Nav className={styles.profile}>
-          {userStore.username ? ( // need to add a logged in logo maybe? or maybe it's better with username?
+          {userStore.username ? ( // need to add a logged in logo maybe? or maybe it's better with username? use avatar yo
             <NavDropdown
               title={userStore.username}
               id="collapsible-nav-dropdown"
