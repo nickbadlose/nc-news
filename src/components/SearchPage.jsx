@@ -3,6 +3,11 @@ import * as api from "../api";
 import { searchStore } from "../stores/search";
 import { useImmer } from "use-immer";
 import ArticleTile from "./ArticleTile";
+import Card from "react-bootstrap/Card";
+import Spinner from "react-bootstrap/Spinner";
+import { formatDate } from "../utils/utils";
+import { Link } from "@reach/router";
+import { StyledDiv } from "../styling/SearchPage.styles";
 
 const SearchPage = ({ search }) => {
   const isMounted = useRef(true);
@@ -27,13 +32,14 @@ const SearchPage = ({ search }) => {
   }, [search, setState]);
 
   return (
-    <div>
+    <StyledDiv>
       {state.isLoading ? (
-        <p>Loading...</p>
+        <Spinner animation="border" className="spinner" />
       ) : state.searchData.length ? (
         <ul>
           {state.searchData.map((data) => {
             if (data.slug) {
+              /* don't forget to style no results*/
               return (
                 <li key={state.searchData.indexOf(data)}>
                   <p>Topic - {data.slug}</p>
@@ -42,7 +48,19 @@ const SearchPage = ({ search }) => {
             } else if (data.username) {
               return (
                 <li key={state.searchData.indexOf(data)}>
-                  <p>User - {data.username}</p>
+                  <Card className="user">
+                    <Card.Body>
+                      <Card.Title className="capitalize">
+                        <img src={data.avatar_url} alt="Avatar" />
+                        <Link to={`/${data.username}`}>
+                          {data.username}
+                        </Link>{" "}
+                      </Card.Title>
+                      <footer className="blockquote-footer">
+                        member since {formatDate(data.joined).date}
+                      </footer>
+                    </Card.Body>
+                  </Card>
                 </li>
               );
             } else
@@ -58,7 +76,7 @@ const SearchPage = ({ search }) => {
       ) : (
         <p>Sorry your search didn't match any documents.</p>
       )}
-    </div>
+    </StyledDiv>
   );
 };
 

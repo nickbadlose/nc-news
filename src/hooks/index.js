@@ -412,7 +412,6 @@ export const useSpecificArticle = (article_id, reducer, initialState) => {
     });
 
     return () => {
-      console.log("unmounting");
       isMounted.current = false;
     };
   }, [article_id, dispatch]);

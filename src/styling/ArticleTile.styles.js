@@ -119,6 +119,10 @@ export const StyledLi = styled.li`
           display: none;
         }
 
+        .comments {
+          display: ${(props) => props.listLayout && "none"};
+        }
+
         .topic {
           display: flex;
 
@@ -127,7 +131,7 @@ export const StyledLi = styled.li`
             background-color: ${(props) => props.theme.linkC};
             border: 1px solid ${(props) => props.theme.linkC};
             border-radius: 50%;
-            display: block;
+            display: ${(props) => (props.listLayout ? "none" : "block")};
             align-self: center;
             height: 1px;
             width: 1px;
@@ -144,7 +148,7 @@ export const StyledLi = styled.li`
     }
 
     .shortComments {
-      display: flex !important;
+      display: ${(props) => !props.listLayout && "flex !important"};
       align-items: center;
 
       .commentIcon {

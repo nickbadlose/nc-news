@@ -151,7 +151,6 @@ const UserTile = ({
                     title={title}
                     editingArticle={state.editingArticle}
                   />
-
                   <DeleteArticleForm
                     article_id={article_id}
                     dispatch={dispatch}
