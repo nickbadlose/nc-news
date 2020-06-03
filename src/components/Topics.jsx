@@ -1,11 +1,9 @@
 import React from "react";
 import { Link } from "@reach/router";
 import PostTopicForm from "./PostTopicForm.jsx";
-import { useTopics, useToggle } from "../hooks";
+import { useTopics } from "../hooks";
 import { StyledMain, StyledLi } from "../styling/Topics.styles";
 import Spinner from "react-bootstrap/Spinner";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 

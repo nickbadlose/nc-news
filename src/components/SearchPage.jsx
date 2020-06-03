@@ -68,27 +68,17 @@ const SearchPage = ({ search }) => {
                               {data.slug}
                             </Card.Title>
                           </Link>
-                          <Card.Text classNAme="topicDescription">
+                          <Card.Text className="topicDescription">
                             {data.description}
                           </Card.Text>
-                          <Card.Text>
-                            {+data.article_count === 1 ? (
-                              <footer className="blockquote-footer">
-                                <FontAwesomeIcon
-                                  icon={faBook}
-                                  className="bookIcon"
-                                />{" "}
-                                {data.article_count} article!
-                              </footer>
-                            ) : (
-                              <footer className="blockquote-footer">
-                                <FontAwesomeIcon
-                                  icon={faBook}
-                                  className="bookIcon"
-                                />{" "}
-                                {data.article_count} articles!
-                              </footer>
-                            )}
+                          <Card.Text className="blockquote-footer">
+                            <FontAwesomeIcon
+                              icon={faBook}
+                              className="bookIcon"
+                            />{" "}
+                            {+data.article_count === 1
+                              ? `${data.article_count} article!`
+                              : `${data.article_count} articles!`}
                           </Card.Text>
                         </Card.Body>
                       </Card>

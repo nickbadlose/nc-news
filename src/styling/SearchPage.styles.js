@@ -95,6 +95,10 @@ export const StyledDiv = styled.div`
           .topicTitle {
             margin-bottom: 0rem;
           }
+
+          .bookIcon {
+            color: ${(props) => props.theme.linkC};
+          }
         }
       }
 
