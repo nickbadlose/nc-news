@@ -42,6 +42,16 @@ export const StyledMain = styled.main`
     }
   }
 
+  a {
+    text-decoration: none;
+    color: ${(props) => props.theme.linkC};
+    transition: color 0.2s ease-in-out;
+
+    :hover {
+      color: ${(props) => props.theme.linkHover};
+    }
+  }
+
   .createLine {
     &::after {
       content: "";

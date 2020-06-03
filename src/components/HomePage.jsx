@@ -154,18 +154,39 @@ const HomePage = () => {
               eventKey="2"
               className="question"
             >
-              <ToggleButton question={"Must see features!"} />
+              <ToggleButton question={"Must see features/pages!"} />
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="2">
               <Card.Body className="answer">
-                If you're pressed for time and can't check out all the features
-                then just make sure you check out these at least!
+                Make sure you check out these pages and featurs at least at
+                least! Links go to the page where you can find that feature.
                 <ListGroup>
-                  <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                  <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                  <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                  <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-                  <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                  <ListGroup.Item>Log in (via the navbar)</ListGroup.Item>
+                  <ListGroup.Item>
+                    View <Link to="/articles">articles</Link> page
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Change layouts (via the <Link to="/articles">articles</Link>{" "}
+                    or <Link to="/topics/articles/cooking">specific topic</Link>{" "}
+                    page)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    View <Link to="/topics">topics</Link> page
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Post a topic (via the <Link to="/topics">topics</Link> page)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    View a <Link to="/articles/19">specific article</Link> page
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    View your profile page once logged in (via the username link
+                    in the nav bar)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Search users / topics / key words in the search bar to find
+                    related results
+                  </ListGroup.Item>
                 </ListGroup>
               </Card.Body>
             </Accordion.Collapse>
@@ -194,10 +215,76 @@ const HomePage = () => {
               eventKey="4"
               className="question"
             >
-              <ToggleButton question={"List of all features"} />
+              <ToggleButton question={"List of all features/pages"} />
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="4">
-              <Card.Body className="answer">All features:</Card.Body>
+              <Card.Body className="answer">
+                Here's a list of all the features and pages the site has to
+                offer which you can try! Links go to the page where you can find
+                that feature.
+                <ListGroup>
+                  <ListGroup.Item>
+                    Edit/delete your users articles/comments either from the{" "}
+                    <Link to="/articles/19">specific article</Link> page or your{" "}
+                    <Link to="/tickle122">profile (jessjelly)</Link> page
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Sign up page (via the nav bar)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Toggle dark mode / light mode (via the nav bar)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Vote on articles (via <Link to="/articles">articles</Link>{" "}
+                    or <Link to="/articles/19">specific article</Link> page)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Post an article (via the{" "}
+                    <Link to="/topics/articles/cooking">specific topic</Link>{" "}
+                    page)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Comment on an article (via the{" "}
+                    <Link to="/articles/19">specific article</Link> page)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    View a{" "}
+                    <Link to="/topics/articles/cooking">specific topic</Link>{" "}
+                    page
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    View another users page (via a link on an article or by
+                    searching for a user profile such as{" "}
+                    <Link to="/tickle122">tickle122</Link>)
+                  </ListGroup.Item>
+                  <ListGroup.Item>Log in (via the navbar)</ListGroup.Item>
+                  <ListGroup.Item>
+                    View <Link to="/articles">articles</Link> page
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Change layouts (via the <Link to="/articles">articles</Link>{" "}
+                    or <Link to="/topics/articles/cooking">specific topic</Link>{" "}
+                    page)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    View <Link to="/topics">topics</Link> page
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Post a topic (via the <Link to="/topics">topics</Link> page)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    View a <Link to="/articles/19">specific article</Link> page
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    View your profile page once logged in (via the username link
+                    in the nav bar)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Search users / topics / key words in the search bar to find
+                    related results
+                  </ListGroup.Item>
+                </ListGroup>
+              </Card.Body>
             </Accordion.Collapse>
           </Card>
         </Accordion>
