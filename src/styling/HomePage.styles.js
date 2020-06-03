@@ -148,7 +148,7 @@ export const StyledMain = styled.main`
     flex-grow: 1;
     max-width: calc((100% - 2rem) / 3);
     min-width: calc((100% - 2rem) / 3);
-    height: 100%;
+    min-height: 100%;
     min-height: 15vw;
     margin-top: 1rem;
     position: relative;
@@ -272,7 +272,7 @@ export const StyledMain = styled.main`
     li {
       min-width: 100%;
       max-width: 100%;
-      height: 100%;
+      min-height: 100%;
       min-height: 20vw;
     }
   }
@@ -290,6 +290,7 @@ export const StyledMain = styled.main`
       "topics . articles";
 
     li {
+      min-height: 100%;
       min-height: 30vw;
     }
   }
@@ -309,6 +310,7 @@ export const StyledMain = styled.main`
       "articles";
 
     li {
+      min-height: 100%;
       min-height: 60vw;
     }
   }
