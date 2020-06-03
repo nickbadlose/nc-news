@@ -53,6 +53,7 @@ export const StyledDiv = styled.div`
     background: ${(props) => props.theme.linkC};
     color: ${(props) => props.theme.headerC};
     height: 100%;
+    align-items: center;
 
     p {
       margin: 0;
@@ -62,6 +63,7 @@ export const StyledDiv = styled.div`
   .specificArticle {
     display: flex;
     padding: 0rem 0.5rem;
+    align-items: center;
 
     .votes {
       padding: 0rem 0.2rem 0rem 0.1rem;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledMain = styled.main`
   display: grid;
   grid-template-columns: 1fr 1rem 1fr 1fr 1fr;
-  grid-template-rows: auto 1rem auto 1rem auto 1rem auto;
+  grid-template-rows: auto 1rem auto 1rem auto 1rem 1fr;
   grid-template-areas:
     "img img img img img"
     ". . . . ."
@@ -29,6 +29,19 @@ export const StyledMain = styled.main`
     align-self: center;
   }
 
+  .description {
+    background: ${(props) => props.theme.bg};
+    border-radius: ${(props) => props.theme.borderR};
+    border: ${(props) => props.theme.border};
+    padding: 1rem;
+    margin-top: 1rem;
+    color: black;
+
+    p {
+      margin-bottom: 0rem;
+    }
+  }
+
   .createLine {
     &::after {
       content: "";
@@ -51,7 +64,36 @@ export const StyledMain = styled.main`
   .faq {
     grid-area: faq;
 
+    .headerHelp {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+
+      h2 {
+        text-align: left;
+        margin-bottom: 0rem;
+      }
+
+      p {
+        margin-bottom: 0rem;
+
+        button {
+          all: unset;
+
+          :focus {
+            outline: 1px dotted;
+          }
+
+          .helpIcon {
+            color: ${(props) => props.theme.linkC};
+          }
+        }
+      }
+    }
+
     .faqAccordion {
+      overflow: show;
       margin-top: 1rem;
       border: ${(props) => props.theme.border};
       border-radius: ${(props) => props.theme.borderR};
@@ -59,6 +101,26 @@ export const StyledMain = styled.main`
 
       :hover {
         border: 1px solid ${(props) => props.theme.borderHover};
+      }
+
+      .question {
+        padding: 0rem;
+      }
+
+      .answer {
+        padding: 0.75rem 0.5rem;
+        text-align: left;
+
+        .list-group {
+          margin-top: 0.75rem;
+        }
+
+        .list-group-item {
+          margin-bottom: 0rem;
+          padding: 0.75rem 0.5rem 0.75rem 0rem;
+          border-right: none;
+          border-left: none;
+        }
       }
     }
   }
@@ -76,7 +138,6 @@ export const StyledMain = styled.main`
     flex-grow: 1;
     max-width: calc((100% - 2rem) / 3);
     min-width: calc((100% - 2rem) / 3);
-    /* width: 100%; */
     height: 100%;
     min-height: 15vw;
     margin-top: 1rem;
@@ -121,21 +182,6 @@ export const StyledMain = styled.main`
         outline: 1px dotted black;
       }
     }
-
-    /* @media (max-width: 950px) {
-               max-width: calc((100% - 3rem) / 3);
-               min-height: 20vw;
-             }
-
-             @media (max-width: 560px) {
-               max-width: calc((100% - 2rem) / 2);
-               min-height: 30vw;
-             }
-
-             @media (max-width: 360px) {
-               max-width: calc((100% - 1rem));
-               min-height: 60vw;
-             } */
   }
 
   .topics {

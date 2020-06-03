@@ -111,6 +111,7 @@ export const StyledMain = styled.main`
         display: flex;
         flex-flow: column nowrap;
         align-items: stretch;
+        margin-bottom: 0rem;
       }
     }
   }
