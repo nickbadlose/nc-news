@@ -192,6 +192,7 @@ export const StyledLi = styled.li`
 
   @media (max-width: 500px) {
     max-height: unset;
+    max-width: 100% !important;
 
     .titleBody {
       height: 100%;
@@ -203,7 +204,12 @@ export const StyledLi = styled.li`
         flex-direction: column;
         flex-grow: 1;
         justify-content: center;
+        margin: 0rem 0.25rem !important;
       }
+    }
+
+    .articleInfo {
+      margin: 0rem 0.25rem !important;
     }
 
     .title {
