@@ -68,9 +68,8 @@ export const StyledMain = styled.main`
   @media (max-width: 500px) {
     ul {
       width: ${(props) => props.layout === "card" && "100%"};
-      flex-direction: column;
-      align-items: ${(props) =>
-        props.layout === "card" ? "center" : "stretch"};
+      flex-flow: column nowrap;
+      align-items: stretch;
     }
   }
 `;

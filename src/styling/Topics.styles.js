@@ -35,6 +35,7 @@ export const StyledMain = styled.main`
   .centerTiles {
     display: flex;
     flex-flow: column nowrap;
+    align-items: center;
   }
 
   ul {
@@ -45,14 +46,26 @@ export const StyledMain = styled.main`
     width: calc(100% + 1rem);
     justify-content: flex-start;
   }
+
+  @media (max-width: 768px) {
+    ul {
+      width: calc(100% + 2vw);
+    }
+  }
+
+  @media (max-width: 360px) {
+    ul {
+      flex-flow: column nowrap;
+      align-items: stretch;
+      width: 100%;
+    }
+  }
 `;
 
 export const StyledLi = styled.li`
   border: ${(props) => props.theme.border};
   border-radius: ${(props) => props.theme.borderR};
-  flex-grow: 1;
-  max-width: calc((100% - 4rem) / 4);
-  min-width: calc((100% - 4rem) / 4);
+  flex: 0 0 calc((100% - 4rem) / 4);
   height: 100%;
   min-height: 15vw;
   margin: 1rem 0.5rem 0rem 0.5rem;
@@ -110,17 +123,23 @@ export const StyledLi = styled.li`
   }
 
   @media (max-width: 950px) {
-    max-width: calc((100% - 3rem) / 3);
+    flex: 0 0 calc((100% - 3rem) / 3);
     min-height: 20vw;
   }
 
+  @media (max-width: 768px) {
+    flex: 0 0 calc((100% - 6vw) / 3);
+    margin: 1rem 1vw 0rem 1vw;
+    min-height: 30vw;
+  }
+
   @media (max-width: 560px) {
-    max-width: calc((100% - 2rem) / 2);
+    flex: 0 0 calc((100% - 4vw) / 2);
     min-height: 30vw;
   }
 
   @media (max-width: 360px) {
-    max-width: calc((100% - 1rem));
     min-height: 60vw;
+    margin: 1rem 0rem 0rem 0rem;
   }
 `;
