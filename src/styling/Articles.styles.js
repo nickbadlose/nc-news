@@ -58,33 +58,11 @@ export const StyledMain = styled.main`
     align-self: ${(props) => props.layout === "card" && "center"};
   }
 
-  @media (max-width: 730px) {
-    ul {
-      width: ${(props) => props.layout === "card" && "calc(80% + 1rem)"};
-    }
-  }
-
-  @media (max-width: 670px) {
-    ul {
-      width: ${(props) => props.layout === "card" && "calc(90% + 1rem)"};
-    }
-  }
-
-  @media (max-width: 600px) {
-    ul {
-      width: ${(props) => props.layout === "card" && "calc(100% + 1rem)"};
-    }
-  }
-
   @media (max-width: 500px) {
     ul {
-      width: ${(props) => props.layout === "card" && "calc(70% + 1rem)"};
-    }
-  }
-
-  @media (max-width: 450px) {
-    ul {
-      width: ${(props) => props.layout === "card" && "calc(100% + 1rem)"};
+      width: ${(props) => props.layout === "card" && "100%"};
+      flex-direction: column;
+      align-items: ${(props) => props.layout === "card" && "center"};
     }
   }
 `;

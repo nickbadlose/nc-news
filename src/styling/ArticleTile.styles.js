@@ -403,13 +403,16 @@ export const StyledLiCard = styled.li`
   }
 
   @media (max-width: 730px) {
+    /* try editing this to center properly*/
     max-width: calc((100% - 2rem) / 2);
     min-width: calc((100% - 2rem) / 2);
   }
 
   @media (max-width: 500px) {
-    max-width: calc(100% - 1rem);
-    min-width: calc(100% - 1rem);
+    max-width: calc(100%);
+    min-width: calc(100%);
+    margin: 1rem 0rem 0rem 0rem;
+
     a:nth-child(2) {
       display: flex;
     }
