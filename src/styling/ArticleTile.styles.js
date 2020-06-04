@@ -99,7 +99,8 @@ export const StyledLi = styled.li`
       font-size: 0.8rem;
       border-top: ${(props) => props.theme.border};
       min-height: 1.25rem;
-      margin: 0rem 0.5rem;
+      padding: 0rem 0.5rem;
+      background: ${(props) => props.theme.articleFooterC};
 
       p {
         margin: 0rem;
@@ -114,6 +115,11 @@ export const StyledLi = styled.li`
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: flex-end;
+
+        .commentIcon {
+          color: ${(props) => props.theme.linkC};
+          padding-left: 0.2rem;
+        }
 
         .shortComments {
           display: none;
@@ -134,6 +140,12 @@ export const StyledLi = styled.li`
             margin: 0px 0.2rem;
           }
         }
+
+        .comments {
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+        }
       }
     }
   }
@@ -146,10 +158,6 @@ export const StyledLi = styled.li`
     .shortComments {
       display: flex !important;
       align-items: center;
-
-      .commentIcon {
-        padding-left: 0.2rem;
-      }
     }
   }
 
@@ -209,7 +217,7 @@ export const StyledLi = styled.li`
     }
 
     .articleInfo {
-      margin: 0rem 0.25rem !important;
+      padding: 0rem 0.25rem !important;
     }
 
     .title {
@@ -315,6 +323,7 @@ export const StyledLiCard = styled.li`
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-content: center;
 
     p {
       margin: 0px;
@@ -348,6 +357,7 @@ export const StyledLiCard = styled.li`
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
+      align-items: center;
 
       &::after {
         content: "";
@@ -361,10 +371,17 @@ export const StyledLiCard = styled.li`
         margin: 0px 0.2rem;
       }
 
-      .commentIcon:nth-child(1) {
+      .commentIcon {
         padding-left: 0.2rem;
         align-self: center;
+        color: ${(props) => props.theme.linkC};
       }
+    }
+
+    .votes {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
     }
   }
 
@@ -406,6 +423,13 @@ export const StyledLiCard = styled.li`
     /* try editing this to center properly*/
     max-width: calc((100% - 2rem) / 2);
     min-width: calc((100% - 2rem) / 2);
+  }
+
+  @media (max-width: 650px) {
+    /* try editing this to center properly*/
+    max-width: calc((100% - 2vw) / 2);
+    min-width: calc((100% - 2vw) / 2);
+    margin: 1rem 1vw 0rem 1vw;
   }
 
   @media (max-width: 500px) {

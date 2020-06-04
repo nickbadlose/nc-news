@@ -12,6 +12,8 @@ export const mainTheme = {
   linkHover: "rgb(240, 45, 58, 1)",
   borderHover: "#ffffff",
   userArticleHeaderFooterC: "rgb(253, 236, 238, 1)",
+  numberFont: "",
+  articleFooterC: "#F7F7F7",
 };
 
 export const loggedIn = {};

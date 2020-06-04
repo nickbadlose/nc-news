@@ -58,11 +58,18 @@ export const StyledMain = styled.main`
     align-self: ${(props) => props.layout === "card" && "center"};
   }
 
+  @media (max-width: 650px) {
+    ul {
+      width: ${(props) => props.layout === "card" && "100% + 2vw"};
+    }
+  }
+
   @media (max-width: 500px) {
     ul {
       width: ${(props) => props.layout === "card" && "100%"};
       flex-direction: column;
-      align-items: ${(props) => props.layout === "card" && "center"};
+      align-items: ${(props) =>
+        props.layout === "card" ? "center" : "stretch"};
     }
   }
 `;

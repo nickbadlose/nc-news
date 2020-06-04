@@ -148,6 +148,7 @@ export const StyledMain = styled.main`
 
           .commentIcon {
             padding-right: 0.2rem;
+            color: ${(props) => props.theme.linkC};
           }
         }
       }

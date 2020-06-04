@@ -132,7 +132,7 @@ const ArticleTile = ({
               {comment_count}{" "}
               <FontAwesomeIcon icon={faCommentDots} className="commentIcon" />
             </p>
-            <p>
+            <p className="votes">
               {votes}
               <FontAwesomeIcon icon={faHeart} className="heart" />
             </p>
