@@ -11,6 +11,7 @@ import { layoutStore } from "../stores/layout";
 const Articles = observer(() => {
   const { state, dispatch } = useArticles();
   useScroll(dispatch, state.page, state.maxPage, state.isLoading);
+  let count = 1;
 
   return (
     <StyledMain layout={layoutStore.layout}>
@@ -38,6 +39,7 @@ const Articles = observer(() => {
                   {...article}
                   key={article.article_id}
                   images={state.images[article.topic]}
+                  index={count++}
                 />
               );
             })}

@@ -24,6 +24,7 @@ const ArticleTile = ({
   images,
   topicLayout,
   searchLayout,
+  index,
 }) => {
   const [toggle, handleToggle] = useToggle();
   const { date } = formatDate(created_at);
@@ -88,7 +89,12 @@ const ArticleTile = ({
     );
   } else {
     return (
-      <StyledLiCard theme={mainTheme} toggle={toggle} topicLayout={topicLayout}>
+      <StyledLiCard
+        theme={mainTheme}
+        toggle={toggle}
+        topicLayout={topicLayout}
+        index={index}
+      >
         <Card className="card">
           {images && (
             <Link to={`/articles/${article_id}`}>

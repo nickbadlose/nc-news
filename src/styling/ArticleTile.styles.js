@@ -241,9 +241,7 @@ export const StyledLi = styled.li`
 `;
 
 export const StyledLiCard = styled.li`
-  flex-grow: 1;
-  max-width: calc((100% - 3rem) / 3);
-  min-width: calc((100% - 3rem) / 3);
+  flex: 0 0 calc((100% - 3rem) / 3);
   margin: 1rem 0.5rem 0rem 0.5rem;
 
   .card {
@@ -402,8 +400,7 @@ export const StyledLiCard = styled.li`
   }
 
   @media (max-width: 950px) {
-    max-width: calc((100% - 2rem) / 2);
-    min-width: calc((100% - 2rem) / 2);
+    flex: 0 0 calc((100% - 2rem) / 2);
     a:nth-child(2) {
       display: flex;
     }
@@ -416,19 +413,17 @@ export const StyledLiCard = styled.li`
   }
 
   @media (max-width: 768px) {
-    max-width: calc((100% - 6vw) / 3);
-    min-width: calc((100% - 6vw) / 3);
+    flex: 0 0 calc((100% - 6vw) / 3);
     margin: 1rem 1vw 0rem 1vw;
   }
 
   @media (max-width: 730px) {
-    max-width: calc((100% - 4vw) / 2);
-    min-width: calc((100% - 4vw) / 2);
+    flex: 0 0 calc((100% - 4vw) / 2);
   }
 
   @media (max-width: 500px) {
-    max-width: calc(100%);
-    min-width: calc(100%);
+    max-width: 100%;
+    min-width: 100%;
     margin: 1rem 0rem 0rem 0rem;
 
     a:nth-child(2) {
