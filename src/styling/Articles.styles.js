@@ -45,6 +45,7 @@ export const StyledMain = styled.main`
   .centerTile {
     display: ${(props) => props.layout === "card" && "flex"};
     flex-direction: ${(props) => props.layout === "card" && "column"};
+    align-items: ${(props) => props.layout === "card" && "center"};
   }
 
   ul {
@@ -58,9 +59,9 @@ export const StyledMain = styled.main`
     align-self: ${(props) => props.layout === "card" && "center"};
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 768px) {
     ul {
-      width: ${(props) => props.layout === "card" && "100% + 2vw"};
+      width: ${(props) => props.layout === "card" && "calc(100% + 2vw)"};
     }
   }
 

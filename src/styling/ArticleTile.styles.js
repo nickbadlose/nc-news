@@ -403,6 +403,7 @@ export const StyledLiCard = styled.li`
 
   @media (max-width: 950px) {
     max-width: calc((100% - 2rem) / 2);
+    min-width: calc((100% - 2rem) / 2);
     a:nth-child(2) {
       display: flex;
     }
@@ -415,21 +416,14 @@ export const StyledLiCard = styled.li`
   }
 
   @media (max-width: 768px) {
-    max-width: calc((100% - 3rem) / 3);
-    min-width: calc((100% - 3rem) / 3);
+    max-width: calc((100% - 6vw) / 3);
+    min-width: calc((100% - 6vw) / 3);
+    margin: 1rem 1vw 0rem 1vw;
   }
 
   @media (max-width: 730px) {
-    /* try editing this to center properly*/
-    max-width: calc((100% - 2rem) / 2);
-    min-width: calc((100% - 2rem) / 2);
-  }
-
-  @media (max-width: 650px) {
-    /* try editing this to center properly*/
-    max-width: calc((100% - 2vw) / 2);
-    min-width: calc((100% - 2vw) / 2);
-    margin: 1rem 1vw 0rem 1vw;
+    max-width: calc((100% - 4vw) / 2);
+    min-width: calc((100% - 4vw) / 2);
   }
 
   @media (max-width: 500px) {
