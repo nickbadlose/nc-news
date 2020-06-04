@@ -114,7 +114,29 @@ export const StyledMain = styled.main`
       }
 
       .question {
-        padding: 0rem;
+        padding: 0.75rem 0.5rem;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+
+        .arrowIcon {
+          color: ${(props) => props.theme.headerC};
+        }
+
+        :focus {
+          outline: none;
+          .arrowIcon {
+            outline: 1px dotted;
+          }
+        }
+
+        :hover {
+          cursor: pointer;
+          .arrowIcon {
+            color: ${(props) => props.theme.linkHover};
+          }
+        }
       }
 
       .answer {
@@ -145,9 +167,7 @@ export const StyledMain = styled.main`
   li {
     border: ${(props) => props.theme.border};
     border-radius: ${(props) => props.theme.borderR};
-    flex-grow: 1;
-    max-width: calc((100% - 2rem) / 3);
-    min-width: calc((100% - 2rem) / 3);
+    flex: 0 0 calc((100% - 2rem) / 3);
     min-height: 100%;
     min-height: 15vw;
     margin-top: 1rem;

@@ -3,7 +3,6 @@ import * as api from "../api";
 import { Link } from "@reach/router";
 import { errorStore } from "../stores/error";
 import { StyledMain, StyledLi } from "../styling/HomePage.styles";
-import ToggleButton from "./ToggleButton";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
@@ -16,6 +15,7 @@ import {
   faHeart,
   faCommentDots,
   faQuestionCircle,
+  faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 const HomePage = () => {
@@ -117,7 +117,8 @@ const HomePage = () => {
               eventKey="0"
               className="question"
             >
-              <ToggleButton question={"Do I need to make an account?"} />
+              Do I need to make an account?
+              <FontAwesomeIcon icon={faAngleDown} className="arrowIcon" />
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body className="answer">
@@ -136,9 +137,8 @@ const HomePage = () => {
               eventKey="1"
               className="question"
             >
-              <ToggleButton
-                question={"What can I do with the default account?"}
-              />
+              What can I do with the default account?
+              <FontAwesomeIcon icon={faAngleDown} className="arrowIcon" />
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="1">
               <Card.Body className="answer">
@@ -154,7 +154,8 @@ const HomePage = () => {
               eventKey="2"
               className="question"
             >
-              <ToggleButton question={"Must see features/pages!"} />
+              Must see features/pages!
+              <FontAwesomeIcon icon={faAngleDown} className="arrowIcon" />
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="2">
               <Card.Body className="answer">
@@ -198,7 +199,8 @@ const HomePage = () => {
               eventKey="3"
               className="question"
             >
-              <ToggleButton question={"Desktop, mobile or tablet?"} />
+              Desktop, mobile or tablet?
+              <FontAwesomeIcon icon={faAngleDown} className="arrowIcon" />
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="3">
               <Card.Body className="answer">
@@ -215,7 +217,8 @@ const HomePage = () => {
               eventKey="4"
               className="question"
             >
-              <ToggleButton question={"List of all features/pages"} />
+              List of all features/pages
+              <FontAwesomeIcon icon={faAngleDown} className="arrowIcon" />
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="4">
               <Card.Body className="answer">
