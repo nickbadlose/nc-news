@@ -395,8 +395,7 @@ export const StyledLiCard = styled.li`
   }
 
   @media (max-width: 1150px) {
-    max-width: ${(props) => props.topicLayout && "calc((100% - 2rem) / 2)"};
-    min-width: ${(props) => props.topicLayout && "calc((100% - 2rem) / 2)"};
+    flex: ${(props) => props.topicLayout && "0 0 calc((100% - 2rem) / 2)"};
   }
 
   @media (max-width: 950px) {

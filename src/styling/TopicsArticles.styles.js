@@ -140,6 +140,7 @@ export const StyledMain = styled.main`
     flex: 1 1 auto;
     display: ${(props) => props.layout === "card" && "flex"};
     flex-direction: ${(props) => props.layout === "card" && "column"};
+    align-items: ${(props) => props.layout === "card" && "center"};
   }
 
   ul {
@@ -159,33 +160,18 @@ export const StyledMain = styled.main`
     }
   }
 
-  @media (max-width: 730px) {
+  @media (max-width: 768px) {
     ul {
-      width: ${(props) => props.layout === "card" && "calc(80% + 1rem)"};
-    }
-  }
-
-  @media (max-width: 670px) {
-    ul {
-      width: ${(props) => props.layout === "card" && "calc(90% + 1rem)"};
-    }
-  }
-
-  @media (max-width: 600px) {
-    ul {
-      width: ${(props) => props.layout === "card" && "calc(100% + 1rem)"};
+      width: ${(props) => props.layout === "card" && "calc(100% + 2vw)"};
     }
   }
 
   @media (max-width: 500px) {
     ul {
-      width: ${(props) => props.layout === "card" && "calc(70% + 1rem)"};
-    }
-  }
-
-  @media (max-width: 450px) {
-    ul {
-      width: ${(props) => props.layout === "card" && "calc(100% + 1rem)"};
+      width: ${(props) => props.layout === "card" && "100%"};
+      flex-direction: column;
+      align-items: ${(props) =>
+        props.layout === "card" ? "center" : "stretch"};
     }
   }
 
