@@ -95,7 +95,7 @@ const HomePage = () => {
               <OverlayTrigger
                 overlay={
                   <Tooltip id="tooltip">
-                    Click on each question to see each answer!
+                    Click on a question to see its answer!
                   </Tooltip>
                 }
               >

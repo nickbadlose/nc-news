@@ -119,6 +119,7 @@ export const StyledMain = styled.main`
         flex-flow: row nowrap;
         align-items: center;
         justify-content: space-between;
+        text-align: left;
 
         .arrowIcon {
           color: ${(props) => props.theme.headerC};
@@ -249,7 +250,7 @@ export const StyledMain = styled.main`
     .articlesLi {
       .article {
         width: 100%;
-        height: 100%;
+        min-height: 100%;
         position: absolute;
         top: 0px;
         text-align: left;
