@@ -116,7 +116,7 @@ export const StyledMain = styled.main`
     }
 
     .articlesComments {
-      flex: 1 1 50%;
+      flex: 1 1 1;
       margin-left: 1rem;
 
       ul {
@@ -134,7 +134,7 @@ export const StyledMain = styled.main`
       align-items: stretch;
 
       .userInfo {
-        flex: 1 1 100%;
+        flex: 1 1 1;
         background: ${(props) => props.theme.bg};
         border: ${(props) => props.theme.border};
         border-radius: ${(props) => props.theme.borderR};
@@ -143,6 +143,7 @@ export const StyledMain = styled.main`
         text-align: left;
         overflow: hidden;
         margin-top: 1rem;
+        display: flex;
 
         .userInfoTitle {
           display: flex;
@@ -164,10 +165,10 @@ export const StyledMain = styled.main`
             margin-right: 0.2rem;
           }
         }
-      }
 
-      .cardImage {
-        display: none;
+        .cardImage {
+          display: none;
+        }
       }
 
       .articlesComments {
