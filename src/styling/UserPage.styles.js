@@ -61,6 +61,18 @@ export const StyledMain = styled.main`
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        button {
+          all: unset;
+
+          :focus {
+            outline: 1px dotted;
+          }
+
+          .helpIcon {
+            color: ${(props) => props.theme.linkC};
+          }
+        }
       }
 
       .memberJoinDate {
@@ -122,7 +134,7 @@ export const StyledMain = styled.main`
       align-items: stretch;
 
       .userInfo {
-        flex: 1 1 auto;
+        flex: 1 1 100%;
         background: ${(props) => props.theme.bg};
         border: ${(props) => props.theme.border};
         border-radius: ${(props) => props.theme.borderR};

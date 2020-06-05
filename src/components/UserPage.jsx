@@ -124,10 +124,12 @@ const UserPage = ({ username }) => {
                     )
                   }
                 >
-                  <FontAwesomeIcon
-                    icon={faQuestionCircle}
-                    className="helpIcon"
-                  />
+                  <button>
+                    <FontAwesomeIcon
+                      icon={faQuestionCircle}
+                      className="helpIcon"
+                    />
+                  </button>
                 </OverlayTrigger>
               </ListGroupItem>
               <ListGroupItem className="memberJoinDate">

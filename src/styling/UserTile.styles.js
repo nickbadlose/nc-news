@@ -55,7 +55,7 @@ export const StyledLi = styled.li`
     flex-flow: row nowrap;
     align-items: center;
     background: ${(props) =>
-      props.article && props.theme.userArticleHeaderFooterC};
+      !props.article && props.theme.userArticleHeaderFooterC};
 
     .headerIcon {
       font-size: 1.2rem;
@@ -73,7 +73,7 @@ export const StyledLi = styled.li`
     color: ${(props) => props.theme.linkC};
     font-size: 0.8rem;
     background: ${(props) =>
-      props.article && props.theme.userArticleHeaderFooterC};
+      !props.article && props.theme.userArticleHeaderFooterC};
 
     .footerIcon {
       padding-left: 0.2rem;

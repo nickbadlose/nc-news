@@ -9,7 +9,11 @@ import { mainTheme } from "../styling/themes.styling";
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faCommentDots } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faCommentDots,
+  faAngleDown,
+} from "@fortawesome/free-solid-svg-icons";
 import { layoutStore } from "../stores/layout";
 
 const ArticleTile = ({
@@ -42,6 +46,7 @@ const ArticleTile = ({
           id={article_id}
           api={api.patchArticleById}
           className="articleTile"
+          article={true}
         />
         {images && (
           <div className="topicImage">
@@ -116,7 +121,9 @@ const ArticleTile = ({
                 eventKey="0"
                 className="toggle"
                 onClick={handleToggle}
-              ></Accordion.Toggle>
+              >
+                <FontAwesomeIcon icon={faAngleDown} className="angleIcon" />
+              </Accordion.Toggle>
               <Accordion.Collapse eventKey="0">
                 <Card.Text>{body}</Card.Text>
               </Accordion.Collapse>

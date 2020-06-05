@@ -12,6 +12,7 @@ export const StyledLi = styled.li`
   min-height: 130px;
   transition: border 0.3s ease-in-out;
   overflow: hidden;
+  align-items: stretch;
 
   :hover {
     border: 1px solid #ffffff;
@@ -290,27 +291,20 @@ export const StyledLiCard = styled.li`
       width: 100%;
 
       :focus {
-        &::before {
+        .angleIcon {
           outline: 1px dotted;
         }
       }
 
       :hover {
         cursor: pointer;
-        &::before {
+        .angleIcon {
           color: ${(props) => props.theme.linkHover};
         }
       }
 
-      &::before {
-        content: "\f107";
-        font-family: FontAwesome;
-        font-style: normal;
-        font-weight: normal;
-        text-decoration: inherit;
+      .angleIcon {
         color: ${(props) => props.theme.headerC};
-        font-size: 1.2rem;
-        width: 100%;
       }
     }
   }

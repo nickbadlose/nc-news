@@ -30,6 +30,7 @@ const CommentTile = ({
         id={comment_id}
         api={api.patchCommentById}
         className="articleTile"
+        article={true}
       />
       <article className="commentMain">
         <p className="commentBody">{form.body}</p>

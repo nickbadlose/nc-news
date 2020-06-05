@@ -9,9 +9,9 @@ export const mainTheme = {
   linkC: "#007bff",
   marginL: "5rem",
   smallMarginL: "1rem",
-  linkHover: "rgb(240, 45, 58, 1)",
+  linkHover: "rgba(240, 45, 58, 1)",
   borderHover: "#ffffff",
-  userArticleHeaderFooterC: "rgb(253, 236, 238, 1)",
+  userArticleHeaderFooterC: "rgba(253, 236, 238, 1)",
   numberFont: "",
   articleFooterC: "#F7F7F7",
 };
