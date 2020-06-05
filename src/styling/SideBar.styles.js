@@ -26,10 +26,6 @@ export const StyledSidebar = styled.div`
     outline: 1px solid ${(props) => props.theme.borderC};
   }
 
-  :hover {
-    overflow-y: scroll;
-  }
-
   :focus {
     overflow-y: scroll;
   }
@@ -67,16 +63,25 @@ export const StyledSidebar = styled.div`
   a {
     color: ${(props) => props.theme.textC};
     text-decoration: none;
-
-    &:hover {
-      color: ${(props) => props.theme.headerC};
-    }
+    transition: color 0.2s ease-in-out;
   }
 
   li {
     padding: 0.4rem 0rem 0.5rem 1rem;
     text-align: left;
     text-transform: capitalize;
+  }
+
+  @media (hover: hover) {
+    :hover {
+      overflow-y: scroll;
+    }
+
+    a {
+      :hover {
+        color: ${(props) => props.theme.headerC};
+      }
+    }
   }
 
   @media (max-width: 768px) {

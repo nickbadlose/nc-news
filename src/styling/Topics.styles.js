@@ -74,10 +74,6 @@ export const StyledLi = styled.li`
   overflow: hidden;
   background: ${(props) => props.theme.textC};
 
-  :hover {
-    border: 1px solid ${(props) => props.theme.borderHover};
-  }
-
   :focus {
     outline: 1px dotted;
   }
@@ -102,10 +98,6 @@ export const StyledLi = styled.li`
     color: #ffffff;
     transition: color 0.2s ease-in-out;
 
-    :hover {
-      color: skyblue;
-    }
-
     :focus {
       outline: 1px dotted black;
     }
@@ -120,6 +112,18 @@ export const StyledLi = styled.li`
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
+  }
+
+  @media (hover: hover) {
+    :hover {
+      border: 1px solid ${(props) => props.theme.borderHover};
+    }
+
+    a {
+      :hover {
+        color: skyblue;
+      }
+    }
   }
 
   @media (max-width: 950px) {

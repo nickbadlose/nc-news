@@ -12,10 +12,6 @@ export const StyledLi = styled.li`
     text-decoration: none;
     color: ${(props) => props.theme.linkC};
     transition: color 0.2s ease-in-out;
-
-    :hover {
-      color: ${(props) => props.theme.linkHover};
-    }
   }
 
   .toggle {
@@ -35,13 +31,6 @@ export const StyledLi = styled.li`
       text-decoration: inherit;
       color: ${(props) => props.theme.headerC};
       font-size: 1rem;
-    }
-
-    :hover {
-      cursor: pointer;
-      .arrowIcon {
-        color: ${(props) => props.theme.linkHover};
-      }
     }
   }
 
@@ -140,5 +129,22 @@ export const StyledLi = styled.li`
   .capitalize {
     text-transform: capitalize;
     margin-right: 0.2rem;
+  }
+
+  @media (hover: hover) {
+    .articleCommentTitle {
+      :hover {
+        color: ${(props) => props.theme.linkHover};
+      }
+    }
+
+    .toggle {
+      :hover {
+        cursor: pointer;
+        .arrowIcon {
+          color: ${(props) => props.theme.linkHover};
+        }
+      }
+    }
   }
 `;

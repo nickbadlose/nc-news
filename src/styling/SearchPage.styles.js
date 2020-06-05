@@ -47,19 +47,11 @@ export const StyledDiv = styled.div`
       transition: border 0.3s ease-in-out;
       text-align: left;
 
-      :hover {
-        border: 1px solid #ffffff;
-      }
-
       a {
         text-decoration: none;
         color: ${(props) => props.theme.linkC};
         align-self: flex-start;
         transition: color 0.2s ease-in-out;
-
-        :hover {
-          color: ${(props) => props.theme.linkHover};
-        }
       }
 
       .topic {
@@ -128,6 +120,20 @@ export const StyledDiv = styled.div`
     border: ${(props) => props.theme.border};
     padding: 1rem;
     margin-top: 1rem;
+  }
+
+  @media (hover: hover) {
+    li {
+      :hover {
+        border: 1px solid #ffffff;
+      }
+
+      a {
+        :hover {
+          color: ${(props) => props.theme.linkHover};
+        }
+      }
+    }
   }
 
   @media (max-width: 390px) {

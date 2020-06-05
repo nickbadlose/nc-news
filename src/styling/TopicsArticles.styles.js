@@ -115,10 +115,6 @@ export const StyledMain = styled.main`
           text-decoration: none;
           color: ${(props) => props.theme.linkC};
           transition: color 0.2s ease-in-out;
-
-          :hover {
-            color: ${(props) => props.theme.linkHover};
-          }
         }
 
         .articleIcon {
@@ -152,6 +148,18 @@ export const StyledMain = styled.main`
     justify-content: ${(props) => props.layout === "card" && "flex-start"};
     width: ${(props) => props.layout === "card" && "calc(100% + 1rem)"};
     align-self: ${(props) => props.layout === "card" && "center"};
+  }
+
+  @media (hover: hover) {
+    .topContributors {
+      .contributor {
+        a {
+          :hover {
+            color: ${(props) => props.theme.linkHover};
+          }
+        }
+      }
+    }
   }
 
   @media (max-width: 800px) {

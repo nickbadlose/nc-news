@@ -25,9 +25,13 @@ export const StyledDiv = styled.div`
     text-decoration: none;
     color: ${(props) => props.theme.linkC};
     transition: color 0.2s ease-in-out;
+  }
 
-    :hover {
-      color: ${(props) => props.theme.linkHover};
+  @media (hover: hover) {
+    a {
+      :hover {
+        color: ${(props) => props.theme.linkHover};
+      }
     }
   }
 

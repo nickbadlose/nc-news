@@ -81,10 +81,6 @@ export const StyledMain = styled.main`
           color: ${(props) => props.theme.linkC};
           align-self: flex-start;
           transition: color 0.2s ease-in-out;
-
-          :hover {
-            color: ${(props) => props.theme.linkHover};
-          }
         }
 
         .topic {
@@ -164,6 +160,18 @@ export const StyledMain = styled.main`
         flex-flow: column nowrap;
         align-items: stretch;
         margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    .articleInfo {
+      .info {
+        a {
+          :hover {
+            color: ${(props) => props.theme.linkHover};
+          }
+        }
       }
     }
   }
