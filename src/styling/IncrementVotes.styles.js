@@ -15,18 +15,6 @@ export const StyledDiv = styled.div`
     align-items: center;
     color: ${(props) => props.theme.headerC};
 
-    .up {
-      :hover {
-        color: ${(props) => props.theme.linkHover};
-      }
-    }
-
-    .down {
-      :hover {
-        color: ${(props) => props.theme.linkHover};
-      }
-    }
-
     :disabled {
       color: ${(props) => props.theme.linkHover};
     }
@@ -58,6 +46,20 @@ export const StyledDiv = styled.div`
 
     .votes {
       padding: 0rem 0.2rem;
+    }
+  }
+
+  @media (hover: hover) {
+    .up {
+      :hover {
+        color: ${(props) => props.theme.linkHover};
+      }
+    }
+
+    .down {
+      :hover {
+        color: ${(props) => props.theme.linkHover};
+      }
     }
   }
 `;

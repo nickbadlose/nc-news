@@ -14,10 +14,6 @@ export const StyledLi = styled.li`
   overflow: hidden;
   align-items: stretch;
 
-  :hover {
-    border: 1px solid #ffffff;
-  }
-
   .topicImage {
     align-self: center;
     min-width: 128px;
@@ -49,10 +45,6 @@ export const StyledLi = styled.li`
       color: ${(props) => props.theme.linkC};
       align-self: flex-start;
       transition: color 0.2s ease-in-out;
-
-      :hover {
-        color: ${(props) => props.theme.linkHover};
-      }
     }
 
     .titleBody {
@@ -147,6 +139,18 @@ export const StyledLi = styled.li`
           flex-flow: row nowrap;
           align-items: center;
         }
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    :hover {
+      border: 1px solid #ffffff;
+    }
+
+    a {
+      :hover {
+        color: ${(props) => props.theme.linkHover};
       }
     }
   }
@@ -249,10 +253,6 @@ export const StyledLiCard = styled.li`
     border: ${(props) => props.theme.border};
     transition: border 0.5s ease-in-out;
     overflow: hidden;
-
-    :hover {
-      border: 1px solid #ffffff;
-    }
   }
 
   hr {
@@ -264,10 +264,6 @@ export const StyledLiCard = styled.li`
     text-decoration: none;
     color: ${(props) => props.theme.linkC};
     transition: color 0.2s ease-in-out;
-
-    :hover {
-      color: ${(props) => props.theme.linkHover};
-    }
   }
 
   .titleBody {
@@ -293,13 +289,6 @@ export const StyledLiCard = styled.li`
       :focus {
         .angleIcon {
           outline: 1px dotted;
-        }
-      }
-
-      :hover {
-        cursor: pointer;
-        .angleIcon {
-          color: ${(props) => props.theme.linkHover};
         }
       }
 
@@ -380,6 +369,29 @@ export const StyledLiCard = styled.li`
   .image {
     width: 100%;
     height: 100%;
+  }
+
+  @media (hover: hover) {
+    .card {
+      :hover {
+        border: 1px solid #ffffff;
+      }
+    }
+
+    a {
+      :hover {
+        color: ${(props) => props.theme.linkHover};
+      }
+    }
+
+    .toggle {
+      :hover {
+        cursor: pointer;
+        .angleIcon {
+          color: ${(props) => props.theme.linkHover};
+        }
+      }
+    }
   }
 
   @media (max-width: 1250px) {
