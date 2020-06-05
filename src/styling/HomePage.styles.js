@@ -46,10 +46,6 @@ export const StyledMain = styled.main`
     text-decoration: none;
     color: ${(props) => props.theme.linkC};
     transition: color 0.2s ease-in-out;
-
-    :hover {
-      color: ${(props) => props.theme.linkHover};
-    }
   }
 
   .createLine {
@@ -109,10 +105,6 @@ export const StyledMain = styled.main`
       border-radius: ${(props) => props.theme.borderR};
       transition: border 0.3s ease-in-out;
 
-      :hover {
-        border: 1px solid ${(props) => props.theme.borderHover};
-      }
-
       .question {
         padding: 0.75rem 0.5rem;
         display: flex;
@@ -129,13 +121,6 @@ export const StyledMain = styled.main`
           outline: none;
           .arrowIcon {
             outline: 1px dotted;
-          }
-        }
-
-        :hover {
-          cursor: pointer;
-          .arrowIcon {
-            color: ${(props) => props.theme.linkHover};
           }
         }
       }
@@ -177,10 +162,6 @@ export const StyledMain = styled.main`
     overflow: hidden;
     background: ${(props) => props.theme.textC};
 
-    :hover {
-      border: 1px solid ${(props) => props.theme.borderHover};
-    }
-
     :focus {
       outline: 1px dotted;
     }
@@ -204,10 +185,6 @@ export const StyledMain = styled.main`
     a {
       color: #ffffff;
       transition: color 0.2s ease-in-out;
-
-      :hover {
-        color: skyblue;
-      }
 
       :focus {
         outline: 1px dotted black;
@@ -272,6 +249,41 @@ export const StyledMain = styled.main`
           flex-flow: row nowrap;
           align-items: center;
         }
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    .faqAccordion {
+      :hover {
+        border: 1px solid ${(props) => props.theme.borderHover};
+      }
+
+      .question {
+        :hover {
+          cursor: pointer;
+          .arrowIcon {
+            color: ${(props) => props.theme.linkHover};
+          }
+        }
+      }
+    }
+
+    li {
+      :hover {
+        border: 1px solid ${(props) => props.theme.borderHover};
+      }
+
+      a {
+        :hover {
+          color: skyblue;
+        }
+      }
+    }
+
+    a {
+      :hover {
+        color: ${(props) => props.theme.linkHover};
       }
     }
   }

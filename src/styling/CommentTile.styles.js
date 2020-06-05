@@ -8,10 +8,6 @@ export const StyledLi = styled.li`
   margin-top: 1rem;
   transition: border 0.3s ease-in-out;
 
-  :hover {
-    border: 1px solid #ffffff;
-  }
-
   p {
     margin: 0rem;
   }
@@ -20,10 +16,6 @@ export const StyledLi = styled.li`
     text-decoration: none;
     color: ${(props) => props.theme.linkC};
     transition: color 0.2s ease-in-out;
-
-    :hover {
-      color: ${(props) => props.theme.linkHover};
-    }
   }
 
   .commentMain {
@@ -57,6 +49,18 @@ export const StyledLi = styled.li`
         button {
           font-size: 0.8rem;
         }
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    :hover {
+      border: 1px solid #ffffff;
+    }
+
+    a {
+      :hover {
+        color: ${(props) => props.theme.linkHover};
       }
     }
   }
