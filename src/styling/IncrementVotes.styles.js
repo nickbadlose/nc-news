@@ -42,6 +42,7 @@ export const StyledDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 0.8rem;
 
     p {
       margin: 0;
@@ -53,6 +54,7 @@ export const StyledDiv = styled.div`
     flex-flow: row nowrap;
     padding: 0rem 0.5rem;
     align-items: center;
+    font-size: 0.8rem;
 
     .votes {
       padding: 0rem 0.2rem;

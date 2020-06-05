@@ -50,7 +50,7 @@ export const StyledMain = styled.main`
     .articleInfo {
       display: flex;
       flex-flow: row nowrap;
-      font-size: 0.8em;
+      font-size: 0.8rem;
       margin: 0rem 0.5rem;
       justify-content: space-between;
       align-items: center;
