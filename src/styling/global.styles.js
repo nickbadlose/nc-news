@@ -70,6 +70,47 @@ ul {
   padding: 0%;
 }
 
+
+.box {
+  /* Topic image search styling is in modal so needs to be global */
+  .photo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.5rem -0.5rem 0;
+    
+    li {
+      height: 20vh;
+      flex-grow: 1;
+      margin: 0 0.5rem 0.5rem 0;
+    }
+    
+    li:last-child {
+      flex-grow: 10;
+    }
+
+    img {
+      max-height: 100%;
+      min-width: 100%;
+      object-fit: cover;
+      vertical-align: bottom;
+      border-radius: ${(props) => props.theme.borderR};
+    }
+  }
+}
+
+@media (hover: hover) {
+  .box {
+  /* Setting hover image pointer */
+    .photo-grid {
+      img {
+        :hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 1050px) {
   .App {
     display: grid;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { userStore } from "../stores/userinfo";
 import { useForm, useToggle } from "../hooks";
 import Button from "react-bootstrap/Button";
@@ -7,33 +7,89 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Form from "react-bootstrap/Form";
 import { StyledDiv } from "../styling/PostTopicForm.styles";
+import superagent from "superagent";
+
+const clientID = "ik__FxLjO_5Cieki0XQDwEjaEUZAXK8PKHCGNlz4nW4";
+
+const initialForm = {
+  slug: "",
+  description: "",
+  image: "",
+  validTopic: false,
+  validated: false,
+  invalidFormat: false,
+};
 
 const PostTopicForm = () => {
   const [postingTopic, handlePostingTopic] = useToggle();
-  const { form, handleChange, handlePostTopic } = useForm(
-    {
-      slug: "",
-      description: "",
-      validTopic: false,
-      validated: false,
-      invalidFormat: false,
-    },
+  const { form, handleChange, handlePostTopic, setForm } = useForm(
+    initialForm,
     handlePostingTopic
   );
+  const [photos, setPhotos] = useState([]);
+  const [query, setQuery] = useState("");
+  const [photoErr, setPhotoErr] = useState(null);
+  const queryInput = useRef(null);
+
+  const simpleGet = (options) => {
+    setPhotoErr(false);
+    superagent
+      .get(options.url)
+      .then(function (res) {
+        if (options.onSuccess) options.onSuccess(res);
+      })
+      .catch(() => {
+        setPhotoErr(true);
+      });
+  };
+
+  const numberOfPhotos = 10;
+
+  const url =
+    "https://api.unsplash.com/photos/random/?count=" +
+    numberOfPhotos +
+    "&client_id=" +
+    clientID;
+
+  const searchPhotos = (e) => {
+    e.preventDefault();
+    setQuery(queryInput.current.value);
+  };
+
+  const handleImage = (url) => {
+    setForm((c) => {
+      c.image = url;
+    });
+  };
+
+  useEffect(() => {
+    const photosUrl = query ? `${url}&query=${query}` : url;
+
+    simpleGet({
+      url: photosUrl,
+      onSuccess: (res) => {
+        setPhotos(res.body);
+      },
+    });
+  }, [query, url]);
 
   return (
     <StyledDiv>
       <Modal
         show={postingTopic}
-        onHide={handlePostingTopic}
+        onHide={() => {
+          setForm((c) => initialForm);
+          setPhotoErr(false);
+          handlePostingTopic();
+        }}
         aria-labelledby="modal-posting-topic"
         dialogClassName="modal-90w"
       >
-        <Form validated={form.validated} onSubmit={handlePostTopic}>
-          <Modal.Header closeButton>
-            <Modal.Title>What would you like to discuss?</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+        <Modal.Header closeButton>
+          <Modal.Title>What would you like to discuss?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form validated={form.validated} onSubmit={handlePostTopic}>
             <Form.Group controlId="topicSlugForm">
               <Form.Label>Title</Form.Label>
               <Form.Control
@@ -68,16 +124,93 @@ const PostTopicForm = () => {
                 className="descriptionForm"
               />
             </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button type="submit" variant="primary" size="sm">
-              Post Topic
+            <Form.Group controlId="toppicImageForm">
+              <Form.Label>Topic image URL</Form.Label>
+              <Form.Control
+                value={form.image}
+                required
+                type="text"
+                disabled={true}
+                placeholder="Search and click an image below to select it"
+                className="imageForm"
+              />
+              <Form.Text className="text-muted">
+                Optional, if you don't choose an image, one will be generated
+                based on your title
+              </Form.Text>
+            </Form.Group>
+          </Form>
+          <div className="box">
+            <Form
+              id="unsplash-search"
+              className="unsplash-search-form"
+              onSubmit={searchPhotos}
+            >
+              <Form.Group controlId="topicImageSearchForm">
+                <Form.Label>
+                  Search Photos on Unsplash add a FA help icon
+                </Form.Label>
+                <Form.Control
+                  ref={queryInput}
+                  placeholder="Search an image using unsplash!"
+                  type="search"
+                  className="topicSearchinput"
+                  defaultValue=""
+                  isInvalid={photoErr}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Your search didn't match any images!
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Form>
+            <ul className="photo-grid">
+              {photos.map((photo) => {
+                return (
+                  <li key={photo.id}>
+                    <img
+                      src={photo.urls.small}
+                      alt="unsplash"
+                      onClick={() => handleImage(photo.urls.small)}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <OverlayTrigger
+            overlay={<Tooltip id="tooltip">Search images!</Tooltip>}
+          >
+            <Button
+              type="submit"
+              variant="primary"
+              size="sm"
+              onClick={searchPhotos}
+            >
+              Search
             </Button>
-            <Button variant="secondary" onClick={handlePostingTopic} size="sm">
-              Close
-            </Button>
-          </Modal.Footer>
-        </Form>
+          </OverlayTrigger>
+          <Button
+            type="submit"
+            variant="primary"
+            size="sm"
+            onClick={handlePostTopic}
+          >
+            Post Topic
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setForm((c) => initialForm);
+              setPhotoErr(false);
+              handlePostingTopic();
+            }}
+            size="sm"
+          >
+            Close
+          </Button>
+        </Modal.Footer>
       </Modal>
       {!postingTopic &&
         (userStore.username ? (

@@ -36,6 +36,20 @@ export const timeSince = (timestamp) => {
   } else return "Less than an hour ago";
 };
 
+export const formatTopicImages = (image) => {
+  if (!image.length) return undefined;
+  const splitImage = image.split("&");
+  const baseURL = splitImage[0] + "&" + splitImage[7];
+  const imgObj = {
+    url: baseURL + "&fm=jpg&w=400&fit=crop&ar=1:1",
+    thumb: baseURL + "&fm=jpg&w=200&fit=crop&ar=1:1",
+    banner: baseURL + "&auto=format&w=1300&h=400&fit=crop&crop=faces",
+    mobile_banner: baseURL + "&auto=format&w=600&h=200&fit=crop&crop=faces",
+    card: baseURL + "&auto=format&w=400&h=226&fit=crop&crop=faces",
+  };
+  return imgObj;
+};
+
 export const getTopContributors = (articles) => {
   if (userStore.users.length === 0 || articles.length === 0) return [];
 

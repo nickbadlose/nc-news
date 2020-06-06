@@ -5,7 +5,7 @@ import throttle from "lodash.throttle";
 import { navigate } from "@reach/router";
 import { useImmerReducer, useImmer } from "use-immer";
 import { userStore } from "../stores/userinfo";
-import { checkValidTopic } from "../utils/utils";
+import { checkValidTopic, formatTopicImages } from "../utils/utils";
 
 export const useForm = (initialForm, dispatch) => {
   const [form, setForm] = useImmer(initialForm);
@@ -50,11 +50,14 @@ export const useForm = (initialForm, dispatch) => {
       c.invalidFormat = false;
     });
 
+    const image = formatTopicImages(form.image);
+
     if (checkValidTopic(form.slug)) {
       api
         .postTopic({
           slug: form.slug.toLowerCase(),
           description: form.description,
+          image,
         })
         .then((topic) => {
           if (isMounted.current) {

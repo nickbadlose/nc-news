@@ -4,6 +4,31 @@ export const StyledMain = styled.main`
   display: flex;
   flex-flow: column nowrap;
 
+  /* .box {
+    width: 50%;
+  } */
+
+  /* .photo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -8px -8px 0;
+    li {
+      height: 20vh;
+      flex-grow: 1;
+      margin: 0 8px 8px 0;
+    }
+    li:last-child {
+      flex-grow: 10;
+    }
+    img {
+      max-height: 100%;
+      min-width: 100%;
+      object-fit: cover;
+      vertical-align: bottom;
+      border-radius: 4px;
+    }
+  } */
+
   .createLine {
     &::after {
       content: "";
