@@ -169,6 +169,9 @@ const PostTopicForm = () => {
                   <li key={photo.id}>
                     <img
                       src={photo.urls.small}
+                      srcSet={`${photo.urls.small} 400w,
+                      ${photo.urls.regular} 1080w`}
+                      sizes="(max-width: 1250px) 400px, 1080px"
                       alt="unsplash"
                       onClick={() => handleImage(photo.urls.small)}
                     />

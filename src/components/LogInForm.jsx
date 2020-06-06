@@ -15,7 +15,7 @@ const LogInForm = () => {
   return (
     <StyledDiv>
       <img
-        src="https://images.unsplash.com/photo-1529243856184-fd5465488984?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&w=600&h=100&fit=crop&crop=edges"
+        src="https://images.unsplash.com/photo-1529243856184-fd5465488984?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&w=600&h=200&fit=crop&crop=edges"
         alt="NC-News banner"
       />
       <Form className="logInForm mx-auto" onSubmit={handleLogin}>

@@ -108,6 +108,7 @@ const ArticleTile = ({
                 variant="top"
                 src={images.image_card}
                 alt={topic}
+                loading="lazy"
               />
             </Link>
           )}
