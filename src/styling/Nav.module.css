@@ -5,7 +5,7 @@
   /* display: flex; */
   position: sticky !important;
   top: 0px;
-  z-index: 1;
+  z-index: 5;
 }
 
 .collapse {
@@ -58,6 +58,8 @@
   display: flex;
   flex-wrap: nowrap;
 }
+
+/* need to style search icon and center it */
 
 .searchBar {
   margin-right: 0.25rem;

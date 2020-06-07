@@ -16,17 +16,12 @@ body {
   text-transform: capitalize;  /* capitalize first letter of each word */
 }
 
-/* .form-control-sm {
-  background: ${(props) => props.theme.inputBg};
-} */
-
 .form-control {
   background: ${(props) => props.theme.inputBg};
   color: ${(props) => props.theme.textC};
 
   :disabled {
-    background: ${(props) => props.theme.inputBg};
-
+    background: ${(props) => props.theme.inputDisabledBg};
   }
 
   :focus {

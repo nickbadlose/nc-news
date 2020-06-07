@@ -77,13 +77,23 @@ const ArticleTile = observer(
                 <p className="topic">
                   <Link to={`/topics/articles/${topic}`}>{topic}</Link>
                 </p>
-                <p className="comments">
-                  {comment_count} comments{" "}
-                  <FontAwesomeIcon
-                    icon={faCommentDots}
-                    className="commentIcon"
-                  />
-                </p>
+                {+comment_count === 1 ? (
+                  <p className="comments">
+                    {comment_count} comment{" "}
+                    <FontAwesomeIcon
+                      icon={faCommentDots}
+                      className="commentIcon"
+                    />
+                  </p>
+                ) : (
+                  <p className="comments">
+                    {comment_count} comments{" "}
+                    <FontAwesomeIcon
+                      icon={faCommentDots}
+                      className="commentIcon"
+                    />
+                  </p>
+                )}
                 <p className="shortComments">
                   {comment_count}{" "}
                   <FontAwesomeIcon

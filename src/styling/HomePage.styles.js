@@ -16,8 +16,9 @@ export const StyledMain = styled.main`
   .bannerImage {
     grid-area: img;
     width: 100%;
+    min-height: 20vw;
     background: ${(props) => props.theme.textC};
-    color: #ffffff;
+    color: ${(props) => props.theme.imageTextC};
     text-align: center;
     overflow: hidden;
     border-radius: ${(props) => props.theme.borderR};
@@ -308,6 +309,18 @@ export const StyledMain = styled.main`
       max-width: 100%;
       min-height: 100%;
       min-height: 20vw;
+    }
+  }
+
+  @media (max-width: 1050px) {
+    .bannerImage {
+      min-height: 22vw;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .bannerImage {
+      min-height: 29vw;
     }
   }
 

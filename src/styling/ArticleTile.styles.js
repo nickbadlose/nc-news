@@ -22,6 +22,7 @@ export const StyledLi = styled.li`
     max-height: 128px;
     width: 128px;
     height: 128px;
+    background: ${(props) => props.theme.textC};
 
     img {
       min-width: 128px;
@@ -30,6 +31,7 @@ export const StyledLi = styled.li`
       max-height: 128px;
       width: 100%;
       height: 100%;
+      color: ${(props) => props.theme.imageTextC};
     }
   }
 
@@ -367,6 +369,11 @@ export const StyledLiCard = styled.li`
   .image {
     width: 100%;
     height: 100%;
+    min-width: 100%;
+    min-height: 11.5vw;
+    background: ${(props) => props.theme.textC};
+    color: ${(props) => props.theme.imageTextC};
+    text-align: center;
   }
 
   @media (hover: hover) {
@@ -402,10 +409,21 @@ export const StyledLiCard = styled.li`
     flex: ${(props) => props.topicLayout && "0 0 calc((100% - 2rem) / 2)"};
   }
 
+  @media (max-width: 1050px) {
+    .image {
+      min-height: 13.5vw;
+    }
+  }
+
   @media (max-width: 950px) {
     flex: 0 0 calc((100% - 2rem) / 2);
+
     a:nth-child(2) {
       display: flex;
+    }
+
+    .image {
+      min-height: 19vw;
     }
   }
 
@@ -418,10 +436,18 @@ export const StyledLiCard = styled.li`
   @media (max-width: 768px) {
     flex: 0 0 calc((100% - 6vw) / 3);
     margin: 1rem 1vw 0rem 1vw;
+
+    .image {
+      min-height: 16.5vw;
+    }
   }
 
   @media (max-width: 730px) {
     flex: 0 0 calc((100% - 4vw) / 2);
+
+    .image {
+      min-height: 25vw;
+    }
   }
 
   @media (max-width: 500px) {
@@ -430,6 +456,10 @@ export const StyledLiCard = styled.li`
 
     a:nth-child(2) {
       display: flex;
+    }
+
+    .image {
+      min-height: 50vw;
     }
   }
 `;

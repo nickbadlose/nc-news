@@ -252,8 +252,8 @@ export const useTopics = (reducer, initialState) => {
     api
       .getTopics(state.page)
       .then(({ data: { topics, total_count } }) => {
-        const maxPage = Math.ceil(total_count / 10);
-        const pages = [...Array(maxPage).keys()].slice(1);
+        const maxPage = Math.ceil(total_count / 12);
+        const pages = [...Array(maxPage + 1).keys()].slice(1);
         if (isMounted.current) {
           dispatch({ type: "fetch-topics", topics, maxPage, pages });
         }

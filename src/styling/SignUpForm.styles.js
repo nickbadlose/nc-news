@@ -6,8 +6,12 @@ export const StyledDiv = styled.div`
   border-radius: ${(props) => props.theme.borderR};
   min-height: calc(100vh - 3.5rem - 5vw);
 
-  img {
+  .bannerImage {
     width: 100%;
+    background: ${(props) => props.theme.textC};
+    color: ${(props) => props.theme.imageTextC};
+    text-align: center;
+    min-height: 20vw;
   }
 
   .signUpForm {
@@ -35,6 +39,12 @@ export const StyledDiv = styled.div`
     }
   }
 
+  @media (max-width: 1050px) {
+    .bannerImage {
+      min-height: 22vw;
+    }
+  }
+
   @media (max-width: 1000px) {
     .signUpForm {
       width: 75%;
@@ -43,6 +53,10 @@ export const StyledDiv = styled.div`
 
   @media (max-width: 768px) {
     min-height: calc(100vh - 3.5rem - 4vh);
+
+    .bannerImage {
+      min-height: 29vw;
+    }
   }
 
   @media (max-width: 600px) {

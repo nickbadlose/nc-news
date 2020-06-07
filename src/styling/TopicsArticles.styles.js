@@ -6,10 +6,14 @@ export const StyledMain = styled.main`
 
   .bannerImage {
     width: 100%;
+    min-height: 20vw;
     height: auto;
     border-radius: ${(props) => props.theme.borderR};
     border: ${(props) => props.theme.border};
     overflow: hidden;
+    background: ${(props) => props.theme.textC};
+    color: ${(props) => props.theme.imageTextC};
+    text-align: center;
   }
 
   .createLine {
@@ -163,6 +167,12 @@ export const StyledMain = styled.main`
     }
   }
 
+  @media (max-width: 1050px) {
+    .bannerImage {
+      min-height: 22vw;
+    }
+  }
+
   @media (max-width: 800px) {
     .topicInfo {
       display: none;
@@ -172,6 +182,10 @@ export const StyledMain = styled.main`
   @media (max-width: 768px) {
     ul {
       width: ${(props) => props.layout === "card" && "calc(100% + 2vw)"};
+    }
+
+    .bannerImage {
+      min-height: 29vw;
     }
   }
 

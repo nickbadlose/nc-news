@@ -29,6 +29,7 @@ const TopicsArticles = observer(({ topic }) => {
         <article>
           <img
             src={state.images[topic].image_banner}
+            srcSet={`${state.images[topic].image_banner} 1300w, ${state.images[topic].mobile_banner} 600w`}
             alt={topic}
             className="bannerImage"
           />

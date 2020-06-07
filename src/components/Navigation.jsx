@@ -10,11 +10,10 @@ import Form from "react-bootstrap/Form";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import FormControl from "react-bootstrap/FormControl";
 import logo from "../logos/news.svg";
-import search from "../logos/search.svg";
 import { Link } from "@reach/router";
 import { darkStore } from "../stores/darkMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faMoon, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = observer(() => {
   return (
@@ -42,7 +41,7 @@ const Navigation = observer(() => {
           className={styles.searchButton}
           onClick={searchStore.handleSubmit}
         >
-          <img src={search} alt="search" className={styles.img} />
+          <FontAwesomeIcon icon={faSearch} className="searchIcon" />
         </button>
       </Form>
       <Navbar.Toggle
@@ -62,7 +61,7 @@ const Navigation = observer(() => {
           </Nav.Link>
         </Nav>
         <Nav className={styles.profile}>
-          {userStore.username ? ( // need to add a logged in logo maybe? or maybe it's better with username? use avatar yo
+          {userStore.username ? (
             <NavDropdown
               title={userStore.username}
               id="collapsible-nav-dropdown"
