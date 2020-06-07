@@ -16,6 +16,14 @@ body {
   text-transform: capitalize;  /* capitalize first letter of each word */
 }
 
+/* .form-control-sm {
+  background: black;
+}
+
+.form-control {
+  background: black;
+} */
+
 .modal-90w {
   max-width: 90%;
 }

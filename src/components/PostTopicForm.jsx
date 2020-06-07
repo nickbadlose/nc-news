@@ -215,29 +215,28 @@ const PostTopicForm = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      {!postingTopic &&
-        (userStore.username ? (
-          <Button type="submit" size="sm" onClick={handlePostingTopic}>
-            Post Topic
-          </Button>
-        ) : (
-          <OverlayTrigger
-            overlay={
-              <Tooltip id="tooltip-disabled">Log in to post a topic!</Tooltip>
-            }
-          >
-            <span className="d-inline-block">
-              <Button
-                variant="primary"
-                disabled
-                style={{ pointerEvents: "none" }}
-                size="sm"
-              >
-                Post Topic
-              </Button>
-            </span>
-          </OverlayTrigger>
-        ))}
+      {userStore.username ? (
+        <Button type="submit" size="sm" onClick={handlePostingTopic}>
+          Post Topic
+        </Button>
+      ) : (
+        <OverlayTrigger
+          overlay={
+            <Tooltip id="tooltip-disabled">Log in to post a topic!</Tooltip>
+          }
+        >
+          <span className="d-inline-block">
+            <Button
+              variant="primary"
+              disabled
+              style={{ pointerEvents: "none" }}
+              size="sm"
+            >
+              Post Topic
+            </Button>
+          </span>
+        </OverlayTrigger>
+      )}
     </StyledDiv>
   );
 };

@@ -55,8 +55,8 @@ export const removeCommentById = (comment_id) => {
   return axios.delete(`${baseUrl}/comments/${comment_id}`);
 };
 
-export const getTopics = () => {
-  return axios.get(`${baseUrl}/topics`);
+export const getTopics = (p, limit) => {
+  return axios.get(`${baseUrl}/topics`, { params: { p, limit } });
 };
 
 export const postLogIn = (username, password) => {

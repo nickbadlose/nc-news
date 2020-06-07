@@ -38,7 +38,7 @@ const HomePage = observer(() => {
   useEffect(() => {
     Promise.all([
       api.getArticles("votes", "desc", undefined, undefined, 3),
-      api.getTopics(),
+      api.getTopics(1, 100),
     ])
       .then(
         ([
@@ -60,7 +60,12 @@ const HomePage = observer(() => {
             return obj;
           }, {});
           isMounted.current &&
-            setState({ articles, topics, images, isLoading: false });
+            setState({
+              articles,
+              topics,
+              images,
+              isLoading: false,
+            });
         }
       )
       .catch(({ response }) => {

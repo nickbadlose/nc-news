@@ -206,7 +206,7 @@ export const useForm = (initialForm, dispatch) => {
   };
 };
 
-export const useTopics = () => {
+export const useTopicsSideBar = () => {
   const isMounted = useRef(true);
   const [isLoading, setIsLoading] = useState(true);
   const [topics, setTopics] = useState([]);
@@ -219,7 +219,7 @@ export const useTopics = () => {
 
   useEffect(() => {
     api
-      .getTopics()
+      .getTopics(1, 100)
       .then(({ data: { topics } }) => {
         if (isMounted.current) {
           setTopics(topics);
@@ -235,6 +235,38 @@ export const useTopics = () => {
     topics,
     setTopics,
     isLoading,
+  };
+};
+
+export const useTopics = (reducer, initialState) => {
+  const isMounted = useRef(true);
+  const [state, dispatch] = useImmerReducer(reducer, initialState);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    // dispatch({ type: "loading" });
+    api
+      .getTopics(state.page)
+      .then(({ data: { topics, total_count } }) => {
+        const maxPage = Math.ceil(total_count / 10);
+        const pages = [...Array(maxPage).keys()].slice(1);
+        if (isMounted.current) {
+          dispatch({ type: "fetch-topics", topics, maxPage, pages });
+        }
+      })
+      .catch(({ response }) => {
+        errorStore.err = { status: response.status, msg: response.data.msg };
+      });
+  }, [dispatch, state.page]);
+
+  return {
+    state,
+    dispatch,
   };
 };
 

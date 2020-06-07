@@ -1,7 +1,11 @@
 import { decorate, observable } from "mobx";
 
 export class dark {
-  constructor(initialDarkMode = JSON.parse(localStorage.darkMode) || false) {
+  constructor(
+    initialDarkMode = localStorage.darkMode
+      ? JSON.parse(localStorage.darkMode)
+      : false
+  ) {
     this.darkMode = initialDarkMode;
   }
 

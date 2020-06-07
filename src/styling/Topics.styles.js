@@ -22,7 +22,25 @@ export const StyledMain = styled.main`
       padding-top: 1rem;
 
       h2 {
+        flex: 0 0 1;
         color: ${(props) => props.theme.headerC};
+      }
+    }
+  }
+
+  .pagination {
+    width: unset;
+    flex: 0 0 1;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0rem 0.5rem;
+
+    .page-item {
+      a {
+        border: ${(props) => props.theme.border};
+        background: ${(props) => props.theme.bg};
       }
     }
   }
@@ -45,6 +63,7 @@ export const StyledMain = styled.main`
     align-self: center;
     width: calc(100% + 1rem);
     justify-content: flex-start;
+    margin-bottom: 1rem;
   }
 
   @media (max-width: 768px) {

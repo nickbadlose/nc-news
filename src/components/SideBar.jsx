@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "@reach/router";
 import { StyledSidebar } from "../styling/SideBar.styles";
 import Spinner from "react-bootstrap/Spinner";
-import { useTopics } from "../hooks";
+import { useTopicsSideBar } from "../hooks";
 
 const SideBar = () => {
-  const { topics, isLoading } = useTopics();
+  const { topics, isLoading } = useTopicsSideBar();
 
   return (
     <StyledSidebar>

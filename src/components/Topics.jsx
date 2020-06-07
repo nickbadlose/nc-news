@@ -4,26 +4,70 @@ import PostTopicForm from "./PostTopicForm.jsx";
 import { useTopics } from "../hooks";
 import { StyledMain, StyledLi } from "../styling/Topics.styles";
 import Spinner from "react-bootstrap/Spinner";
+import Pagination from "react-bootstrap/Pagination";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "fetch-topics":
+      state.topics = action.topics;
+      state.isLoading = false;
+      state.maxPage = action.maxPage;
+      state.pages = action.pages;
+      return;
+    case "loading":
+      state.isLoading = true;
+      return;
+    case "page":
+      state.page = action.page;
+      return;
+    case "reset":
+      state.page = 1;
+      return;
+    default:
+      return state;
+  }
+};
+
+const initialState = {
+  topics: [],
+  page: 1,
+  maxPage: null,
+  isLoading: true,
+  pages: [1],
+};
+
 const Topics = () => {
-  const { topics, isLoading } = useTopics();
+  const { state, dispatch } = useTopics(reducer, initialState);
 
   return (
     <StyledMain>
       <div className="createLine">
         <div className="headerPostTopic">
           <h2>Topics</h2>
+          <Pagination size="sm" className="pagination">
+            {state.pages.map((page) => {
+              return (
+                <Pagination.Item
+                  key={page}
+                  active={page === state.page}
+                  onClick={() => dispatch({ type: "page", page })}
+                >
+                  {page}
+                </Pagination.Item>
+              );
+            })}
+          </Pagination>
           <PostTopicForm />
         </div>
       </div>
-      {isLoading ? (
+      {state.isLoading ? (
         <Spinner animation="border" className="spinner" />
       ) : (
         <div className="centerTiles">
           <ul>
-            {topics.map((topic) => {
+            {state.topics.map((topic) => {
               return (
                 <StyledLi key={topic.slug}>
                   <Link to={`/topics/articles/${topic.slug}`}>
@@ -48,6 +92,19 @@ const Topics = () => {
               );
             })}
           </ul>
+          <Pagination size="sm" className="paginationBottom">
+            {state.pages.map((page) => {
+              return (
+                <Pagination.Item
+                  key={page}
+                  active={page === state.page}
+                  onClick={() => dispatch({ type: "page", page })}
+                >
+                  {page}
+                </Pagination.Item>
+              );
+            })}
+          </Pagination>
         </div>
       )}
     </StyledMain>
