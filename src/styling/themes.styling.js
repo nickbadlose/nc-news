@@ -17,6 +17,10 @@ export const mainTheme = {
   gradient:
     "linear-gradient(to bottom, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 1) 100%)",
   scrollBarC: "rgba(52, 52, 52, 0.4)",
+  inputBg: "#fff",
+  inputDisabledBg: "#fff",
+  inputPlaceholderC: "",
+  commentFormFooterC: "#E8EBED",
 };
 
 export const loggedIn = {};
@@ -40,4 +44,7 @@ export const darkTheme = {
   gradient:
     "linear-gradient(to bottom, rgba(52, 58, 64, 0) 10%, rgba(52, 58, 64, 1) 95%)",
   scrollBarC: "rgba(255, 255, 255, 0.8)",
+  inputBg: "rgba(39, 39, 41, 1)",
+  inputDisabledBg: "black",
+  commentFormFooterC: "#1C1F22",
 };

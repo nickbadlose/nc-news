@@ -249,7 +249,6 @@ export const useTopics = (reducer, initialState) => {
   }, []);
 
   useEffect(() => {
-    // dispatch({ type: "loading" });
     api
       .getTopics(state.page)
       .then(({ data: { topics, total_count } }) => {
@@ -337,7 +336,7 @@ export const useArticles = (topic) => {
   }, [topic, dispatch]);
 
   useEffect(() => {
-    api.getTopics().then(({ data: { topics } }) => {
+    api.getTopics(1, 100).then(({ data: { topics } }) => {
       if (isMounted.current) {
         const descriptions = topics.reduce((obj, topic) => {
           obj[topic.slug] = topic.description;

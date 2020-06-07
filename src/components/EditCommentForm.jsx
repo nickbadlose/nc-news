@@ -29,7 +29,10 @@ const EditCommentForm = ({
           <Modal.Title>Edit your comment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form.Group controlId="editCommentFormBodyInput">
+          <Form.Group
+            controlId="editCommentFormBodyInput"
+            className="editCommentFormGroup"
+          >
             <Form.Control
               as="textarea"
               value={body}

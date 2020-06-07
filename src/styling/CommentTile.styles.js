@@ -7,6 +7,7 @@ export const StyledLi = styled.li`
   flex-flow: row nowrap;
   margin-top: 1rem;
   transition: border 0.3s ease-in-out;
+  overflow: hidden;
 
   p {
     margin: 0rem;
