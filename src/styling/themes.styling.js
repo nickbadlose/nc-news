@@ -34,9 +34,9 @@ export const darkTheme = {
   smallMarginL: "1rem",
   linkHover: "rgba(240, 45, 58, 1)",
   borderHover: "#ffffff",
-  userArticleHeaderFooterC: "rgba(253, 236, 238, 1)" /* need to set */,
+  userArticleHeaderFooterC: "rgba(40, 40, 40, 1)",
   numberFont: "",
-  articleFooterC: "#32383D" /* need to set */,
+  articleFooterC: "#32383D",
   gradient:
     "linear-gradient(to bottom, rgba(52, 58, 64, 0) 10%, rgba(52, 58, 64, 1) 95%)",
   scrollBarC: "rgba(255, 255, 255, 0.8)",

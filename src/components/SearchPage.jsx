@@ -10,6 +10,7 @@ import { Link } from "@reach/router";
 import { StyledDiv } from "../styling/SearchPage.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
+import { darkStore } from "../stores/darkMode";
 
 const SearchPage = ({ search }) => {
   const isMounted = useRef(true);
@@ -54,7 +55,10 @@ const SearchPage = ({ search }) => {
                 if (data.slug) {
                   return (
                     <li key={state.searchData.indexOf(data)}>
-                      <Card className="topic">
+                      <Card
+                        className="topic"
+                        bg={darkStore.darkMode ? "dark" : "light"}
+                      >
                         <Link to={`/topics/articles/${data.slug}`}>
                           <img
                             src={data.image_thumb}
@@ -87,7 +91,10 @@ const SearchPage = ({ search }) => {
                 } else if (data.username) {
                   return (
                     <li key={state.searchData.indexOf(data)}>
-                      <Card className="user">
+                      <Card
+                        className="user"
+                        bg={darkStore.darkMode ? "dark" : "light"}
+                      >
                         <Card.Body>
                           <Card.Title className="capitalize">
                             <img
