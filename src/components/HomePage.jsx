@@ -88,11 +88,6 @@ const HomePage = observer(() => {
           first 3 questions if you can't read them all) below to look at what
           you can do here. Each page has different styles and features so be
           sure to check out as many pages and try as many things as you can.
-          This is an App I've made to showcase my programming skills, nothing
-          more. Please spend a brief amount of time trying out the different
-          features so that you can get a feel for my ability and what I can
-          offer from what I have managed in the short time I've been
-          programming.
         </p>
       </div>
       <div className="faq">
