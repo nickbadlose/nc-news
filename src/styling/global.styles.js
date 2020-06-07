@@ -18,19 +18,26 @@ body {
 
 .modal-90w {
   max-width: 90%;
+}
+
+.close {
   color: ${(props) => props.theme.headerC};
-  .close {
-    color: ${(props) => props.theme.headerC};
-  }
-  .modal-header {
-    background-color: ${(props) => props.theme.bg};
-  }
-  .modal-body {
-    background-color: ${(props) => props.theme.bg};
-  }
-  .modal-footer {
-    background-color: ${(props) => props.theme.bg};
-  }
+  color: ${(props) => props.theme.headerC};
+}
+  
+.modal-header {
+  background-color: ${(props) => props.theme.bg};
+  color: ${(props) => props.theme.headerC};
+}
+  
+.modal-body {
+  background-color: ${(props) => props.theme.bg};
+  color: ${(props) => props.theme.headerC};
+}
+  
+.modal-footer {
+  background-color: ${(props) => props.theme.bg};
+  color: ${(props) => props.theme.headerC};
 }
 
 

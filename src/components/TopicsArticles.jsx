@@ -14,6 +14,7 @@ import { getTopContributors } from "../utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "@reach/router";
+import { darkStore } from "../stores/darkMode";
 
 const TopicsArticles = observer(({ topic }) => {
   const { state, dispatch } = useArticles(topic);
@@ -47,7 +48,7 @@ const TopicsArticles = observer(({ topic }) => {
           </div>
           <div className="mainTopic">
             <div className="topicInfo">
-              <Card className="info">
+              <Card className="info" bg={darkStore.darkMode ? "dark" : "light"}>
                 <Card.Header>
                   <Card.Title className="capitalize">{topic}</Card.Title>
                 </Card.Header>
@@ -55,7 +56,10 @@ const TopicsArticles = observer(({ topic }) => {
                   <Card.Text>{state.descriptions[topic]}</Card.Text>
                 </Card.Body>
               </Card>
-              <Card className="topContributors">
+              <Card
+                className="topContributors"
+                bg={darkStore.darkMode ? "dark" : "light"}
+              >
                 <Card.Header>
                   <Card.Title>Top Contributors</Card.Title>
                 </Card.Header>

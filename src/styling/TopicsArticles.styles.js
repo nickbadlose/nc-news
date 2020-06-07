@@ -95,6 +95,7 @@ export const StyledMain = styled.main`
 
       .list-group-item {
         margin-bottom: 0rem;
+        background: ${(props) => props.theme.bg};
       }
 
       .contributor {
@@ -178,8 +179,7 @@ export const StyledMain = styled.main`
     ul {
       width: ${(props) => props.layout === "card" && "100%"};
       flex-direction: column;
-      align-items: ${(props) =>
-        props.layout === "card" ? "center" : "stretch"};
+      align-items: stretch;
     }
   }
 

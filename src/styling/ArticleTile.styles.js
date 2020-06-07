@@ -213,6 +213,8 @@ export const StyledLi = styled.li`
         flex-direction: column;
         flex-grow: 1;
         justify-content: center;
+        align-items: center;
+        text-align: center;
         margin: 0rem 0.25rem !important;
       }
     }
@@ -423,6 +425,7 @@ export const StyledLiCard = styled.li`
   }
 
   @media (max-width: 500px) {
+    flex: 0 0 1;
     margin: 1rem 0rem 0rem 0rem;
 
     a:nth-child(2) {
