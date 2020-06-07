@@ -12,10 +12,19 @@ import FormControl from "react-bootstrap/FormControl";
 import logo from "../logos/news.svg";
 import search from "../logos/search.svg";
 import { Link } from "@reach/router";
+import { darkStore } from "../stores/darkMode";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = observer(() => {
   return (
-    <Navbar expand="sm" variant="dark" id="navbar" className={styles.navBar}>
+    <Navbar
+      expand="sm"
+      bg={darkStore.darkMode ? "dark" : "primary"}
+      variant={"dark"}
+      id="navbar"
+      className={styles.navBar}
+    >
       <Navbar.Brand as={Link} to="/" className={styles.brand}>
         NC <img src={logo} alt="news" />
       </Navbar.Brand>
@@ -65,6 +74,24 @@ const Navigation = observer(() => {
               <NavDropdown.Item onClick={userStore.logOut}>
                 Log out
               </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={darkStore.handleDarkMode}>
+                <Form>
+                  <Form.Group controlId="darkModeToggleForm">
+                    <Form.Label>
+                      <FontAwesomeIcon icon={faMoon} className="darkModeIcon" />
+                    </Form.Label>
+                    <Form.Check
+                      type="switch"
+                      id="custom-switch"
+                      label=""
+                      className="nightModeSwitch"
+                      checked={darkStore.darkMode}
+                      readOnly={true}
+                    />
+                  </Form.Group>
+                </Form>
+              </NavDropdown.Item>
             </NavDropdown>
           ) : (
             <NavDropdown
@@ -77,6 +104,24 @@ const Navigation = observer(() => {
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/signup">
                 Sign up
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={darkStore.handleDarkMode}>
+                <Form>
+                  <Form.Group controlId="darkModeToggleForm">
+                    <Form.Label>
+                      <FontAwesomeIcon icon={faMoon} className="darkModeIcon" />
+                    </Form.Label>
+                    <Form.Check
+                      type="switch"
+                      id="custom-switch"
+                      label=""
+                      checked={darkStore.darkMode}
+                      className="nightModeSwitch"
+                      readOnly={true}
+                    />
+                  </Form.Group>
+                </Form>
               </NavDropdown.Item>
             </NavDropdown>
           )}

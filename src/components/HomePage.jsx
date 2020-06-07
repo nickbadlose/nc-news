@@ -17,8 +17,10 @@ import {
   faQuestionCircle,
   faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
+import { darkStore } from "../stores/darkMode";
+import { observer } from "mobx-react";
 
-const HomePage = () => {
+const HomePage = observer(() => {
   const [state, setState] = useState({
     articles: [],
     topics: [],
@@ -109,8 +111,11 @@ const HomePage = () => {
             </p>
           </div>
         </div>
-        <Accordion className="faqAccordion">
-          <Card>
+        <Accordion
+          className="faqAccordion"
+          bg={darkStore.darkMode ? "dark" : "light"}
+        >
+          <Card bg={darkStore.darkMode ? "dark" : "light"}>
             <Accordion.Toggle
               as={Card.Header}
               variant="link"
@@ -130,7 +135,7 @@ const HomePage = () => {
               </Card.Body>
             </Accordion.Collapse>
           </Card>
-          <Card>
+          <Card bg={darkStore.darkMode ? "dark" : "light"}>
             <Accordion.Toggle
               as={Card.Header}
               variant="link"
@@ -147,7 +152,7 @@ const HomePage = () => {
               </Card.Body>
             </Accordion.Collapse>
           </Card>
-          <Card>
+          <Card bg={darkStore.darkMode ? "dark" : "light"}>
             <Accordion.Toggle
               as={Card.Header}
               variant="link"
@@ -192,7 +197,7 @@ const HomePage = () => {
               </Card.Body>
             </Accordion.Collapse>
           </Card>{" "}
-          <Card>
+          <Card bg={darkStore.darkMode ? "dark" : "light"}>
             <Accordion.Toggle
               as={Card.Header}
               variant="link"
@@ -210,7 +215,7 @@ const HomePage = () => {
               </Card.Body>
             </Accordion.Collapse>
           </Card>
-          <Card>
+          <Card bg={darkStore.darkMode ? "dark" : "light"}>
             <Accordion.Toggle
               as={Card.Header}
               variant="link"
@@ -384,6 +389,6 @@ const HomePage = () => {
       </div>
     </StyledMain>
   );
-};
+});
 
 export default HomePage;

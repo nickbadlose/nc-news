@@ -22,7 +22,7 @@ export const StyledSidebar = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.borderC};
+    background-color: ${(props) => props.theme.scrollBarC};
     outline: 1px solid ${(props) => props.theme.borderC};
   }
 

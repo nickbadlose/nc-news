@@ -70,7 +70,6 @@ ul {
   padding: 0%;
 }
 
-
 .box {
   /* Topic image search styling is in modal so needs to be global */
   .photo-grid {

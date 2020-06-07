@@ -30,12 +30,13 @@ export const StyledMain = styled.main`
   }
 
   .description {
+    grid-area: description;
     background: ${(props) => props.theme.bg};
     border-radius: ${(props) => props.theme.borderR};
     border: ${(props) => props.theme.border};
     padding: 1rem;
     margin-top: 1rem;
-    color: black;
+    color: ${(props) => props.theme.headerC};
 
     p {
       margin-bottom: 0rem;
@@ -61,10 +62,6 @@ export const StyledMain = styled.main`
     h2 {
       color: ${(props) => props.theme.headerC};
     }
-  }
-
-  .description {
-    grid-area: description;
   }
 
   .faq {
@@ -104,6 +101,10 @@ export const StyledMain = styled.main`
       border: ${(props) => props.theme.border};
       border-radius: ${(props) => props.theme.borderR};
       transition: border 0.3s ease-in-out;
+
+      .list-group-item {
+        background: ${(props) => props.theme.bg};
+      }
 
       .question {
         padding: 0.75rem 0.5rem;

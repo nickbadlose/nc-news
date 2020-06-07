@@ -18,6 +18,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
+import { darkStore } from "../stores/darkMode";
 
 const UserPage = ({ username }) => {
   const isMounted = useRef(true);
@@ -75,7 +76,7 @@ const UserPage = ({ username }) => {
         <Spinner animation="border" className="spinner" />
       ) : (
         <div className="layout">
-          <Card className="userInfo">
+          <Card className="userInfo" bg={darkStore.darkMode ? "dark" : "light"}>
             <Card.Img
               variant="top"
               src={state.user.avatar_url}
@@ -103,7 +104,7 @@ const UserPage = ({ username }) => {
                 </Card.Text>
               )}
             </Card.Body>
-            <ListGroup className="list-group-flush">
+            <ListGroup className="list-group-flush starsJoinDate">
               <ListGroupItem className="stars">
                 <span>
                   {state.stars} Stars{" "}

@@ -8,8 +8,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import * as api from "./api";
 import { userStore } from "./stores/userinfo";
 import { ThemeProvider } from "styled-components";
-import { mainTheme } from "./styling/themes.styling";
+import { mainTheme, darkTheme } from "./styling/themes.styling";
 import GlobalStyles from "./styling/global.styles";
+import { darkStore } from "./stores/darkMode";
 
 const App = observer(() => {
   const isMounted = useRef(true);
@@ -26,7 +27,7 @@ const App = observer(() => {
   }, []);
 
   return (
-    <ThemeProvider theme={mainTheme}>
+    <ThemeProvider theme={darkStore.darkMode ? darkTheme : mainTheme}>
       <GlobalStyles />
       <div className="App">
         <Header />

@@ -74,11 +74,7 @@ export const StyledLi = styled.li`
         height: 100%;
         position: absolute;
         top: 0px;
-        background: linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 0) 60%,
-          rgba(255, 255, 255, 1) 100%
-        );
+        background: ${(props) => props.theme.gradient};
       }
     }
 

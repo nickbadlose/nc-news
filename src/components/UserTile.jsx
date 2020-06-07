@@ -20,6 +20,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
+import { darkStore } from "../stores/darkMode";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -87,7 +88,7 @@ const UserTile = ({
   return (
     !state.deleted && (
       <StyledLi toggle={bodyToggle} article={topic ? true : false}>
-        <Card>
+        <Card bg={darkStore.darkMode ? "dark" : "light"}>
           {topic ? (
             <Card.Header className="header">
               <FontAwesomeIcon icon={faBook} className="headerIcon" />

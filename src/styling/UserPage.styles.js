@@ -55,6 +55,10 @@ export const StyledMain = styled.main`
         text-transform: capitalize;
       }
 
+      .list-group-item {
+        background: ${(props) => props.theme.bg};
+      }
+
       .stars {
         font-size: 0.85rem;
         padding: 0.5rem;
