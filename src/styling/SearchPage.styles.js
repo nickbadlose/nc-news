@@ -6,7 +6,7 @@ export const StyledDiv = styled.div`
       content: "";
       height: 1px;
       display: block;
-      background-color: ${(props) => props.theme.borderC};
+      background-color: ${(props) => props.theme.textC};
       margin-top: 1rem;
       align-self: center;
     }

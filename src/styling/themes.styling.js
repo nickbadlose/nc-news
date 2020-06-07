@@ -38,6 +38,6 @@ export const darkTheme = {
   numberFont: "",
   articleFooterC: "#32383D" /* need to set */,
   gradient:
-    "linear-gradient(to bottom, rgba(26, 26, 27, 0) 10%, rgba(26, 26, 27, 1) 95%)",
+    "linear-gradient(to bottom, rgba(52, 58, 64, 0) 10%, rgba(52, 58, 64, 1) 95%)",
   scrollBarC: "rgba(255, 255, 255, 0.8)",
 };

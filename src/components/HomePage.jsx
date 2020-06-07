@@ -148,7 +148,7 @@ const HomePage = observer(() => {
             <Accordion.Collapse eventKey="1">
               <Card.Body className="answer">
                 Everything, don't worry about what you do, please
-                post/edit/delet as much as you like!
+                post/edit/delete as much as you like!
               </Card.Body>
             </Accordion.Collapse>
           </Card>
@@ -164,8 +164,8 @@ const HomePage = observer(() => {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="2">
               <Card.Body className="answer">
-                Make sure you check out these pages and featurs at least at
-                least! Links go to the page where you can find that feature.
+                Make sure you check out these pages and featurs at least! Links
+                go to the page where you can find that feature.
                 <ListGroup>
                   <ListGroup.Item>Log in (via the navbar)</ListGroup.Item>
                   <ListGroup.Item>
@@ -183,11 +183,15 @@ const HomePage = observer(() => {
                     Post a topic (via the <Link to="/topics">topics</Link> page)
                   </ListGroup.Item>
                   <ListGroup.Item>
+                    Toggle dark mode / light mode (via the username/login
+                    dropdown in the nav bar)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
                     View a <Link to="/articles/19">specific article</Link> page
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    View your profile page once logged in (via the username link
-                    in the nav bar)
+                    View your profile page once logged in (via the
+                    username/login dropdown in the nav bar)
                   </ListGroup.Item>
                   <ListGroup.Item>
                     Search users / topics / key words in the search bar to find
@@ -240,9 +244,6 @@ const HomePage = observer(() => {
                     Sign up page (via the nav bar)
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    Toggle dark mode / light mode (via the nav bar)
-                  </ListGroup.Item>
-                  <ListGroup.Item>
                     Vote on articles (via <Link to="/articles">articles</Link>{" "}
                     or <Link to="/articles/19">specific article</Link> page)
                   </ListGroup.Item>
@@ -281,11 +282,15 @@ const HomePage = observer(() => {
                     Post a topic (via the <Link to="/topics">topics</Link> page)
                   </ListGroup.Item>
                   <ListGroup.Item>
+                    Toggle dark mode / light mode (via the username/login
+                    dropdown in the nav bar)
+                  </ListGroup.Item>
+                  <ListGroup.Item>
                     View a <Link to="/articles/19">specific article</Link> page
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    View your profile page once logged in (via the username link
-                    in the nav bar)
+                    View your profile page once logged in (via the
+                    username/login dropdown in the nav bar)
                   </ListGroup.Item>
                   <ListGroup.Item>
                     Search users / topics / key words in the search bar to find

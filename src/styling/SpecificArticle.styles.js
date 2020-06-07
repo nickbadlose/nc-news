@@ -36,7 +36,7 @@ export const StyledMain = styled.main`
           display: block;
           width: 100%;
           height: 1px;
-          background-color: ${(props) => props.theme.borderC};
+          background-color: ${(props) => props.theme.textC};
           margin-top: 1rem;
         }
       }

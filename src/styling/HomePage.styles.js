@@ -54,7 +54,7 @@ export const StyledMain = styled.main`
       content: "";
       height: 1px;
       display: block;
-      background-color: ${(props) => props.theme.borderC};
+      background-color: ${(props) => props.theme.textC};
       margin-top: 0.5rem;
       align-self: center;
     }
