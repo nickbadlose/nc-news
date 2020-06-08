@@ -106,8 +106,11 @@ const SearchPage = ({ search }) => {
                               {data.username}
                             </Link>{" "}
                           </Card.Title>
-                          <footer className="blockquote-footer numbers">
-                            member since {formatDate(data.joined).date}
+                          <footer className="blockquote-footer">
+                            member since{" "}
+                            <span className="numbers">
+                              {formatDate(data.joined).date}
+                            </span>
                           </footer>
                         </Card.Body>
                       </Card>

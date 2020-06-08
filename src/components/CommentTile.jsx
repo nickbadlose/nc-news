@@ -35,9 +35,10 @@ const CommentTile = ({
       <article className="commentMain">
         <p className="commentBody">{form.body}</p>
         <div className="commentInfo">
-          <p className="commentAuthor numbers">
-            Posted by <Link to={`/${author}`}>{author}</Link> on {date} at{" "}
-            {time}
+          <p className="commentAuthor">
+            Posted by <Link to={`/${author}`}>{author}</Link> on{" "}
+            <span className="numbers">{date}</span> at{" "}
+            <span className="numbers">{time}</span>
           </p>
           <p className="commentAuthorShort numbers">
             <Link to={`/${author}`}>{author}</Link> on {date}

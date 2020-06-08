@@ -76,14 +76,16 @@ const Topics = () => {
                       <h4>{topic.slug}</h4>
                       <p>{topic.description}</p>
                       {+topic.article_count === 1 ? (
-                        <p className="numbers">
+                        <p>
                           <FontAwesomeIcon icon={faBook} className="bookIcon" />{" "}
-                          {topic.article_count} article!
+                          <span className="numbers">{topic.article_count}</span>{" "}
+                          article!
                         </p>
                       ) : (
-                        <p className="numbers">
+                        <p>
                           <FontAwesomeIcon icon={faBook} className="bookIcon" />{" "}
-                          {topic.article_count} articles!
+                          <span className="numbers">{topic.article_count}</span>{" "}
+                          articles!
                         </p>
                       )}
                     </div>

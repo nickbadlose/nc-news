@@ -67,8 +67,9 @@ const ArticleTile = observer(
               </Link>
             </div>
             <div className="articleInfo">
-              <p className="author numbers">
-                By <Link to={`/${author}`}>{author}</Link> on {date}
+              <p className="author">
+                By <Link to={`/${author}`}>{author}</Link> on{" "}
+                <span className="numbers">{date}</span>
               </p>
               <p className="shortAuthor">
                 <Link to={`/${author}`}>{author}</Link>
@@ -78,16 +79,18 @@ const ArticleTile = observer(
                   <Link to={`/topics/articles/${topic}`}>{topic}</Link>
                 </p>
                 {+comment_count === 1 ? (
-                  <p className="comments numbers">
-                    {comment_count} comment{" "}
+                  <p className="comments">
+                    <span className="numbers marginR">{comment_count}</span>{" "}
+                    comment{" "}
                     <FontAwesomeIcon
                       icon={faCommentDots}
                       className="commentIcon"
                     />
                   </p>
                 ) : (
-                  <p className="comments numbers">
-                    {comment_count} comments{" "}
+                  <p className="comments">
+                    <span className="numbers marginR">{comment_count}</span>{" "}
+                    comments{" "}
                     <FontAwesomeIcon
                       icon={faCommentDots}
                       className="commentIcon"

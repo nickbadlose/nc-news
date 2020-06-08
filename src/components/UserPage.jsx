@@ -106,9 +106,9 @@ const UserPage = ({ username }) => {
             </Card.Body>
             <ListGroup className="list-group-flush starsJoinDate">
               <ListGroupItem className="stars">
-                <span className="numbers">
-                  {state.stars} Stars{" "}
-                  <FontAwesomeIcon icon={faStar} className="starIcon" />
+                <span>
+                  <span className="numbers marginR">{state.stars}</span>
+                  Stars <FontAwesomeIcon icon={faStar} className="starIcon" />
                 </span>
                 <OverlayTrigger
                   overlay={
@@ -133,9 +133,11 @@ const UserPage = ({ username }) => {
                   </button>
                 </OverlayTrigger>
               </ListGroupItem>
-              <ListGroupItem className="memberJoinDate numbers">
+              <ListGroupItem className="memberJoinDate">
                 {" "}
-                Joined {date}{" "}
+                <span>
+                  Joined <span className="numbers">{date}</span>
+                </span>{" "}
                 <FontAwesomeIcon icon={faClock} className="clockIcon" />
               </ListGroupItem>
             </ListGroup>

@@ -133,12 +133,13 @@ const SpecificArticle = ({ article_id }) => {
                   {state.article.topic}
                 </Link>
               </p>
-              <p className="author numbers">
+              <p className="author">
                 Posted by{" "}
                 <Link to={`/${state.article.author}`}>
                   {state.article.author}
                 </Link>{" "}
-                on {date} at {time}
+                on <span className="numbers marginL marginR">{date}</span> at{" "}
+                <span className="numbers marginL">{time}</span>
               </p>
               <p className="authorShort">
                 <Link to={`/${state.article.author}`}>

@@ -76,14 +76,16 @@ const TopicsArticles = observer(({ topic }) => {
                         <Link to={`/${contributor.author}`}>
                           {contributor.author}
                         </Link>{" "}
-                        <footer className="blockquote-footer numbers">
+                        <footer className="blockquote-footer">
                           <FontAwesomeIcon
                             icon={faBook}
                             className="articleIcon"
                           />{" "}
-                          {contributor.articles === 1
-                            ? "1 article!"
-                            : `${contributor.articles} articles!`}
+                          <span className="numbers">
+                            {contributor.articles === 1
+                              ? "1 article!"
+                              : `${contributor.articles} articles!`}
+                          </span>
                         </footer>{" "}
                       </ListGroup.Item>
                     );

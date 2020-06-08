@@ -190,7 +190,7 @@ const HomePage = observer(() => {
                     dropdown in the nav bar)
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    View a <Link to="/articles/19">specific article</Link> page
+                    View a <Link to="/articles/42">specific article</Link> page
                   </ListGroup.Item>
                   <ListGroup.Item>
                     View your profile page once logged in (via the
@@ -240,7 +240,7 @@ const HomePage = observer(() => {
                 <ListGroup>
                   <ListGroup.Item>
                     Edit/delete your users articles/comments either from the{" "}
-                    <Link to="/articles/19">specific article</Link> page or your{" "}
+                    <Link to="/articles/42">specific article</Link> page or your{" "}
                     <Link to="/tickle122">profile (jessjelly)</Link> page
                   </ListGroup.Item>
                   <ListGroup.Item>
@@ -248,7 +248,7 @@ const HomePage = observer(() => {
                   </ListGroup.Item>
                   <ListGroup.Item>
                     Vote on articles (via <Link to="/articles">articles</Link>{" "}
-                    or <Link to="/articles/19">specific article</Link> page)
+                    or <Link to="/articles/42">specific article</Link> page)
                   </ListGroup.Item>
                   <ListGroup.Item>
                     Post an article (via the{" "}
@@ -257,7 +257,7 @@ const HomePage = observer(() => {
                   </ListGroup.Item>
                   <ListGroup.Item>
                     Comment on an article (via the{" "}
-                    <Link to="/articles/19">specific article</Link> page)
+                    <Link to="/articles/42">specific article</Link> page)
                   </ListGroup.Item>
                   <ListGroup.Item>
                     View a{" "}
@@ -289,7 +289,7 @@ const HomePage = observer(() => {
                     dropdown in the nav bar)
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    View a <Link to="/articles/19">specific article</Link> page
+                    View a <Link to="/articles/42">specific article</Link> page
                   </ListGroup.Item>
                   <ListGroup.Item>
                     View your profile page once logged in (via the
@@ -325,14 +325,16 @@ const HomePage = observer(() => {
                       </h4>
                       <p className="topicDescription">{topic.description}</p>
                       {+topic.article_count === 1 ? (
-                        <p className="numbers">
+                        <p>
                           <FontAwesomeIcon icon={faBook} className="bookIcon" />{" "}
-                          {topic.article_count} article!
+                          <span className="numbers">{topic.article_count}</span>{" "}
+                          article!
                         </p>
                       ) : (
-                        <p className="numbers">
+                        <p>
                           <FontAwesomeIcon icon={faBook} className="bookIcon" />{" "}
-                          {topic.article_count} articles!
+                          <span className="numbers">{topic.article_count}</span>{" "}
+                          articles!
                         </p>
                       )}
                     </div>

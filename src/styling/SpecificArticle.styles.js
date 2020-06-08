@@ -145,6 +145,7 @@ export const StyledMain = styled.main`
 
           .commentIcon {
             padding-right: 0.2rem;
+            padding-left: 0.1rem;
             color: ${(props) => props.theme.linkC};
           }
         }

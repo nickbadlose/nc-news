@@ -140,6 +140,14 @@ ul {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.marginR {
+  margin-right: 0.2rem;
+}
+
+.marginL {
+  margin-left: 0.2rem;
+}
+
 @media (hover: hover) {
   .box {
   /* Setting hover image pointer */
