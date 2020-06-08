@@ -29,7 +29,6 @@ const App = observer(() => {
     <ThemeProvider theme={darkStore.darkMode ? darkTheme : mainTheme}>
       <GlobalStyles />
       <div className="App">
-        {/* <Header /> */}
         <Navigation />
         <SideBar />
         <Routes />

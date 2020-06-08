@@ -23,8 +23,6 @@ export const mainTheme = {
   imageTextC: "white",
 };
 
-export const loggedIn = {};
-
 export const darkTheme = {
   htmlBg: "#030303",
   bg: "#343A40",

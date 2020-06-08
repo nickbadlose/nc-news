@@ -88,7 +88,6 @@ code {
 }
 
 .App {
-  /* background-color: #dae0e6; */
   background-color: ${(props) => props.theme.htmlBg};
   text-align: center;
   font-family: "Guardian Text Egyptian Web", Georgia, serif;

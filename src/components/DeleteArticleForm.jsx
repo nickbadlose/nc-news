@@ -31,6 +31,7 @@ const DeleteArticleForm = ({ article_id, dispatch, isMounted, userPage }) => {
         });
       });
   };
+
   return (
     <div>
       <Modal
