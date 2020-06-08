@@ -180,4 +180,11 @@ export const StyledMain = styled.main`
       }
     }
   }
+
+  @media (max-height: 500px) {
+    .userInfo {
+      position: unset !important;
+      top: unset !important;
+    }
+  }
 `;

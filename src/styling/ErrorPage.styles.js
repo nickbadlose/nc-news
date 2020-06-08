@@ -8,6 +8,7 @@ export const Main = styled.main`
   width: 50vw;
   height: 50vh;
   justify-content: center;
+  align-items: center;
   border-radius: 5px;
   margin: 15vh auto 0px auto;
   overflow: auto;
@@ -16,5 +17,9 @@ export const Main = styled.main`
   img {
     width: 96px;
     margin: 0px auto;
+  }
+
+  button {
+    margin-top: 0.5rem;
   }
 `;
