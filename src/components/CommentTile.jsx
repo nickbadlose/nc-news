@@ -35,11 +35,11 @@ const CommentTile = ({
       <article className="commentMain">
         <p className="commentBody">{form.body}</p>
         <div className="commentInfo">
-          <p className="commentAuthor">
+          <p className="commentAuthor ">
             Posted by <Link to={`/${author}`}>{author}</Link> on {date} at{" "}
             {time}
           </p>
-          <p className="commentAuthorShort">
+          <p className="commentAuthorShort ">
             <Link to={`/${author}`}>{author}</Link> on {date}
           </p>
           {userStore.username === author && (

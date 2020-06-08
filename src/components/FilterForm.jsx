@@ -16,42 +16,45 @@ const FilterForm = ({ article, dispatch, order, sort_by }) => {
   const { handleSelect } = useFilter(dispatch);
   return (
     <StyledForm>
-      <OverlayTrigger overlay={<Tooltip id="tooltip">Sort by!</Tooltip>}>
-        <DropdownButton
-          id="dropdown-basic-button"
-          onSelect={handleSelect}
-          title={
-            order === "asc" ? (
-              <FontAwesomeIcon icon={faClock} className="filterIcon" />
-            ) : sort_by === "created_at" ? (
-              <FontAwesomeIcon icon={faClock} className="filterIcon" />
-            ) : sort_by === "votes" ? (
-              <FontAwesomeIcon icon={faHeart} className="filterIcon" />
-            ) : (
-              <FontAwesomeIcon icon={faCommentDots} className="filterIcon" />
-            )
-          }
-          size="sm"
-          alignRight={article}
-          className={!article && "comments"}
-        >
-          <Dropdown.Item eventKey="created_at">
-            New <FontAwesomeIcon icon={faClock} className="filterIcon" />
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="created_at/asc">
-            Old <FontAwesomeIcon icon={faClock} className="filterIcon" />
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="votes">
-            Popular <FontAwesomeIcon icon={faHeart} className="filterIcon" />
-          </Dropdown.Item>
-          {article && (
-            <Dropdown.Item eventKey="comment_count">
-              Conversational{" "}
-              <FontAwesomeIcon icon={faCommentDots} className="filterIcon" />
+      <div className={!article && "comments"}>
+        <OverlayTrigger overlay={<Tooltip id="tooltip">Sort by!</Tooltip>}>
+          <DropdownButton
+            id="dropdown-basic-button"
+            onSelect={handleSelect}
+            title={
+              order === "asc" ? (
+                <FontAwesomeIcon icon={faClock} className="filterIcon" />
+              ) : sort_by === "created_at" ? (
+                <FontAwesomeIcon icon={faClock} className="filterIcon" />
+              ) : sort_by === "votes" ? (
+                <FontAwesomeIcon icon={faHeart} className="filterIcon" />
+              ) : article ? (
+                <FontAwesomeIcon icon={faCommentDots} className="filterIcon" />
+              ) : (
+                <FontAwesomeIcon icon={faClock} className="filterIcon" />
+              )
+            }
+            size="sm"
+            alignRight={article}
+          >
+            <Dropdown.Item eventKey="created_at">
+              New <FontAwesomeIcon icon={faClock} className="filterIcon" />
             </Dropdown.Item>
-          )}
-        </DropdownButton>
-      </OverlayTrigger>
+            <Dropdown.Item eventKey="created_at/asc">
+              Old <FontAwesomeIcon icon={faClock} className="filterIcon" />
+            </Dropdown.Item>
+            <Dropdown.Item eventKey="votes">
+              Popular <FontAwesomeIcon icon={faHeart} className="filterIcon" />
+            </Dropdown.Item>
+            {article && (
+              <Dropdown.Item eventKey="comment_count">
+                Conversational{" "}
+                <FontAwesomeIcon icon={faCommentDots} className="filterIcon" />
+              </Dropdown.Item>
+            )}
+          </DropdownButton>
+        </OverlayTrigger>
+      </div>
     </StyledForm>
   );
 };

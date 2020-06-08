@@ -10,6 +10,8 @@ import { Link } from "@reach/router";
 import { StyledDiv } from "../styling/SignUpForm.styles";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import bannerImage from "../logos/nc-news.banner.jpeg";
+import mobileImage from "../logos/nc-news.mobile.jpeg";
 
 const SignUpForm = () => {
   const { form, setForm, handleSignUp } = useForm({
@@ -58,8 +60,8 @@ const SignUpForm = () => {
   return (
     <StyledDiv>
       <img
-        src="https://images.unsplash.com/photo-1529243856184-fd5465488984?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&w=1300&h=400&fit=crop&crop=edges"
-        srcSet="https://images.unsplash.com/photo-1529243856184-fd5465488984?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&w=1300&h=400&fit=crop&crop=edges 1300w, https://images.unsplash.com/photo-1529243856184-fd5465488984?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&w=600&h=200&fit=crop&crop=edges 600w"
+        src={bannerImage}
+        srcSet={`${bannerImage} 1300w, ${mobileImage} 600w`}
         alt="NC-News banner"
         className="bannerImage"
       />

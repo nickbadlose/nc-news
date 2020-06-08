@@ -75,7 +75,7 @@ const SearchPage = ({ search }) => {
                           <Card.Text className="topicDescription">
                             {data.description}
                           </Card.Text>
-                          <Card.Text className="blockquote-footer">
+                          <Card.Text className="blockquote-footer ">
                             <FontAwesomeIcon
                               icon={faBook}
                               className="bookIcon"
@@ -106,7 +106,7 @@ const SearchPage = ({ search }) => {
                               {data.username}
                             </Link>{" "}
                           </Card.Title>
-                          <footer className="blockquote-footer">
+                          <footer className="blockquote-footer ">
                             member since {formatDate(data.joined).date}
                           </footer>
                         </Card.Body>

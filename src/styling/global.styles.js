@@ -91,7 +91,7 @@ code {
   /* background-color: #dae0e6; */
   background-color: ${(props) => props.theme.htmlBg};
   text-align: center;
-  font-family: "Guardian Text Egyptian Web", Georgia, serif;
+  font-family: "Guardian Text Egyptian Web", Arial, Helvetica, sans-serif;
   color: ${(props) => props.theme.textC};
   display: grid;
   grid-template-columns: 8vw auto 160px 8vw;

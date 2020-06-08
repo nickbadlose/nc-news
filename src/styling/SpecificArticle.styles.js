@@ -12,6 +12,7 @@ export const StyledMain = styled.main`
   .smallMarginSpinner {
     margin-top: ${(props) => props.theme.smallMarginL};
     align-self: center;
+    margin-bottom: 1rem;
   }
 
   .main {

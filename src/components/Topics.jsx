@@ -46,7 +46,7 @@ const Topics = () => {
       <div className="createLine">
         <div className="headerPostTopic">
           <h2>Topics</h2>
-          <Pagination size="sm" className="pagination">
+          <Pagination size="sm" className="pagination ">
             {state.pages.map((page) => {
               return (
                 <Pagination.Item
@@ -92,7 +92,7 @@ const Topics = () => {
               );
             })}
           </ul>
-          <Pagination size="sm" className="paginationBottom">
+          <Pagination size="sm" className="paginationBottom ">
             {state.pages.map((page) => {
               return (
                 <Pagination.Item

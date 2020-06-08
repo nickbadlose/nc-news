@@ -133,7 +133,7 @@ const UserPage = ({ username }) => {
                   </button>
                 </OverlayTrigger>
               </ListGroupItem>
-              <ListGroupItem className="memberJoinDate">
+              <ListGroupItem className="memberJoinDate ">
                 {" "}
                 Joined {date}{" "}
                 <FontAwesomeIcon icon={faClock} className="clockIcon" />

@@ -133,7 +133,7 @@ const SpecificArticle = ({ article_id }) => {
                   {state.article.topic}
                 </Link>
               </p>
-              <p className="author">
+              <p className="author ">
                 Posted by{" "}
                 <Link to={`/${state.article.author}`}>
                   {state.article.author}
@@ -145,7 +145,7 @@ const SpecificArticle = ({ article_id }) => {
                   {state.article.author}
                 </Link>
               </p>
-              <p className="comments">
+              <p className="comments ">
                 <FontAwesomeIcon icon={faComment} className="commentIcon" />
                 {+state.article.comment_count}
               </p>
@@ -180,7 +180,12 @@ const SpecificArticle = ({ article_id }) => {
           />
           <section className="commentSection">
             {state.comments.length !== 0 && (
-              <FilterForm dispatch={dispatch} article={false} />
+              <FilterForm
+                dispatch={dispatch}
+                article={false}
+                order={state.order}
+                sort_by={state.sort_by}
+              />
             )}
             <ul>
               {state.comments.map((comment) => {

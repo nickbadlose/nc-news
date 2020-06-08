@@ -19,6 +19,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { darkStore } from "../stores/darkMode";
 import { observer } from "mobx-react";
+import bannerImage from "../logos/nc-news.banner.jpeg";
+import mobileImage from "../logos/nc-news.mobile.jpeg";
 
 const HomePage = observer(() => {
   const [state, setState] = useState({
@@ -76,8 +78,8 @@ const HomePage = observer(() => {
   return (
     <StyledMain>
       <img
-        src="https://images.unsplash.com/photo-1529243856184-fd5465488984?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&w=1300&h=400&fit=crop&crop=edges"
-        srcSet="https://images.unsplash.com/photo-1529243856184-fd5465488984?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&w=1300&h=400&fit=crop&crop=edges 1300w, https://images.unsplash.com/photo-1529243856184-fd5465488984?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&w=600&h=200&fit=crop&crop=edges 600w"
+        src={bannerImage}
+        srcSet={`${bannerImage} 1300w, ${mobileImage} 600w`}
         alt="NC-News banner"
         className="bannerImage"
       />
@@ -369,7 +371,7 @@ const HomePage = observer(() => {
                       <h4 className="capitalize articleTitle">
                         {article.title.toLowerCase()}
                       </h4>
-                      <div className="articleInfo">
+                      <div className="articleInfo ">
                         <p>
                           {article.votes}{" "}
                           <FontAwesomeIcon

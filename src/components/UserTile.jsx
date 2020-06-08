@@ -108,7 +108,7 @@ const UserTile = ({
             >
               <Card.Title>{title}</Card.Title>
             </Link>
-            <footer className="blockquote-footer">
+            <footer className="blockquote-footer ">
               {timeSince(created_at)}
             </footer>
           </Card.Body>
@@ -129,7 +129,7 @@ const UserTile = ({
           <Card.Footer className="text-muted footer">
             <div className="articleCommentInfo">
               {comment_count && (
-                <p className="comments">
+                <p className="comments ">
                   {comment_count}{" "}
                   <FontAwesomeIcon
                     icon={faCommentDots}
@@ -137,7 +137,7 @@ const UserTile = ({
                   />
                 </p>
               )}
-              <p className="votes">
+              <p className="votes ">
                 {votes}
                 <FontAwesomeIcon icon={faHeart} className="footerIcon" />
               </p>
