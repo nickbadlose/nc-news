@@ -181,7 +181,7 @@ export const StyledMain = styled.main`
     }
   }
 
-  @media (max-height: 500px) {
+  @media (max-height: 570px) {
     .userInfo {
       position: unset !important;
       top: unset !important;

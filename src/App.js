@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Routes from "./components/Routes";
 import SideBar from "./components/SideBar";
@@ -30,7 +29,7 @@ const App = observer(() => {
     <ThemeProvider theme={darkStore.darkMode ? darkTheme : mainTheme}>
       <GlobalStyles />
       <div className="App">
-        <Header />
+        {/* <Header /> */}
         <Navigation />
         <SideBar />
         <Routes />

@@ -95,9 +95,8 @@ code {
   color: ${(props) => props.theme.textC};
   display: grid;
   grid-template-columns: 8vw auto 1rem 160px 8vw;
-  grid-template-rows: 4rem 3.5rem 2.5vw auto 2.5vw;
+  grid-template-rows: 3.5rem 2.5vw auto 2.5vw;
   grid-template-areas:
-    "header header header header header"
     "nav nav nav nav nav"
     ". . . . ."
     ". main . sidebar ."
@@ -165,9 +164,8 @@ ul {
   .App {
     display: grid;
     grid-template-columns: 2vw auto 1rem 160px 2vw;
-    grid-template-rows: 4rem 3.5rem 2.5vw auto 2.5vw;
+    grid-template-rows: 3.5rem 2.5vw auto 2.5vw;
     grid-template-areas:
-      "header header header header header"
       "nav nav nav nav nav"
       ". . . . ."
       ". main . sidebar ."
@@ -179,9 +177,8 @@ ul {
   .App {
     display: grid;
     grid-template-columns: 2vw auto 2vw;
-    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-rows: auto 2vh auto 2vh;
     grid-template-areas:
-      "header header header"
       "nav nav nav"
       ". . ."
       ". main ."
@@ -193,9 +190,8 @@ ul {
   .App {
     display: grid;
     grid-template-columns: 2vw auto 2vw;
-    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-rows: auto 2vh auto 2vh;
     grid-template-areas:
-      "header header header"
       "nav nav nav"
       ". . ."
       ". main ."
@@ -207,9 +203,8 @@ ul {
   .App {
     display: grid;
     grid-template-columns: 2vw auto 2vw;
-    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-rows: auto 2vh auto 2vh;
     grid-template-areas:
-      "header header header"
       "nav nav nav"
       ". . ."
       ". main ."
@@ -221,9 +216,8 @@ ul {
   .App {
     display: grid;
     grid-template-columns: 2vw auto 2vw;
-    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-rows: auto 2vh auto 2vh;
     grid-template-areas:
-      "header header header"
       "nav nav nav"
       ". . ."
       ". main ."
@@ -235,9 +229,8 @@ ul {
   .App {
     display: grid;
     grid-template-columns: 2vw auto 2vw;
-    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-rows: auto 2vh auto 2vh;
     grid-template-areas:
-      "header header header"
       "nav nav nav"
       ". . ."
       ". main ."
@@ -249,9 +242,8 @@ ul {
   .App {
     display: grid;
     grid-template-columns: 2vw auto 2vw;
-    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-rows: auto 2vh auto 2vh;
     grid-template-areas:
-      "header header header"
       "nav nav nav"
       ". . ."
       ". main ."
@@ -263,9 +255,8 @@ ul {
   .App {
     display: grid;
     grid-template-columns: 2vw auto 2vw;
-    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-rows: auto 2vh auto 2vh;
     grid-template-areas:
-      "header header header"
       "nav nav nav"
       ". . ."
       ". main ."
@@ -277,9 +268,8 @@ ul {
   .App {
     display: grid;
     grid-template-columns: 2vw auto 2vw;
-    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-rows: auto 2vh auto 2vh;
     grid-template-areas:
-      "header header header"
       "nav nav nav"
       ". . ."
       ". main ."
@@ -296,9 +286,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -313,9 +302,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -330,9 +318,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -350,9 +337,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -368,9 +354,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -386,9 +371,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -407,9 +391,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -427,9 +410,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -447,9 +429,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -468,9 +449,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -488,9 +468,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -508,9 +487,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -528,9 +506,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -547,9 +524,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -566,9 +542,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -586,9 +561,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -605,9 +579,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -624,9 +597,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -643,9 +615,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -661,9 +632,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
@@ -679,9 +649,8 @@ ul {
     .App {
       display: grid;
       grid-template-columns: 2vw auto 2vw;
-      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-rows: auto 2vh auto 2vh;
       grid-template-areas:
-        "header header header"
         "nav nav nav"
         ". . ."
         ". main ."
