@@ -83,7 +83,12 @@ export const StyledMain = styled.main`
         margin-bottom: 0rem;
 
         button {
-          all: unset;
+          padding: 0;
+          border: none;
+          outline: none;
+          font: inherit;
+          color: inherit;
+          background: none;
 
           :focus {
             outline: 1px dotted;

@@ -41,9 +41,14 @@
 }
 
 .searchButton {
-  all: unset;
-  cursor: pointer;
+  /* all: unset; doesn't have ie or edge support :( */
+  padding: 0;
+  border: none;
   outline: none;
+  font: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
   align-self: center;
   color: rgba(255, 255, 255, 0.6);
   display: flex;
@@ -51,10 +56,6 @@
   justify-content: center;
   align-items: center;
   margin-left: 0.2rem;
-}
-
-.searchButton:focus {
-  outline: 1px dotted black;
 }
 
 .img {

@@ -15,7 +15,12 @@ export const StyledLi = styled.li`
   }
 
   .toggle {
-    all: unset;
+    padding: 0;
+    border: none;
+    outline: none;
+    font: inherit;
+    color: inherit;
+    background: none;
     transition: transform 0.5s ease;
     transform: rotate(${(props) => (props.toggle ? "180deg" : "0deg")});
     width: 100%;
