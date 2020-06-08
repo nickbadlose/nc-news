@@ -94,14 +94,14 @@ code {
   font-family: "Guardian Text Egyptian Web", Georgia, serif;
   color: ${(props) => props.theme.textC};
   display: grid;
-  grid-template-columns: 8vw auto 160px 8vw;
+  grid-template-columns: 8vw auto 1rem 160px 8vw;
   grid-template-rows: 4rem 3.5rem 2.5vw auto 2.5vw;
   grid-template-areas:
-    "header header header header"
-    "nav nav nav nav"
-    ". . . ."
-    ". main sidebar ."
-    ". . . .";
+    "header header header header header"
+    "nav nav nav nav nav"
+    ". . . . ."
+    ". main . sidebar ."
+    ". . . . .";
 }
 
 ul {
@@ -156,14 +156,14 @@ ul {
 @media (max-width: 1050px) {
   .App {
     display: grid;
-    grid-template-columns: 2vw auto 160px 2vw;
+    grid-template-columns: 2vw auto 1rem 160px 2vw;
     grid-template-rows: 4rem 3.5rem 2.5vw auto 2.5vw;
     grid-template-areas:
-      "header header header header"
-      "nav nav nav nav"
-      ". . . ."
-      ". main sidebar ."
-      ". . . .";
+      "header header header header header"
+      "nav nav nav nav nav"
+      ". . . . ."
+      ". main . sidebar ."
+      ". . . . .";
   }
 }
 
@@ -179,6 +179,506 @@ ul {
       ". main ."
       ". . .";
   }
+}
+
+@media (device-width: 812px) and (device-height: 375px) {
+  .App {
+    display: grid;
+    grid-template-columns: 2vw auto 2vw;
+    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-areas:
+      "header header header"
+      "nav nav nav"
+      ". . ."
+      ". main ."
+      ". . .";
+  }
+}
+
+@media (device-width: 823px) and (device-height: 411px) {
+  .App {
+    display: grid;
+    grid-template-columns: 2vw auto 2vw;
+    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-areas:
+      "header header header"
+      "nav nav nav"
+      ". . ."
+      ". main ."
+      ". . .";
+  }
+}
+
+@media (device-width: 1024px) and (device-height: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+  .App {
+    display: grid;
+    grid-template-columns: 2vw auto 2vw;
+    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-areas:
+      "header header header"
+      "nav nav nav"
+      ". . ."
+      ". main ."
+      ". . .";
+  }
+}
+
+@media (device-width: 1112px) and (device-height: 834px) and (-webkit-min-device-pixel-ratio: 2) {
+  .App {
+    display: grid;
+    grid-template-columns: 2vw auto 2vw;
+    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-areas:
+      "header header header"
+      "nav nav nav"
+      ". . ."
+      ". main ."
+      ". . .";
+  }
+}
+
+@media (device-width: 834px) and (device-height: 1112px) and (-webkit-min-device-pixel-ratio: 2) {
+  .App {
+    display: grid;
+    grid-template-columns: 2vw auto 2vw;
+    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-areas:
+      "header header header"
+      "nav nav nav"
+      ". . ."
+      ". main ."
+      ". . .";
+  }
+}
+
+@media (device-width: 1366px) and (device-height: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+  .App {
+    display: grid;
+    grid-template-columns: 2vw auto 2vw;
+    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-areas:
+      "header header header"
+      "nav nav nav"
+      ". . ."
+      ". main ."
+      ". . .";
+  }
+}
+
+@media (device-width: 1024px) and (device-height: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+  .App {
+    display: grid;
+    grid-template-columns: 2vw auto 2vw;
+    grid-template-rows: 4rem auto 2vh auto 2vh;
+    grid-template-areas:
+      "header header header"
+      "nav nav nav"
+      ". . ."
+      ". main ."
+      ". . .";
+  }
+}
+
+/* ----------- Galaxy Tab 2 ----------- */
+
+/* Portrait and Landscape */
+@media 
+  (min-device-width: 800px) 
+  and (max-device-width: 1280px) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Portrait */
+@media 
+  (max-device-width: 800px) 
+  and (orientation: portrait) { 
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Landscape */
+@media 
+  (max-device-width: 1280px) 
+  and (orientation: landscape) { 
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* ----------- Galaxy Tab S ----------- */
+
+/* Portrait and Landscape */
+@media 
+  (min-device-width: 800px) 
+  and (max-device-width: 1280px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Portrait */
+@media 
+  (max-device-width: 800px) 
+  and (orientation: portrait)
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Landscape */
+@media 
+  (max-device-width: 1280px) 
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* ----------- Nexus 7 ----------- */
+
+/* Portrait and Landscape */
+@media screen 
+  and (device-width: 601px) 
+  and (device-height: 906px) 
+  and (-webkit-min-device-pixel-ratio: 1.331) 
+  and (-webkit-max-device-pixel-ratio: 1.332) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Portrait */
+@media screen 
+  and (device-width: 601px) 
+  and (device-height: 906px) 
+  and (-webkit-min-device-pixel-ratio: 1.331) 
+  and (-webkit-max-device-pixel-ratio: 1.332) 
+  and (orientation: portrait) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Landscape */
+@media screen 
+  and (device-width: 601px) 
+  and (device-height: 906px) 
+  and (-webkit-min-device-pixel-ratio: 1.331) 
+  and (-webkit-max-device-pixel-ratio: 1.332) 
+  and (orientation: landscape) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* ----------- Nexus 9 ----------- */
+
+/* Portrait and Landscape */
+@media screen 
+  and (device-width: 1536px) 
+  and (device-height: 2048px) 
+  and (-webkit-min-device-pixel-ratio: 1.331) 
+  and (-webkit-max-device-pixel-ratio: 1.332) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Portrait */
+@media screen 
+  and (device-width: 1536px) 
+  and (device-height: 2048px) 
+  and (-webkit-min-device-pixel-ratio: 1.331) 
+  and (-webkit-max-device-pixel-ratio: 1.332) 
+  and (orientation: portrait) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Landscape */
+@media screen 
+  and (device-width: 1536px) 
+  and (device-height: 2048px) 
+  and (-webkit-min-device-pixel-ratio: 1.331) 
+  and (-webkit-max-device-pixel-ratio: 1.332) 
+  and (orientation: landscape) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* ----------- Kindle Fire HD 7" ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 800px) 
+  and (max-device-width: 1280px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 800px) 
+  and (max-device-width: 1280px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) 
+  and (orientation: portrait) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 800px) 
+  and (max-device-width: 1280px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) 
+  and (orientation: landscape) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* ----------- Kindle Fire HD 8.9" ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) 
+  and (orientation: portrait) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) 
+  and (orientation: landscape) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* ----------- Windows Phone ----------- */
+
+/* Portrait and Landscape */
+@media screen 
+  and (device-width: 480px) 
+  and (device-height: 800px) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Portrait */
+@media screen 
+  and (device-width: 480px) 
+  and (device-height: 800px)  
+  and (orientation: portrait) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
+}
+
+/* Landscape */
+@media screen 
+  and (device-width: 480px) 
+  and (device-height: 800px) 
+  and (orientation: landscape) {
+    .App {
+      display: grid;
+      grid-template-columns: 2vw auto 2vw;
+      grid-template-rows: 4rem auto 2vh auto 2vh;
+      grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        ". . ."
+        ". main ."
+        ". . .";
+    }
 }
 
 @media (max-width: 575px) {

@@ -16,7 +16,7 @@ const FilterForm = ({ article, dispatch, order, sort_by }) => {
   const { handleSelect } = useFilter(dispatch);
   return (
     <StyledForm>
-      <div className={!article && "comments"}>
+      <div className={!article ? "comments" : undefined}>
         <OverlayTrigger overlay={<Tooltip id="tooltip">Sort by!</Tooltip>}>
           <DropdownButton
             id="dropdown-basic-button"

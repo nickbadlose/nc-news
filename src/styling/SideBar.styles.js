@@ -87,4 +87,151 @@ export const StyledSidebar = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
+
+  @media (device-width: 812px) and (device-height: 375px) {
+    display: none;
+  }
+
+  @media (device-width: 823px) and (device-height: 411px) {
+    display: none;
+  }
+
+  @media (device-width: 1024px) and (device-height: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+    display: none;
+  }
+
+  @media (device-width: 1112px) and (device-height: 834px) and (-webkit-min-device-pixel-ratio: 2) {
+    display: none;
+  }
+
+  @media (device-width: 834px) and (device-height: 1112px) and (-webkit-min-device-pixel-ratio: 2) {
+    display: none;
+  }
+
+  @media (device-width: 1366px) and (device-height: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+    display: none;
+  }
+
+  @media (device-width: 1024px) and (device-height: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+    display: none;
+  }
+
+  /* ----------- Galaxy Tab 2 ----------- */
+
+  /* Portrait and Landscape */
+  @media (min-device-width: 800px) and (max-device-width: 1280px) {
+    display: none;
+  }
+
+  /* Portrait */
+  @media (max-device-width: 800px) and (orientation: portrait) {
+    display: none;
+  }
+
+  /* Landscape */
+  @media (max-device-width: 1280px) and (orientation: landscape) {
+    display: none;
+  }
+
+  /* ----------- Galaxy Tab S ----------- */
+
+  /* Portrait and Landscape */
+  @media (min-device-width: 800px) and (max-device-width: 1280px) and (-webkit-min-device-pixel-ratio: 2) {
+    display: none;
+  }
+
+  /* Portrait */
+  @media (max-device-width: 800px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+    display: none;
+  }
+
+  /* Landscape */
+  @media (max-device-width: 1280px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+    display: none;
+  }
+
+  /* ----------- Nexus 7 ----------- */
+
+  /* Portrait and Landscape */
+  @media screen and (device-width: 601px) and (device-height: 906px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) {
+    display: none;
+  }
+
+  /* Portrait */
+  @media screen and (device-width: 601px) and (device-height: 906px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) and (orientation: portrait) {
+    display: none;
+  }
+
+  /* Landscape */
+  @media screen and (device-width: 601px) and (device-height: 906px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) and (orientation: landscape) {
+    display: none;
+  }
+
+  /* ----------- Nexus 9 ----------- */
+
+  /* Portrait and Landscape */
+  @media screen and (device-width: 1536px) and (device-height: 2048px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) {
+    display: none;
+  }
+
+  /* Portrait */
+  @media screen and (device-width: 1536px) and (device-height: 2048px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) and (orientation: portrait) {
+    display: none;
+  }
+
+  /* Landscape */
+  @media screen and (device-width: 1536px) and (device-height: 2048px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) and (orientation: landscape) {
+    display: none;
+  }
+
+  /* ----------- Kindle Fire HD 7" ----------- */
+
+  /* Portrait and Landscape */
+  @media only screen and (min-device-width: 800px) and (max-device-width: 1280px) and (-webkit-min-device-pixel-ratio: 1.5) {
+    display: none;
+  }
+
+  /* Portrait */
+  @media only screen and (min-device-width: 800px) and (max-device-width: 1280px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: portrait) {
+    display: none;
+  }
+
+  /* Landscape */
+  @media only screen and (min-device-width: 800px) and (max-device-width: 1280px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape) {
+    display: none;
+  }
+
+  /* ----------- Kindle Fire HD 8.9" ----------- */
+
+  /* Portrait and Landscape */
+  @media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1.5) {
+    display: none;
+  }
+
+  /* Portrait */
+  @media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: portrait) {
+    display: none;
+  }
+
+  /* Landscape */
+  @media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape) {
+    display: none;
+  }
+
+  /* ----------- Windows Phone ----------- */
+
+  /* Portrait and Landscape */
+  @media screen and (device-width: 480px) and (device-height: 800px) {
+    dosplay: none;
+  }
+
+  /* Portrait */
+  @media screen and (device-width: 480px) and (device-height: 800px) and (orientation: portrait) {
+    dosplay: none;
+  }
+
+  /* Landscape */
+  @media screen and (device-width: 480px) and (device-height: 800px) and (orientation: landscape) {
+    dosplay: none;
+  }
 `;
