@@ -133,7 +133,7 @@ const SpecificArticle = ({ article_id }) => {
                   {state.article.topic}
                 </Link>
               </p>
-              <p className="author ">
+              <p className="author numbers">
                 Posted by{" "}
                 <Link to={`/${state.article.author}`}>
                   {state.article.author}
@@ -145,7 +145,7 @@ const SpecificArticle = ({ article_id }) => {
                   {state.article.author}
                 </Link>
               </p>
-              <p className="comments ">
+              <p className="comments numbers">
                 <FontAwesomeIcon icon={faComment} className="commentIcon" />
                 {+state.article.comment_count}
               </p>

@@ -46,7 +46,7 @@ const Topics = () => {
       <div className="createLine">
         <div className="headerPostTopic">
           <h2>Topics</h2>
-          <Pagination size="sm" className="pagination ">
+          <Pagination size="sm" className="pagination numbers">
             {state.pages.map((page) => {
               return (
                 <Pagination.Item
@@ -76,12 +76,12 @@ const Topics = () => {
                       <h4>{topic.slug}</h4>
                       <p>{topic.description}</p>
                       {+topic.article_count === 1 ? (
-                        <p>
+                        <p className="numbers">
                           <FontAwesomeIcon icon={faBook} className="bookIcon" />{" "}
                           {topic.article_count} article!
                         </p>
                       ) : (
-                        <p>
+                        <p className="numbers">
                           <FontAwesomeIcon icon={faBook} className="bookIcon" />{" "}
                           {topic.article_count} articles!
                         </p>
@@ -92,7 +92,7 @@ const Topics = () => {
               );
             })}
           </ul>
-          <Pagination size="sm" className="paginationBottom ">
+          <Pagination size="sm" className="paginationBottom numbers">
             {state.pages.map((page) => {
               return (
                 <Pagination.Item

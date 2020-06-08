@@ -76,7 +76,7 @@ const TopicsArticles = observer(({ topic }) => {
                         <Link to={`/${contributor.author}`}>
                           {contributor.author}
                         </Link>{" "}
-                        <footer className="blockquote-footer ">
+                        <footer className="blockquote-footer numbers">
                           <FontAwesomeIcon
                             icon={faBook}
                             className="articleIcon"

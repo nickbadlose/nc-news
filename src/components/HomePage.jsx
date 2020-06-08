@@ -325,12 +325,12 @@ const HomePage = observer(() => {
                       </h4>
                       <p className="topicDescription">{topic.description}</p>
                       {+topic.article_count === 1 ? (
-                        <p>
+                        <p className="numbers">
                           <FontAwesomeIcon icon={faBook} className="bookIcon" />{" "}
                           {topic.article_count} article!
                         </p>
                       ) : (
-                        <p>
+                        <p className="numbers">
                           <FontAwesomeIcon icon={faBook} className="bookIcon" />{" "}
                           {topic.article_count} articles!
                         </p>
@@ -371,7 +371,7 @@ const HomePage = observer(() => {
                       <h4 className="capitalize articleTitle">
                         {article.title.toLowerCase()}
                       </h4>
-                      <div className="articleInfo ">
+                      <div className="articleInfo numbers">
                         <p>
                           {article.votes}{" "}
                           <FontAwesomeIcon
