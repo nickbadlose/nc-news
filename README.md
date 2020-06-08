@@ -54,7 +54,7 @@ This will open the APP in your browser so you can have a play around with it.
 
 **Hosted backend API: https://not-quite-reddit.herokuapp.com/api .**
 
-**Deployed APP: https://trusting-mclean-e3947d.netlify.com/ .**
+**Deployed APP: https://nc-news-nickbadlose.netlify.app .**
 
 ## Acknowledgments
 
