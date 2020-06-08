@@ -21,6 +21,9 @@ export const mainTheme = {
   inputDisabledBg: "#e9ecef",
   commentFormFooterC: "#E8EBED",
   imageTextC: "white",
+  headerBgC: "rgba(0, 123, 255, 1)",
+  headerGradient:
+    "linear-gradient(to bottom, rgba(8, 121, 250, 0.5) 0%, rgba(8, 121, 250, 1) 100%)",
 };
 
 export const loggedIn = {};
@@ -48,4 +51,5 @@ export const darkTheme = {
   inputDisabledBg: "black",
   commentFormFooterC: "#1C1F22",
   imageTextC: "black",
+  headerBgC: "rgba(0, 123, 255, 1)",
 };

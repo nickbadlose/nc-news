@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const StyledDiv = styled.div`
   background: ${(props) => props.article && props.theme.linkC};
+  color: rgba(0, 0, 0, 0.8);
 
   button {
     border: none;
@@ -13,7 +14,7 @@ export const StyledDiv = styled.div`
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    color: ${(props) => props.theme.headerC};
+    color: rgba(0, 0, 0, 0.8);
 
     :disabled {
       color: ${(props) => props.theme.linkHover};
