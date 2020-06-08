@@ -24,6 +24,8 @@ const Articles = observer(() => {
               article={true}
               dispatch={dispatch}
               className="articles"
+              order={state.order}
+              sort_by={state.sort_by}
             />
           </div>
         </div>

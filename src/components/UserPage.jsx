@@ -114,13 +114,13 @@ const UserPage = ({ username }) => {
                   overlay={
                     userStore.username === username ? (
                       <Tooltip id="tooltip">
-                        Want to improve your stars? Earn 5 stars for every
-                        article you post and 1 star for each comment you post!
+                        Want to improve your stars? Post articles and comments
+                        to earn stars!
                       </Tooltip>
                     ) : (
                       <Tooltip id="tooltip">
-                        5 stars per articles posted and 1 star per comment
-                        posted!
+                        Want to earn as many stars as {username}? Post articles
+                        and comments to earn stars!
                       </Tooltip>
                     )
                   }
@@ -135,7 +135,7 @@ const UserPage = ({ username }) => {
               </ListGroupItem>
               <ListGroupItem className="memberJoinDate">
                 {" "}
-                Member since {date}{" "}
+                Joined {date}{" "}
                 <FontAwesomeIcon icon={faClock} className="clockIcon" />
               </ListGroupItem>
             </ListGroup>

@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 const LogInForm = () => {
   const { form, handleChange, handleLogin } = useForm({
     username: "jessjelly",
-    password: "123",
+    password: "a12345",
     invalidUser: false,
   });
 

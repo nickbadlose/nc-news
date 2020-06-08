@@ -423,7 +423,7 @@ export const useScroll = (dispatch, page, maxPage, isLoading) => {
           });
       }
     }
-  }, 1000);
+  }, 2000);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

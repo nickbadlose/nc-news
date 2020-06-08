@@ -9,11 +9,14 @@ import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import FormControl from "react-bootstrap/FormControl";
-import logo from "../logos/news.svg";
 import { Link } from "@reach/router";
 import { darkStore } from "../stores/darkMode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMoon,
+  faSearch,
+  faNewspaper,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = observer(() => {
   return (
@@ -25,7 +28,8 @@ const Navigation = observer(() => {
       className={styles.navBar}
     >
       <Navbar.Brand as={Link} to="/" className={styles.brand}>
-        NC <img src={logo} alt="news" />
+        NC{" "}
+        <FontAwesomeIcon icon={faNewspaper} className={styles.newsPaperIcon} />
       </Navbar.Brand>
       <Form className={styles.form}>
         <FormControl
@@ -40,8 +44,9 @@ const Navigation = observer(() => {
         <button
           className={styles.searchButton}
           onClick={searchStore.handleSubmit}
+          disabled={searchStore.search.length === 0}
         >
-          <FontAwesomeIcon icon={faSearch} className="searchIcon" />
+          <FontAwesomeIcon icon={faSearch} />
         </button>
       </Form>
       <Navbar.Toggle
