@@ -43,6 +43,8 @@ const TopicsArticles = observer(({ topic }) => {
                   article={true}
                   dispatch={dispatch}
                   className="articles"
+                  order={state.order}
+                  sort_by={state.sort_by}
                 />
               </div>
             </div>
