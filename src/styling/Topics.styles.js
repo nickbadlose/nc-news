@@ -22,7 +22,7 @@ export const StyledMain = styled.main`
       padding-top: 1rem;
 
       h2 {
-        flex: 0 0 1;
+        flex: 0 0 auto;
         color: ${(props) => props.theme.headerC};
       }
     }
@@ -30,7 +30,7 @@ export const StyledMain = styled.main`
 
   .pagination {
     width: unset;
-    flex: 0 0 1;
+    flex: 0 0 auto;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;

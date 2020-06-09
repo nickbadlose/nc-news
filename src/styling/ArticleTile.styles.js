@@ -456,7 +456,7 @@ export const StyledLiCard = styled.li`
   }
 
   @media (max-width: 500px) {
-    flex: 0 0 1;
+    flex: 0 0 auto;
     margin: 1rem 0rem 0rem 0rem;
 
     a:nth-child(2) {
