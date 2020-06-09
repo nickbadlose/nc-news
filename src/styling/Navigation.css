@@ -20,6 +20,6 @@
 
 @media only screen and (max-width: 575px) {
   #responsive-navbar-nav > div.Nav_profile__297M-.navbar-nav > div > div {
-    min-width: calc(100vw + 1px - 3rem);
+    min-width: calc(100vw - 3rem);
   }
 }

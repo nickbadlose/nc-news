@@ -234,16 +234,16 @@ export const StyledMain = styled.main`
     .articlesLi {
       .article {
         width: 100%;
-        min-height: 100%;
+        height: 100%;
         position: absolute;
         top: 0px;
         text-align: left;
         display: flex;
         flex-flow: column nowrap;
-        justify-content: space-between;
+        justify-content: flex-start;
 
         .articleTitle {
-          flex: 1 1 0rem;
+          flex: 1 1 auto;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -251,7 +251,7 @@ export const StyledMain = styled.main`
         }
 
         .articleInfo {
-          flex: 0 0 0rem;
+          flex: 0 0 auto;
           display: flex;
           flex-flow: row nowrap;
           align-items: center;

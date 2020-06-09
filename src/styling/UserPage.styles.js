@@ -125,7 +125,7 @@ export const StyledMain = styled.main`
     }
 
     .articlesComments {
-      flex: 1 1 1;
+      flex: 1 1 auto;
       margin-left: 1rem;
 
       ul {
@@ -133,6 +133,7 @@ export const StyledMain = styled.main`
         flex-flow: column nowrap;
         align-items: stretch;
         margin-bottom: 0rem;
+        width: 100%;
       }
     }
   }
@@ -143,7 +144,7 @@ export const StyledMain = styled.main`
       align-items: stretch;
 
       .userInfo {
-        flex: 1 1 1;
+        flex: 1 1 auto;
         background: ${(props) => props.theme.bg};
         border: ${(props) => props.theme.border};
         border-radius: ${(props) => props.theme.borderR};

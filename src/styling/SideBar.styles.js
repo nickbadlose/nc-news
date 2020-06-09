@@ -43,6 +43,7 @@ export const StyledSidebar = styled.div`
     flex-direction: column;
     position: sticky;
     top: 0px;
+    flex: 0 0 auto;
 
     &::after {
       content: "";
@@ -58,6 +59,7 @@ export const StyledSidebar = styled.div`
   ul {
     list-style: none;
     padding: 0%;
+    flex: 1 1 auto;
   }
 
   a {
