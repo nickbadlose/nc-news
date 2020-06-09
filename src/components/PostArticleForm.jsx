@@ -7,8 +7,9 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Form from "react-bootstrap/Form";
 import { StyledDiv } from "../styling/PostArticleForm.styles";
+import { observer } from "mobx-react";
 
-const PostArticleForm = ({ topic }) => {
+const PostArticleForm = observer(({ topic }) => {
   const [postingArticle, handlePostingArticle] = useToggle();
   const { form, handleChange, handlePostArticle, setForm } = useForm({
     body: "",
@@ -129,6 +130,6 @@ const PostArticleForm = ({ topic }) => {
         ))}
     </StyledDiv>
   );
-};
+});
 
 export default PostArticleForm;

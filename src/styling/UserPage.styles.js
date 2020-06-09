@@ -172,6 +172,8 @@ export const StyledMain = styled.main`
             text-align: center;
             overflow: hidden;
             margin-right: 0.2rem;
+            border-radius: ${(props) => props.theme.borderR};
+            border: ${(props) => props.theme.border};
           }
         }
 

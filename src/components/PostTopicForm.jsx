@@ -8,6 +8,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import Form from "react-bootstrap/Form";
 import { StyledDiv } from "../styling/PostTopicForm.styles";
 import superagent from "superagent";
+import { observer } from "mobx-react";
 
 const clientID = "ik__FxLjO_5Cieki0XQDwEjaEUZAXK8PKHCGNlz4nW4";
 
@@ -20,7 +21,7 @@ const initialForm = {
   invalidFormat: false,
 };
 
-const PostTopicForm = () => {
+const PostTopicForm = observer(() => {
   const [postingTopic, handlePostingTopic] = useToggle();
   const { form, handleChange, handlePostTopic, setForm } = useForm(
     initialForm,
@@ -239,6 +240,6 @@ const PostTopicForm = () => {
       )}
     </StyledDiv>
   );
-};
+});
 
 export default PostTopicForm;

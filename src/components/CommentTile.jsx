@@ -8,59 +8,55 @@ import { StyledLi } from "../styling/CommentTile.styles";
 import { Link } from "@reach/router";
 import EditCommentForm from "./EditCommentForm";
 import DeleteCommentForm from "./DeleteCommentForm";
+import { observer } from "mobx-react";
 
-const CommentTile = ({
-  body,
-  author,
-  created_at,
-  comment_id,
-  votes,
-  deleteCommentById,
-}) => {
-  const { form, handleChange, handleEditComment } = useForm({
-    body,
-  });
+const CommentTile = observer(
+  ({ body, author, created_at, comment_id, votes, deleteCommentById }) => {
+    const { form, handleChange, handleEditComment } = useForm({
+      body,
+    });
 
-  const { date, time } = formatDate(created_at);
+    const { date, time } = formatDate(created_at);
 
-  return (
-    <StyledLi>
-      <IncrementVotes
-        votes={votes}
-        id={comment_id}
-        api={api.patchCommentById}
-        className="articleTile"
-        article={true}
-      />
-      <article className="commentMain">
-        <p className="commentBody">{form.body}</p>
-        <div className="commentInfo">
-          <p className="commentAuthor">
-            Posted by <Link to={`/${author}`}>{author}</Link> on{" "}
-            <span className="numbers">{date}</span> at{" "}
-            <span className="numbers">{time}</span>
-          </p>
-          <p className="commentAuthorShort numbers">
-            <Link to={`/${author}`}>{author}</Link> on {date}
-          </p>
-          {userStore.username === author && (
-            <div className="editDeleteComment">
-              <EditCommentForm
-                handleChange={handleChange}
-                handleEditComment={handleEditComment}
-                body={form.body}
-                comment_id={comment_id}
-              />
-              <DeleteCommentForm
-                deleteCommentById={deleteCommentById}
-                comment_id={comment_id}
-              />
-            </div>
-          )}
-        </div>
-      </article>
-    </StyledLi>
-  );
-};
+    return (
+      <StyledLi>
+        <IncrementVotes
+          votes={votes}
+          id={comment_id}
+          api={api.patchCommentById}
+          className="articleTile"
+          article={true}
+        />
+        <article className="commentMain">
+          <p className="commentBody">{form.body}</p>
+          <div className="commentInfo">
+            <p className="commentAuthor">
+              Posted by <Link to={`/${author}`}>{author}</Link> on{" "}
+              <span className="numbers">{date}</span> at{" "}
+              <span className="numbers">{time}</span>
+            </p>
+            <p className="commentAuthorShort numbers">
+              <Link to={`/${author}`}>{author}</Link> on {date}
+            </p>
+            {userStore.username === author && (
+              <div className="editDeleteComment">
+                <EditCommentForm
+                  handleChange={handleChange}
+                  handleEditComment={handleEditComment}
+                  body={form.body}
+                  comment_id={comment_id}
+                />
+                <DeleteCommentForm
+                  deleteCommentById={deleteCommentById}
+                  comment_id={comment_id}
+                />
+              </div>
+            )}
+          </div>
+        </article>
+      </StyledLi>
+    );
+  }
+);
 
 export default CommentTile;

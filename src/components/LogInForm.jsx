@@ -6,8 +6,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import bannerImage from "../logos/nc-news.banner.jpeg";
 import mobileImage from "../logos/nc-news.mobile.jpeg";
+import { observer } from "mobx-react";
 
-const LogInForm = () => {
+const LogInForm = observer(() => {
   const { form, handleChange, handleLogin } = useForm({
     username: "jessjelly",
     password: "a12345",
@@ -65,6 +66,6 @@ const LogInForm = () => {
       </Form>
     </StyledDiv>
   );
-};
+});
 
 export default LogInForm;

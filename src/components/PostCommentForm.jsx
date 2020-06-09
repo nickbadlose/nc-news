@@ -6,8 +6,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Tooltip from "react-bootstrap/Tooltip";
 import { StyledForm } from "../styling/PostCommentForm.styles";
+import { observer } from "mobx-react";
 
-const PostCommentForm = ({ article_id, dispatch, commentsNum }) => {
+const PostCommentForm = observer(({ article_id, dispatch, commentsNum }) => {
   const { form, handlePostComment, handleChange } = useForm(
     { body: "" },
     dispatch
@@ -60,6 +61,6 @@ const PostCommentForm = ({ article_id, dispatch, commentsNum }) => {
       </div>
     </StyledForm>
   );
-};
+});
 
 export default PostCommentForm;

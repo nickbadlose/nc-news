@@ -7,6 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Pagination from "react-bootstrap/Pagination";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
+import { observer } from "mobx-react";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -38,7 +39,7 @@ const initialState = {
   pages: [1],
 };
 
-const Topics = () => {
+const Topics = observer(() => {
   const { state, dispatch } = useTopics(reducer, initialState);
 
   return (
@@ -111,6 +112,6 @@ const Topics = () => {
       )}
     </StyledMain>
   );
-};
+});
 
 export default Topics;

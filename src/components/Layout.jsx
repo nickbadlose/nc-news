@@ -7,8 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTh, faThList } from "@fortawesome/free-solid-svg-icons";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { observer } from "mobx-react";
 
-const Layout = () => {
+const Layout = observer(() => {
   return (
     <StyledForm>
       <OverlayTrigger overlay={<Tooltip id="tooltip">Change layout!</Tooltip>}>
@@ -33,6 +34,6 @@ const Layout = () => {
       </OverlayTrigger>
     </StyledForm>
   );
-};
+});
 
 export default Layout;

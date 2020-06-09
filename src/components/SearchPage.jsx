@@ -11,8 +11,9 @@ import { StyledDiv } from "../styling/SearchPage.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { darkStore } from "../stores/darkMode";
+import { observer } from "mobx-react";
 
-const SearchPage = ({ search }) => {
+const SearchPage = observer(({ search }) => {
   const isMounted = useRef(true);
   const [state, setState] = useImmer({ searchData: [], isLoading: true });
 
@@ -135,6 +136,6 @@ const SearchPage = ({ search }) => {
       )}
     </StyledDiv>
   );
-};
+});
 
 export default SearchPage;

@@ -12,8 +12,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import bannerImage from "../logos/nc-news.banner.jpeg";
 import mobileImage from "../logos/nc-news.mobile.jpeg";
+import { observer } from "mobx-react";
 
-const SignUpForm = () => {
+const SignUpForm = observer(() => {
   const { form, setForm, handleSignUp } = useForm({
     username: "",
     name: "",
@@ -140,6 +141,6 @@ const SignUpForm = () => {
       </Form>
     </StyledDiv>
   );
-};
+});
 
 export default SignUpForm;

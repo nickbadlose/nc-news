@@ -15,6 +15,7 @@ import { StyledMain } from "../styling/SpecificArticle.styles";
 import Spinner from "react-bootstrap/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
+import { observer } from "mobx-react";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -80,7 +81,7 @@ const initialState = {
   editingArticle: false,
 };
 
-const SpecificArticle = ({ article_id }) => {
+const SpecificArticle = observer(({ article_id }) => {
   const { state, isMounted, dispatch } = useSpecificArticle(
     article_id,
     reducer,
@@ -207,6 +208,6 @@ const SpecificArticle = ({ article_id }) => {
       )}
     </StyledMain>
   );
-};
+});
 
 export default SpecificArticle;

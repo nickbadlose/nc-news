@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { observer } from "mobx-react";
 
-const DeleteCommentForm = ({ deleteCommentById, comment_id }) => {
+const DeleteCommentForm = observer(({ deleteCommentById, comment_id }) => {
   const [deleteComment, handleDeleteComment] = useToggle();
   return (
     <div>
@@ -58,6 +59,6 @@ const DeleteCommentForm = ({ deleteCommentById, comment_id }) => {
       )}
     </div>
   );
-};
+});
 
 export default DeleteCommentForm;

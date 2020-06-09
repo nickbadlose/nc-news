@@ -11,8 +11,9 @@ import {
   faCommentDots,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
+import { observer } from "mobx-react";
 
-const FilterForm = ({ article, dispatch, order, sort_by }) => {
+const FilterForm = observer(({ article, dispatch, order, sort_by }) => {
   const { handleSelect } = useFilter(dispatch);
   return (
     <StyledForm>
@@ -57,6 +58,6 @@ const FilterForm = ({ article, dispatch, order, sort_by }) => {
       </div>
     </StyledForm>
   );
-};
+});
 
 export default FilterForm;

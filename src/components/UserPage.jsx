@@ -19,8 +19,9 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import { darkStore } from "../stores/darkMode";
+import { observer } from "mobx-react";
 
-const UserPage = ({ username }) => {
+const UserPage = observer(({ username }) => {
   const isMounted = useRef(true);
   const [state, setState] = useImmer({
     articlesComments: [],
@@ -164,6 +165,6 @@ const UserPage = ({ username }) => {
       )}
     </StyledMain>
   );
-};
+});
 
 export default UserPage;

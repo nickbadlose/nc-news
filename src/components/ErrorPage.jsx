@@ -4,8 +4,9 @@ import { Main } from "../styling/ErrorPage.styles";
 import Button from "react-bootstrap/Button";
 import { navigate } from "@reach/router";
 import { errorStore } from "../stores/error";
+import { observer } from "mobx-react";
 
-const ErrorPage = ({ err }) => {
+const ErrorPage = observer(({ err }) => {
   const handleError = () => {
     errorStore.err = null;
     navigate("/");
@@ -19,6 +20,6 @@ const ErrorPage = ({ err }) => {
       <Button onClick={handleError}>Home Page</Button>
     </Main>
   );
-};
+});
 
 export default ErrorPage;

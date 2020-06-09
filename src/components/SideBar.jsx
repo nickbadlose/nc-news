@@ -3,8 +3,9 @@ import { Link } from "@reach/router";
 import { StyledSidebar } from "../styling/SideBar.styles";
 import Spinner from "react-bootstrap/Spinner";
 import { useTopicsSideBar } from "../hooks";
+import { observer } from "mobx-react";
 
-const SideBar = () => {
+const SideBar = observer(() => {
   const { topics, isLoading } = useTopicsSideBar();
 
   return (
@@ -31,6 +32,6 @@ const SideBar = () => {
       )}
     </StyledSidebar>
   );
-};
+});
 
 export default SideBar;

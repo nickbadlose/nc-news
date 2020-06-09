@@ -3,8 +3,9 @@ import { useVotes } from "../hooks";
 import { StyledDiv } from "../styling/IncrementVotes.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { observer } from "mobx-react";
 
-const IncrementVotes = ({ votes, id, api, className, article }) => {
+const IncrementVotes = observer(({ votes, id, api, className, article }) => {
   const { voteDifference, handleVotes } = useVotes(id, api);
 
   return (
@@ -28,6 +29,6 @@ const IncrementVotes = ({ votes, id, api, className, article }) => {
       </div>
     </StyledDiv>
   );
-};
+});
 
 export default IncrementVotes;

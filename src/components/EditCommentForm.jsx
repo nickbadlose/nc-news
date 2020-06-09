@@ -8,66 +8,70 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { observer } from "mobx-react";
 
-const EditCommentForm = ({
-  handleChange,
-  handleEditComment,
-  body,
-  comment_id,
-}) => {
-  const [editingComment, handleEditingComment] = useToggle();
+const EditCommentForm = observer(
+  ({ handleChange, handleEditComment, body, comment_id }) => {
+    const [editingComment, handleEditingComment] = useToggle();
 
-  return (
-    <StyledDiv>
-      <Modal
-        show={editingComment}
-        onHide={handleEditingComment}
-        aria-labelledby="modal-editing-comment"
-        dialogClassName="modal-90w"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Edit your comment</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group
-            controlId="editCommentFormBodyInput"
-            className="editCommentFormGroup"
+    return (
+      <StyledDiv>
+        <Modal
+          show={editingComment}
+          onHide={handleEditingComment}
+          aria-labelledby="modal-editing-comment"
+          dialogClassName="modal-90w"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Edit your comment</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Group
+              controlId="editCommentFormBodyInput"
+              className="editCommentFormGroup"
+            >
+              <Form.Control
+                as="textarea"
+                value={body}
+                onChange={(e) => handleChange(e, "body")}
+                required
+                className="editCommentInput"
+              />
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              type="submit"
+              variant="primary"
+              size="sm"
+              onClick={(e) => {
+                handleEditingComment();
+                handleEditComment(e, body, comment_id);
+              }}
+            >
+              Save Edits
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={handleEditingComment}
+              size="sm"
+            >
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        {!editingComment && (
+          <OverlayTrigger
+            overlay={<Tooltip id="tooltip">Edit Comment!</Tooltip>}
           >
-            <Form.Control
-              as="textarea"
-              value={body}
-              onChange={(e) => handleChange(e, "body")}
-              required
-              className="editCommentInput"
-            />
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            type="submit"
-            variant="primary"
-            size="sm"
-            onClick={(e) => {
-              handleEditingComment();
-              handleEditComment(e, body, comment_id);
-            }}
-          >
-            Save Edits
-          </Button>
-          <Button variant="secondary" onClick={handleEditingComment} size="sm">
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      {!editingComment && (
-        <OverlayTrigger overlay={<Tooltip id="tooltip">Edit Comment!</Tooltip>}>
-          <Button type="submit" size="sm" onClick={handleEditingComment}>
-            <FontAwesomeIcon icon={faPencilAlt} className="pencilIcon" />
-          </Button>
-        </OverlayTrigger>
-      )}
-    </StyledDiv>
-  );
-};
+            <Button type="submit" size="sm" onClick={handleEditingComment}>
+              <FontAwesomeIcon icon={faPencilAlt} className="pencilIcon" />
+            </Button>
+          </OverlayTrigger>
+        )}
+      </StyledDiv>
+    );
+  }
+);
 
 export default EditCommentForm;
